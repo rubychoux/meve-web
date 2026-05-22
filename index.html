@@ -1,289 +1,646 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AURA — 왜 내 피부가 이래?</title>
-<meta name="description" content="피부가 왜 이런지, 이제 데이터로 알아보세요. AURA 웨이트리스트에 등록하세요.">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>meve — 나만의 아름다움을 발견하다</title>
+<meta name="description" content="meve는 AI와 함께 나만의 뷰티 타입을 발견하고 완성해가는 앱입니다." />
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap');
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
-    --cream: #FAF8F4;
-    --ink: #1A1916;
-    --muted: #7A7770;
-    --border: rgba(26,25,22,0.12);
-    --accent: #C9A882;
-    --accent-dark: #9E7D5A;
+    --pink: #ffd9e4;
+    --pink-deep: #ffb8cf;
+    --blue: #cfe6ff;
+    --blue-deep: #a8d2ff;
+    --ink: #2b2632;
+    --ink-soft: #6b6471;
+    --cream: #fffaf6;
+    --white: #ffffff;
+    --grad: linear-gradient(120deg, #ffd9e4 0%, #ffe4ec 35%, #e0ecff 70%, #cfe6ff 100%);
   }
 
-  html { font-size: 16px; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
 
   body {
-    background: var(--cream);
+    font-family: 'Pretendard', sans-serif;
     color: var(--ink);
-    font-family: 'DM Sans', 'Noto Sans KR', sans-serif;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+    background: var(--cream);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
   }
 
+  .display { font-family: 'Pretendard', sans-serif; }
+
+  /* ---------- grain overlay ---------- */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ---------- nav ---------- */
   nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.5rem 2.5rem;
-    border-bottom: 0.5px solid var(--border);
+    padding: 20px clamp(20px, 5vw, 64px);
+    backdrop-filter: blur(14px);
+    background: rgba(255, 250, 246, 0.72);
+    border-bottom: 1px solid rgba(43, 38, 50, 0.06);
   }
-
   .logo {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+  }
+  .logo span { color: #d96a92; }
+  .nav-cta {
     font-size: 14px;
     font-weight: 500;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-  }
-
-  .nav-tag {
-    font-size: 12px;
-    color: var(--muted);
-    letter-spacing: 0.06em;
-  }
-
-  main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 5rem 2rem 4rem;
-    text-align: center;
-  }
-
-  .eyebrow {
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 2.5rem;
-  }
-
-  .hero-question {
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: clamp(2.4rem, 7vw, 5.5rem);
-    font-weight: 300;
-    line-height: 1.15;
-    letter-spacing: -0.01em;
-    max-width: 820px;
-    margin-bottom: 1.25rem;
-  }
-
-  .hero-sub {
-    font-size: clamp(1rem, 2vw, 1.2rem);
-    color: var(--muted);
-    font-weight: 300;
-    max-width: 480px;
-    line-height: 1.7;
-    margin: 0 auto 3.5rem;
-  }
-
-  .hero-sub em {
-    font-style: normal;
-    color: var(--ink);
-    font-weight: 400;
-  }
-
-  .form-wrap {
-    display: flex;
-    gap: 0;
-    max-width: 420px;
-    width: 100%;
-    border: 0.5px solid var(--border);
-    border-radius: 3px;
-    overflow: hidden;
-    background: #fff;
-  }
-
-  .form-wrap input[type="email"] {
-    flex: 1;
-    border: none;
-    outline: none;
-    padding: 0.85rem 1.1rem;
-    font-size: 14px;
-    font-family: inherit;
-    background: transparent;
-    color: var(--ink);
-  }
-
-  .form-wrap input::placeholder {
-    color: var(--muted);
-  }
-
-  .form-wrap button {
-    border: none;
+    padding: 10px 22px;
+    border-radius: 999px;
     background: var(--ink);
     color: var(--cream);
-    padding: 0.85rem 1.4rem;
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    cursor: pointer;
-    font-family: inherit;
-    transition: background 0.2s;
-    white-space: nowrap;
+    text-decoration: none;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
   }
+  .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(43,38,50,0.18); }
 
-  .form-wrap button:hover { background: #333; }
-
-  .success-msg {
-    display: none;
-    font-size: 13px;
-    color: var(--muted);
-    margin-top: 1rem;
-  }
-
-  .privacy-note {
-    font-size: 11px;
-    color: var(--muted);
-    margin-top: 1rem;
-    opacity: 0.7;
-  }
-
-  .divider {
-    width: 40px;
-    height: 0.5px;
-    background: var(--border);
-    margin: 4rem auto;
-  }
-
-  .features {
+  /* ---------- hero ---------- */
+  .hero {
+    min-height: 100vh;
+    padding: 160px clamp(20px, 5vw, 64px) 80px;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem 3rem;
-    max-width: 760px;
-    text-align: left;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 48px;
+    align-items: center;
+    background: var(--grad);
+    position: relative;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    width: 480px; height: 480px;
+    background: radial-gradient(circle, rgba(255,255,255,0.85), transparent 70%);
+    top: -120px; right: -80px;
+    border-radius: 50%;
   }
 
-  .feature-label {
-    font-size: 11px;
+  .hero-eyebrow {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: var(--accent-dark);
-    margin-bottom: 0.4rem;
+    color: var(--ink-soft);
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: rise 0.8s 0.1s ease forwards;
   }
-
-  .feature-text {
-    font-size: 14px;
-    color: var(--ink);
+  .hero h1 {
+    font-family: 'Pretendard', sans-serif;
     font-weight: 300;
-    line-height: 1.6;
+    font-size: clamp(42px, 6.2vw, 82px);
+    line-height: 1.12;
+    letter-spacing: -0.045em;
+    margin-bottom: 28px;
+  }
+  .hero h1 em { font-style: normal; font-weight: 700; color: #d96a92; }
+  .hero h1 .ln { display: block; opacity: 0; animation: rise 0.9s ease forwards; }
+  .hero h1 .ln:nth-child(1) { animation-delay: 0.2s; }
+  .hero h1 .ln:nth-child(2) { animation-delay: 0.35s; }
+  .hero h1 .ln:nth-child(3) { animation-delay: 0.5s; }
+
+  .hero p.sub {
+    font-size: clamp(16px, 1.5vw, 19px);
+    color: var(--ink-soft);
+    line-height: 1.7;
+    max-width: 420px;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: rise 0.9s 0.65s ease forwards;
   }
 
+  .store-row {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: rise 0.9s 0.8s ease forwards;
+  }
+  .store-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 24px;
+    border-radius: 16px;
+    background: var(--ink);
+    color: var(--cream);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .store-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(43,38,50,0.22); }
+  .store-btn small { display: block; font-size: 10px; opacity: 0.65; font-weight: 400; }
+  .store-btn.ghost {
+    background: rgba(255,255,255,0.7);
+    color: var(--ink);
+    border: 1px solid rgba(43,38,50,0.12);
+  }
+  .store-btn .ico { font-size: 22px; }
+
+  /* ---------- hero phone card ---------- */
+  .hero-visual {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+    opacity: 0;
+    animation: rise 1s 0.5s ease forwards;
+  }
+  .type-card {
+    width: 290px;
+    background: var(--white);
+    border-radius: 32px;
+    padding: 34px 30px 30px;
+    box-shadow: 0 30px 70px rgba(170, 130, 150, 0.28);
+    transform: rotate(-4deg);
+    position: relative;
+  }
+  .type-card::before {
+    content: "AI BEAUTY TYPE";
+    position: absolute;
+    top: 22px; left: 30px;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    color: var(--ink-soft);
+    font-weight: 600;
+  }
+  .type-orb {
+    width: 130px; height: 130px;
+    margin: 38px auto 24px;
+    border-radius: 50%;
+    background: conic-gradient(from 140deg, #ffd9e4, #cfe6ff, #ffe4ec, #ffd9e4);
+    filter: blur(0.5px);
+    box-shadow: inset 0 0 30px rgba(255,255,255,0.6), 0 10px 30px rgba(200,160,190,0.4);
+    animation: float 5s ease-in-out infinite;
+  }
+  .type-card h3 {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 25px;
+    text-align: center;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin-bottom: 6px;
+  }
+  .type-card .kr {
+    text-align: center;
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin-bottom: 22px;
+  }
+  .type-tags {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .type-tags span {
+    font-size: 12px;
+    padding: 6px 13px;
+    border-radius: 999px;
+    background: var(--cream);
+    color: var(--ink-soft);
+  }
+
+  /* ---------- section base ---------- */
+  section { padding: clamp(80px, 12vh, 140px) clamp(20px, 5vw, 64px); }
+  .label {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #d96a92;
+    margin-bottom: 18px;
+  }
+  .sec-head {
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 300;
+    font-size: clamp(28px, 3.8vw, 48px);
+    line-height: 1.28;
+    letter-spacing: -0.04em;
+    max-width: 720px;
+  }
+  .sec-head em { font-style: normal; font-weight: 700; color: #d96a92; }
+
+  .reveal { opacity: 0; transform: translateY(34px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* ---------- discovery section ---------- */
+  .discovery { background: var(--cream); text-align: center; }
+  .discovery .sec-head { margin: 0 auto 18px; }
+  .discovery p.lead {
+    color: var(--ink-soft);
+    font-size: 17px;
+    line-height: 1.7;
+    max-width: 540px;
+    margin: 0 auto 60px;
+  }
+  .type-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .mini-type {
+    background: var(--white);
+    border-radius: 24px;
+    padding: 30px 20px;
+    border: 1px solid rgba(43,38,50,0.05);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+  }
+  .mini-type:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(170,130,150,0.18); }
+  .mini-orb {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    margin: 0 auto 16px;
+  }
+  .mini-orb.a { background: conic-gradient(from 90deg, #ffd9e4, #ffb8cf); }
+  .mini-orb.b { background: conic-gradient(from 90deg, #cfe6ff, #a8d2ff); }
+  .mini-orb.c { background: conic-gradient(from 90deg, #ffe4ec, #ffd9e4, #cfe6ff); }
+  .mini-orb.d { background: conic-gradient(from 90deg, #e8dcff, #ffd9e4); }
+  .mini-type h4 { font-family: 'Pretendard', sans-serif; font-size: 17px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 4px; }
+  .mini-type p { font-size: 12.5px; color: var(--ink-soft); }
+
+  /* ---------- features ---------- */
+  .features { background: var(--grad); }
+  .features .label { color: #b85a82; }
+  .feat-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 60px;
+    max-width: 980px;
+  }
+  .feat {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 28px;
+    align-items: start;
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(8px);
+    border-radius: 26px;
+    padding: 36px 38px;
+    border: 1px solid rgba(255,255,255,0.6);
+  }
+  .feat .num {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 34px;
+    font-weight: 700;
+    color: #d96a92;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+  .feat h3 { font-family: 'Pretendard', sans-serif; font-size: 22px; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 8px; }
+  .feat p { color: var(--ink-soft); font-size: 15px; line-height: 1.7; }
+  .feat .tab-tag {
+    display: inline-block;
+    margin-top: 12px;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: var(--ink);
+    color: var(--cream);
+    font-weight: 600;
+  }
+
+  /* ---------- social / coach ---------- */
+  .duo { background: var(--cream); }
+  .duo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 56px;
+  }
+  .duo-card {
+    border-radius: 30px;
+    padding: 48px 44px;
+    position: relative;
+    overflow: hidden;
+  }
+  .duo-card.eve { background: linear-gradient(160deg, #ffe4ec, #ffd9e4); }
+  .duo-card.coach { background: linear-gradient(160deg, #e0ecff, #cfe6ff); }
+  .duo-card h3 {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 26px;
+    font-weight: 300;
+    letter-spacing: -0.04em;
+    margin-bottom: 14px;
+  }
+  .duo-card h3 em { font-style: normal; font-weight: 700; }
+  .duo-card p { color: var(--ink-soft); font-size: 15px; line-height: 1.75; max-width: 320px; }
+  .duo-card .corner {
+    position: absolute;
+    bottom: -40px; right: -30px;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.5);
+  }
+
+  /* ---------- final CTA ---------- */
+  .final {
+    background: var(--ink);
+    color: var(--cream);
+    text-align: center;
+  }
+  .final h2 {
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 300;
+    font-size: clamp(30px, 4.6vw, 54px);
+    line-height: 1.25;
+    letter-spacing: -0.04em;
+    margin-bottom: 20px;
+  }
+  .final h2 em { font-style: normal; font-weight: 700; color: var(--pink-deep); }
+  .final p {
+    color: rgba(255,250,246,0.6);
+    font-size: 16px;
+    margin-bottom: 40px;
+  }
+  .signup {
+    display: flex;
+    gap: 10px;
+    max-width: 440px;
+    margin: 0 auto 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .signup input {
+    flex: 1;
+    min-width: 200px;
+    padding: 16px 22px;
+    border-radius: 14px;
+    border: none;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 15px;
+    background: rgba(255,255,255,0.1);
+    color: var(--cream);
+    outline: none;
+    border: 1px solid rgba(255,250,246,0.15);
+  }
+  .signup input::placeholder { color: rgba(255,250,246,0.4); }
+  .signup button {
+    padding: 16px 30px;
+    border-radius: 14px;
+    border: none;
+    background: var(--grad);
+    color: var(--ink);
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    transition: transform 0.25s ease;
+  }
+  .signup button:hover { transform: translateY(-2px); }
+  .signup-note { font-size: 12px; color: rgba(255,250,246,0.4); }
+  .thanks { font-size: 15px; color: var(--pink-deep); margin-top: 16px; display: none; }
+
+  /* ---------- footer ---------- */
   footer {
-    padding: 1.5rem 2.5rem;
-    border-top: 0.5px solid var(--border);
+    background: var(--ink);
+    color: rgba(255,250,246,0.5);
+    padding: 40px clamp(20px, 5vw, 64px);
+    border-top: 1px solid rgba(255,250,246,0.08);
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 13px;
   }
+  footer .logo { color: var(--cream); font-size: 22px; }
 
-  .footer-text {
-    font-size: 11px;
-    color: var(--muted);
-    letter-spacing: 0.05em;
-  }
+  /* ---------- animations ---------- */
+  @keyframes rise { to { opacity: 1; transform: none; } }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
 
-  @media (max-width: 600px) {
-    nav { padding: 1.25rem 1.25rem; }
-    main { padding: 3rem 1.25rem 3rem; }
-    .features { grid-template-columns: 1fr; gap: 1.5rem; }
-    .form-wrap { flex-direction: column; border-radius: 3px; }
-    .form-wrap button { border-radius: 0; width: 100%; }
-    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  /* ---------- responsive ---------- */
+  @media (max-width: 880px) {
+    .hero { grid-template-columns: 1fr; padding-top: 130px; text-align: center; }
+    .hero p.sub { margin-left: auto; margin-right: auto; }
+    .store-row { justify-content: center; }
+    .hero-eyebrow { margin-top: 0; }
+    .type-grid { grid-template-columns: repeat(2, 1fr); }
+    .feat { grid-template-columns: 1fr; gap: 12px; }
+    .duo-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body>
 
 <nav>
-  <span class="logo">AURA</span>
-  <span class="nav-tag">Beta · Seoul · 2026</span>
+  <div class="logo">m<span>e</span>ve</div>
+  <a href="#download" class="nav-cta">앱 다운로드</a>
 </nav>
 
-<main>
-  <p class="eyebrow">AI 피부 & 웰니스</p>
-
-  <h1 class="hero-question">왜 내 피부가 이래?</h1>
-
-  <p class="hero-sub">
-    수면, 식단, 스트레스, 루틴 — 당신의 피부는 <em>모든 것을 기억합니다.</em><br>
-    AURA는 그 연결고리를 데이터로 보여줍니다.
-  </p>
-
-  <div class="form-wrap" id="form-wrap">
-    <input type="email" id="email-input" placeholder="이메일을 입력하세요" autocomplete="email" />
-    <button onclick="handleSubmit()">등록하기</button>
-  </div>
-  <p class="success-msg" id="success-msg">등록되었습니다. 오픈 소식을 가장 먼저 알려드릴게요 ✦</p>
-  <p class="privacy-note">스팸 없음. 오픈 소식만 드립니다.</p>
-
-  <div class="divider"></div>
-
-  <div class="features">
-    <div>
-      <p class="feature-label">AI 피부 분석</p>
-      <p class="feature-text">얼굴 스캔으로 피부 상태를 매일 추적하고 변화를 시각화</p>
-    </div>
-    <div>
-      <p class="feature-label">성분 스캐너</p>
-      <p class="feature-text">제품 라벨을 찍으면 내 피부에 맞는지 즉시 분석</p>
-    </div>
-    <div>
-      <p class="feature-label">라이프스타일 로그</p>
-      <p class="feature-text">수면·식단·스트레스가 피부에 미치는 영향을 데이터로 확인</p>
-    </div>
-    <div>
-      <p class="feature-label">브레이크아웃 예측</p>
-      <p class="feature-text">패턴 분석으로 트러블이 생기기 전에 미리 알려드립니다</p>
-    </div>
-    <div>
-      <p class="feature-label">루틴 AI 코치</p>
-      <p class="feature-text">내 피부 데이터 기반 맞춤 AM/PM 루틴 추천</p>
-    </div>
-    <div>
-      <p class="feature-label">피부과 시술 추적</p>
-      <p class="feature-text">시술 전후 효과를 스코어로 기록하고 비교</p>
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-text">
+    <span class="hero-eyebrow">AI Beauty Companion</span>
+    <h1>
+      <span class="ln">나만의</span>
+      <span class="ln"><em>아름다움</em>을</span>
+      <span class="ln">발견하다</span>
+    </h1>
+    <p class="sub">한 번의 스캔으로 나만의 뷰티 타입을 발견하고, AI와 함께 매일을 완성해가는 뷰티 앱.</p>
+    <div class="store-row" id="download">
+      <a href="#" class="store-btn" data-store="ios">
+        <span class="ico">&#63743;</span>
+        <span><small>곧 만나요</small>App Store</span>
+      </a>
+      <a href="#signup" class="store-btn ghost">
+        <span class="ico">&#9993;</span>
+        <span><small>먼저 받는</small>출시 알림 신청</span>
+      </a>
     </div>
   </div>
-</main>
+  <div class="hero-visual">
+    <div class="type-card">
+      <div class="type-orb"></div>
+      <h3>Icy Glow</h3>
+      <div class="kr">아이시 글로우 타입</div>
+      <div class="type-tags">
+        <span>여름 쿨톤</span>
+        <span>물광</span>
+        <span>청순</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- DISCOVERY -->
+<section class="discovery">
+  <div class="label reveal">The WOW Moment</div>
+  <h2 class="sec-head reveal">첫 스캔에서 만나는<br><em>나만의 뷰티 타입</em></h2>
+  <p class="lead reveal">MBTI처럼, 하지만 더 정교하게. AI가 피부·퍼스널컬러·분위기·얼굴형을 읽어 당신만의 뷰티 정체성을 한 장의 카드로 보여줘요.</p>
+  <div class="type-grid">
+    <div class="mini-type reveal"><div class="mini-orb a"></div><h4>Warm Petal</h4><p>웜 페탈 타입</p></div>
+    <div class="mini-type reveal"><div class="mini-orb b"></div><h4>Icy Glow</h4><p>아이시 글로우 타입</p></div>
+    <div class="mini-type reveal"><div class="mini-orb c"></div><h4>Soft Mist</h4><p>소프트 미스트 타입</p></div>
+    <div class="mini-type reveal"><div class="mini-orb d"></div><h4>Bold Aura</h4><p>볼드 오라 타입</p></div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+  <div class="label reveal">How meve works</div>
+  <h2 class="sec-head reveal">발견에서 완성까지,<br><em>매일의 뷰티 루틴</em></h2>
+  <div class="feat-list">
+    <div class="feat reveal">
+      <div class="num">01</div>
+      <div>
+        <h3>피부를 읽다</h3>
+        <p>AI 페이스 스캔으로 피부 상태와 퍼스널컬러를 분석하고, 나에게 맞는 데일리 케어 루틴을 제안해요.</p>
+        <span class="tab-tag">SKIN</span>
+      </div>
+    </div>
+    <div class="feat reveal">
+      <div class="num">02</div>
+      <div>
+        <h3>오늘의 룩을 완성하다</h3>
+        <p>Today's Look과 Inspo Look으로 그날의 분위기에 맞는 메이크업과 스타일을 추천받아요.</p>
+        <span class="tab-tag">LOOK</span>
+      </div>
+    </div>
+    <div class="feat reveal">
+      <div class="num">03</div>
+      <div>
+        <h3>D-day로 바라보다</h3>
+        <p>중요한 날이 있다면, meve의 모든 기능이 그날을 향해 다시 정렬돼요. 없다면 매일을 위한 뷰티 앱으로.</p>
+        <span class="tab-tag">D-DAY</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DUO -->
+<section class="duo">
+  <div class="label reveal">More than an app</div>
+  <h2 class="sec-head reveal">혼자가 아닌, <em>함께</em>하는 뷰티</h2>
+  <div class="duo-grid">
+    <div class="duo-card eve reveal">
+      <h3><em>eve</em> — 나와 닮은 피드</h3>
+      <p>나의 뷰티 프로필에 맞춰 자동으로 필터링되는 커뮤니티. 비슷한 톤, 비슷한 고민을 가진 사람들의 리얼한 룩을 만나요.</p>
+      <div class="corner"></div>
+    </div>
+    <div class="duo-card coach reveal">
+      <h3><em>meve</em> — 나만의 AI 코치</h3>
+      <p>언제든 물어볼 수 있는 뷰티 코치. 루틴, 제품, 스타일까지 — 나의 데이터를 아는 AI가 곁에서 함께해요.</p>
+      <div class="corner"></div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final" id="signup">
+  <h2>가장 먼저 <em>meve</em>를<br>만나보세요</h2>
+  <p>출시 소식을 메일로 가장 먼저 알려드릴게요.</p>
+  <div class="signup">
+    <input type="email" id="email" placeholder="이메일 주소" />
+    <button id="submitBtn">알림 신청</button>
+  </div>
+  <p class="signup-note">스팸은 보내지 않아요. 출시 알림 한 통이면 끝.</p>
+  <p class="thanks" id="thanks">신청 완료! 출시되면 가장 먼저 알려드릴게요 &#128150;</p>
+</section>
 
 <footer>
-  <span class="footer-text">© 2026 AURA</span>
-  <span class="footer-text">Seoul · Korea</span>
+  <div class="logo">m<span>e</span>ve</div>
+  <div>&copy; 2026 meve · meve.beauty</div>
 </footer>
 
 <script>
-function handleSubmit() {
-  const email = document.getElementById('email-input').value.trim();
-  if (!email || !email.includes('@')) {
-    document.getElementById('email-input').style.borderLeft = '2px solid #C9A882';
-    return;
+  // scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('in'), i * 80);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // ---- email signup -> Supabase waitlist ----
+  const SUPABASE_URL = 'https://auyqgcppbrhjthvkkwwb.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF1eXFnY3BwYnJoanRodmtrd3diIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzOTY4NTAsImV4cCI6MjA4ODk3Mjg1MH0.3VjInUooRD1TahI9tgFX3G6yE5A97yAJ2sZH2YMmXLY';
+
+  const btn = document.getElementById('submitBtn');
+  const email = document.getElementById('email');
+  const thanks = document.getElementById('thanks');
+  const note = document.querySelector('.signup-note');
+
+  function showThanks(msg) {
+    document.querySelector('.signup').style.display = 'none';
+    note.style.display = 'none';
+    thanks.textContent = msg;
+    thanks.style.display = 'block';
   }
-  document.getElementById('form-wrap').style.display = 'none';
-  document.getElementById('success-msg').style.display = 'block';
 
-  fetch('https://formspree.io/f/mqeybvoo', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-    body: JSON.stringify({ email })
-  }).catch(() => {});
-}
+  async function joinWaitlist() {
+    const val = email.value.trim().toLowerCase();
+    if (!val || !val.includes('@') || !val.includes('.')) {
+      email.style.borderColor = '#ff8aa8';
+      email.focus();
+      return;
+    }
+    email.style.borderColor = '';
+    btn.disabled = true;
+    btn.textContent = '신청 중...';
 
-document.getElementById('email-input').addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') handleSubmit();
-});
+    try {
+      const res = await fetch(SUPABASE_URL + '/rest/v1/waitlist', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify({ email: val })
+      });
+
+      if (res.ok) {
+        showThanks('신청 완료! 출시되면 가장 먼저 알려드릴게요 \uD83D\uDC96');
+      } else if (res.status === 409) {
+        // duplicate email (unique constraint)
+        showThanks('이미 신청된 이메일이에요. 출시되면 알려드릴게요 \uD83D\uDC96');
+      } else {
+        throw new Error('status ' + res.status);
+      }
+    } catch (err) {
+      console.error('waitlist signup failed:', err);
+      btn.disabled = false;
+      btn.textContent = '알림 신청';
+      note.textContent = '잠시 후 다시 시도해 주세요.';
+      note.style.color = '#ff8aa8';
+    }
+  }
+
+  btn.addEventListener('click', joinWaitlist);
+  email.addEventListener('keydown', (e) => { if (e.key === 'Enter') joinWaitlist(); });
 </script>
 
 </body>
