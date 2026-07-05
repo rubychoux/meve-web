@@ -986,12 +986,20 @@ nav.scrolled{
 .mm-node.final span{font-weight:600;color:var(--rose-deep)}
 .mm-foot{position:relative;z-index:1;display:flex;justify-content:center}
 @media(max-width:760px){
+  .mm-rail{margin-right:16px}
   .mm-node span{font-size:.6rem}
   .mm-node b{display:none}
   .mm-node:nth-child(odd) span{bottom:auto;top:1.15rem}
-  .mm-node.final span{left:auto;right:-4px;transform:none}
+  .mm-node.final{left:96% !important}
+  .mm-node.final span{left:auto;right:0;transform:none}
+  .mm-node.final i{width:18px;height:18px}
+  .mm-node:nth-child(2){left:4% !important}
   .mm-node:nth-child(2) span{left:0;transform:none}
   .mm-eightbg{font-size:16rem;opacity:.7}
+  .mm-foot .btn{
+    font-size:.6rem;letter-spacing:.12em;padding:.95rem 1.3rem;
+    white-space:nowrap;gap:.5rem;
+  }
 }
 
 /* ---------- N°08 the house ---------- */
@@ -1140,7 +1148,11 @@ nav.scrolled{
 .wl-note{margin-top:1.1rem;font-size:.78rem;color:#8A7C82;font-weight:300}
 .wl-done{display:none;margin-top:2rem;font-weight:300;font-size:1.02rem;color:var(--rose-deep)}
 .wl-done .etoile{display:block;margin-top:.6rem}
-@media(max-width:560px){.wl-form{flex-direction:column}.wl-form button{width:100%}}
+@media(max-width:560px){
+  .wl-form{flex-direction:column;gap:.6rem}
+  .wl-form input{flex:none;height:58px;font-size:1rem;padding-inline:1.3rem}
+  .wl-form button{width:100%;height:58px}
+}
 
 /* ---------- footer — credo ---------- */
 footer{background:var(--ink);color:var(--pearl);padding-block:clamp(6rem,11vh,9rem) 3rem}
@@ -1327,7 +1339,7 @@ footer{background:var(--ink);color:var(--pearl);padding-block:clamp(6rem,11vh,9r
       <p class="numero reveal">N°02 · The House</p>
       <h2 class="display reveal" data-delay="1">One House.<br><em>Every Ritual.</em></h2>
       <p class="kr-body reveal" data-delay="2">
-        MEVE는 앱 하나가 아니라 하나의 하우스입니다. 모두 하나의 세계관 안에서 이어집니다.
+        MEVE는 앱 하나가 아니라 하나의 하우스입니다.<br>모두 하나의 세계관 안에서 이어집니다.
       </p>
     </div>
     <div class="house-stage reveal" data-sys>
