@@ -1165,6 +1165,40 @@ footer{background:var(--ink);color:var(--pearl);padding-block:clamp(6rem,11vh,9r
 }
 @media(max-width:640px){.sig-meta{text-align:left}}
 
+/* ---------- korean text wrapping ---------- */
+.kr-body,.kr-head,.thesis-kr,.sys-copy p.desc,.sys-copy .krsub,.sys-note,
+.maison p,.partners-lede,.pillar p,.credo-line p,.dc-kr,.wl-note,.sys-close,
+.nuit-step h3,.nuit-close p,.mm-head .kr-head{word-break:keep-all;overflow-wrap:break-word}
+
+/* ---------- mobile typography ---------- */
+@media(max-width:700px){
+  .numero{font-size:.6rem;letter-spacing:.28em}
+  .numero::after{width:32px}
+  .kr-body{font-size:1rem;line-height:1.85}
+  .sys-copy p.desc{font-size:.98rem;line-height:1.82}
+  .sys-copy .krsub{font-size:1.08rem}
+  .sys-note{font-size:.85rem;line-height:1.7}
+  .sys-kicker{font-size:.62rem;letter-spacing:.3em}
+  .thesis-kr{font-size:.98rem}
+  .nuit-step h3{font-size:1.6rem;line-height:1.5}
+  .nuit .kr-body{font-size:.98rem}
+  .partners-lede{font-size:.98rem;line-height:1.8}
+  .pillar p{font-size:.94rem;line-height:1.75}
+  .maison p{font-size:.94rem;line-height:1.75}
+  .maison h3{font-size:1.6rem}
+  .dc-name{font-size:1.15rem}
+  .dc-data span{font-size:.56rem}
+  .dc-serial{font-size:.46rem;letter-spacing:.22em}
+  .mm-head .kr-head{font-size:1.08rem}
+  .mm-tag{font-size:.62rem;letter-spacing:.2em;padding:.5rem 1rem}
+  .credo-line .display{font-size:1.35rem;line-height:1.35}
+  .credo-line p{font-size:.92rem}
+  .glass-card .kr-body{font-size:.95rem}
+  .wl-note{font-size:.8rem}
+  .sig-meta{font-size:.6rem;line-height:2}
+  .house-head .kr-body,.sys-head .kr-body,.manifesto .kr-body{font-size:1.02rem}
+}
+
 /* ---------- reduced motion ---------- */
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
