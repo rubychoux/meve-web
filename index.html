@@ -346,32 +346,25 @@ nav.scrolled{
 }
 .nuit-step h3 strong{font-weight:500;color:var(--powder)}
 .nuit-step p{margin-top:1.4rem}
-/* the moon */
+/* the moon — precise phase geometry */
 .lune-stage{position:relative;display:grid;place-items:center}
 .lune{
-  --d:clamp(240px,32vw,420px);
-  width:var(--d);height:var(--d);border-radius:50%;
-  position:relative;overflow:hidden;
-  background:
-    radial-gradient(58% 58% at 38% 32%,#FFFDFB 0%,#F7EBE8 34%,#EBD5D4 62%,#DDBEC2 84%,#CBA6AF 100%);
-  box-shadow:
-    0 0 90px 8px rgba(239,184,200,.18),
-    0 0 220px 40px rgba(239,184,200,.08),
-    inset -14px -18px 44px rgba(122,74,92,.22);
+  --d:clamp(250px,33vw,430px);
+  width:var(--d);height:var(--d);position:relative;
 }
-.lune::after{ /* mother-of-pearl sheen */
-  content:"";position:absolute;inset:0;border-radius:50%;
-  background:
-    radial-gradient(42% 30% at 66% 24%,rgba(214,233,240,.35),transparent 70%),
-    radial-gradient(34% 26% at 28% 62%,rgba(240,214,226,.4),transparent 70%);
-  mix-blend-mode:screen;
+.lune svg{width:100%;height:100%;display:block;overflow:visible}
+.lu-orbit{fill:none;stroke:rgba(253,251,250,.13);stroke-width:1}
+.lu-tick{stroke:rgba(239,184,200,.28);stroke-width:1.5;stroke-linecap:round;transition:stroke .5s var(--ease)}
+.lu-tick.on{stroke:#EFB8C8}
+.lu-base{
+  fill:rgba(253,251,250,.045);
+  stroke:rgba(253,251,250,.17);stroke-width:1;
 }
-.lune-shade{
-  position:absolute;top:-4%;left:-4%;width:108%;height:108%;border-radius:50%;
-  background:var(--plum-deep);
-  will-change:transform;
-  box-shadow:0 0 40px 10px rgba(34,20,32,.5);
+.lu-lit{
+  fill:url(#pearlG);
+  filter:drop-shadow(0 0 22px rgba(239,184,200,.32)) drop-shadow(0 0 70px rgba(239,184,200,.14));
 }
+.lu-star{fill:#C7A76C;opacity:.85}
 .lune-hud{
   position:absolute;bottom:clamp(-1rem,-2vh,-2rem);left:50%;transform:translate(-50%,100%);
   display:flex;align-items:baseline;gap:1.2rem;white-space:nowrap;
@@ -1260,6 +1253,8 @@ footer{background:var(--ink);color:var(--pearl);padding-block:clamp(6rem,11vh,9r
   font-family:var(--sans);font-size:.66rem;letter-spacing:.3em;text-transform:uppercase;
   color:#8E7C87;text-align:right;line-height:2.1;
 }
+.sig-meta a{color:#B9A8B2;text-transform:none;letter-spacing:.14em;transition:color .3s}
+.sig-meta a:hover{color:var(--powder)}
 @media(max-width:640px){.sig-meta{text-align:left}}
 
 /* ---------- refinement pass ---------- */
@@ -1376,7 +1371,6 @@ footer{background:var(--ink);color:var(--pearl);padding-block:clamp(6rem,11vh,9r
   .nuit-sticky{position:static;height:auto;padding-block:4rem}
   .nuit-copy{min-height:0}
   .nuit-step{position:static;opacity:1;transform:none;margin-bottom:3rem}
-  .lune-shade{display:none}
 }
 </style>
 </head>
@@ -1902,7 +1896,7 @@ footer{background:var(--ink);color:var(--pearl);padding-block:clamp(6rem,11vh,9r
     <div class="sys-trust reveal">
       <span>각 분야 전문가 지식 클론</span>
       <span>GPT-4 Vision AI</span>
-      <span>Supabase Seoul · PIPA 준수</span>
+      <span>개인정보보호법(PIPA) 준수</span>
       <span>비주얼 데이터 암호화</span>
     </div>
     <p class="sys-close reveal">그리고 이 모든 시스템은 다정함을 위해 존재합니다. <em>느슨한 매듭도 아름답다.</em></p>
@@ -1932,7 +1926,30 @@ footer{background:var(--ink);color:var(--pearl);padding-block:clamp(6rem,11vh,9r
       </div>
       <div class="lune-stage">
         <div class="lune" role="img" aria-label="스크롤에 따라 차오르는 진주빛 달">
-          <div class="lune-shade" id="luneShade"></div>
+          <svg viewBox="-110 -110 220 220" aria-hidden="true">
+            <defs>
+              <radialGradient id="pearlG" cx="38%" cy="32%" r="78%">
+                <stop offset="0%" stop-color="#FFFDFC"/>
+                <stop offset="42%" stop-color="#F4E6E8"/>
+                <stop offset="78%" stop-color="#E0C3CC"/>
+                <stop offset="100%" stop-color="#C9A3B4"/>
+              </radialGradient>
+            </defs>
+            <circle class="lu-orbit" r="104"/>
+            <g id="luneTicks">
+              <line class="lu-tick" x1="0" y1="-104" x2="0" y2="-97"/>
+              <line class="lu-tick" x1="0" y1="-104" x2="0" y2="-97" transform="rotate(45)"/>
+              <line class="lu-tick" x1="0" y1="-104" x2="0" y2="-97" transform="rotate(90)"/>
+              <line class="lu-tick" x1="0" y1="-104" x2="0" y2="-97" transform="rotate(135)"/>
+              <line class="lu-tick" x1="0" y1="-104" x2="0" y2="-97" transform="rotate(180)"/>
+              <line class="lu-tick" x1="0" y1="-104" x2="0" y2="-97" transform="rotate(225)"/>
+              <line class="lu-tick" x1="0" y1="-104" x2="0" y2="-97" transform="rotate(270)"/>
+              <line class="lu-tick" x1="0" y1="-104" x2="0" y2="-97" transform="rotate(315)"/>
+            </g>
+            <circle class="lu-base" r="88"/>
+            <path class="lu-lit" id="lunePath" d=""/>
+            <path class="lu-star" d="M96,-88 l1.6,4.4 4.4,1.6 -4.4,1.6 -1.6,4.4 -1.6,-4.4 -4.4,-1.6 4.4,-1.6 z"/>
+          </svg>
         </div>
         <div class="lune-hud" aria-hidden="true">
           <span class="lune-pct" id="lunePct">0%</span>
@@ -2210,6 +2227,7 @@ footer{background:var(--ink);color:var(--pearl);padding-block:clamp(6rem,11vh,9r
         <div class="h">Beauty-Tech House</div>
       </div>
       <div class="sig-meta">
+        <a href="mailto:ruby@meve.beauty">ruby@meve.beauty</a><br>
         Seoul → Global<br>
         © 2026 MEVE. All rights reserved.
       </div>
@@ -2325,23 +2343,32 @@ footer{background:var(--ink);color:var(--pearl);padding-block:clamp(6rem,11vh,9r
     });
   }
 
-  /* lune — scroll-driven waxing moon */
+  /* lune — scroll-driven waxing moon (real phase geometry) */
   const track = document.getElementById('luneTrack');
-  const shade = document.getElementById('luneShade');
+  const lunePath = document.getElementById('lunePath');
+  const luneTicks = lunePath ? [...document.querySelectorAll('#luneTicks .lu-tick')] : [];
   const pct   = document.getElementById('lunePct');
   const phase = document.getElementById('lunePhase');
   const steps = [...document.querySelectorAll('.nuit-step')];
   const names = ['New','Crescent','Quarter','Half','Gibbous','Near Full','Full'];
+  const R = 88;
+  const moonD = f => {
+    if(f <= 0.004) return '';
+    if(f >= 0.996) return `M 0,${-R} A ${R},${R} 0 1 1 0,${R} A ${R},${R} 0 1 1 0,${-R} Z`;
+    const rx = (R * Math.abs(1 - 2 * f)).toFixed(2);
+    const sweep = f < 0.5 ? 0 : 1;
+    return `M 0,${-R} A ${R},${R} 0 0 1 0,${R} A ${rx},${R} 0 0 ${sweep} 0,${-R} Z`;
+  };
 
-  if(track && shade && !reduced){
+  if(track && lunePath && !reduced){
     let ticking = false;
     const update = () => {
       ticking = false;
       const r = track.getBoundingClientRect();
       const total = r.height - innerHeight;
       const p = Math.min(1, Math.max(0, -r.top / total));
-      const d = shade.parentElement.offsetWidth;
-      shade.style.transform = `translateX(${p * d * 1.16}px)`;
+      lunePath.setAttribute('d', moonD(p));
+      luneTicks.forEach((t, i) => t.classList.toggle('on', i <= p * 7.99 - 0.5));
       pct.textContent = Math.round(p * 100) + '%';
       phase.textContent = names[Math.min(6, Math.floor(p * 6.999))];
       const s = p < .3 ? 0 : p < .68 ? 1 : 2;
@@ -2352,6 +2379,8 @@ footer{background:var(--ink);color:var(--pearl);padding-block:clamp(6rem,11vh,9r
     }, {passive:true});
     update();
   } else if(reduced){
+    if(lunePath) lunePath.setAttribute('d', moonD(1));
+    luneTicks.forEach(t => t.classList.add('on'));
     pct.textContent = '100%'; phase.textContent = 'Full';
     steps.forEach(el => el.classList.add('on'));
   }
