@@ -420,6 +420,93 @@ nav.scrolled{
 }
 .axis .display{font-size:1.6rem;margin-top:.4rem}
 .axis p{font-size:.82rem;color:#6B5E64;margin-top:.2rem}
+/* featured DNA card — flip */
+.dna-feature{
+  display:grid;grid-template-columns:minmax(0,400px) minmax(0,1fr);
+  gap:clamp(2.5rem,6vw,5rem);align-items:center;
+  margin-bottom:clamp(3rem,6vh,4.5rem);
+}
+.dnaf{perspective:1500px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.dnaf-inner{
+  position:relative;width:100%;aspect-ratio:3/3.8;
+  transform-style:preserve-3d;transition:transform 1s var(--ease);
+}
+@media(hover:hover){.dnaf:hover .dnaf-inner{transform:rotateY(180deg)}}
+.dnaf.flipped .dnaf-inner{transform:rotateY(180deg)}
+.dnaf-face{
+  position:absolute;inset:0;border-radius:16px;overflow:hidden;
+  backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  display:flex;flex-direction:column;text-align:center;
+  padding:clamp(1.6rem,3vw,2.4rem) clamp(1.3rem,2.6vw,2rem);
+}
+.dnaf-front{
+  --tint:#F2BFA9;
+  --deep:color-mix(in srgb,var(--tint) 55%,var(--ink));
+  background:
+    radial-gradient(130% 55% at 50% -6%,color-mix(in srgb,var(--tint) 42%,transparent),transparent 70%),
+    linear-gradient(180deg,color-mix(in srgb,var(--tint) 18%,#FDFBFA),#FDFBFA 60%);
+  box-shadow:
+    0 2px 4px rgba(26,18,22,.06),
+    0 34px 70px -28px color-mix(in srgb,var(--deep) 55%,transparent),
+    inset 0 2px 0 rgba(255,255,255,.95),
+    inset 0 0 0 1px color-mix(in srgb,var(--tint) 50%,transparent);
+}
+.dnaf-front::after{
+  content:"";position:absolute;top:-40%;bottom:-40%;left:-70%;width:34%;
+  transform:skewX(-18deg);pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.65),transparent);
+  animation:foil 4.5s ease-in-out 1.5s infinite;
+}
+.dnaf-front .dc-emblem svg{width:44px;height:44px}
+.dnaf-front .dc-no{font-size:.66rem}
+.dnaf-front .dc-name{font-size:clamp(2rem,3.4vw,2.7rem);margin-top:.45rem}
+.dnaf-front .dc-kr{font-size:.88rem;min-height:0;margin-top:.55rem}
+.dnaf-front .dc-perf{margin:1.2rem -2rem 1rem}
+.dnaf-front .dc-data span{font-size:.72rem;padding:.26rem .7rem}
+.dc-code{
+  margin-top:auto;height:36px;border-radius:2px;opacity:.5;
+  background:repeating-linear-gradient(90deg,
+    var(--deep) 0 2px,transparent 2px 5px,var(--deep) 5px 6px,
+    transparent 6px 11px,var(--deep) 11px 14px,transparent 14px 17px);
+}
+.dnaf-front .dc-serial{margin-top:.7rem;font-size:.56rem}
+.dnaf-back{
+  transform:rotateY(180deg);text-align:left;
+  background:
+    radial-gradient(120% 70% at 85% 0%,rgba(242,191,169,.28),transparent 60%),
+    linear-gradient(180deg,#FDFBFA,#FAF3F0);
+  box-shadow:
+    0 2px 4px rgba(26,18,22,.06),
+    0 34px 70px -28px rgba(142,58,80,.4),
+    inset 0 2px 0 rgba(255,255,255,.95),
+    inset 0 0 0 1px rgba(232,160,184,.4);
+}
+.dbk-eyebrow{font-family:var(--sans);font-size:.58rem;letter-spacing:.4em;text-transform:uppercase;color:var(--rose)}
+.dbk-name{font-family:var(--serif);font-weight:500;font-size:1.55rem;margin-top:.3rem}
+.dbk-rows{margin-top:1rem}
+.dbk-row{
+  display:flex;justify-content:space-between;align-items:baseline;gap:1rem;
+  padding:.52rem 0;border-bottom:1px dashed rgba(200,130,170,.4);
+}
+.dbk-row b{font-family:var(--sans);font-weight:400;font-size:.56rem;letter-spacing:.26em;text-transform:uppercase;color:var(--dove);flex:none}
+.dbk-row span{font-size:.8rem;font-weight:400;color:#3B3036;text-align:right;word-break:keep-all}
+.dbk-pal{display:flex;gap:.45rem;margin-top:1rem;align-items:center}
+.dbk-pal .p-sw{width:20px;height:20px}
+.dbk-pal em{font-style:normal;font-size:.68rem;color:#8A7C82;margin-left:.3rem}
+.dbk-foot{margin-top:auto;font-family:var(--sans);font-size:.54rem;letter-spacing:.24em;text-transform:uppercase;color:var(--dove);display:flex;justify-content:space-between}
+.dnaf-side .display{font-size:clamp(1.8rem,3.4vw,2.6rem);font-weight:400}
+.dnaf-side .display em{font-style:italic;color:var(--rose)}
+.dnaf-side .kr-body{margin-top:1rem}
+.dnaf-hint{
+  display:inline-flex;align-items:center;gap:.6rem;margin-top:1.6rem;
+  font-family:var(--sans);font-size:.64rem;letter-spacing:.3em;text-transform:uppercase;color:var(--rose-deep);
+}
+.dnaf-hint i{font-style:normal;display:inline-block;animation:hintSpin 3.5s var(--ease) infinite}
+@keyframes hintSpin{0%,60%,100%{transform:rotate(0)}30%{transform:rotate(180deg)}}
+@media(max-width:880px){
+  .dna-feature{grid-template-columns:1fr;gap:2rem}
+  .dnaf{max-width:360px;margin-inline:auto;width:100%}
+}
 /* aura index — DNA ticket cards */
 .dna-grid{
   display:grid;grid-template-columns:repeat(4,1fr);
@@ -1995,6 +2082,49 @@ footer{background:var(--ink);color:var(--pearl);padding-block:clamp(6rem,11vh,9r
       </div>
     </div>
 
+    <div class="dna-feature">
+      <div class="dnaf reveal" id="dnaFlip" role="button" tabindex="0" aria-label="Sunlit Rose 카드 — 클릭하면 뒷면 상세를 볼 수 있어요">
+        <div class="dnaf-inner">
+          <div class="dnaf-face dnaf-front">
+            <div class="dc-emblem" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M26 6 A15 15 0 1 0 26 34 A12 12 0 1 1 26 6 Z"/><path d="M31 8.5l1 2.7 2.7 1-2.7 1-1 2.7-1-2.7-2.7-1 2.7-1z"/></svg></div>
+            <p class="dc-no">Aura · 05</p>
+            <h3 class="dc-name">Sunlit Rose</h3>
+            <p class="dc-kr">햇살을 머금은 로즈 톤</p>
+            <div class="dc-perf" aria-hidden="true"></div>
+            <div class="dc-data"><span>수분광</span><span>웜 라이트</span><span>러블리</span></div>
+            <div class="dc-code" aria-hidden="true"></div>
+            <p class="dc-serial"><span>No. MV-0705</span> · <span>8 Types · One You</span></p>
+          </div>
+          <div class="dnaf-face dnaf-back">
+            <p class="dbk-eyebrow">Aura · 05 — Detail</p>
+            <h3 class="dbk-name">Sunlit Rose</h3>
+            <div class="dbk-rows">
+              <div class="dbk-row"><b>Skin</b><span>수분광 결 · 수분 72 · 유분 38</span></div>
+              <div class="dbk-row"><b>Tone</b><span>웜 라이트 · 스프링 · 드레이프 91%</span></div>
+              <div class="dbk-row"><b>Mood</b><span>러블리 · 코랄 · 부드러운 인상</span></div>
+              <div class="dbk-row"><b>Best</b><span>코랄 블러셔 · MLBB 립 · 골드</span></div>
+              <div class="dbk-row"><b>Care</b><span>수분 유지 · 홍조 진정 · 향료 회피</span></div>
+            </div>
+            <div class="dbk-pal" aria-label="시그니처 팔레트">
+              <i class="p-sw" style="background:#F5C9A9"></i><i class="p-sw" style="background:#F2A9A0"></i>
+              <i class="p-sw" style="background:#E8A0B8"></i><i class="p-sw" style="background:#D8B98F"></i>
+              <em>시그니처 팔레트</em>
+            </div>
+            <p class="dbk-foot"><span>전체 유저의 12%</span><span>첫 스캔 후 발급</span></p>
+          </div>
+        </div>
+      </div>
+      <div class="dnaf-side">
+        <h3 class="display reveal">One scan,<br>one <em>ticket</em>.</h3>
+        <p class="kr-body reveal" data-delay="1">
+          첫 스캔이 끝나면 세 축의 교차점에서 나만의 DNA 카드가 발급됩니다.
+          앞면은 나의 아우라, 뒷면은 데이터가 찾아낸 나의 설명서.
+          잘 맞는 컬러부터 케어 포커스까지, 카드 한 장에 담겨요.
+        </p>
+        <p class="dnaf-hint reveal" data-delay="2"><i>↻</i>카드에 올려보세요</p>
+      </div>
+    </div>
+
     <div class="dna-grid">
       <article class="dna-card reveal" style="--tint:#F5C9C4">
         <div class="dc-emblem" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M26 6 A15 15 0 1 0 26 34 A12 12 0 1 1 26 6 Z"/><path d="M31 8.5l1 2.7 2.7 1-2.7 1-1 2.7-1-2.7-2.7-1 2.7-1z"/></svg></div>
@@ -2031,15 +2161,6 @@ footer{background:var(--ink);color:var(--pearl);padding-block:clamp(6rem,11vh,9r
         <div class="dc-perf" aria-hidden="true"></div>
         <div class="dc-data"><span>매트</span><span>딥</span><span>강렬</span></div>
         <p class="dc-serial">MEVE · N°04</p>
-      </article>
-      <article class="dna-card reveal" style="--tint:#F2BFA9">
-        <div class="dc-emblem" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M26 6 A15 15 0 1 0 26 34 A12 12 0 1 1 26 6 Z"/><path d="M31 8.5l1 2.7 2.7 1-2.7 1-1 2.7-1-2.7-2.7-1 2.7-1z"/></svg></div>
-        <p class="dc-no">Aura · 05</p>
-        <h3 class="dc-name">Sunlit Rose</h3>
-        <p class="dc-kr">햇살을 머금은 로즈 톤</p>
-        <div class="dc-perf" aria-hidden="true"></div>
-        <div class="dc-data"><span>수분광</span><span>웜 라이트</span><span>러블리</span></div>
-        <p class="dc-serial">MEVE · N°05</p>
       </article>
       <article class="dna-card reveal" style="--tint:#C08A93;transition-delay:.08s">
         <div class="dc-emblem" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M26 6 A15 15 0 1 0 26 34 A12 12 0 1 1 26 6 Z"/><path d="M31 8.5l1 2.7 2.7 1-2.7 1-1 2.7-1-2.7-2.7-1 2.7-1z"/></svg></div>
@@ -2433,6 +2554,15 @@ footer{background:var(--ink);color:var(--pearl);padding-block:clamp(6rem,11vh,9r
   /* phase marquee — duplicate rail for seamless loop */
   const rail = document.getElementById('phaseRail');
   if(rail){ rail.innerHTML += rail.innerHTML; }
+
+  /* featured dna card — tap/keyboard flip */
+  const dnaFlip = document.getElementById('dnaFlip');
+  if(dnaFlip){
+    dnaFlip.addEventListener('click', () => dnaFlip.classList.toggle('flipped'));
+    dnaFlip.addEventListener('keydown', e => {
+      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); dnaFlip.classList.toggle('flipped'); }
+    });
+  }
 
   /* waitlist */
   const form = document.getElementById('wlForm');
