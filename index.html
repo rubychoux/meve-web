@@ -1961,10 +1961,14 @@ footer{background:var(--ink);color:var(--pearl);padding-block:clamp(6rem,11vh,9r
     el, a: parseFloat(el.dataset.in), b: parseFloat(el.dataset.out)
   }));
   if(proTrack && proVideo && !reduced){
-    /* mobile: lighter film */
+    /* mobile: portrait-native film */
     if(innerWidth <= 700){
       const s = proVideo.querySelector('source');
-      if(s){ s.src = 'assets/prologue-720.mp4'; proVideo.load(); }
+      if(s){
+        s.src = 'assets/prologue-mobile.mp4';
+        proVideo.poster = 'assets/prologue-poster-m.jpg';
+        proVideo.load();
+      }
     }
     /* iOS/Android: unlock frame rendering on first touch */
     const unlockVideo = () => {
