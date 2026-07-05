@@ -5,7 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MEVE · Beauty-Tech House</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%221024%22%20height%3D%221024%22%20viewBox%3D%220%200%201024%201024%22%3E%3Crect%20width%3D%221024%22%20height%3D%221024%22%20rx%3D%22224%22%20fill%3D%22%23FBF4F1%22%2F%3E%3Cdefs%3E%3Cmask%20id%3D%22hole2%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22white%22%2F%3E%3Cellipse%20cx%3D%22260%22%20cy%3D%22160%22%20rx%3D%2214%22%20ry%3D%2210%22%20fill%3D%22black%22%2F%3E%3C%2Fmask%3E%3C%2Fdefs%3E%3Cg%20transform%3D%22translate%28161%2C251%29%20scale%281.35%29%22%3E%3Cg%20mask%3D%22url%28%23hole2%29%22%3E%0A%3Cpath%20d%3D%22M%2084%20160%20A%2098%2098%200%201%201%20280%20160%20A%2098%2098%200%201%201%2084%20160%20Z%20M%20147.16%20160%20A%2076%2076%200%201%200%20299.15999999999997%20160%20A%2076%2076%200%201%200%20147.16%20160%20Z%22%20fill%3D%22%231F1B21%22%20fill-rule%3D%22evenodd%22%2F%3E%0A%3Cpath%20d%3D%22M%20240%20160%20A%2098%2098%200%201%201%20436%20160%20A%2098%2098%200%201%201%20240%20160%20Z%20M%20220.84000000000003%20160%20A%2076%2076%200%201%200%20372.84000000000003%20160%20A%2076%2076%200%201%200%20220.84000000000003%20160%20Z%22%20fill%3D%22%231F1B21%22%20fill-rule%3D%22evenodd%22%2F%3E%0A%3Cpath%20d%3D%22M%20214%20113%20C%20233%20133%2C%20245%20147%2C%20260%20160%20C%20245%20173%2C%20233%20187%2C%20214%20207%20C%20221%20187%2C%20225%20174%2C%20225%20160%20C%20225%20146%2C%20221%20133%2C%20214%20113%20Z%22%20fill%3D%22%231F1B21%22%2F%3E%0A%3Cpath%20d%3D%22M%20306%20113%20C%20287%20133%2C%20275%20147%2C%20260%20160%20C%20275%20173%2C%20287%20187%2C%20306%20207%20C%20299%20187%2C%20295%20174%2C%20295%20160%20C%20295%20146%2C%20299%20133%2C%20306%20113%20Z%22%20fill%3D%22%231F1B21%22%2F%3E%0A%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E">
-<meta name="description" content="오늘의 강박을 풀고, 내일의 나를 매듭짓다. AI 뷰티-테크 하우스 MEVE.">
+<meta name="description" content="감에 기대던 아름다움의 시대는 끝. 나의 최상은 데이터가 알고 있어요. 스킨케어부터 메이크업까지, 초개인화 뷰티 매니저 MEVE. App Launching July 2026.">
+<meta name="theme-color" content="#FBF7F5">
+<meta property="og:title" content="MEVE · Beauty-Tech House">
+<meta property="og:description" content="감에 기대던 아름다움의 시대는 끝. 나의 최상은 데이터가 알고 있어요. App Launching July 2026.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://meve.beauty">
+<meta property="og:image" content="https://meve.beauty/assets/prologue-poster.jpg">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
@@ -1177,6 +1184,58 @@ footer{background:var(--ink);color:var(--pearl);padding-block:clamp(6rem,11vh,9r
 }
 @media(max-width:640px){.sig-meta{text-align:left}}
 
+/* ---------- refinement pass ---------- */
+[id]{scroll-margin-top:82px}
+.nav-progress{
+  position:fixed;top:0;left:0;height:2px;width:0;z-index:70;
+  background:linear-gradient(90deg,#F0A0BC,#C94E70);
+  box-shadow:0 0 8px rgba(232,160,184,.55);
+}
+.nav-links a.cur{color:var(--rose-deep)}
+.nav-links a.cur::after{width:100%}
+.pro-skip{
+  position:absolute;bottom:12px;left:50%;transform:translateX(-50%);
+  font-family:var(--sans);font-size:.55rem;letter-spacing:.32em;text-transform:uppercase;
+  color:#8A7C82;pointer-events:auto;padding:.3rem .6rem;
+  transition:color .3s;
+}
+.pro-skip:hover{color:var(--rose-deep)}
+/* partners: veiled lineup */
+.veil-row{display:flex;flex-wrap:wrap;gap:.55rem;margin-top:1.8rem}
+.veil-chip{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-family:var(--kr);font-size:.76rem;font-weight:300;color:#E9D9E2;
+  padding:.5rem 1.05rem;border-radius:100px;
+  background:rgba(253,251,250,.06);
+  box-shadow:inset 0 0 0 1px rgba(253,251,250,.16);
+}
+.veil-chip b{filter:blur(4.5px);font-weight:400;user-select:none;letter-spacing:.04em}
+.veil-chip i{font-style:normal;color:var(--powder);font-size:.58rem}
+.veil-cap{margin-top:1rem;font-size:.76rem;font-weight:300;color:#8E7C87}
+/* house cards: navigational */
+.maison .go{
+  display:inline-flex;align-items:center;gap:.45rem;margin-top:.7rem;
+  font-family:var(--sans);font-size:.6rem;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--rose-deep);
+}
+.maison .go::after{content:"";position:absolute;inset:0}
+.maison .go i{font-style:normal;transition:transform .35s var(--ease)}
+.maison:hover .go i{transform:translateX(4px)}
+.maison--mm .go{color:var(--powder)}
+/* back to top pearl */
+.totop{
+  position:fixed;right:18px;bottom:18px;z-index:58;
+  width:44px;height:44px;border-radius:50%;
+  background:radial-gradient(circle at 32% 28%,#fff,#F5E8F0 55%,#ECA0C0);
+  box-shadow:0 8px 20px rgba(160,60,110,.35),inset 0 1.5px 0 rgba(255,255,255,.85);
+  display:grid;place-items:center;
+  opacity:0;pointer-events:none;transform:translateY(10px);
+  transition:opacity .45s var(--ease),transform .45s var(--ease);
+}
+.totop.show{opacity:1;pointer-events:auto;transform:none}
+.totop:hover{transform:translateY(-2px)}
+.totop svg{width:14px;height:14px;stroke:#8E3A50;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+
 /* ---------- korean text wrapping ---------- */
 .kr-body,.kr-head,.thesis-kr,.sys-copy p.desc,.sys-copy .krsub,.sys-note,
 .maison p,.partners-lede,.pillar p,.credo-line p,.dc-kr,.wl-note,.sys-close,
@@ -1266,9 +1325,10 @@ footer{background:var(--ink);color:var(--pearl);padding-block:clamp(6rem,11vh,9r
   <video id="proVideo" muted playsinline preload="auto" poster="assets/prologue-poster.jpg" aria-hidden="true">
     <source src="assets/prologue.mp4" type="video/mp4">
   </video>
-  <div class="pro-frame" aria-hidden="true">
-    <span class="fm1">Seoul → Global</span>
-    <span class="fm2"><i></i>App · Launching July 2026</span>
+  <div class="pro-frame">
+    <span class="fm1" aria-hidden="true">Seoul → Global</span>
+    <span class="fm2" aria-hidden="true"><i></i>App · Launching July 2026</span>
+    <a class="pro-skip" href="#manifesto">Skip Intro ↓</a>
   </div>
 
   <!-- B0 · title -->
@@ -1359,6 +1419,7 @@ footer{background:var(--ink);color:var(--pearl);padding-block:clamp(6rem,11vh,9r
           <h3>MEVE App</h3>
           <p>매일의 진단과 처방. AI 스캔, Beauty DNA, 글로우 문, 루틴·리듬 트래킹. 데이터가 매일 나를 읽는 곳.</p>
           <span class="soon">July 2026 · Launching</span>
+          <a class="go" href="#system">Explore <i>→</i></a>
         </div>
         <div class="maison maison--mm m m2">
           <div class="mo" aria-hidden="true">8</div>
@@ -1366,6 +1427,7 @@ footer{background:var(--ink);color:var(--pearl);padding-block:clamp(6rem,11vh,9r
           <h3>MEVE Mastermind</h3>
           <p>데이터 위에 전문가의 손길. 강남·청담 전문가진과 8주, 나의 최상을 꺼내는 프라이빗 아틀리에.</p>
           <span class="soon">Cohort 01 · Open Soon</span>
+          <a class="go" href="#mastermind">Explore <i>→</i></a>
         </div>
         <div class="maison maison--objets m m3">
           <div class="mo" aria-hidden="true"><span class="pearl"></span><span class="star">✦</span></div>
@@ -1373,6 +1435,7 @@ footer{background:var(--ink);color:var(--pearl);padding-block:clamp(6rem,11vh,9r
           <h3>MEVE Objets</h3>
           <p>하우스의 세계관을 손끝으로. 향수, 스테이셔너리, 리본 문 오브제. 데이터가 아닌 감촉으로 남는 미브.</p>
           <span class="soon">Coming Soon</span>
+          <a class="go" href="#waitlist">Waitlist <i>→</i></a>
         </div>
       </div>
     </div>
@@ -1871,6 +1934,13 @@ footer{background:var(--ink);color:var(--pearl);padding-block:clamp(6rem,11vh,9r
         미브 마스터마인드 크루만을 위해 베일 뒤에 준비된 강남·청담권 프리미엄 피부과,
         프라이빗 에스테틱, 전문 자문단 라인업이 곧 순차 공개됩니다.
       </p>
+      <div class="veil-row reveal" data-delay="3" aria-label="공개 예정 파트너 라인업">
+        <span class="veil-chip"><b>청담 ○○○ 피부과</b><i>✦</i></span>
+        <span class="veil-chip"><b>압구정 ○○ 클리닉</b><i>✦</i></span>
+        <span class="veil-chip"><b>○○○ 프라이빗 에스테틱</b><i>✦</i></span>
+        <span class="veil-chip"><b>아티스트 K</b><i>✦</i></span>
+      </div>
+      <p class="veil-cap reveal" data-delay="3">파트너 라인업 · 계약 확정 순 순차 공개</p>
     </div>
     <div class="pillars reveal" data-delay="2">
       <div class="pillar">
@@ -1942,11 +2012,16 @@ footer{background:var(--ink);color:var(--pearl);padding-block:clamp(6rem,11vh,9r
         <input type="email" id="wlEmail" name="email" placeholder="이메일 주소" autocomplete="email" required aria-label="이메일 주소">
         <button type="submit">알림 신청</button>
       </form>
-      <p class="wl-note" id="wlNote">스팸은 보내지 않아요. 출시 알림 한 통이면 끝.</p>
+      <p class="wl-note" id="wlNote">스팸은 보내지 않아요 · 얼리 액세스는 선착순으로 초대돼요</p>
       <p class="wl-done" id="wlDone">신청이 완료되었어요. 곧 만나요. MEVE<span class="etoile" aria-hidden="true">✦</span></p>
     </div>
   </div>
 </section>
+
+<span class="nav-progress" id="navProg" aria-hidden="true"></span>
+<button class="totop" id="toTop" aria-label="맨 위로 이동">
+  <svg viewBox="0 0 24 24"><path d="M6 14l6-6 6 6"/></svg>
+</button>
 
 <!-- ================= FOOTER — credo ================= -->
 <footer>
@@ -1985,10 +2060,38 @@ footer{background:var(--ink);color:var(--pearl);padding-block:clamp(6rem,11vh,9r
 (function(){
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* nav */
+  /* nav + progress + back-to-top */
   const nav = document.getElementById('nav');
-  const onScrollNav = () => nav.classList.toggle('scrolled', scrollY > 24);
+  const prog = document.getElementById('navProg');
+  const toTop = document.getElementById('toTop');
+  const onScrollNav = () => {
+    nav.classList.toggle('scrolled', scrollY > 24);
+    const max = document.documentElement.scrollHeight - innerHeight;
+    if(prog && max > 0) prog.style.width = (scrollY / max * 100).toFixed(2) + '%';
+    if(toTop) toTop.classList.toggle('show', scrollY > innerHeight * 3);
+  };
   addEventListener('scroll', onScrollNav, {passive:true}); onScrollNav();
+  if(toTop) toTop.addEventListener('click', () => scrollTo({top:0, behavior: reduced ? 'auto' : 'smooth'}));
+
+  /* nav scrollspy */
+  const spyLinks = [...document.querySelectorAll('.nav-links a[href^="#"]:not(.nav-cta)')];
+  const spyMap = new Map();
+  spyLinks.forEach(a => {
+    const sec = document.querySelector(a.getAttribute('href'));
+    if(sec) spyMap.set(sec, a);
+  });
+  if(spyMap.size){
+    const spyIO = new IntersectionObserver(es => {
+      es.forEach(e => {
+        if(e.isIntersecting){
+          spyLinks.forEach(a => a.classList.remove('cur'));
+          const link = spyMap.get(e.target);
+          if(link) link.classList.add('cur');
+        }
+      });
+    }, {rootMargin:'-30% 0px -55% 0px'});
+    spyMap.forEach((_, sec) => spyIO.observe(sec));
+  }
 
   /* reveals */
   if(!reduced){
