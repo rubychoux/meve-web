@@ -933,6 +933,59 @@ nav.scrolled{
   color:#fff;padding:.2rem .5rem;border-radius:100px;
   background:linear-gradient(135deg,#F0A0BC,#D05878);
 }
+/* ----- mockup v6 : coach chat, checklist, skin phase ----- */
+.p-msgs{display:grid;gap:6px}
+.p-msg{
+  max-width:86%;padding:7px 10px;border-radius:3px 12px 12px 12px;
+  background:rgba(255,255,255,.8);
+  box-shadow:0 2px 20px rgba(160,60,110,.05),inset 0 1px 0 rgba(255,255,255,.95);
+  font-size:.6rem;line-height:1.5;color:#3B3036;word-break:keep-all;
+}
+.p-msg.me{
+  margin-left:auto;border-radius:12px 3px 12px 12px;
+  background:linear-gradient(135deg,#F0A0BC,#D05878);color:#fff;
+  box-shadow:0 3px 12px rgba(208,88,120,.35);
+}
+.p-msg .mini{
+  margin-top:5px;padding:6px 8px;border-radius:9px;
+  background:rgba(246,228,232,.75);
+  box-shadow:inset 0 0 0 1px rgba(220,175,195,.45);
+  font-size:.55rem;color:#6B5E64;line-height:1.45;
+}
+.p-msg .mini b{color:#D05878;font-weight:600}
+.p-quick{display:flex;gap:5px;flex-wrap:wrap}
+.p-quick span{
+  font-family:var(--kr);font-size:.54rem;color:#D05878;
+  padding:.28rem .62rem;border-radius:100px;
+  box-shadow:inset 0 0 0 1px rgba(200,130,170,.5);background:rgba(255,255,255,.6);
+}
+.p-inputbar{
+  display:flex;align-items:center;gap:6px;padding:7px 8px 7px 12px;border-radius:100px;
+  background:rgba(255,255,255,.88);
+  box-shadow:0 2px 20px rgba(160,60,110,.07),inset 0 0 0 1px rgba(220,175,195,.35);
+  font-size:.56rem;color:#A88898;
+}
+.p-inputbar .snd{
+  margin-left:auto;width:20px;height:20px;border-radius:50%;flex:none;
+  background:linear-gradient(135deg,#F0A0BC,#D05878);display:grid;place-items:center;
+}
+.p-inputbar .snd svg{width:9px;height:9px;stroke:#fff;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.p-chk{display:flex;align-items:center;gap:7px;font-size:.6rem;font-weight:500;color:#4E434A}
+.p-chk i{
+  width:13px;height:13px;border-radius:50%;flex:none;display:grid;place-items:center;
+  background:linear-gradient(135deg,#F0A0BC,#E06888);color:#fff;
+  font-size:.44rem;font-style:normal;line-height:1;
+}
+.p-chk.off{color:#A88898;font-weight:400}
+.p-chk.off i{background:#EAE0E4;color:#B9A8AE}
+.p-chk .tm{margin-left:auto;font-size:.5rem;font-weight:400;color:#A88898}
+.p-phase{display:flex;align-items:center;gap:8px}
+.p-phase .ph{
+  width:26px;height:26px;border-radius:50%;flex:none;position:relative;overflow:hidden;
+  background:radial-gradient(circle at 35% 30%,#FFF,#F5E8F0 50%,#ECA0C0);
+  box-shadow:inset -2px -3px 6px rgba(160,60,110,.2),0 1px 5px rgba(160,60,110,.25);
+}
+.p-phase .ph::after{content:"";position:absolute;left:0;top:0;bottom:0;width:34%;background:rgba(110,66,86,.22)}
 
 @media(max-width:840px){
   .sys-step{grid-template-columns:1fr;gap:2.2rem}
@@ -1488,11 +1541,9 @@ footer{background:var(--ink);color:var(--pearl);padding-block:clamp(6rem,11vh,9r
           <p class="sys-kicker"><i>01</i> Scan 탭 · 진단</p>
           <h3>Six lenses,<br><em>one truth.</em></h3>
           <p class="krsub">468개 포인트를 읽는 정밀 스캔.</p>
-          <p class="desc">여섯 개의 AI 스캐너가 피부·성분·제품을 다각도로 읽고, 안 맞았던 제품들의 공통 성분까지 역추적합니다. 모든 분석에는 전문가 클론의 신뢰도가 함께 표기돼요.</p>
+          <p class="desc">여섯 개의 AI 스캐너가 피부·성분·제품을 다각도로 읽습니다. 얼굴 분석은 회차가 쌓일수록 변화 추이를 비교하고, 회피 성분 Finder는 안 맞았던 제품들의 공통 성분을 역추적하고, 세 축의 교차점에서 Beauty DNA가 리빌돼요.</p>
           <div class="sys-chips">
-            <span class="sys-chip">얼굴 분석</span><span class="sys-chip">피부 스캔</span>
-            <span class="sys-chip">성분 스캔</span><span class="sys-chip">제품 검색</span>
-            <span class="sys-chip">회피 성분</span><span class="sys-chip">메이크업 스캔</span>
+            <span class="sys-chip">얼굴 분석</span><span class="sys-chip">피부 스캔</span><span class="sys-chip">성분 스캔</span><span class="sys-chip">제품 검색</span><span class="sys-chip">회피 성분 Finder</span><span class="sys-chip">메이크업 스캔</span><span class="sys-chip">DNA 리빌</span><span class="sys-chip">스캔 히스토리</span>
           </div>
           <p class="sys-note"><b>Bare Face Vault</b> · 모든 민낯 기록은 필터 제로, 암호화된 비밀 금고에만.</p>
         </div>
@@ -1504,7 +1555,10 @@ footer{background:var(--ink);color:var(--pearl);padding-block:clamp(6rem,11vh,9r
             <div class="p-body">
               <p class="p-eyebrow">AI Scanner</p>
               <div class="p-row"><p class="p-h">정밀 스캔</p><span class="p-label">신뢰도 92%</span></div>
-              <div class="p-view" style="height:128px">
+              <div class="p-steps m m1">
+                <span class="p-step on">얼굴</span><span class="p-step">성분</span><span class="p-step">제품</span><span class="p-step">회피</span>
+              </div>
+              <div class="p-view" style="height:116px">
                 <span class="p-corner c1"></span><span class="p-corner c2"></span>
                 <span class="p-corner c3"></span><span class="p-corner c4"></span>
                 <svg class="p-facesvg" viewBox="0 0 110 140" aria-hidden="true">
@@ -1519,13 +1573,12 @@ footer{background:var(--ink);color:var(--pearl);padding-block:clamp(6rem,11vh,9r
               </div>
               <p class="p-scanprog"><span>468개 포인트 분석</span><b><span class="cnt" data-to="100">0</span>%</b></p>
               <div class="p-grid2">
-                <div class="p-card m m1"><p class="p-label">수분</p><p class="p-strong">62 · 촉촉</p></div>
-                <div class="p-card m m2"><p class="p-label">유분</p><p class="p-strong">38 · 균형</p></div>
+                <div class="p-card m m2"><p class="p-label">수분 · 유분</p><p class="p-strong">62 · 38 균형</p></div>
                 <div class="p-card m m3"><p class="p-label">모공 · 결</p><p class="p-strong">양호 · 고움</p></div>
-                <div class="p-card m m4"><p class="p-label">홍조 · 색소</p><p class="p-strong">낮음 · 옅음</p></div>
               </div>
+              <div class="p-card m m4"><div class="p-row"><span class="p-label">지난 스캔 대비</span><span class="p-strong" style="color:#D05878">수분 +6 · 홍조 −2</span></div></div>
               <div class="p-avoid m m5"><b>원인 발견 · 공통 성분 2개</b>안 맞았던 제품 4개의 교집합 · 향료 · 변성알코올</div>
-              <p class="p-meta m m6" style="text-align:center">스캔 12회 축적 · 전문가 클론 분석 기반</p>
+              <p class="p-meta m m6" style="text-align:center">스캔 12회 축적 · Beauty DNA 리빌 완료</p>
             </div>
             <div class="p-tabbar" aria-hidden="true">
               <span class="p-tab"><svg viewBox="0 0 24 24"><path d="M4 11.5 12 4.5l8 7v7.5a1 1 0 0 1-1 1h-4.5v-5.5h-5V20H5a1 1 0 0 1-1-1z"/></svg>홈</span>
@@ -1540,11 +1593,14 @@ footer{background:var(--ink);color:var(--pearl);padding-block:clamp(6rem,11vh,9r
       </div>
       <div class="sys-step rev reveal" data-sys>
         <div class="sys-copy">
-          <p class="sys-kicker"><i>02</i> Care 탭 · 처방</p>
-          <h3>Diagnosis becomes<br><em>a prescription.</em></h3>
-          <p class="krsub">전문가 클론의 처방, 나의 반응으로 완성.</p>
-          <p class="desc">피부 전문가의 지식이 이식된 AI 코치가 오늘의 루틴을 처방하고, 모든 제품에 적합도를 %로 증명합니다. 새 제품의 반응과 시술 회복 곡선까지 자동 트래킹.</p>
-          <p class="sys-note"><b>Skin Phase</b> · 점수 대신 달의 위상. 오늘의 피부에 딱 맞는 미니멀 루틴.</p>
+          <p class="sys-kicker"><i>02</i> Care 탭 · 케어</p>
+          <h3>Prescribed by phase,<br><em>proven by tracking.</em></h3>
+          <p class="krsub">위상이 처방하고, 트래킹이 증명하는 케어.</p>
+          <p class="desc">오늘의 피부 위상에 맞는 미니멀 루틴이 처방되고, 아침·저녁 체크로 완주를 관리합니다. 새 제품의 반응 곡선, 시술 회복, 트러블 로그, 글로우 저널까지. 케어의 모든 순간이 데이터로 남아 다음 처방을 더 정확하게 만들어요.</p>
+          <div class="sys-chips">
+            <span class="sys-chip">위상 루틴 처방</span><span class="sys-chip">루틴 빌더</span><span class="sys-chip">데일리 체크</span><span class="sys-chip">제품 반응 트래킹</span><span class="sys-chip">시술 회복 트래킹</span><span class="sys-chip">트러블 로그</span><span class="sys-chip">글로우 저널</span>
+          </div>
+          <p class="sys-note"><b>Skin Phase</b> · 점수 대신 달의 위상. 강박적 과잉 케어 대신 오늘에 맞는 만큼만.</p>
         </div>
         <div class="sys-stage">
           <div class="float"><div class="phone"><div class="p-screen">
@@ -1552,19 +1608,20 @@ footer{background:var(--ink);color:var(--pearl);padding-block:clamp(6rem,11vh,9r
             <div class="p-status" aria-hidden="true"><span>9:41</span><span style="display:flex;align-items:center"><span class="p-sig"><i></i><i></i><i></i><i></i></span><span class="p-batt"></span></span></div>
             <span class="p-blob b1"></span><span class="p-blob b2"></span><span class="p-blob b3"></span>
             <div class="p-body">
-              <p class="p-eyebrow">Care · AI Coach</p>
-              <div class="p-row"><p class="p-h">오늘의 처방</p><span class="p-label">7월 6일 · 일</span></div>
-              <div class="p-coach m m1">
-                <span class="p-ava"></span>
-                <span class="p-bubble">
-                  <span class="p-dots"><i></i><i></i><i></i></span>
-                  <span class="msg">어제 유분이 안정됐어요. 오늘은 수분 위주로 가볍게.</span>
-                </span>
+              <p class="p-eyebrow">Care · Skin Phase</p>
+              <div class="p-row"><p class="p-h">오늘의 케어</p><span class="p-label">7월 6일 · 일</span></div>
+              <div class="p-card m m1">
+                <div class="p-phase">
+                  <span class="ph"></span>
+                  <span class="grow"><span class="nm" style="font-size:.64rem;font-weight:600">위상 5 · 차오르는 달</span><br><span class="cat">오늘 피부에 맞는 미니멀 루틴 처방</span></span>
+                  <span class="p-chip">위상 루틴</span>
+                </div>
               </div>
-              <div class="p-card p-prod m m2">
-                <span class="pi"></span>
-                <span class="grow"><span class="nm">수분 세럼 · 아침</span><br><span class="cat">히알루론산 · 회피 성분 0</span><span class="p-bar"><i style="--w:94%"></i></span></span>
-                <span class="p-pill"><span class="cnt" data-to="94">0</span>%</span>
+              <div class="p-card m m2" style="display:grid;gap:6px">
+                <div class="p-chk"><i>✓</i>저자극 클렌징<span class="tm">아침 07:40</span></div>
+                <div class="p-chk"><i>✓</i>수분 세럼 · 적합 94%<span class="tm">아침 07:43</span></div>
+                <div class="p-chk off"><i></i>시카 진정 크림<span class="tm">저녁</span></div>
+                <div class="p-chk off"><i></i>배리어 크림 · 위상 케어<span class="tm">저녁</span></div>
               </div>
               <div class="p-card p-prod m m3">
                 <span class="pi pi-cream"></span>
@@ -1576,7 +1633,7 @@ footer{background:var(--ink);color:var(--pearl);padding-block:clamp(6rem,11vh,9r
                 <span class="grow"><span class="nm">레이저 토닝 · D+14</span><br><span class="cat">회복 곡선 정상 · 다음 시술 D-16</span></span>
                 <span class="p-chip">회복 <span class="cnt" data-to="92">0</span>%</span>
               </div>
-              <p class="p-meta m m5" style="text-align:center">오늘 루틴 2/4 완료 · 저녁 2단계 남음</p>
+              <p class="p-meta m m5" style="text-align:center">트러블 로그 · 턱 D+2 진정 중 · 글로우 저널 자동 기록</p>
             </div>
             <div class="p-tabbar" aria-hidden="true">
               <span class="p-tab"><svg viewBox="0 0 24 24"><path d="M4 11.5 12 4.5l8 7v7.5a1 1 0 0 1-1 1h-4.5v-5.5h-5V20H5a1 1 0 0 1-1-1z"/></svg>홈</span>
@@ -1591,13 +1648,58 @@ footer{background:var(--ink);color:var(--pearl);padding-block:clamp(6rem,11vh,9r
       </div>
       <div class="sys-step reveal" data-sys>
         <div class="sys-copy">
-          <p class="sys-kicker"><i>03</i> Look 탭 · 스타일</p>
+          <p class="sys-kicker"><i>03</i> AI Coach · 코치 채팅</p>
+          <h3>An expert clone<br><em>who knows your skin.</em></h3>
+          <p class="krsub">내 38일 기록을 아는 코치와의 대화.</p>
+          <p class="desc">각 분야 전문가의 지식을 클론한 코치가 24시간 대기합니다. 일반론이 아니라 내 스캔·컨디션·사이클 기록을 인용해 답하고, 대화 한 번으로 오늘의 루틴이 즉시 조정돼요. SKIN과 LOOK, 두 모드의 전문 코치.</p>
+          <div class="sys-chips">
+            <span class="sys-chip">24시간 상담</span><span class="sys-chip">내 기록 인용 답변</span><span class="sys-chip">루틴 즉시 조정</span><span class="sys-chip">제품·성분 Q&A</span><span class="sys-chip">시술 상담</span><span class="sys-chip">SKIN·LOOK 모드</span>
+          </div>
+          <p class="sys-note"><b>Gentle Guardrails</b> · 너무 오래 들여다보면 코치가 먼저 말을 건네요. "오늘은 충분히 아름다워요."</p>
+        </div>
+        <div class="sys-stage">
+          <div class="float"><div class="phone"><div class="p-screen">
+            <span class="p-island"></span>
+            <div class="p-status" aria-hidden="true"><span>9:41</span><span style="display:flex;align-items:center"><span class="p-sig"><i></i><i></i><i></i><i></i></span><span class="p-batt"></span></span></div>
+            <span class="p-blob b1"></span><span class="p-blob b2"></span><span class="p-blob b3"></span>
+            <div class="p-body">
+              <p class="p-eyebrow">AI Coach · Expert Clone</p>
+              <div class="p-row"><p class="p-h">코치와 대화</p><span class="p-label">SKIN 모드</span></div>
+              <div class="p-msgs">
+                <div class="p-msg m m1">어젯밤 턱에 올라온 트러블, 기록 봤어요. 최근 3일 수면이 5시간대였고 사이클 D-9라 예상 범위예요.</div>
+                <div class="p-msg me m m2">오늘 레티놀 써도 될까?</div>
+                <div class="p-msg m m3">오늘은 쉬어가요. 위상 5 + 트러블 진정 중이라 자극을 더하면 회복이 느려져요.
+                  <span class="mini">저녁 루틴 자동 조정 · <b>레티놀 제외</b> · 시카 크림 → 배리어 크림 순서로</span>
+                </div>
+              </div>
+              <div class="p-quick m m4">
+                <span>대체 성분 추천</span><span>내일은 가능해?</span><span>시술 상담</span>
+              </div>
+              <div class="p-inputbar m m5">
+                무엇이든 물어보세요
+                <span class="snd"><svg viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
+              </div>
+              <p class="p-meta m m6" style="text-align:center">내 38일 기록을 아는 전문가 클론 · 24시간</p>
+            </div>
+            <div class="p-tabbar" aria-hidden="true">
+              <span class="p-tab"><svg viewBox="0 0 24 24"><path d="M4 11.5 12 4.5l8 7v7.5a1 1 0 0 1-1 1h-4.5v-5.5h-5V20H5a1 1 0 0 1-1-1z"/></svg>홈</span>
+              <span class="p-tab on"><svg viewBox="0 0 24 24"><path d="M12 4.5c3.3 4 5.6 6.8 5.6 9.4a5.6 5.6 0 1 1-11.2 0C6.4 11.3 8.7 8.5 12 4.5z"/></svg>케어</span>
+              <span class="p-scanbtn"><svg viewBox="0 0 24 24"><path d="M4 8V6.5A2.5 2.5 0 0 1 6.5 4H8M16 4h1.5A2.5 2.5 0 0 1 20 6.5V8M20 16v1.5a2.5 2.5 0 0 1-2.5 2.5H16M8 20H6.5A2.5 2.5 0 0 1 4 17.5V16M7.5 12h9"/></svg></span>
+              <span class="p-tab"><svg viewBox="0 0 24 24"><path d="M12 3.5l1.9 6.6 6.6 1.9-6.6 1.9L12 20.5l-1.9-6.6-6.6-1.9 6.6-1.9z"/></svg>룩</span>
+              <span class="p-tab"><svg viewBox="0 0 24 24"><path d="M4.5 6.5a3 3 0 0 1 3-3h9a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3H10l-5.5 4z"/></svg>eve</span>
+              </div>
+            <span class="p-homebar"></span>
+          </div></div></div>
+        </div>
+      </div>
+      <div class="sys-step rev reveal" data-sys>
+        <div class="sys-copy">
+          <p class="sys-kicker"><i>04</i> Look 탭 · 스타일</p>
           <h3>Precision, from<br><em>your own face.</em></h3>
           <p class="krsub">내 얼굴 데이터에서 나온 정밀 가이드.</p>
-          <p class="desc">얼굴 분석 기반의 각도·위치까지 짚어주는 정밀 메이크업 가이드, 흔들리지 않는 피부 퍼스널컬러, 그리고 추구미 보드. 유행이 아니라 내 골격과 톤에서 출발합니다.</p>
+          <p class="desc">얼굴 분석 기반으로 각도와 위치까지 짚어주는 정밀 메이크업 가이드, 흔들리지 않는 피부 퍼스널컬러, 추구미 보드와 무드별 색조 추천, 그리고 바로 시작할 수 있는 스타터킷 구성까지. 유행이 아니라 내 골격과 톤에서 출발합니다.</p>
           <div class="sys-chips">
-            <span class="sys-chip">정밀 메이크업 가이드</span><span class="sys-chip">퍼스널컬러</span>
-            <span class="sys-chip">추구미 보드</span>
+            <span class="sys-chip">정밀 메이크업 가이드</span><span class="sys-chip">피부 퍼스널컬러</span><span class="sys-chip">추구미 보드</span><span class="sys-chip">색조 추천</span><span class="sys-chip">스타터킷</span><span class="sys-chip">룩 히스토리</span>
           </div>
           <p class="sys-note"><b>30cm Mirror</b> · 결점 확대 대신, 타인이 나를 보는 거리에서의 전체 아우라 가이드.</p>
         </div>
@@ -1610,10 +1712,10 @@ footer{background:var(--ink);color:var(--pearl);padding-block:clamp(6rem,11vh,9r
               <p class="p-eyebrow">Look · Precision Guide</p>
               <div class="p-row"><p class="p-h">정밀 메이크업</p><span class="p-label">얼굴 분석 기반</span></div>
               <div class="p-steps m m1">
-                <span class="p-step on">메이크업</span><span class="p-step">퍼스널컬러</span><span class="p-step">추구미</span>
+                <span class="p-step on">메이크업</span><span class="p-step">퍼스널컬러</span><span class="p-step">추구미</span><span class="p-step">스타터킷</span>
               </div>
               <div class="p-card m m2" style="padding:7px 9px">
-                <div class="p-guide" style="height:104px">
+                <div class="p-guide" style="height:98px">
                   <svg viewBox="0 0 110 140" aria-hidden="true">
                     <path class="p-outline" d="M55,12 C78,12 88,30 88,52 C88,80 74,104 55,112 C36,104 22,80 22,52 C22,30 32,12 55,12 Z"/>
                     <path class="p-gline g1" d="M28,64 Q37,72 46,66"/>
@@ -1641,9 +1743,10 @@ footer{background:var(--ink);color:var(--pearl);padding-block:clamp(6rem,11vh,9r
               </div>
               <div class="p-card p-prod m m4">
                 <span class="pi pi-blush"></span>
-                <span class="grow"><span class="nm">크림 블러셔 · 코랄 04</span><br><span class="cat">웜 스프링 매치 · 추구미 코랄 무드</span><span class="p-bar"><i style="--w:94%"></i></span></span>
+                <span class="grow"><span class="nm">크림 블러셔 · 코랄 04</span><br><span class="cat">웜 스프링 매치 · 회피 성분 0</span><span class="p-bar"><i style="--w:94%"></i></span></span>
                 <span class="p-pill"><span class="cnt" data-to="94">0</span>%</span>
               </div>
+              <div class="p-card m m5"><div class="p-row"><span class="p-label">추구미 스타터킷</span><span class="p-strong" style="color:#D05878">3종 구성 완료 · 코랄 무드</span></div></div>
             </div>
             <div class="p-tabbar" aria-hidden="true">
               <span class="p-tab"><svg viewBox="0 0 24 24"><path d="M4 11.5 12 4.5l8 7v7.5a1 1 0 0 1-1 1h-4.5v-5.5h-5V20H5a1 1 0 0 1-1-1z"/></svg>홈</span>
@@ -1656,13 +1759,16 @@ footer{background:var(--ink);color:var(--pearl);padding-block:clamp(6rem,11vh,9r
           </div></div></div>
         </div>
       </div>
-      <div class="sys-step rev reveal" data-sys>
+      <div class="sys-step reveal" data-sys>
         <div class="sys-copy">
-          <p class="sys-kicker"><i>04</i> Home 탭 · 리듬</p>
+          <p class="sys-kicker"><i>05</i> Home 탭 · 리듬</p>
           <h3>Every trace,<br><em>one rhythm.</em></h3>
           <p class="krsub">모든 기록이 하나의 리듬으로.</p>
-          <p class="desc">스캔·컨디션·반응·시술, 흩어진 기록 전부가 홈에서 하나의 리듬이 됩니다. 달의 위상으로 차오르는 글로우, 추구미 일치도, 그리고 D-day에서 역산되는 자동 플랜.</p>
-          <p class="sys-note"><b>Gentle Guardrails</b> · 너무 오래 들여다보면 미브가 먼저 말을 건네요. "오늘은 충분히 아름다워요."</p>
+          <p class="desc">흩어진 기록 전부가 홈에서 하나의 리듬이 됩니다. 달의 위상으로 차오르는 글로우, 사이클 연동 인사이트, 주간 스트릭, 추구미 일치도, D-day 역산 플랜, 오늘의 팁까지. 위젯 캐러셀로 매일 아침 3초면 나의 흐름이 읽혀요.</p>
+          <div class="sys-chips">
+            <span class="sys-chip">글로우 문</span><span class="sys-chip">위젯 캐러셀</span><span class="sys-chip">D-day 플랜</span><span class="sys-chip">사이클 리듬</span><span class="sys-chip">주간 스트릭</span><span class="sys-chip">추구미 일치도</span><span class="sys-chip">오늘의 팁</span>
+          </div>
+          <p class="sys-note"><b>Glow Moon</b> · 조급한 숫자 대신, 매일 조금씩 차오르는 나만의 위상.</p>
         </div>
         <div class="sys-stage">
           <div class="float"><div class="phone"><div class="p-screen">
@@ -1671,8 +1777,8 @@ footer{background:var(--ink);color:var(--pearl);padding-block:clamp(6rem,11vh,9r
             <span class="p-blob b1"></span><span class="p-blob b2"></span><span class="p-blob b3"></span>
             <div class="p-body">
               <p class="p-eyebrow">Home · My Rhythm</p>
-              <div class="p-row"><p class="p-h">나의 리듬</p><span class="p-label">사이클 D-9</span></div>
-              <div class="p-orb m m1" style="width:96px;height:96px">
+              <div class="p-row"><p class="p-h">나의 리듬</p><span class="p-label">사이클 D-9 · 황체기</span></div>
+              <div class="p-orb m m1" style="width:88px;height:88px">
                 <svg viewBox="0 0 120 120" aria-hidden="true">
                   <circle class="ring-k" cx="60" cy="60" r="59" fill="none" stroke-width="1.4"/>
                   <circle class="ring-t" cx="60" cy="60" r="54" fill="none" stroke-width="5"/>
@@ -1681,7 +1787,7 @@ footer{background:var(--ink);color:var(--pearl);padding-block:clamp(6rem,11vh,9r
                 <span class="core"></span>
                 <span class="p-spark" aria-hidden="true"></span>
               </div>
-              <p class="m m2" style="text-align:center;font-size:.62rem;color:#A88898">글로우 <b style="color:#D05878"><span class="cnt" data-to="67">0</span>%</b> · 차오르는 달 · 위상 5</p>
+              <p class="m m2" style="text-align:center;font-size:.6rem;color:#A88898">글로우 <b style="color:#D05878"><span class="cnt" data-to="67">0</span>%</b> · 차오르는 달 · 위상 5</p>
               <div class="p-card m m3">
                 <div class="p-week">
                   <span class="p-day f">월<i></i></span><span class="p-day f">화<i></i></span>
@@ -1689,7 +1795,7 @@ footer{background:var(--ink);color:var(--pearl);padding-block:clamp(6rem,11vh,9r
                   <span class="p-day f">금<i></i></span><span class="p-day f">토<i></i></span>
                   <span class="p-day f td">일<i></i></span>
                 </div>
-                <span class="p-meta" style="text-align:center">연속 12일 기록 · 이번 주 7/7</span>
+                <span class="p-meta" style="text-align:center">연속 12일 · 오늘 루틴 2/4 · 스캔 완료</span>
               </div>
               <div class="p-card m m4">
                 <div class="p-row">
@@ -1703,6 +1809,8 @@ footer{background:var(--ink);color:var(--pearl);padding-block:clamp(6rem,11vh,9r
                 <span class="d">D-12</span>
                 <span><span class="t">제주 여행</span><span class="s">추구미 목표일 · 플랜 자동 조정 중</span></span>
               </div>
+              <div class="p-card m m6"><div class="p-row"><span class="p-label">오늘의 팁</span><span class="cat" style="font-size:.56rem">자외선 차단제는 흐린 날에도 꼭.</span></div></div>
+              <div class="p-pagedots m m7" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></div>
             </div>
             <div class="p-tabbar" aria-hidden="true">
               <span class="p-tab on"><svg viewBox="0 0 24 24"><path d="M4 11.5 12 4.5l8 7v7.5a1 1 0 0 1-1 1h-4.5v-5.5h-5V20H5a1 1 0 0 1-1-1z"/></svg>홈</span>
@@ -1715,12 +1823,15 @@ footer{background:var(--ink);color:var(--pearl);padding-block:clamp(6rem,11vh,9r
           </div></div></div>
         </div>
       </div>
-      <div class="sys-step reveal" data-sys>
+      <div class="sys-step rev reveal" data-sys>
         <div class="sys-copy">
-          <p class="sys-kicker"><i>05</i> eve 탭 · 커뮤니티</p>
+          <p class="sys-kicker"><i>06</i> eve 탭 · 커뮤니티</p>
           <h3>Personalization,<br><em>even together.</em></h3>
           <p class="krsub">나와 같은 DNA의 검증된 후기만.</p>
-          <p class="desc">초개인화는 커뮤니티까지 이어집니다. '내 핏' 필터는 나와 같은 Beauty DNA·피부 타입인 사람들의 후기만 골라 보여줘요. 반응 데이터가 첨부된, 나에게 유효한 이야기들.</p>
+          <p class="desc">초개인화는 커뮤니티까지 이어집니다. '내 핏' 필터는 나와 같은 Beauty DNA·피부 타입의 후기만 골라 보여주고, 팁·고민·닮은꼴 피드와 댓글·친구로 이어져요. 반응 데이터가 첨부된, 나에게 유효한 이야기들만.</p>
+          <div class="sys-chips">
+            <span class="sys-chip">내 핏 필터</span><span class="sys-chip">팁 피드</span><span class="sys-chip">고민 피드</span><span class="sys-chip">닮은꼴 피드</span><span class="sys-chip">반응 데이터 첨부</span><span class="sys-chip">댓글 · 친구</span><span class="sys-chip">필터 제로</span>
+          </div>
           <p class="sys-note"><b>필터 제로 컬처</b> · 보정 없는 기록과 후기가 기본값인 공간.</p>
         </div>
         <div class="sys-stage">
@@ -1732,7 +1843,7 @@ footer{background:var(--ink);color:var(--pearl);padding-block:clamp(6rem,11vh,9r
               <p class="p-eyebrow">eve · Community</p>
               <div class="p-row"><p class="p-h">내 핏 피드</p><span class="p-label">같은 타입 1,204명</span></div>
               <div class="p-steps m m1">
-                <span class="p-step on">내 핏 ✦</span><span class="p-step">전체</span><span class="p-step">팔로잉</span>
+                <span class="p-step on">내 핏 ✦</span><span class="p-step">팁</span><span class="p-step">고민</span><span class="p-step">닮은꼴</span>
               </div>
               <div class="p-card m m2">
                 <div class="p-feed">
@@ -1740,7 +1851,7 @@ footer{background:var(--ink);color:var(--pearl);padding-block:clamp(6rem,11vh,9r
                   <span class="fbody">
                     <p class="fname">달빛토끼 <em>· Sunlit Rose · 웜 라이트</em></p>
                     <p class="ftxt">저랑 같은 타입이면 이 선크림 백탁 걱정 없어요. 3주째 홍조 반응 0.</p>
-                    <p class="ffoot">공감 128 · 저장 56 · 반응 데이터 첨부</p>
+                    <p class="ffoot">공감 128 · 댓글 24 · 반응 데이터 첨부</p>
                   </span>
                   <span class="p-fit">내 핏 98%</span>
                 </div>
@@ -1751,7 +1862,7 @@ footer{background:var(--ink);color:var(--pearl);padding-block:clamp(6rem,11vh,9r
                   <span class="fbody">
                     <p class="fname">미미 <em>· Sunlit Rose · 수분광</em></p>
                     <p class="ftxt">D-day 플랜 2주차 후기. 글로우 문 셋째 주부터 확실히 달라져요.</p>
-                    <p class="ffoot">공감 92 · 저장 41 · 로드맵 공유</p>
+                    <p class="ffoot">공감 92 · 댓글 17 · 로드맵 공유</p>
                   </span>
                   <span class="p-fit">내 핏 95%</span>
                 </div>
@@ -1762,12 +1873,12 @@ footer{background:var(--ink);color:var(--pearl);padding-block:clamp(6rem,11vh,9r
                   <span class="fbody">
                     <p class="fname">새벽결 <em>· Sunlit Rose · 민감</em></p>
                     <p class="ftxt">회피 성분 리스트 겹치는 분들, 이 토너 성분표 확인해 보세요.</p>
-                    <p class="ffoot">공감 77 · 저장 63</p>
+                    <p class="ffoot">공감 77 · 저장 63 · 친구 12명 공감</p>
                   </span>
                   <span class="p-fit">내 핏 93%</span>
                 </div>
               </div>
-              <p class="p-meta m m5" style="text-align:center">나와 같은 Beauty DNA의 검증된 후기만</p>
+              <p class="p-meta m m5" style="text-align:center">필터 제로 · 보정 없는 기록만 · 민낯 인증 커뮤니티</p>
             </div>
             <div class="p-tabbar" aria-hidden="true">
               <span class="p-tab"><svg viewBox="0 0 24 24"><path d="M4 11.5 12 4.5l8 7v7.5a1 1 0 0 1-1 1h-4.5v-5.5h-5V20H5a1 1 0 0 1-1-1z"/></svg>홈</span>
