@@ -174,7 +174,7 @@ nav.scrolled{
 }
 .pro-serif em{font-style:italic;font-weight:400;color:var(--rose)}
 .pro-kr{
-  font-family:var(--kr);font-weight:300;
+  font-family:var(--kr);font-weight:300;word-break:keep-all;
   font-size:clamp(1.1rem,2.2vw,1.55rem);letter-spacing:-.02em;color:#3B3036;
 }
 .pro-lines{display:grid;gap:.6rem}
@@ -272,6 +272,14 @@ nav.scrolled{
 }
 @media(max-width:700px){
   .pro-eyebrow{font-size:.6rem;letter-spacing:.32em}
+  .prologue-track{height:680vh}
+  .pro-kr{font-size:1.02rem}
+  .pro-lines .pro-serif{font-size:1.5rem}
+  .pro-caption{font-size:.8rem;word-break:keep-all}
+  .pro-frame{inset:10px}
+  .pro-frame span{font-size:.48rem;letter-spacing:.24em}
+  .pro-logo{width:min(270px,74vw)}
+  .pro-cta .btn{padding:.9rem 1.6rem;font-size:.68rem}
 }
 @keyframes drip{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 
@@ -900,9 +908,13 @@ nav.scrolled{
 .play .p-gline.g7{transition-delay:1.8s}
 
 @media(max-width:840px){
-  .sys-step{grid-template-columns:1fr}
+  .sys-step{grid-template-columns:1fr;gap:2.2rem}
   .sys-step.rev .sys-copy{order:1}
   .sys-step.rev .sys-stage{order:2}
+  .sys-steps{gap:4.2rem}
+  .sys-pain{font-size:.95rem}
+  .sys-trust{gap:.8rem 1.6rem;font-size:.58rem;letter-spacing:.22em}
+  .sys-close{word-break:keep-all}
 }
 
 /* ---------- N°06 partners — plum band ---------- */
@@ -977,6 +989,8 @@ nav.scrolled{
   .mm-node span{font-size:.6rem}
   .mm-node b{display:none}
   .mm-node:nth-child(odd) span{bottom:auto;top:1.15rem}
+  .mm-node.final span{left:auto;right:-4px;transform:none}
+  .mm-node:nth-child(2) span{left:0;transform:none}
   .mm-eightbg{font-size:16rem;opacity:.7}
 }
 
@@ -1947,6 +1961,17 @@ footer{background:var(--ink);color:var(--pearl);padding-block:clamp(6rem,11vh,9r
     el, a: parseFloat(el.dataset.in), b: parseFloat(el.dataset.out)
   }));
   if(proTrack && proVideo && !reduced){
+    /* mobile: lighter film */
+    if(innerWidth <= 700){
+      const s = proVideo.querySelector('source');
+      if(s){ s.src = 'assets/prologue-720.mp4'; proVideo.load(); }
+    }
+    /* iOS/Android: unlock frame rendering on first touch */
+    const unlockVideo = () => {
+      const pr = proVideo.play();
+      if(pr && pr.then) pr.then(() => proVideo.pause()).catch(() => {});
+    };
+    addEventListener('touchstart', unlockVideo, {once:true, passive:true});
     let target = 0, current = 0, raf = null;
     const F = .045; /* fade window as fraction of journey */
     const measure = () => {
