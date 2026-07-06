@@ -1585,6 +1585,60 @@ body.loading{overflow:hidden}
 a:hover .roll>span,button:hover .roll>span{transform:translateY(-1.3em)}
 .nav-links a::after{bottom:-3px}
 
+/* ---------- N°07 flashlight veil — light reveals the lineup ---------- */
+.veil-stage{
+  position:relative;margin-top:2.2rem;border-radius:20px;overflow:hidden;
+  min-height:320px;cursor:none;
+  background:radial-gradient(120% 100% at 72% 0%,#241624 0%,#1B0F1A 55%,#150C15 100%);
+  box-shadow:inset 0 0 0 1px rgba(239,184,200,.13),inset 0 30px 90px -40px rgba(0,0,0,.85);
+}
+.veil-layer{
+  position:absolute;inset:0;
+  display:flex;flex-wrap:wrap;align-content:center;justify-content:center;
+  gap:1rem 1.1rem;padding:2.8rem 2rem 3.6rem;
+}
+.v-chip{
+  display:flex;flex-direction:column;gap:.1rem;
+  padding:.8rem 1.25rem;border-radius:14px;
+  border:1px solid rgba(253,251,250,.3);
+}
+.v-chip small{
+  font-family:var(--sans);font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:var(--powder);
+}
+.v-chip b{
+  font-family:var(--kr);font-weight:500;font-size:.92rem;letter-spacing:-.01em;color:var(--pearl);white-space:nowrap;
+}
+.v-chip i{display:none}
+.veil-base{opacity:.13;filter:blur(.7px)}
+.veil-lit{
+  opacity:0;transition:opacity .4s var(--ease);
+  -webkit-mask-image:radial-gradient(circle 190px at var(--mx,50%) var(--my,40%),#000 0%,rgba(0,0,0,.85) 45%,transparent 72%);
+  mask-image:radial-gradient(circle 190px at var(--mx,50%) var(--my,40%),#000 0%,rgba(0,0,0,.85) 45%,transparent 72%);
+}
+.veil-lit .v-chip{border-color:rgba(239,184,200,.55);box-shadow:0 0 30px -8px rgba(239,184,200,.25)}
+.veil-lit .v-chip i{display:block;position:absolute;right:.8rem;top:.7rem;font-style:normal;color:#C7A76C;font-size:.6rem}
+.veil-lit .v-chip{position:relative}
+.veil-stage.lit .veil-lit{opacity:1}
+.veil-glow{
+  position:absolute;left:0;top:0;width:460px;height:460px;margin:-230px 0 0 -230px;border-radius:50%;
+  background:radial-gradient(circle,rgba(239,184,200,.22) 0%,rgba(239,184,200,.07) 42%,transparent 70%);
+  opacity:0;transition:opacity .4s var(--ease);
+  pointer-events:none;mix-blend-mode:screen;will-change:transform;
+}
+.veil-stage.lit .veil-glow{opacity:1}
+.veil-hint{
+  position:absolute;left:0;bottom:1.05rem;width:100%;text-align:center;
+  font-family:var(--sans);font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:#8A7186;
+  transition:opacity .4s;
+}
+.veil-stage.lit .veil-hint{opacity:.35}
+@media(pointer:coarse){
+  .veil-stage{cursor:auto;min-height:0}
+  .veil-layer{position:static}
+  .veil-base{opacity:.4;filter:none}
+  .veil-lit,.veil-glow,.veil-hint{display:none}
+}
+
 /* ---------- editorial scale-up — headlines carry the page ---------- */
 .manifesto .display{font-size:clamp(2.3rem,5.8vw,4.9rem);max-width:17em}
 .house-head .display{font-size:clamp(2.5rem,6vw,4.8rem)}
@@ -2430,11 +2484,25 @@ a:hover .roll>span,button:hover .roll>span{transform:translateY(-1.3em)}
         미브 마스터마인드 크루만을 위해 베일 뒤에 준비된 강남·청담권 프리미엄 피부과,
         프라이빗 에스테틱, 전문 자문단 라인업이 곧 순차 공개됩니다.
       </p>
-      <div class="veil-row reveal" data-delay="3" aria-label="공개 예정 파트너 라인업">
-        <span class="veil-chip"><b>청담 ○○○ 피부과</b><i>✦</i></span>
-        <span class="veil-chip"><b>압구정 ○○ 클리닉</b><i>✦</i></span>
-        <span class="veil-chip"><b>○○○ 프라이빗 에스테틱</b><i>✦</i></span>
-        <span class="veil-chip"><b>아티스트 K</b><i>✦</i></span>
+      <div class="veil-stage reveal" data-delay="3" id="veilStage" aria-label="공개 예정 파트너 라인업. 마우스로 베일을 비추면 실루엣이 드러납니다">
+        <div class="veil-layer veil-base" aria-hidden="true">
+          <span class="v-chip"><small>Clinic · 청담</small><b>○○○ 피부과</b><i>✦</i></span>
+          <span class="v-chip"><small>Clinic · 압구정</small><b>○○ 클리닉</b><i>✦</i></span>
+          <span class="v-chip"><small>Aesthetic</small><b>○○○ 프라이빗 에스테틱</b><i>✦</i></span>
+          <span class="v-chip"><small>Artist</small><b>아티스트 K</b><i>✦</i></span>
+          <span class="v-chip"><small>Brand</small><b>○○ 코스메틱</b><i>✦</i></span>
+          <span class="v-chip"><small>Retail · Global</small><b>리테일 ○○○</b><i>✦</i></span>
+        </div>
+        <div class="veil-layer veil-lit" aria-hidden="true">
+          <span class="v-chip"><small>Clinic · 청담</small><b>○○○ 피부과</b><i>✦</i></span>
+          <span class="v-chip"><small>Clinic · 압구정</small><b>○○ 클리닉</b><i>✦</i></span>
+          <span class="v-chip"><small>Aesthetic</small><b>○○○ 프라이빗 에스테틱</b><i>✦</i></span>
+          <span class="v-chip"><small>Artist</small><b>아티스트 K</b><i>✦</i></span>
+          <span class="v-chip"><small>Brand</small><b>○○ 코스메틱</b><i>✦</i></span>
+          <span class="v-chip"><small>Retail · Global</small><b>리테일 ○○○</b><i>✦</i></span>
+        </div>
+        <div class="veil-glow" aria-hidden="true"></div>
+        <p class="veil-hint">( 마우스로 베일 비추기 )</p>
       </div>
       <p class="veil-cap reveal" data-delay="3">파트너 라인업 · 계약 확정 순 순차 공개</p>
     </div>
@@ -2908,6 +2976,32 @@ a:hover .roll>span,button:hover .roll>span{transform:translateY(-1.3em)}
 
   /* ---------- desktop only: magnetic buttons + cursor ring ---------- */
   if(!matchMedia('(pointer:fine)').matches) return;
+
+  /* N°07 flashlight veil */
+  const stage = document.getElementById('veilStage');
+  if(stage){
+    const lit = stage.querySelector('.veil-lit');
+    const glow = stage.querySelector('.veil-glow');
+    let vr = null;
+    const pos = { x:0, y:0 };
+    const apply = () => {
+      lit.style.setProperty('--mx', pos.x + 'px');
+      lit.style.setProperty('--my', pos.y + 'px');
+      gsap.set(glow, { x:pos.x, y:pos.y });
+    };
+    const vx = gsap.quickTo(pos, 'x', { duration:.5, ease:'power3.out', onUpdate:apply });
+    const vy = gsap.quickTo(pos, 'y', { duration:.5, ease:'power3.out', onUpdate:apply });
+    stage.addEventListener('pointerenter', e => {
+      vr = stage.getBoundingClientRect();
+      pos.x = e.clientX - vr.left; pos.y = e.clientY - vr.top; apply();
+      stage.classList.add('lit');
+    });
+    stage.addEventListener('pointermove', e => {
+      if(!vr) vr = stage.getBoundingClientRect();
+      vx(e.clientX - vr.left); vy(e.clientY - vr.top);
+    });
+    stage.addEventListener('pointerleave', () => { stage.classList.remove('lit'); vr = null; });
+  }
 
   document.querySelectorAll('.btn, .nav-cta').forEach(b => {
     b.classList.add('magnet');
