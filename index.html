@@ -1147,6 +1147,7 @@ nav.scrolled{
 .partners{background:var(--plum);color:var(--pearl);padding-block:clamp(5rem,10vh,8rem)}
 .partners .numero{color:var(--powder)}
 .partners .numero::after{background:rgba(253,251,250,.22)}
+.partners-head{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(2rem,6vw,5rem);align-items:end}
 .partners-grid{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:clamp(2.5rem,6vw,5rem);align-items:start}
 .partners .display{font-size:clamp(1.9rem,4vw,3rem);font-weight:400;margin-top:1.6rem}
 .partners .display em{font-style:italic;color:var(--powder)}
@@ -1423,17 +1424,6 @@ footer{background:var(--ink);color:var(--pearl);padding-block:clamp(6rem,11vh,9r
 }
 .pro-skip:hover{color:var(--rose-deep)}
 /* partners: veiled lineup */
-.veil-row{display:flex;flex-wrap:wrap;gap:.55rem;margin-top:1.8rem}
-.veil-chip{
-  display:inline-flex;align-items:center;gap:.5rem;
-  font-family:var(--kr);font-size:.76rem;font-weight:300;color:#E9D9E2;
-  padding:.5rem 1.05rem;border-radius:100px;
-  background:rgba(253,251,250,.06);
-  box-shadow:inset 0 0 0 1px rgba(253,251,250,.16);
-}
-.veil-chip b{filter:blur(4.5px);font-weight:400;user-select:none;letter-spacing:.04em}
-.veil-chip i{font-style:normal;color:var(--powder);font-size:.58rem}
-.veil-cap{margin-top:1rem;font-size:.76rem;font-weight:300;color:#8E7C87}
 /* house cards: navigational */
 .maison .go{
   display:inline-flex;align-items:center;gap:.45rem;margin-top:.7rem;
@@ -1585,58 +1575,59 @@ body.loading{overflow:hidden}
 a:hover .roll>span,button:hover .roll>span{transform:translateY(-1.3em)}
 .nav-links a::after{bottom:-3px}
 
-/* ---------- N°07 flashlight veil — light reveals the lineup ---------- */
-.veil-stage{
-  position:relative;margin-top:2.2rem;border-radius:20px;overflow:hidden;
-  min-height:320px;cursor:none;
-  background:radial-gradient(120% 100% at 72% 0%,#241624 0%,#1B0F1A 55%,#150C15 100%);
-  box-shadow:inset 0 0 0 1px rgba(239,184,200,.13),inset 0 30px 90px -40px rgba(0,0,0,.85);
+/* ---------- N°07 partner ledger — sealed until reveal ---------- */
+.ledger{margin-top:clamp(2.6rem,5vh,3.8rem);border-top:1px solid rgba(253,251,250,.18)}
+.lg-row{
+  display:grid;grid-template-columns:72px minmax(0,1.1fr) minmax(0,1fr) auto;
+  gap:clamp(.9rem,2.5vw,1.6rem);align-items:center;
+  padding:1.25rem .4rem;border-bottom:1px solid rgba(253,251,250,.14);
+  transition:background .45s var(--ease);
 }
-.veil-layer{
-  position:absolute;inset:0;
-  display:flex;flex-wrap:wrap;align-content:center;justify-content:center;
-  gap:1rem 1.1rem;padding:2.8rem 2rem 3.6rem;
+.lg-row:hover{background:rgba(253,251,250,.045)}
+.lg-no{font-family:var(--sans);font-size:.66rem;letter-spacing:.22em;color:#A78E9D}
+.lg-cat b{display:block;font-family:var(--serif);font-weight:500;font-size:clamp(1.15rem,2vw,1.45rem);line-height:1.15;color:var(--pearl)}
+.lg-cat i{font-style:normal;font-size:.76rem;font-weight:300;color:#B9A2AF}
+.lg-seal{display:flex;align-items:center;gap:.75rem;color:var(--powder)}
+.lg-seal svg{width:40px;height:40px;flex:none;transition:transform .5s var(--ease),color .4s}
+.lg-row:hover .lg-seal svg{transform:rotate(-8deg) scale(1.06);color:#F6CDD9}
+.lg-seal .st{
+  position:relative;overflow:hidden;
+  font-family:var(--sans);font-size:.6rem;letter-spacing:.36em;text-transform:uppercase;color:#CBB0BE;
 }
-.v-chip{
-  display:flex;flex-direction:column;gap:.1rem;
-  padding:.8rem 1.25rem;border-radius:14px;
-  border:1px solid rgba(253,251,250,.3);
+.lg-seal .st::after{
+  content:"";position:absolute;top:0;left:-70%;width:45%;height:100%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.5),transparent);
+  transform:skewX(-18deg);
 }
-.v-chip small{
-  font-family:var(--sans);font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:var(--powder);
+.lg-row:hover .lg-seal .st::after{animation:foil 1.2s var(--ease)}
+.lg-right{display:flex;flex-direction:column;align-items:flex-end;gap:.4rem}
+.lg-status{
+  font-family:var(--sans);font-size:.62rem;letter-spacing:.18em;white-space:nowrap;
+  padding:.34rem .9rem;border-radius:100px;
 }
-.v-chip b{
-  font-family:var(--kr);font-weight:500;font-size:.92rem;letter-spacing:-.01em;color:var(--pearl);white-space:nowrap;
+.lg-status.on{color:#fff;background:linear-gradient(135deg,#F0A0BC,#C94E70);box-shadow:inset 0 1px 0 rgba(255,255,255,.4),0 6px 16px -8px rgba(201,78,112,.5);text-shadow:0 1px 2px rgba(142,58,80,.25)}
+.lg-status.mid{color:var(--powder);box-shadow:inset 0 0 0 1px rgba(239,184,200,.5)}
+.lg-status.dim{color:#A78E9D;box-shadow:inset 0 0 0 1px rgba(253,251,250,.2)}
+.lg-date{font-family:var(--sans);font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:#8A7186}
+.pledge{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.2rem,3vw,2.4rem);
+  margin-top:clamp(2.4rem,5vh,3.4rem);
 }
-.v-chip i{display:none}
-.veil-base{opacity:.13;filter:blur(.7px)}
-.veil-lit{
-  opacity:0;transition:opacity .4s var(--ease);
-  -webkit-mask-image:radial-gradient(circle 190px at var(--mx,50%) var(--my,40%),#000 0%,rgba(0,0,0,.85) 45%,transparent 72%);
-  mask-image:radial-gradient(circle 190px at var(--mx,50%) var(--my,40%),#000 0%,rgba(0,0,0,.85) 45%,transparent 72%);
+.pledge b{
+  display:block;font-family:var(--sans);font-size:.66rem;font-weight:500;
+  letter-spacing:.26em;text-transform:uppercase;color:var(--powder);
 }
-.veil-lit .v-chip{border-color:rgba(239,184,200,.55);box-shadow:0 0 30px -8px rgba(239,184,200,.25)}
-.veil-lit .v-chip i{display:block;position:absolute;right:.8rem;top:.7rem;font-style:normal;color:#C7A76C;font-size:.6rem}
-.veil-lit .v-chip{position:relative}
-.veil-stage.lit .veil-lit{opacity:1}
-.veil-glow{
-  position:absolute;left:0;top:0;width:460px;height:460px;margin:-230px 0 0 -230px;border-radius:50%;
-  background:radial-gradient(circle,rgba(239,184,200,.22) 0%,rgba(239,184,200,.07) 42%,transparent 70%);
-  opacity:0;transition:opacity .4s var(--ease);
-  pointer-events:none;mix-blend-mode:screen;will-change:transform;
-}
-.veil-stage.lit .veil-glow{opacity:1}
-.veil-hint{
-  position:absolute;left:0;bottom:1.05rem;width:100%;text-align:center;
-  font-family:var(--sans);font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:#8A7186;
-  transition:opacity .4s;
-}
-.veil-stage.lit .veil-hint{opacity:.35}
-@media(pointer:coarse){
-  .veil-stage{cursor:auto;min-height:0}
-  .veil-layer{position:static}
-  .veil-base{opacity:.4;filter:none}
-  .veil-lit,.veil-glow,.veil-hint{display:none}
+.pledge p{margin-top:.5rem;font-size:.84rem;font-weight:300;color:#C9B4BF;line-height:1.85}
+.partners-cta{display:flex;align-items:center;gap:1.4rem;flex-wrap:wrap;margin-top:clamp(2.4rem,5vh,3.2rem)}
+.partners-cta .note{font-family:var(--sans);font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:#A78E9D}
+@media(max-width:820px){
+  .partners-head{grid-template-columns:1fr}
+  .lg-row{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"cat seal" "right right";row-gap:.8rem}
+  .lg-no{display:none}
+  .lg-cat{grid-area:cat}
+  .lg-seal{grid-area:seal}
+  .lg-right{grid-area:right;flex-direction:row;align-items:center;justify-content:space-between;width:100%}
+  .pledge{grid-template-columns:1fr}
 }
 
 /* ---------- editorial scale-up — headlines carry the page ---------- */
@@ -2476,49 +2467,111 @@ a:hover .roll>span,button:hover .roll>span{transform:translateY(-1.3em)}
 
 <!-- ================= N°07 PARTNERS — plum band ================= -->
 <section class="partners">
-  <div class="wrap partners-grid">
-    <div>
-      <p class="numero reveal">N°07 · Partners</p>
-      <h2 class="display reveal" data-delay="1">Cheongdam &amp; Gangnam,<br><em>behind the veil.</em></h2>
+  <div class="wrap">
+    <div class="partners-head">
+      <div>
+        <p class="numero reveal">N°07 · Partners</p>
+        <h2 class="display reveal" data-delay="1">Cheongdam &amp; Gangnam,<br><em>behind the veil.</em></h2>
+      </div>
       <p class="partners-lede reveal" data-delay="2">
-        미브 마스터마인드 크루만을 위해 베일 뒤에 준비된 강남·청담권 프리미엄 피부과,
-        프라이빗 에스테틱, 전문 자문단 라인업이 곧 순차 공개됩니다.
+        하우스가 소개하는 모든 이름은 계약과 검증이 끝난 뒤에만 공개됩니다.
+        강남·청담권 라인업은 봉인된 채 준비 중. 공개는 계약 확정 순.
       </p>
-      <div class="veil-stage reveal" data-delay="3" id="veilStage" aria-label="공개 예정 파트너 라인업. 마우스로 베일을 비추면 실루엣이 드러납니다">
-        <div class="veil-layer veil-base" aria-hidden="true">
-          <span class="v-chip"><small>Clinic · 청담</small><b>○○○ 피부과</b><i>✦</i></span>
-          <span class="v-chip"><small>Clinic · 압구정</small><b>○○ 클리닉</b><i>✦</i></span>
-          <span class="v-chip"><small>Aesthetic</small><b>○○○ 프라이빗 에스테틱</b><i>✦</i></span>
-          <span class="v-chip"><small>Artist</small><b>아티스트 K</b><i>✦</i></span>
-          <span class="v-chip"><small>Brand</small><b>○○ 코스메틱</b><i>✦</i></span>
-          <span class="v-chip"><small>Retail · Global</small><b>리테일 ○○○</b><i>✦</i></span>
-        </div>
-        <div class="veil-layer veil-lit" aria-hidden="true">
-          <span class="v-chip"><small>Clinic · 청담</small><b>○○○ 피부과</b><i>✦</i></span>
-          <span class="v-chip"><small>Clinic · 압구정</small><b>○○ 클리닉</b><i>✦</i></span>
-          <span class="v-chip"><small>Aesthetic</small><b>○○○ 프라이빗 에스테틱</b><i>✦</i></span>
-          <span class="v-chip"><small>Artist</small><b>아티스트 K</b><i>✦</i></span>
-          <span class="v-chip"><small>Brand</small><b>○○ 코스메틱</b><i>✦</i></span>
-          <span class="v-chip"><small>Retail · Global</small><b>리테일 ○○○</b><i>✦</i></span>
-        </div>
-        <div class="veil-glow" aria-hidden="true"></div>
-        <p class="veil-hint">( 마우스로 베일 비추기 )</p>
-      </div>
-      <p class="veil-cap reveal" data-delay="3">파트너 라인업 · 계약 확정 순 순차 공개</p>
     </div>
-    <div class="pillars reveal" data-delay="2">
-      <div class="pillar">
+
+    <div class="ledger reveal" data-delay="2" aria-label="파트너 라인업 레저. 이름은 공개 전까지 봉인">
+      <div class="lg-row">
+        <span class="lg-no">N°01</span>
+        <div class="lg-cat"><b>Clinic</b><i>청담 · 피부과</i></div>
+        <div class="lg-seal" aria-label="파트너명 봉인">
+          <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18.5" fill="none" stroke="currentColor" stroke-width="1"/><circle cx="20" cy="20" r="14.6" fill="none" stroke="currentColor" stroke-width=".55" opacity=".5"/><path d="M23 11.5a9.3 9.3 0 1 0 0 17 10.6 10.6 0 0 1 0-17Z" fill="currentColor" opacity=".9"/><circle cx="26.6" cy="14.2" r=".95" fill="currentColor"/></svg>
+          <span class="st">Sealed</span>
+        </div>
+        <div class="lg-right">
+          <span class="lg-status on">계약 확정</span>
+          <span class="lg-date">Reveal · 2026.08</span>
+        </div>
+      </div>
+      <div class="lg-row">
+        <span class="lg-no">N°02</span>
+        <div class="lg-cat"><b>Clinic</b><i>압구정 · 피부과</i></div>
+        <div class="lg-seal" aria-label="파트너명 봉인">
+          <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18.5" fill="none" stroke="currentColor" stroke-width="1"/><circle cx="20" cy="20" r="14.6" fill="none" stroke="currentColor" stroke-width=".55" opacity=".5"/><path d="M23 11.5a9.3 9.3 0 1 0 0 17 10.6 10.6 0 0 1 0-17Z" fill="currentColor" opacity=".9"/><circle cx="26.6" cy="14.2" r=".95" fill="currentColor"/></svg>
+          <span class="st">Sealed</span>
+        </div>
+        <div class="lg-right">
+          <span class="lg-status mid">최종 협의</span>
+          <span class="lg-date">Reveal · 2026.08</span>
+        </div>
+      </div>
+      <div class="lg-row">
+        <span class="lg-no">N°03</span>
+        <div class="lg-cat"><b>Aesthetic</b><i>프라이빗 에스테틱</i></div>
+        <div class="lg-seal" aria-label="파트너명 봉인">
+          <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18.5" fill="none" stroke="currentColor" stroke-width="1"/><circle cx="20" cy="20" r="14.6" fill="none" stroke="currentColor" stroke-width=".55" opacity=".5"/><path d="M23 11.5a9.3 9.3 0 1 0 0 17 10.6 10.6 0 0 1 0-17Z" fill="currentColor" opacity=".9"/><circle cx="26.6" cy="14.2" r=".95" fill="currentColor"/></svg>
+          <span class="st">Sealed</span>
+        </div>
+        <div class="lg-right">
+          <span class="lg-status on">계약 확정</span>
+          <span class="lg-date">Reveal · 2026.09</span>
+        </div>
+      </div>
+      <div class="lg-row">
+        <span class="lg-no">N°04</span>
+        <div class="lg-cat"><b>Artist</b><i>메이크업 · 지식 클론</i></div>
+        <div class="lg-seal" aria-label="파트너명 봉인">
+          <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18.5" fill="none" stroke="currentColor" stroke-width="1"/><circle cx="20" cy="20" r="14.6" fill="none" stroke="currentColor" stroke-width=".55" opacity=".5"/><path d="M23 11.5a9.3 9.3 0 1 0 0 17 10.6 10.6 0 0 1 0-17Z" fill="currentColor" opacity=".9"/><circle cx="26.6" cy="14.2" r=".95" fill="currentColor"/></svg>
+          <span class="st">Sealed</span>
+        </div>
+        <div class="lg-right">
+          <span class="lg-status mid">클론 제작 중</span>
+          <span class="lg-date">Reveal · 2026.09</span>
+        </div>
+      </div>
+      <div class="lg-row">
+        <span class="lg-no">N°05</span>
+        <div class="lg-cat"><b>Brand</b><i>스킨케어 · 성분 검증</i></div>
+        <div class="lg-seal" aria-label="파트너명 봉인">
+          <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18.5" fill="none" stroke="currentColor" stroke-width="1"/><circle cx="20" cy="20" r="14.6" fill="none" stroke="currentColor" stroke-width=".55" opacity=".5"/><path d="M23 11.5a9.3 9.3 0 1 0 0 17 10.6 10.6 0 0 1 0-17Z" fill="currentColor" opacity=".9"/><circle cx="26.6" cy="14.2" r=".95" fill="currentColor"/></svg>
+          <span class="st">Sealed</span>
+        </div>
+        <div class="lg-right">
+          <span class="lg-status dim">검증 진행</span>
+          <span class="lg-date">Reveal · 2026 F/W</span>
+        </div>
+      </div>
+      <div class="lg-row">
+        <span class="lg-no">N°06</span>
+        <div class="lg-cat"><b>Retail</b><i>글로벌 · MEVE Objets</i></div>
+        <div class="lg-seal" aria-label="파트너명 봉인">
+          <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18.5" fill="none" stroke="currentColor" stroke-width="1"/><circle cx="20" cy="20" r="14.6" fill="none" stroke="currentColor" stroke-width=".55" opacity=".5"/><path d="M23 11.5a9.3 9.3 0 1 0 0 17 10.6 10.6 0 0 1 0-17Z" fill="currentColor" opacity=".9"/><circle cx="26.6" cy="14.2" r=".95" fill="currentColor"/></svg>
+          <span class="st">Sealed</span>
+        </div>
+        <div class="lg-right">
+          <span class="lg-status dim">협의 중</span>
+          <span class="lg-date">Reveal · 2026 F/W</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pledge reveal" data-delay="3">
+      <div>
         <b>Intelligence</b>
-        <p>감성에 더해, 이공계 출신 파운더가 직접 공학적으로 시스템화한 테크니컬 뷰티 매뉴얼.</p>
+        <p>이공계 출신 파운더가 공학적으로 시스템화한 테크니컬 뷰티 매뉴얼 위에서 협업해요.</p>
       </div>
-      <div class="pillar">
+      <div>
         <b>Proof</b>
-        <p>철저한 데이터와 정밀 분석으로 증명하는 하이엔드 비포 &amp; 애프터.</p>
+        <p>모든 파트너는 데이터와 정밀 분석으로 증명하는 하이엔드 비포 &amp; 애프터로 검증돼요.</p>
       </div>
-      <div class="pillar">
+      <div>
         <b>Security</b>
-        <p>개인정보보호법(PIPA) 준수, 모든 비주얼 데이터는 암호화되어 안전하게 보관.</p>
+        <p>개인정보보호법(PIPA) 준수. 모든 비주얼 데이터는 암호화되어 안전하게 보관돼요.</p>
       </div>
+    </div>
+
+    <div class="partners-cta reveal" data-delay="3">
+      <a class="btn btn-ink" href="/partners">파트너 하우스 신청 →</a>
+      <span class="note">Clinic · Brand · Artist · Retail</span>
     </div>
   </div>
 </section>
@@ -2976,32 +3029,6 @@ a:hover .roll>span,button:hover .roll>span{transform:translateY(-1.3em)}
 
   /* ---------- desktop only: magnetic buttons + cursor ring ---------- */
   if(!matchMedia('(pointer:fine)').matches) return;
-
-  /* N°07 flashlight veil */
-  const stage = document.getElementById('veilStage');
-  if(stage){
-    const lit = stage.querySelector('.veil-lit');
-    const glow = stage.querySelector('.veil-glow');
-    let vr = null;
-    const pos = { x:0, y:0 };
-    const apply = () => {
-      lit.style.setProperty('--mx', pos.x + 'px');
-      lit.style.setProperty('--my', pos.y + 'px');
-      gsap.set(glow, { x:pos.x, y:pos.y });
-    };
-    const vx = gsap.quickTo(pos, 'x', { duration:.5, ease:'power3.out', onUpdate:apply });
-    const vy = gsap.quickTo(pos, 'y', { duration:.5, ease:'power3.out', onUpdate:apply });
-    stage.addEventListener('pointerenter', e => {
-      vr = stage.getBoundingClientRect();
-      pos.x = e.clientX - vr.left; pos.y = e.clientY - vr.top; apply();
-      stage.classList.add('lit');
-    });
-    stage.addEventListener('pointermove', e => {
-      if(!vr) vr = stage.getBoundingClientRect();
-      vx(e.clientX - vr.left); vy(e.clientY - vr.top);
-    });
-    stage.addEventListener('pointerleave', () => { stage.classList.remove('lit'); vr = null; });
-  }
 
   document.querySelectorAll('.btn, .nav-cta').forEach(b => {
     b.classList.add('magnet');
