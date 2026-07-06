@@ -1536,11 +1536,11 @@ html.lenis, html.lenis body{height:auto}
   position:fixed;left:0;top:0;z-index:998;pointer-events:none;
   width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;
   border:1px solid color-mix(in srgb,var(--rose) 65%,transparent);
-  transition:transform .35s var(--ease),opacity .3s,border-color .3s,background .3s;
-  opacity:0;
+  transition:opacity .3s,border-color .3s,background .3s;
+  opacity:0;will-change:transform;
 }
 .cur-ring.on{opacity:1}
-.cur-ring.hot{transform:scale(1.75);border-color:var(--rose);background:rgba(184,80,107,.07)}
+.cur-ring.hot{border-color:var(--rose);background:rgba(184,80,107,.07)}
 @media(pointer:coarse){.cur-ring{display:none}}
 </style>
 </head>
@@ -2519,10 +2519,10 @@ html.lenis, html.lenis body{height:auto}
       return Math.min(1, Math.max(0, -r.top / total));
     };
     const tick = () => {
-      current += (target - current) * .14;
+      current += (target - current) * (window.__proK || .14);
       if(proVideo.duration){
         const t = current * Math.max(0, proVideo.duration - .06);
-        if(Math.abs(proVideo.currentTime - t) > .005) proVideo.currentTime = t;
+        if(Math.abs(proVideo.currentTime - t) > .012) proVideo.currentTime = t;
       }
       beats.forEach(({el, a, b}) => {
         const fadeIn  = Math.min(1, Math.max(0, (current - a) / F));
@@ -2681,10 +2681,13 @@ html.lenis, html.lenis body{height:auto}
 
   /* ---------- Lenis smooth scroll ---------- */
   document.documentElement.style.scrollBehavior = 'auto';
-  const lenis = new Lenis({ lerp:.09, wheelMultiplier:1 });
+  const lenis = new Lenis({ lerp:.125, wheelMultiplier:1 });
   lenis.on('scroll', ScrollTrigger.update);
   gsap.ticker.add(t => lenis.raf(t * 1000));
   gsap.ticker.lagSmoothing(0);
+  /* Lenis already smooths the scroll — let the prologue film track it near-directly
+     instead of stacking a second heavy lerp on top */
+  window.__proK = .42;
 
   /* anchor links through Lenis */
   document.querySelectorAll('a[href^="#"]').forEach(a => {
@@ -2738,13 +2741,13 @@ html.lenis, html.lenis body{height:auto}
   }
 
   /* ---------- parallax — key visual objects drift against scroll ---------- */
-  const drift = (el, y) => gsap.fromTo(el, { y:-y }, { y:y, ease:'none',
+  const drift = (el, y) => gsap.fromTo(el, { y:-y }, { y:y, ease:'none', force3D:true,
     scrollTrigger:{ trigger:el, start:'top bottom', end:'bottom top', scrub:true } });
   document.querySelectorAll('.float').forEach(f => { if(f.parentElement) drift(f.parentElement, 26); });
   const lune = document.querySelector('.lune-stage'); if(lune) drift(lune, 30);
   const dnaF = document.querySelector('.dna-feature'); if(dnaF) drift(dnaF, 22);
   const eight = document.querySelector('.mm-eightbg');
-  if(eight) gsap.fromTo(eight, { y:-46 }, { y:46, ease:'none',
+  if(eight) gsap.fromTo(eight, { y:-46 }, { y:46, ease:'none', force3D:true,
     scrollTrigger:{ trigger:'#mastermind', start:'top bottom', end:'bottom top', scrub:true } });
 
   /* ---------- desktop only: magnetic buttons + cursor ring ---------- */
@@ -2767,14 +2770,16 @@ html.lenis, html.lenis body{height:auto}
   const ring = document.createElement('div');
   ring.className = 'cur-ring'; ring.setAttribute('aria-hidden','true');
   document.body.appendChild(ring);
-  const rx = gsap.quickTo(ring, 'left', { duration:.42, ease:'power3.out' });
-  const ry = gsap.quickTo(ring, 'top',  { duration:.42, ease:'power3.out' });
+  const rx = gsap.quickTo(ring, 'x', { duration:.42, ease:'power3.out' });
+  const ry = gsap.quickTo(ring, 'y', { duration:.42, ease:'power3.out' });
+  const rs = gsap.quickTo(ring, 'scale', { duration:.35, ease:'power3.out' });
   let seen = false;
   addEventListener('pointermove', e => {
-    if(!seen){ ring.classList.add('on'); seen = true; }
+    if(!seen){ ring.classList.add('on'); seen = true; gsap.set(ring, { x:e.clientX, y:e.clientY }); }
     rx(e.clientX); ry(e.clientY);
     const hot = e.target.closest('a, button, [role="button"], input, .dna-card, #dnaFlip');
     ring.classList.toggle('hot', !!hot);
+    rs(hot ? 1.75 : 1);
   }, { passive:true });
   addEventListener('pointerleave', () => ring.classList.remove('on'));
 })();
