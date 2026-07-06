@@ -1668,6 +1668,14 @@ a:hover .roll>span,button:hover .roll>span{transform:translateY(-1.3em)}
 .plan a:hover .plan-cell{fill:rgba(239,184,200,.38)}
 .plan a:focus-visible{outline:2px solid var(--rose);outline-offset:1px}
 .plan-cell.on{fill:rgba(239,184,200,.85);stroke:var(--rose)}
+.plan.allon .plan-cell{fill:rgba(239,184,200,.35);stroke:rgba(184,80,107,.55)}
+.plan-txt{
+  font-family:var(--sans);font-size:7px;font-weight:500;letter-spacing:.14em;
+  fill:rgba(26,18,22,.45);text-anchor:middle;pointer-events:none;
+  transition:fill .4s;
+}
+a:hover .plan-txt{fill:var(--rose-deep)}
+.plan-cell.on + .plan-txt,a .plan-cell.on ~ .plan-txt{fill:var(--rose-deep)}
 .plan-label{
   font-family:var(--sans);font-size:.54rem;letter-spacing:.18em;text-transform:uppercase;
   color:#6B5A63;white-space:nowrap;text-align:center;max-width:150px;
@@ -3028,47 +3036,56 @@ a:hover .roll>span,button:hover .roll>span{transform:translateY(-1.3em)}
       ['partners','N°07 · The Archive'],['mastermind','N°08 · Salon Privé'],
       ['waitlist','N°09 · The Doorstep']
     ];
-    const cellIds = ['manifesto','house','system','dna','thesis','partners','mastermind','waitlist'];
-    let cells = '';
-    cellIds.forEach((id, i) => {
-      const col = i % 2, row = (i - col) / 2;
-      const x = 12 + col * 38, y = 40 + row * 25.5;
-      cells += '<a href="#' + id + '" data-plan="' + id + '" aria-label="' + id + ' 섹션으로 이동">'
-        + '<rect class="plan-cell" x="' + x + '" y="' + y + '" width="38" height="25.5" rx="3"/></a>';
-    });
+    /* one floor, three rooms — App · Mastermind · Objets (the maison itself) */
     const plan = document.createElement('aside');
     plan.className = 'plan';
     plan.setAttribute('role','navigation');
     plan.setAttribute('aria-label','하우스 평면도 내비게이션');
     plan.innerHTML =
-      '<svg viewBox="0 0 96 152" width="96" height="152" aria-hidden="true">'
-      + '<path class="plan-line" d="M8 40 L48 13 L88 40"/>'
-      + '<a href="#moon" data-plan="moon" aria-label="Moon System 섹션으로 이동"><circle class="plan-cell" cx="76" cy="15" r="6.5"/></a>'
-      + cells
-      + '<rect class="plan-line" x="43" y="135.5" width="10" height="6" rx="1"/>'
+      '<svg viewBox="0 0 150 100" width="150" height="100" aria-hidden="true">'
+      + '<a href="#moon" data-cell="moon" aria-label="Moon System으로 이동"><circle class="plan-cell" cx="127" cy="13" r="6"/></a>'
+      + '<path class="plan-line" d="M6 38 L75 12 L144 38"/>'
+      + '<a href="#system" data-cell="app" aria-label="MEVE App 소개로 이동">'
+      +   '<rect class="plan-cell" x="10" y="38" width="43.3" height="48" rx="3"/>'
+      +   '<text class="plan-txt" x="31.6" y="65">APP</text></a>'
+      + '<a href="#mastermind" data-cell="mm" aria-label="Mastermind로 이동">'
+      +   '<rect class="plan-cell" x="53.3" y="38" width="43.3" height="48" rx="3"/>'
+      +   '<text class="plan-txt" x="75" y="65">MM</text></a>'
+      + '<a href="#house" data-cell="objets" aria-label="MEVE Objets로 이동">'
+      +   '<rect class="plan-cell" x="96.6" y="38" width="43.4" height="48" rx="3"/>'
+      +   '<text class="plan-txt" x="118.3" y="65">OBJ</text></a>'
+      + '<a href="#manifesto" data-cell="door" aria-label="처음으로 이동">'
+      +   '<rect class="plan-cell plan-door" x="27" y="79" width="9" height="7" rx="1"/></a>'
       + '</svg><span class="plan-label" id="planLabel">MEVE House</span>';
     document.body.appendChild(plan);
 
     const label = plan.querySelector('#planLabel');
     const roomName = Object.fromEntries(ROOMS);
-    const cellMap = new Map();
-    plan.querySelectorAll('a[data-plan]').forEach(a => {
-      const sec = document.getElementById(a.dataset.plan);
-      if(sec) cellMap.set(sec, a);
+    /* which part of the house each chapter lights up */
+    const secCell = {
+      manifesto:'door', house:'all', system:'app', moon:'moon', dna:'app',
+      thesis:'all', partners:'mm', mastermind:'mm', waitlist:'door'
+    };
+    const cellEls = {};
+    plan.querySelectorAll('a[data-cell]').forEach(a => {
+      cellEls[a.dataset.cell] = a.querySelector('.plan-cell');
     });
     const planIO = new IntersectionObserver(es => {
       es.forEach(e => {
         if(!e.isIntersecting) return;
-        plan.querySelectorAll('.plan-cell.on').forEach(c => c.classList.remove('on'));
-        const a = cellMap.get(e.target);
-        if(a){
-          a.querySelector('.plan-cell').classList.add('on');
-          label.textContent = roomName[a.dataset.plan];
-          plan.classList.add('vis');
-        }
+        const id = e.target.id;
+        Object.values(cellEls).forEach(c => c.classList.remove('on'));
+        plan.classList.toggle('allon', secCell[id] === 'all');
+        const c = cellEls[secCell[id]];
+        if(c) c.classList.add('on');
+        label.textContent = roomName[id] || 'MEVE House';
+        plan.classList.add('vis');
       });
     }, { rootMargin:'-32% 0px -52% 0px' });
-    cellMap.forEach((_, sec) => planIO.observe(sec));
+    ROOMS.forEach(([id]) => {
+      const sec = document.getElementById(id);
+      if(sec) planIO.observe(sec);
+    });
     /* hide while inside the prologue film */
     addEventListener('scroll', () => {
       if(scrollY < innerHeight * 2) plan.classList.remove('vis');
