@@ -1548,15 +1548,52 @@ html.lenis, html.lenis body{height:auto}
   opacity:0;visibility:hidden;pointer-events:none;
   transition:transform 1.05s cubic-bezier(.76,0,.24,1),opacity .4s linear .85s,visibility 0s 1.2s;
 }
-body.loading .pl{opacity:1;visibility:visible}
-.pl.out{transform:translateY(-101%)}
+body.loading .pl{opacity:1;visibility:visible;pointer-events:auto}
+.pl.out{transform:translateY(-101%);pointer-events:none}
 body.loading{overflow:hidden}
-.pl-eyebrow{font-family:var(--sans);font-size:.62rem;letter-spacing:.52em;text-transform:uppercase;color:var(--rose)}
-.pl-moon{width:104px;height:104px;filter:drop-shadow(0 10px 26px rgba(184,80,107,.22))}
-.pl-orbit{fill:none;stroke:rgba(184,80,107,.28);stroke-width:1}
-.pl-pct{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(2.4rem,5.4vw,3.4rem);line-height:1;color:var(--ink)}
-.pl-pct i{font-style:italic;font-size:.46em;color:var(--rose);margin-left:.12em}
-.pl-note{font-family:var(--sans);font-size:.56rem;letter-spacing:.44em;text-transform:uppercase;color:#A2949B}
+/* the invitation card */
+.inv-card{
+  position:relative;width:min(300px,72vw);aspect-ratio:4/5;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;
+  padding:2rem 1.4rem;text-align:center;
+  background:linear-gradient(165deg,#FEFCFA 0%,#FAF2EE 70%,#F6EAE7 100%);
+  border-radius:8px;
+  box-shadow:
+    0 34px 80px -28px rgba(120,60,85,.5),
+    0 8px 22px -10px rgba(120,60,85,.28),
+    inset 0 0 0 1px #EACDD5;
+  transform:rotate(-2deg);
+  animation:cardIn 1.2s var(--ease) both, cardFloat 7s ease-in-out 1.2s infinite;
+}
+.inv-card::before{
+  content:"";position:absolute;inset:9px;border-radius:5px;pointer-events:none;
+  border:1px solid rgba(184,80,107,.32);
+}
+@keyframes cardIn{from{opacity:0;transform:translateY(30px) rotate(-5deg)}to{opacity:1;transform:translateY(0) rotate(-2deg)}}
+@keyframes cardFloat{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-7px) rotate(-1.4deg)}}
+.inv-card.img{padding:0;background-image:url('assets/invitation.png');background-size:cover;background-position:center}
+.inv-card.img > *{display:none}
+.ic-star{color:#C7A76C;font-size:.66rem;letter-spacing:.3em;padding-left:.3em}
+.ic-maison{font-family:var(--sans);font-size:.58rem;letter-spacing:.5em;text-transform:uppercase;color:var(--rose);padding-left:.5em}
+.ic-mark{width:82px;height:auto;margin-block:.55rem .1rem;opacity:.92}
+.ic-word{font-family:var(--serif);font-style:italic;font-weight:500;font-size:2.05rem;line-height:1;color:var(--ink)}
+.ic-kr{font-size:.78rem;font-weight:300;color:#6B5A63;margin-top:.35rem}
+.ic-foot{margin-top:1.15rem;font-family:var(--sans);font-size:.54rem;letter-spacing:.42em;text-transform:uppercase;color:#A2949B;padding-left:.42em}
+.inv-q{margin-top:1.6rem;font-size:.95rem;font-weight:300;color:#4E434A}
+.inv-accept{
+  min-width:230px;height:56px;border-radius:100px;margin-top:.15rem;
+  font-family:var(--sans);font-size:.74rem;letter-spacing:.26em;text-transform:uppercase;color:#fff;
+  background:linear-gradient(135deg,#F0A0BC 0%,#DE7495 45%,#C94E70 100%);
+  box-shadow:0 12px 28px -10px rgba(201,78,112,.55),inset 0 1.5px 0 rgba(255,255,255,.55),inset 0 -1px 0 rgba(142,58,80,.35);
+  text-shadow:0 1px 2px rgba(142,58,80,.25);
+  opacity:.55;cursor:wait;
+  transition:opacity .5s,transform .4s var(--ease),box-shadow .4s var(--ease);
+}
+.inv-accept.armed{opacity:1;cursor:pointer}
+.inv-accept.armed:hover{transform:translateY(-2px);box-shadow:0 18px 38px -12px rgba(201,78,112,.65),inset 0 1.5px 0 rgba(255,255,255,.65),inset 0 -1px 0 rgba(142,58,80,.35)}
+.inv-accept.armed:focus-visible{outline:2px solid var(--rose);outline-offset:3px}
+.inv-accept i{font-style:normal;font-size:.7em;opacity:.85;margin-left:.3em}
+.inv-note{font-family:var(--sans);font-size:.56rem;letter-spacing:.4em;text-transform:uppercase;color:#A2949B;padding-left:.4em}
 
 /* entrance orchestration after the veil lifts */
 @media(prefers-reduced-motion:no-preference){
@@ -1696,61 +1733,61 @@ a:hover .plan-txt{fill:var(--rose-deep)}
 </head>
 <body id="top">
 
-<!-- ================= PRELOADER — the moon fills ================= -->
-<div class="pl" id="pl" aria-hidden="true">
-  <p class="pl-eyebrow">Maison MEVE</p>
-  <svg class="pl-moon" viewBox="-60 -60 120 120">
-    <defs>
-      <radialGradient id="plG" cx="38%" cy="30%" r="80%">
-        <stop offset="0%" stop-color="#FFFEFE"/>
-        <stop offset="55%" stop-color="#FBEFF3"/>
-        <stop offset="100%" stop-color="#F0C3D2"/>
-      </radialGradient>
-    </defs>
-    <circle class="pl-orbit" r="49"/>
-    <path id="plLit" fill="url(#plG)" d=""/>
-  </svg>
-  <div class="pl-pct"><span id="plNum">0</span><i>%</i></div>
-  <p class="pl-note">Beauty-Tech House</p>
+<!-- ================= ENTRANCE — the invitation ================= -->
+<div class="pl" id="pl">
+  <div class="inv-card" id="invCard" role="img" aria-label="MEVE 하우스 초대장">
+    <span class="ic-star" aria-hidden="true">✦</span>
+    <span class="ic-maison">Maison MEVE</span>
+    <img class="ic-mark" src="assets/logo-mark.png" alt="" width="875" height="875">
+    <span class="ic-word">Invitation</span>
+    <span class="ic-kr">하우스 오프닝에 당신을 초대합니다</span>
+    <span class="ic-foot">Seoul · July 2026</span>
+  </div>
+  <p class="inv-q">초대장을 수락하시겠어요?</p>
+  <button class="inv-accept" id="invAccept" disabled>봉인 확인 중 · <span id="invPct">0</span>%</button>
+  <p class="inv-note">House opens July 2026</p>
 </div>
 <script>
 (function(){
   const d = document, b = d.body;
   if(matchMedia('(prefers-reduced-motion: reduce)').matches){ b.classList.add('ready'); return; }
+  let seen = false;
+  try{ seen = !!sessionStorage.getItem('mv-inv'); }catch(e){}
+  if(seen){ b.classList.add('ready'); return; }   /* already accepted this session */
   b.classList.add('loading');
-  const lit = d.getElementById('plLit'), num = d.getElementById('plNum');
-  const R = 44;
-  const moonD = f => {
-    if(f <= 0.004) return '';
-    if(f >= 0.996) return `M 0,${-R} A ${R},${R} 0 1 1 0,${R} A ${R},${R} 0 1 1 0,${-R} Z`;
-    const rx = (R * Math.abs(1 - 2 * f)).toFixed(2);
-    const sweep = f < 0.5 ? 0 : 1;
-    return `M 0,${-R} A ${R},${R} 0 0 1 0,${R} A ${rx},${R} 0 0 ${sweep} 0,${-R} Z`;
-  };
-  let p = 0, loaded = false, fin = false;
+  const btn = d.getElementById('invAccept'), pct = d.getElementById('invPct');
+  /* if a Higgsfield invitation face exists, dress the card with it */
+  const face = new Image();
+  face.onload = () => d.getElementById('invCard').classList.add('img');
+  face.src = 'assets/invitation.png';
+  let p = 0, loaded = false, armed = false;
   const t0 = performance.now();
   addEventListener('load', () => loaded = true);
   setTimeout(() => { if(d.readyState === 'complete') loaded = true; }, 120);
   setTimeout(() => loaded = true, 8000); /* absolute failsafe */
-  const finish = () => {
-    if(fin) return; fin = true;
-    num.textContent = '100'; lit.setAttribute('d', moonD(1));
-    setTimeout(() => {
-      b.classList.add('ready');
-      d.getElementById('pl').classList.add('out');
-      setTimeout(() => b.classList.remove('loading'), 1200);
-    }, 300);
+  const arm = () => {
+    if(armed) return; armed = true;
+    btn.disabled = false;
+    btn.classList.add('armed');
+    btn.innerHTML = '초대 수락 <i aria-hidden="true">✦</i>';
+    btn.focus({ preventScroll:true });
   };
   const tick = now => {
     const el = (now - t0) / 1000;
     const cap = loaded ? 100 : Math.min(88, el * 52);
-    p += (Math.max(p, cap) - p) * .085;
-    num.textContent = Math.round(p);
-    lit.setAttribute('d', moonD(Math.min(1, p / 100)));
-    if(p > 99.3 && loaded){ finish(); return; }
+    p += (Math.max(p, cap) - p) * .09;
+    pct.textContent = Math.round(p);
+    if(p > 99.3 && loaded){ arm(); return; }
     requestAnimationFrame(tick);
   };
   requestAnimationFrame(tick);
+  btn.addEventListener('click', () => {
+    if(!armed) return;
+    try{ sessionStorage.setItem('mv-inv','1'); }catch(e){}
+    b.classList.add('ready');
+    d.getElementById('pl').classList.add('out');
+    setTimeout(() => b.classList.remove('loading'), 1200);
+  });
 })();
 </script>
 
