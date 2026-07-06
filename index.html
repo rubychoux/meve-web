@@ -1408,9 +1408,10 @@ footer{background:var(--ink);color:var(--pearl);padding-block:clamp(6rem,11vh,9r
 /* ---------- refinement pass ---------- */
 [id]{scroll-margin-top:82px}
 .nav-progress{
-  position:fixed;top:0;left:0;height:2px;width:0;z-index:70;
+  position:fixed;top:0;left:0;height:2px;width:100%;z-index:70;
   background:linear-gradient(90deg,#F0A0BC,#C94E70);
   box-shadow:0 0 8px rgba(232,160,184,.55);
+  transform:scaleX(0);transform-origin:left center;will-change:transform;
 }
 .nav-links a.cur{color:var(--rose-deep)}
 .nav-links a.cur::after{width:100%}
@@ -2450,11 +2451,24 @@ html.lenis, html.lenis body{height:auto}
   const nav = document.getElementById('nav');
   const prog = document.getElementById('navProg');
   const toTop = document.getElementById('toTop');
+  /* cache document height — reading scrollHeight per frame forces reflow */
+  let docMax = 0, vh3 = 0;
+  const measureDoc = () => {
+    docMax = document.documentElement.scrollHeight - innerHeight;
+    vh3 = innerHeight * 3;
+  };
+  measureDoc();
+  addEventListener('resize', measureDoc, {passive:true});
+  addEventListener('load', measureDoc);
+  let navScrolled = null, topShown = null;
   const onScrollNav = () => {
-    nav.classList.toggle('scrolled', scrollY > 24);
-    const max = document.documentElement.scrollHeight - innerHeight;
-    if(prog && max > 0) prog.style.width = (scrollY / max * 100).toFixed(2) + '%';
-    if(toTop) toTop.classList.toggle('show', scrollY > innerHeight * 3);
+    const sc = scrollY > 24;
+    if(sc !== navScrolled){ nav.classList.toggle('scrolled', sc); navScrolled = sc; }
+    if(prog && docMax > 0) prog.style.transform = 'scaleX(' + Math.min(1, scrollY / docMax).toFixed(4) + ')';
+    if(toTop){
+      const show = scrollY > vh3;
+      if(show !== topShown){ toTop.classList.toggle('show', show); topShown = show; }
+    }
   };
   addEventListener('scroll', onScrollNav, {passive:true}); onScrollNav();
   if(toTop) toTop.addEventListener('click', () => scrollTo({top:0, behavior: reduced ? 'auto' : 'smooth'}));
@@ -2513,11 +2527,17 @@ html.lenis, html.lenis body{height:auto}
     addEventListener('touchstart', unlockVideo, {once:true, passive:true});
     let target = 0, current = 0, raf = null;
     const F = .045; /* fade window as fraction of journey */
-    const measure = () => {
+    /* cache track geometry — per-frame getBoundingClientRect forces reflow */
+    let trackTop = 0, trackTotal = 1;
+    const measureTrack = () => {
       const r = proTrack.getBoundingClientRect();
-      const total = r.height - innerHeight;
-      return Math.min(1, Math.max(0, -r.top / total));
+      trackTop = r.top + scrollY;
+      trackTotal = Math.max(1, r.height - innerHeight);
     };
+    measureTrack();
+    addEventListener('resize', measureTrack, {passive:true});
+    addEventListener('load', measureTrack);
+    const measure = () => Math.min(1, Math.max(0, (scrollY - trackTop) / trackTotal));
     const tick = () => {
       current += (target - current) * (window.__proK || .14);
       if(proVideo.duration){
@@ -2569,17 +2589,29 @@ html.lenis, html.lenis body{height:auto}
 
   if(track && lunePath && !reduced){
     let ticking = false;
+    /* cached geometry + change-guarded writes: no per-frame reflow, no redundant DOM writes */
+    let luneTop = 0, luneTotal = 1, lastP = -1, lastPc = -1, lastN = -1, lastS = -1;
+    const measureLune = () => {
+      const r = track.getBoundingClientRect();
+      luneTop = r.top + scrollY;
+      luneTotal = Math.max(1, r.height - innerHeight);
+    };
+    measureLune();
+    addEventListener('resize', measureLune, {passive:true});
+    addEventListener('load', measureLune);
     const update = () => {
       ticking = false;
-      const r = track.getBoundingClientRect();
-      const total = r.height - innerHeight;
-      const p = Math.min(1, Math.max(0, -r.top / total));
+      const p = Math.min(1, Math.max(0, (scrollY - luneTop) / luneTotal));
+      if(Math.abs(p - lastP) < .0015) return;
+      lastP = p;
       lunePath.setAttribute('d', moonD(p));
       luneTicks.forEach((t, i) => t.classList.toggle('on', i <= p * 7.99 - 0.5));
-      pct.textContent = Math.round(p * 100) + '%';
-      phase.textContent = names[Math.min(6, Math.floor(p * 6.999))];
+      const pc = Math.round(p * 100);
+      if(pc !== lastPc){ pct.textContent = pc + '%'; lastPc = pc; }
+      const ni = Math.min(6, Math.floor(p * 6.999));
+      if(ni !== lastN){ phase.textContent = names[ni]; lastN = ni; }
       const s = p < .3 ? 0 : p < .68 ? 1 : 2;
-      steps.forEach((el,i) => el.classList.toggle('on', i === s));
+      if(s !== lastS){ steps.forEach((el,i) => el.classList.toggle('on', i === s)); lastS = s; }
     };
     addEventListener('scroll', () => {
       if(!ticking){ ticking = true; requestAnimationFrame(update); }
@@ -2627,13 +2659,15 @@ html.lenis, html.lenis body{height:auto}
   if(!reduced && matchMedia('(pointer:fine)').matches){
     document.querySelectorAll('.sys-stage .phone').forEach(ph => {
       const stage = ph.closest('.sys-stage');
+      let r = null;
+      stage.addEventListener('mouseenter', () => { r = ph.getBoundingClientRect(); });
       stage.addEventListener('mousemove', e => {
-        const r = ph.getBoundingClientRect();
+        if(!r) r = ph.getBoundingClientRect();
         const x = (e.clientX - r.left) / r.width - .5;
         const y = (e.clientY - r.top) / r.height - .5;
         ph.style.transform = `rotateY(${(x * 10).toFixed(2)}deg) rotateX(${(-y * 8).toFixed(2)}deg)`;
       });
-      stage.addEventListener('mouseleave', () => { ph.style.transform = ''; });
+      stage.addEventListener('mouseleave', () => { ph.style.transform = ''; r = null; });
     });
   }
 
@@ -2679,28 +2713,31 @@ html.lenis, html.lenis body{height:auto}
   if(reduced || !window.gsap || !window.Lenis) return;
   gsap.registerPlugin(ScrollTrigger);
 
-  /* ---------- Lenis smooth scroll ---------- */
-  document.documentElement.style.scrollBehavior = 'auto';
-  const lenis = new Lenis({ lerp:.125, wheelMultiplier:1 });
-  lenis.on('scroll', ScrollTrigger.update);
-  gsap.ticker.add(t => lenis.raf(t * 1000));
-  gsap.ticker.lagSmoothing(0);
-  /* Lenis already smooths the scroll — let the prologue film track it near-directly
-     instead of stacking a second heavy lerp on top */
-  window.__proK = .42;
+  /* ---------- Lenis smooth scroll (?nolenis to compare native feel) ---------- */
+  const noLenis = /(\?|&)nolenis/.test(location.search);
+  if(!noLenis){
+    document.documentElement.style.scrollBehavior = 'auto';
+    const lenis = new Lenis({ lerp:.125, wheelMultiplier:1 });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(t => lenis.raf(t * 1000));
+    gsap.ticker.lagSmoothing(0);
+    /* Lenis already smooths the scroll — let the prologue film track it near-directly
+       instead of stacking a second heavy lerp on top */
+    window.__proK = .42;
 
-  /* anchor links through Lenis */
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      const id = a.getAttribute('href');
-      if(id.length < 2) return;
-      const el = document.querySelector(id);
-      if(!el) return;
-      e.preventDefault();
-      lenis.scrollTo(el, { offset:-64, duration:1.5, easing: x => 1 - Math.pow(1 - x, 4) });
-      history.pushState(null, '', id);
+    /* anchor links through Lenis */
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const id = a.getAttribute('href');
+        if(id.length < 2) return;
+        const el = document.querySelector(id);
+        if(!el) return;
+        e.preventDefault();
+        lenis.scrollTo(el, { offset:-64, duration:1.5, easing: x => 1 - Math.pow(1 - x, 4) });
+        history.pushState(null, '', id);
+      });
     });
-  });
+  }
 
   /* ---------- masked headline reveals (all chapters, prologue untouched) ---------- */
   document.querySelectorAll('section h2.display.reveal').forEach(h => {
@@ -2757,12 +2794,15 @@ html.lenis, html.lenis body{height:auto}
     b.classList.add('magnet');
     const xTo = gsap.quickTo(b, 'x', { duration:.4, ease:'power3.out' });
     const yTo = gsap.quickTo(b, 'y', { duration:.4, ease:'power3.out' });
+    let r = null; /* cache rect on enter — reading it per move forces reflow and feeds back its own transform */
+    b.addEventListener('pointerenter', () => { r = b.getBoundingClientRect(); });
     b.addEventListener('pointermove', e => {
-      const r = b.getBoundingClientRect();
+      if(!r) r = b.getBoundingClientRect();
       xTo((e.clientX - r.left - r.width/2) * .22);
       yTo((e.clientY - r.top - r.height/2) * .34);
     });
     b.addEventListener('pointerleave', () => {
+      r = null;
       gsap.to(b, { x:0, y:0, duration:.8, ease:'elastic.out(1,.45)' });
     });
   });
