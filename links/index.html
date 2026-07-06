@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>MEVE · Links</title>
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<meta name="description" content="MEVE Beauty-Tech House. 출시 알림 · 하우스 · Mastermind · Partnership.">
+<meta name="theme-color" content="#2E1D29">
+<meta property="og:title" content="MEVE · Beauty-Tech House">
+<meta property="og:description" content="감에 기대던 아름다움의 시대는 끝. App Launching July 2026.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://meve.beauty/links">
+<meta property="og:image" content="https://meve.beauty/assets/prologue-poster.jpg">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+/* ============================================================
+   MEVE — Links · pocket maison for the Instagram doorway
+   ============================================================ */
+:root{
+  --powder:#EFB8C8;
+  --rose:#B8506B;
+  --rose-deep:#8E3A50;
+  --ink:#1A1216;
+  --plum:#2E1D29;
+  --plum-deep:#201220;
+  --pearl:#FDFBFA;
+  --serif:'Cormorant Garamond',serif;
+  --sans:'Jost','Pretendard Variable',Pretendard,sans-serif;
+  --kr:'Pretendard Variable',Pretendard,-apple-system,sans-serif;
+  --ease:cubic-bezier(.19,.6,.22,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{
+  background:
+    radial-gradient(120% 70% at 80% -8%,rgba(239,184,200,.17),transparent 55%),
+    radial-gradient(100% 60% at 8% 106%,rgba(184,80,107,.16),transparent 60%),
+    linear-gradient(170deg,var(--plum) 0%,var(--plum-deep) 100%);
+  background-attachment:fixed;
+  color:var(--pearl);
+  font-family:var(--kr);
+  line-height:1.7;
+  letter-spacing:-0.008em;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+
+/* ambient ribbon threads */
+.threads{position:fixed;inset:0;pointer-events:none;opacity:.55;z-index:0}
+
+.page{
+  position:relative;z-index:1;
+  min-height:100%;
+  width:min(460px,100%);
+  margin-inline:auto;
+  padding:clamp(3rem,9vh,4.5rem) clamp(1.3rem,5vw,1.8rem) 2.2rem;
+  padding-top:calc(clamp(3rem,9vh,4.5rem) + env(safe-area-inset-top));
+  padding-bottom:calc(2.2rem + env(safe-area-inset-bottom));
+  display:flex;flex-direction:column;align-items:center;
+}
+
+/* ---------- head ---------- */
+.mark{width:158px}
+.mark img{width:100%;height:auto}
+.eyebrow{
+  margin-top:1.5rem;
+  font-family:var(--sans);font-size:.62rem;font-weight:400;
+  letter-spacing:.46em;text-transform:uppercase;color:#A78E9D;
+  text-align:center;
+}
+.launch{
+  display:inline-flex;align-items:center;gap:.55rem;
+  margin-top:1rem;
+  font-family:var(--sans);font-size:.66rem;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--powder);
+  padding:.5rem 1.15rem;border-radius:100px;
+  background:rgba(239,184,200,.09);
+  box-shadow:inset 0 0 0 1px rgba(239,184,200,.3);
+}
+.launch i{
+  width:6px;height:6px;border-radius:50%;flex:none;
+  background:var(--powder);
+  box-shadow:0 0 0 0 rgba(239,184,200,.55);
+  animation:pulse 2.4s infinite;
+}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 rgba(239,184,200,.55)}
+  70%{box-shadow:0 0 0 9px rgba(239,184,200,0)}
+  100%{box-shadow:0 0 0 0 rgba(239,184,200,0)}
+}
+.thesis{
+  margin-top:1.4rem;text-align:center;
+  font-family:var(--serif);font-style:italic;font-weight:400;
+  font-size:1.06rem;letter-spacing:.015em;color:#D8C8D1;
+  line-height:1.55;
+}
+
+/* ---------- links ---------- */
+.links{
+  width:100%;margin-top:2.2rem;
+  display:grid;gap:.85rem;
+}
+.lk{
+  position:relative;display:flex;align-items:center;gap:1.05rem;
+  padding:1.02rem 1.25rem;
+  border-radius:18px;
+  background:rgba(253,251,250,.055);
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  box-shadow:inset 0 0 0 1px rgba(253,251,250,.15),inset 0 1px 0 rgba(253,251,250,.09);
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease),background .35s var(--ease);
+  -webkit-tap-highlight-color:transparent;
+}
+.lk:hover{transform:translateY(-2px);background:rgba(253,251,250,.085);box-shadow:inset 0 0 0 1px rgba(239,184,200,.45),inset 0 1px 0 rgba(253,251,250,.12)}
+.lk:active{transform:scale(.985)}
+.lk:focus-visible{outline:2px solid var(--powder);outline-offset:3px}
+.lk .no{
+  font-family:var(--serif);font-style:italic;font-size:.98rem;color:rgba(239,184,200,.75);
+  width:1.5rem;flex:none;text-align:center;
+}
+.lk .tx{flex:1;min-width:0}
+.lk .tx b{
+  display:block;
+  font-family:var(--sans);font-size:.8rem;font-weight:500;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--pearl);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.lk .tx i{
+  display:block;font-style:normal;
+  font-size:.74rem;font-weight:300;color:#B9A2AF;letter-spacing:0;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.lk .ar{
+  font-family:var(--serif);font-size:1.05rem;color:rgba(239,184,200,.6);flex:none;
+  transition:transform .35s var(--ease),color .35s var(--ease);
+}
+.lk:hover .ar{transform:translateX(3px);color:var(--powder)}
+
+/* primary — rose satin */
+.lk.primary{
+  background:linear-gradient(135deg,#F0A0BC 0%,#DE7495 45%,#C94E70 100%);
+  box-shadow:
+    0 14px 30px -10px rgba(201,78,112,.55),
+    inset 0 1.5px 0 rgba(255,255,255,.5),
+    inset 0 -1px 0 rgba(142,58,80,.35);
+}
+.lk.primary:hover{
+  background:linear-gradient(135deg,#F0A0BC 0%,#DE7495 45%,#C94E70 100%);
+  box-shadow:
+    0 20px 40px -12px rgba(201,78,112,.65),
+    inset 0 1.5px 0 rgba(255,255,255,.6),
+    inset 0 -1px 0 rgba(142,58,80,.35);
+}
+.lk.primary .no{color:rgba(255,255,255,.8)}
+.lk.primary .tx b{color:#fff;text-shadow:0 1px 2px rgba(142,58,80,.3)}
+.lk.primary .tx i{color:rgba(255,240,245,.85)}
+.lk.primary .ar{color:rgba(255,255,255,.85)}
+
+/* ---------- foot ---------- */
+.foot{
+  margin-top:auto;padding-top:2.6rem;text-align:center;
+}
+.foot .etoile{color:#C7A76C;font-size:.6rem;letter-spacing:.55em;padding-left:.55em}
+.foot p{
+  margin-top:.9rem;
+  font-family:var(--sans);font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:#8A7186;
+}
+.foot p a{color:#A78E9D}
+
+/* entrance */
+.up{opacity:0;transform:translateY(16px);animation:up .9s var(--ease) forwards}
+@keyframes up{to{opacity:1;transform:none}}
+.d1{animation-delay:.06s}.d2{animation-delay:.14s}.d3{animation-delay:.22s}
+.d4{animation-delay:.3s}.d5{animation-delay:.38s}.d6{animation-delay:.46s}
+.d7{animation-delay:.54s}.d8{animation-delay:.62s}.d9{animation-delay:.72s}
+@media(prefers-reduced-motion:reduce){
+  .up{opacity:1;transform:none;animation:none}
+  .launch i{animation:none}
+}
+</style>
+</head>
+<body>
+
+<svg class="threads" viewBox="0 0 460 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <path d="M-40,150 C90,110 190,210 320,150 C400,115 450,140 520,105"
+        fill="none" stroke="rgba(239,184,200,.16)" stroke-width="1"/>
+  <path d="M-40,760 C110,700 220,810 360,740 C430,706 470,730 520,700"
+        fill="none" stroke="rgba(239,184,200,.11)" stroke-width="1"/>
+</svg>
+
+<main class="page">
+  <a class="mark up" href="https://meve.beauty" aria-label="MEVE 홈">
+    <img src="/assets/wordmark2-dark.png" alt="MEVE · Beauty-Tech House" width="1466" height="408">
+  </a>
+  <p class="eyebrow up d1">Maison MEVE · Seoul → Global</p>
+  <span class="launch up d2"><i aria-hidden="true"></i>App · Launching July 2026</span>
+  <p class="thesis up d3">"Growth has rhythm. Beauty has structure.<br>Transformation can be designed."</p>
+
+  <nav class="links" aria-label="MEVE 링크">
+    <a class="lk primary up d4" href="https://meve.beauty/#waitlist">
+      <span class="no" aria-hidden="true">I.</span>
+      <span class="tx"><b>출시 알림 신청</b><i>얼리 액세스 · 선착순 초대</i></span>
+      <span class="ar" aria-hidden="true">→</span>
+    </a>
+    <a class="lk up d5" href="https://meve.beauty">
+      <span class="no" aria-hidden="true">II.</span>
+      <span class="tx"><b>MEVE House</b><i>브랜드 필름 · The System · Beauty DNA</i></span>
+      <span class="ar" aria-hidden="true">→</span>
+    </a>
+    <a class="lk up d6" href="https://meve.beauty/#mastermind">
+      <span class="no" aria-hidden="true">III.</span>
+      <span class="tx"><b>Mastermind</b><i>8주 아카데미 · 1기 모집</i></span>
+      <span class="ar" aria-hidden="true">→</span>
+    </a>
+    <a class="lk up d7" href="https://meve.beauty/partners">
+      <span class="no" aria-hidden="true">IV.</span>
+      <span class="tx"><b>Partnership</b><i>클리닉 · 브랜드 · 아티스트 · 리테일</i></span>
+      <span class="ar" aria-hidden="true">→</span>
+    </a>
+    <a class="lk up d8" href="mailto:ruby@meve.beauty">
+      <span class="no" aria-hidden="true">V.</span>
+      <span class="tx"><b>Contact</b><i>ruby@meve.beauty</i></span>
+      <span class="ar" aria-hidden="true">→</span>
+    </a>
+  </nav>
+
+  <div class="foot up d9">
+    <span class="etoile" aria-hidden="true">✦ ✦ ✦</span>
+    <p>© 2026 MEVE · <a href="https://meve.beauty">meve.beauty</a></p>
+  </div>
+</main>
+
+</body>
+</html>
