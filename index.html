@@ -1522,6 +1522,26 @@ footer{background:var(--ink);color:var(--pearl);padding-block:clamp(6rem,11vh,9r
   .nuit-copy{min-height:0}
   .nuit-step{position:static;opacity:1;transform:none;margin-bottom:3rem}
 }
+
+/* ---------- premium motion layer (GSAP + Lenis) ---------- */
+html.lenis, html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto !important}
+.lenis.lenis-stopped{overflow:hidden}
+/* magnetic buttons: transform handed over to GSAP */
+.magnet{transition:box-shadow .4s var(--ease),color .35s var(--ease) !important}
+/* manifesto word scrub */
+.manifesto .display .mw{opacity:.13;will-change:opacity}
+/* cursor ring — desktop fine pointer only */
+.cur-ring{
+  position:fixed;left:0;top:0;z-index:998;pointer-events:none;
+  width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;
+  border:1px solid color-mix(in srgb,var(--rose) 65%,transparent);
+  transition:transform .35s var(--ease),opacity .3s,border-color .3s,background .3s;
+  opacity:0;
+}
+.cur-ring.on{opacity:1}
+.cur-ring.hot{transform:scale(1.75);border-color:var(--rose);background:rgba(184,80,107,.07)}
+@media(pointer:coarse){.cur-ring{display:none}}
 </style>
 </head>
 <body id="top">
@@ -2646,6 +2666,117 @@ footer{background:var(--ink);color:var(--pearl);padding-block:clamp(6rem,11vh,9r
       document.getElementById('wlDone').style.display = 'block';
     });
   }
+})();
+</script>
+
+<!-- ================= PREMIUM MOTION LAYER — GSAP + Lenis ================= -->
+<script src="assets/vendor/gsap.min.js"></script>
+<script src="assets/vendor/ScrollTrigger.min.js"></script>
+<script src="assets/vendor/lenis.min.js"></script>
+<script>
+(function(){
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduced || !window.gsap || !window.Lenis) return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* ---------- Lenis smooth scroll ---------- */
+  document.documentElement.style.scrollBehavior = 'auto';
+  const lenis = new Lenis({ lerp:.09, wheelMultiplier:1 });
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add(t => lenis.raf(t * 1000));
+  gsap.ticker.lagSmoothing(0);
+
+  /* anchor links through Lenis */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href');
+      if(id.length < 2) return;
+      const el = document.querySelector(id);
+      if(!el) return;
+      e.preventDefault();
+      lenis.scrollTo(el, { offset:-64, duration:1.5, easing: x => 1 - Math.pow(1 - x, 4) });
+      history.pushState(null, '', id);
+    });
+  });
+
+  /* ---------- masked headline reveals (all chapters, prologue untouched) ---------- */
+  document.querySelectorAll('section h2.display.reveal').forEach(h => {
+    if(h.closest('.manifesto')) return; /* manifesto gets the word scrub instead */
+    h.classList.remove('reveal');
+    gsap.fromTo(h,
+      { clipPath:'inset(-10% 0 102% 0)', y:52, opacity:1 },
+      { clipPath:'inset(-10% 0 -14% 0)', y:0, duration:1.3, ease:'power4.out',
+        scrollTrigger:{ trigger:h, start:'top 84%', once:true } });
+  });
+
+  /* ---------- manifesto — word-by-word ink fill on scrub ---------- */
+  const mh = document.querySelector('.manifesto h2.display');
+  if(mh){
+    mh.classList.remove('reveal');
+    const splitWords = node => {
+      [...node.childNodes].forEach(ch => {
+        if(ch.nodeType === 3){
+          const frag = document.createDocumentFragment();
+          ch.textContent.split(/(\s+)/).forEach(tk => {
+            if(!tk) return;
+            if(/^\s+$/.test(tk)){ frag.appendChild(document.createTextNode(tk)); return; }
+            const s = document.createElement('span');
+            s.className = 'mw'; s.textContent = tk;
+            frag.appendChild(s);
+          });
+          node.replaceChild(frag, ch);
+        } else if(ch.nodeType === 1 && ch.tagName !== 'BR'){
+          splitWords(ch);
+        }
+      });
+    };
+    splitWords(mh);
+    gsap.to('.manifesto .mw', {
+      opacity:1, stagger:.055, ease:'none',
+      scrollTrigger:{ trigger:'.manifesto', start:'top 72%', end:'center 42%', scrub:true }
+    });
+  }
+
+  /* ---------- parallax — key visual objects drift against scroll ---------- */
+  const drift = (el, y) => gsap.fromTo(el, { y:-y }, { y:y, ease:'none',
+    scrollTrigger:{ trigger:el, start:'top bottom', end:'bottom top', scrub:true } });
+  document.querySelectorAll('.float').forEach(f => { if(f.parentElement) drift(f.parentElement, 26); });
+  const lune = document.querySelector('.lune-stage'); if(lune) drift(lune, 30);
+  const dnaF = document.querySelector('.dna-feature'); if(dnaF) drift(dnaF, 22);
+  const eight = document.querySelector('.mm-eightbg');
+  if(eight) gsap.fromTo(eight, { y:-46 }, { y:46, ease:'none',
+    scrollTrigger:{ trigger:'#mastermind', start:'top bottom', end:'bottom top', scrub:true } });
+
+  /* ---------- desktop only: magnetic buttons + cursor ring ---------- */
+  if(!matchMedia('(pointer:fine)').matches) return;
+
+  document.querySelectorAll('.btn, .nav-cta').forEach(b => {
+    b.classList.add('magnet');
+    const xTo = gsap.quickTo(b, 'x', { duration:.4, ease:'power3.out' });
+    const yTo = gsap.quickTo(b, 'y', { duration:.4, ease:'power3.out' });
+    b.addEventListener('pointermove', e => {
+      const r = b.getBoundingClientRect();
+      xTo((e.clientX - r.left - r.width/2) * .22);
+      yTo((e.clientY - r.top - r.height/2) * .34);
+    });
+    b.addEventListener('pointerleave', () => {
+      gsap.to(b, { x:0, y:0, duration:.8, ease:'elastic.out(1,.45)' });
+    });
+  });
+
+  const ring = document.createElement('div');
+  ring.className = 'cur-ring'; ring.setAttribute('aria-hidden','true');
+  document.body.appendChild(ring);
+  const rx = gsap.quickTo(ring, 'left', { duration:.42, ease:'power3.out' });
+  const ry = gsap.quickTo(ring, 'top',  { duration:.42, ease:'power3.out' });
+  let seen = false;
+  addEventListener('pointermove', e => {
+    if(!seen){ ring.classList.add('on'); seen = true; }
+    rx(e.clientX); ry(e.clientY);
+    const hot = e.target.closest('a, button, [role="button"], input, .dna-card, #dnaFlip');
+    ring.classList.toggle('hot', !!hot);
+  }, { passive:true });
+  addEventListener('pointerleave', () => ring.classList.remove('on'));
 })();
 </script>
 </body>
