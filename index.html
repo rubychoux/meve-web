@@ -1633,6 +1633,47 @@ a:hover .roll>span,button:hover .roll>span{transform:translateY(-1.3em)}
   .pledge{grid-template-columns:1fr}
 }
 
+/* ---------- house thresholds — a door plate at every room ---------- */
+.threshold{
+  display:flex;align-items:center;justify-content:center;gap:1.2rem;
+  color:rgba(26,18,22,.42);
+  margin-bottom:clamp(2.4rem,5vh,4rem);
+  padding-inline:8vw;
+}
+.nuit .threshold,.partners .threshold{color:rgba(253,251,250,.42)}
+.th-line{height:1px;flex:1;max-width:150px;background:currentColor;opacity:.4}
+.th-arch{width:22px;height:27px;flex:none;opacity:.85}
+.th-name{
+  font-family:var(--sans);font-size:.62rem;font-weight:400;
+  letter-spacing:.4em;text-transform:uppercase;white-space:nowrap;
+}
+
+/* ---------- floor plan — where you are in the house ---------- */
+.plan{
+  position:fixed;left:auto;bottom:auto;right:clamp(10px,1.6vw,26px);top:50%;transform:translateY(-50%);z-index:59;
+  width:auto;
+  display:flex;flex-direction:column;align-items:center;gap:.55rem;
+  padding:.85rem .8rem .7rem;border-radius:16px;
+  background:rgba(251,247,245,.55);
+  backdrop-filter:blur(18px) saturate(1.1);-webkit-backdrop-filter:blur(18px) saturate(1.1);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.6),0 10px 30px -18px rgba(142,58,80,.35);
+  opacity:0;pointer-events:none;transition:opacity .6s var(--ease);
+}
+.plan.vis{opacity:1;pointer-events:auto}
+.plan-line{stroke:rgba(26,18,22,.32);stroke-width:1;fill:none}
+.plan-cell{
+  fill:rgba(255,255,255,.25);stroke:rgba(26,18,22,.26);stroke-width:1;
+  cursor:pointer;transition:fill .4s var(--ease),stroke .4s var(--ease);
+}
+.plan a:hover .plan-cell{fill:rgba(239,184,200,.38)}
+.plan a:focus-visible{outline:2px solid var(--rose);outline-offset:1px}
+.plan-cell.on{fill:rgba(239,184,200,.85);stroke:var(--rose)}
+.plan-label{
+  font-family:var(--sans);font-size:.54rem;letter-spacing:.18em;text-transform:uppercase;
+  color:#6B5A63;white-space:nowrap;text-align:center;max-width:150px;
+}
+@media(max-width:1099px){.plan{display:none}}
+
 /* ---------- editorial scale-up — headlines carry the page ---------- */
 .manifesto .display{font-size:clamp(2.3rem,5.8vw,4.9rem);max-width:17em}
 .house-head .display{font-size:clamp(2.5rem,6vw,4.8rem)}
@@ -1781,7 +1822,7 @@ a:hover .roll>span,button:hover .roll>span{transform:translateY(-1.3em)}
 <!-- ================= N°01 MANIFESTO ================= -->
 <section class="manifesto" id="manifesto">
   <div class="wrap manifesto-grid">
-    <p class="numero reveal">N°01 · Manifesto</p>
+    <p class="numero reveal">N°01 · Foyer · Manifesto</p>
     <h2 class="display reveal" data-delay="1">
       The age of intuition is over.<br>
       Your best is in the <em>data</em>.
@@ -1797,7 +1838,7 @@ a:hover .roll>span,button:hover .roll>span{transform:translateY(-1.3em)}
 <section class="house" id="house">
   <div class="wrap">
     <div class="house-head">
-      <p class="numero reveal">N°02 · The House</p>
+      <p class="numero reveal">N°02 · Grand Salon · The House</p>
       <h2 class="display reveal" data-delay="1">One House.<br><em>Every Ritual.</em></h2>
       <p class="kr-body reveal" data-delay="2">
         MEVE는 앱 하나가 아니라 하나의 하우스입니다.<br>모두 하나의 세계관 안에서 이어집니다.
@@ -1847,7 +1888,7 @@ a:hover .roll>span,button:hover .roll>span{transform:translateY(-1.3em)}
 <section class="sys" id="system">
   <div class="wrap">
     <div class="sys-head">
-      <p class="numero reveal">N°03 · The System</p>
+      <p class="numero reveal">N°03 · L'Atelier · The System</p>
       <h2 class="display reveal" data-delay="1">Beauty, engineered<br>with <em>kindness</em>.</h2>
       <div class="sys-pains reveal" data-delay="2">
         <p class="sys-pain">"분명 후기는 다 좋았는데, 왜 나한테만 뒤집어질까?"</p>
@@ -2235,7 +2276,7 @@ a:hover .roll>span,button:hover .roll>span{transform:translateY(-1.3em)}
 <!-- ================= N°04 NUIT — MOON SYSTEM ================= -->
 <section class="nuit" id="moon">
   <div class="wrap nuit-head">
-    <p class="numero reveal">N°04 · The Moon System</p>
+    <p class="numero reveal">N°04 · The Courtyard · Moon System</p>
   </div>
   <div class="nuit-track" id="luneTrack">
     <div class="nuit-sticky wrap">
@@ -2309,7 +2350,7 @@ a:hover .roll>span,button:hover .roll>span{transform:translateY(-1.3em)}
   <div class="wrap">
     <div class="dna-head">
       <div>
-        <p class="numero reveal">N°05 · Beauty DNA</p>
+        <p class="numero reveal">N°05 · Vanity Room · Beauty DNA</p>
         <h2 class="display reveal" data-delay="1">One identity,<br><em>entirely yours.</em></h2>
         <p class="kr-head reveal" data-delay="2" style="font-size:1.2rem">나를 설명하는 단 하나의 아이덴티티.</p>
         <p class="kr-body reveal" data-delay="2" style="margin-top:1rem">
@@ -2439,9 +2480,9 @@ a:hover .roll>span,button:hover .roll>span{transform:translateY(-1.3em)}
 </section>
 
 <!-- ================= N°06 THESIS ================= -->
-<section class="thesis">
+<section class="thesis" id="thesis">
   <div class="wrap">
-    <p class="numero reveal">N°06 · The House Thesis</p>
+    <p class="numero reveal">N°06 · The Library · House Thesis</p>
     <div style="margin-top:3.2rem">
       <div class="thesis-row reveal">
         <span class="thesis-num">i.</span>
@@ -2469,11 +2510,11 @@ a:hover .roll>span,button:hover .roll>span{transform:translateY(-1.3em)}
 </section>
 
 <!-- ================= N°07 PARTNERS — plum band ================= -->
-<section class="partners">
+<section class="partners" id="partners">
   <div class="wrap">
     <div class="partners-head">
       <div>
-        <p class="numero reveal">N°07 · Partners</p>
+        <p class="numero reveal">N°07 · The Archive · Partners</p>
         <h2 class="display reveal" data-delay="1">Cheongdam &amp; Gangnam,<br><em>behind the veil.</em></h2>
       </div>
       <p class="partners-lede reveal" data-delay="2">
@@ -2584,7 +2625,7 @@ a:hover .roll>span,button:hover .roll>span{transform:translateY(-1.3em)}
   <span class="mm-eightbg" aria-hidden="true">8</span>
   <div class="wrap">
     <div class="mm-head">
-      <p class="numero reveal">N°08 · MEVE Mastermind</p>
+      <p class="numero reveal">N°08 · Salon Privé · Mastermind</p>
       <h2 class="display reveal" data-delay="1">Eight weeks to<br><em>your finest self.</em></h2>
       <p class="kr-head reveal" data-delay="2">전문가의 손으로, 데이터의 눈으로. 나의 최상을 꺼내는 8주.</p>
       <p class="kr-body reveal" data-delay="2">
@@ -2622,7 +2663,7 @@ a:hover .roll>span,button:hover .roll>span{transform:translateY(-1.3em)}
 <section class="waitlist" id="waitlist">
   <div class="wrap">
     <div class="glass-card reveal">
-      <p class="numero" style="justify-content:center">N°09 · Waitlist</p>
+      <p class="numero" style="justify-content:center">N°09 · The Doorstep · Waitlist</p>
       <h2 class="display">Be the first<br>to tie <em>your knot</em>.</h2>
       <p class="kr-body">
         가장 먼저 나만의 매듭을 완성하기.<br>
@@ -2680,6 +2721,26 @@ a:hover .roll>span,button:hover .roll>span{transform:translateY(-1.3em)}
 <script>
 (function(){
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* house thresholds — a door plate at the entry of every room
+     (injected before any geometry is measured) */
+  [
+    ['manifesto','Foyer'],['house','Grand Salon'],['system',"L'Atelier"],['moon','The Courtyard'],
+    ['dna','Vanity Room'],['thesis','The Library'],['partners','The Archive'],
+    ['mastermind','Salon Privé'],['waitlist','The Doorstep']
+  ].forEach(([id,name]) => {
+    const sec = document.getElementById(id);
+    if(!sec) return;
+    const d = document.createElement('div');
+    d.className = 'threshold reveal';
+    d.setAttribute('aria-hidden','true');
+    d.innerHTML =
+      '<span class="th-line"></span>' +
+      '<svg class="th-arch" viewBox="0 0 28 34"><path d="M3 33 V15 A11 11 0 0 1 25 15 V33" fill="none" stroke="currentColor" stroke-width="1.1"/><path d="M14 33 V21" stroke="currentColor" stroke-width="1" opacity=".55"/></svg>' +
+      '<span class="th-name">' + name + '</span>' +
+      '<span class="th-line"></span>';
+    sec.insertBefore(d, sec.firstChild);
+  });
 
   /* nav + progress + back-to-top */
   const nav = document.getElementById('nav');
@@ -2957,6 +3018,62 @@ a:hover .roll>span,button:hover .roll>span{transform:translateY(-1.3em)}
     if(!t) return;
     a.innerHTML = '<span class="roll"><span>' + t + '</span><span aria-hidden="true">' + t + '</span></span>';
   });
+
+  /* ---------- floor plan minimap — where you are in the house ---------- */
+  if(matchMedia('(min-width:1100px)').matches){
+    const ROOMS = [
+      ['manifesto','N°01 · Foyer'],['house','N°02 · Grand Salon'],
+      ['system',"N°03 · L'Atelier"],['moon','N°04 · The Courtyard'],
+      ['dna','N°05 · Vanity Room'],['thesis','N°06 · The Library'],
+      ['partners','N°07 · The Archive'],['mastermind','N°08 · Salon Privé'],
+      ['waitlist','N°09 · The Doorstep']
+    ];
+    const cellIds = ['manifesto','house','system','dna','thesis','partners','mastermind','waitlist'];
+    let cells = '';
+    cellIds.forEach((id, i) => {
+      const col = i % 2, row = (i - col) / 2;
+      const x = 12 + col * 38, y = 40 + row * 25.5;
+      cells += '<a href="#' + id + '" data-plan="' + id + '" aria-label="' + id + ' 섹션으로 이동">'
+        + '<rect class="plan-cell" x="' + x + '" y="' + y + '" width="38" height="25.5" rx="3"/></a>';
+    });
+    const plan = document.createElement('aside');
+    plan.className = 'plan';
+    plan.setAttribute('role','navigation');
+    plan.setAttribute('aria-label','하우스 평면도 내비게이션');
+    plan.innerHTML =
+      '<svg viewBox="0 0 96 152" width="96" height="152" aria-hidden="true">'
+      + '<path class="plan-line" d="M8 40 L48 13 L88 40"/>'
+      + '<a href="#moon" data-plan="moon" aria-label="Moon System 섹션으로 이동"><circle class="plan-cell" cx="76" cy="15" r="6.5"/></a>'
+      + cells
+      + '<rect class="plan-line" x="43" y="135.5" width="10" height="6" rx="1"/>'
+      + '</svg><span class="plan-label" id="planLabel">MEVE House</span>';
+    document.body.appendChild(plan);
+
+    const label = plan.querySelector('#planLabel');
+    const roomName = Object.fromEntries(ROOMS);
+    const cellMap = new Map();
+    plan.querySelectorAll('a[data-plan]').forEach(a => {
+      const sec = document.getElementById(a.dataset.plan);
+      if(sec) cellMap.set(sec, a);
+    });
+    const planIO = new IntersectionObserver(es => {
+      es.forEach(e => {
+        if(!e.isIntersecting) return;
+        plan.querySelectorAll('.plan-cell.on').forEach(c => c.classList.remove('on'));
+        const a = cellMap.get(e.target);
+        if(a){
+          a.querySelector('.plan-cell').classList.add('on');
+          label.textContent = roomName[a.dataset.plan];
+          plan.classList.add('vis');
+        }
+      });
+    }, { rootMargin:'-32% 0px -52% 0px' });
+    cellMap.forEach((_, sec) => planIO.observe(sec));
+    /* hide while inside the prologue film */
+    addEventListener('scroll', () => {
+      if(scrollY < innerHeight * 2) plan.classList.remove('vis');
+    }, { passive:true });
+  }
 
   if(reduced || !window.gsap || !window.Lenis) return;
   gsap.registerPlugin(ScrollTrigger);
