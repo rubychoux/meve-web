@@ -1557,21 +1557,30 @@ body.loading{overflow:hidden}
   width:min(380px,84vw);
   animation:envIn 1.2s var(--ease) both;
 }
-/* AI ceremony mode — Higgsfield envelope film */
-.env-scene.ai{position:relative;perspective:none;width:min(680px,92vw)}
+/* AI ceremony mode — Higgsfield envelope film, feathered into the page (no frame) */
+.env-scene.ai{position:relative;perspective:none;width:min(720px,94vw)}
 .env-scene.ai video{
-  display:block;width:100%;height:auto;border-radius:20px;
-  box-shadow:0 40px 100px -34px rgba(120,60,85,.55),0 10px 28px -14px rgba(120,60,85,.3);
+  display:block;width:100%;height:auto;
+  -webkit-mask-image:radial-gradient(ellipse 72% 68% at 50% 50%,#000 50%,transparent 79%);
+  mask-image:radial-gradient(ellipse 72% 68% at 50% 50%,#000 50%,transparent 79%);
 }
 /* final beat: the letter alone drifts toward you (crisp 2K still) */
 .env-scene.ai .letter-close{
-  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:20px;
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
   opacity:0;transform:scale(.94);
   transition:opacity .9s var(--ease),transform 3.2s cubic-bezier(.2,.85,.25,1);
   pointer-events:none;
+  -webkit-mask-image:radial-gradient(ellipse 72% 68% at 50% 50%,#000 50%,transparent 79%);
+  mask-image:radial-gradient(ellipse 72% 68% at 50% 50%,#000 50%,transparent 79%);
+}
+/* transparent cutout version: no mask, true floating card */
+.env-scene.ai .letter-close.cut{
+  object-fit:contain;
+  -webkit-mask-image:none;mask-image:none;
+  filter:drop-shadow(0 34px 60px rgba(120,60,85,.38));
 }
 .env-scene.ai.close .letter-close{opacity:1;transform:scale(1.22)}
-.env-scene.ai.close video{filter:blur(2px)}
+.env-scene.ai.close video{filter:blur(2px);opacity:.35;transition:filter .9s,opacity .9s}
 @keyframes envIn{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
 .env{
   position:relative;width:100%;aspect-ratio:10/7;
@@ -1915,15 +1924,19 @@ a:hover .plan-txt{fill:var(--rose-deep)}
     scene.innerHTML = '<video id="envVid" muted playsinline preload="auto" poster="assets/envelope-sealed.jpg">'
       + '<source src="assets/envelope.mp4" type="video/mp4"></video>';
     vid = scene.querySelector('video');
-    /* optional final beat still */
-    const close = new Image();
-    close.onload = () => {
-      close.className = 'letter-close';
-      close.alt = '';
-      scene.appendChild(close);
-      window.__hasClose = true;
+    /* optional final beat still — prefer transparent cutout, fall back to feathered jpg */
+    const mountClose = (src, cut) => {
+      const close = new Image();
+      close.onload = () => {
+        close.className = 'letter-close' + (cut ? ' cut' : '');
+        close.alt = '';
+        scene.appendChild(close);
+        window.__hasClose = true;
+      };
+      close.onerror = () => { if(cut) mountClose('assets/letter-close.jpg', false); };
+      close.src = src;
     };
-    close.src = 'assets/letter-close.jpg';
+    mountClose('assets/letter-cut.png', true);
     addEventListener('touchstart', () => { const p = vid.play(); if(p && p.then) p.then(() => vid.pause()).catch(() => {}); }, { once:true, passive:true });
   };
   probeEnv.src = 'assets/envelope-sealed.jpg';
