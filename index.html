@@ -1551,34 +1551,110 @@ html.lenis, html.lenis body{height:auto}
 body.loading .pl{opacity:1;visibility:visible;pointer-events:auto}
 .pl.out{transform:translateY(-101%);pointer-events:none}
 body.loading{overflow:hidden}
-/* the invitation card */
-.inv-card{
-  position:relative;width:min(300px,72vw);aspect-ratio:4/5;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;
-  padding:2rem 1.4rem;text-align:center;
-  background:linear-gradient(165deg,#FEFCFA 0%,#FAF2EE 70%,#F6EAE7 100%);
-  border-radius:8px;
+/* the sealed envelope — wax, satin, letterpress */
+.env-scene{
+  perspective:1300px;
+  width:min(380px,84vw);
+  animation:envIn 1.2s var(--ease) both;
+}
+/* AI ceremony mode — Higgsfield envelope film */
+.env-scene.ai{perspective:none;width:min(680px,92vw)}
+.env-scene.ai video{
+  display:block;width:100%;height:auto;border-radius:20px;
+  box-shadow:0 40px 100px -34px rgba(120,60,85,.55),0 10px 28px -14px rgba(120,60,85,.3);
+}
+@keyframes envIn{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+.env{
+  position:relative;width:100%;aspect-ratio:10/7;
+  transform-style:preserve-3d;
+  animation:envFloat 7s ease-in-out 1.4s infinite;
+  transition:transform 1s var(--ease),opacity .9s var(--ease);
+  pointer-events:none;
+}
+@keyframes envFloat{0%,100%{transform:translateY(0) rotate(-1.2deg)}50%{transform:translateY(-7px) rotate(-.5deg)}}
+.env-back,.env-front,.env-flap{
+  position:absolute;left:0;width:100%;
+  background:linear-gradient(168deg,#F6EFE6 0%,#F1E7DC 60%,#ECE0D4 100%);
+}
+.env-back{
+  top:0;height:100%;border-radius:10px;
+  box-shadow:0 36px 80px -30px rgba(120,60,85,.5),0 10px 26px -12px rgba(120,60,85,.3);
+}
+.env-front{
+  bottom:0;height:72%;border-radius:0 0 10px 10px;z-index:3;
+  clip-path:polygon(0 0,50% 34%,100% 0,100% 100%,0 100%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.7),inset 0 0 0 1px rgba(184,80,107,.1);
+}
+.env-flap{
+  top:0;height:56%;z-index:4;
+  clip-path:polygon(0 0,100% 0,50% 100%);
+  border-radius:10px 10px 0 0;
+  background:linear-gradient(180deg,#F4EDE3 0%,#EFE4D7 100%);
+  box-shadow:inset 0 -1px 0 rgba(184,80,107,.14);
+  transform-origin:top center;
+  transition:transform .85s cubic-bezier(.6,0,.3,1);
+}
+.env.open .env-flap{transform:rotateX(-179deg)}
+/* debossed hairline following the flap edge */
+.env-flap::before{
+  content:"";position:absolute;inset:7px 10px;
+  clip-path:polygon(0 0,100% 0,50% 100%);
+  background:linear-gradient(180deg,rgba(184,80,107,.1),rgba(184,80,107,.05));
+  opacity:.6;
+}
+/* pearl-pink wax seal, moon emblem pressed in */
+.env-seal{
+  position:absolute;left:50%;top:56%;z-index:5;
+  width:76px;height:76px;margin:-38px 0 0 -38px;
+  border-radius:46% 54% 52% 48% / 50% 47% 53% 50%;
+  background:radial-gradient(circle at 36% 30%,#F0B5C8 0%,#E39FB8 45%,#CF87A3 100%);
   box-shadow:
-    0 34px 80px -28px rgba(120,60,85,.5),
-    0 8px 22px -10px rgba(120,60,85,.28),
-    inset 0 0 0 1px #EACDD5;
-  transform:rotate(-2deg);
-  animation:cardIn 1.2s var(--ease) both, cardFloat 7s ease-in-out 1.2s infinite;
+    inset 0 2px 3px rgba(255,255,255,.55),
+    inset 0 -3px 5px rgba(142,58,80,.35),
+    0 4px 10px -3px rgba(142,58,80,.4);
+  transform:rotate(-6deg);
+  transition:opacity .45s,transform .85s cubic-bezier(.6,0,.3,1);
+  animation:sealPulse 2.6s ease-in-out infinite;
 }
-.inv-card::before{
-  content:"";position:absolute;inset:9px;border-radius:5px;pointer-events:none;
-  border:1px solid rgba(184,80,107,.32);
+@keyframes sealPulse{0%,100%{filter:brightness(1)}50%{filter:brightness(1.05)}}
+.env.open .env-seal{opacity:0;transform:rotate(-6deg) translateY(-30px) scale(.9)}
+.seal-in{
+  position:absolute;inset:9px;border-radius:50%;
+  background:radial-gradient(circle at 40% 32%,#EBADC1 0%,#DD97B1 60%,#D28CA7 100%);
+  box-shadow:inset 0 2px 4px rgba(142,58,80,.3),inset 0 -1px 2px rgba(255,255,255,.4);
+  display:grid;place-items:center;
+  color:#B46886;
 }
-@keyframes cardIn{from{opacity:0;transform:translateY(30px) rotate(-5deg)}to{opacity:1;transform:translateY(0) rotate(-2deg)}}
-@keyframes cardFloat{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-7px) rotate(-1.4deg)}}
-.inv-card.img{padding:0;background-image:url('assets/invitation.png');background-size:cover;background-position:center}
-.inv-card.img > *{display:none}
-.ic-star{color:#C7A76C;font-size:.66rem;letter-spacing:.3em;padding-left:.3em}
-.ic-maison{font-family:var(--sans);font-size:.58rem;letter-spacing:.5em;text-transform:uppercase;color:var(--rose);padding-left:.5em}
-.ic-mark{width:82px;height:auto;margin-block:.55rem .1rem;opacity:.92}
-.ic-word{font-family:var(--serif);font-style:italic;font-weight:500;font-size:2.05rem;line-height:1;color:var(--ink)}
-.ic-kr{font-size:.78rem;font-weight:300;color:#6B5A63;margin-top:.35rem}
-.ic-foot{margin-top:1.15rem;font-family:var(--sans);font-size:.54rem;letter-spacing:.42em;text-transform:uppercase;color:#A2949B;padding-left:.42em}
+.seal-in svg{width:70%;height:70%;filter:drop-shadow(0 1px 0 rgba(255,255,255,.45))}
+/* the letter inside */
+.letter{
+  position:absolute;left:50%;top:4%;z-index:2;
+  width:52%;aspect-ratio:4/5;transform:translateX(-50%);
+  font-size:min(10.5px,2.7vw);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.3em;
+  padding:1.6em 1.2em;text-align:center;
+  background:linear-gradient(170deg,#FEFCFA 0%,#FBF4EF 100%);
+  border-radius:6px;
+  box-shadow:inset 0 0 0 1px #EFD8DE,0 10px 30px -14px rgba(120,60,85,.35);
+  transition:transform 1s cubic-bezier(.22,.9,.24,1),box-shadow 1s;
+}
+.env.out .letter{transform:translateX(-50%) translateY(-62%)}
+.env.present .letter{
+  z-index:6;
+  transform:translateX(-50%) translateY(-50%) scale(1.9);
+  box-shadow:inset 0 0 0 1px #EFD8DE,0 40px 90px -30px rgba(120,60,85,.55);
+}
+.env.present .env-back,.env.present .env-front,.env.present .env-flap{opacity:.55;filter:blur(1px)}
+.env.present{animation:none;transform:translateY(6%)}
+.letter.img{background-image:url('assets/invitation.png');background-size:cover;background-position:center}
+.letter.img > *{visibility:hidden}
+.lt-maison{font-family:var(--sans);font-size:.55em;letter-spacing:.46em;text-transform:uppercase;color:var(--rose);padding-left:.46em}
+.lt-word{font-family:var(--serif);font-style:italic;font-weight:500;font-size:2.1em;line-height:1.05;color:var(--ink);margin-top:.2em}
+.lt-bow{width:4.4em;height:auto;margin-block:.35em}
+.lt-kr{font-size:.76em;font-weight:300;color:#5D5257;line-height:1.7}
+.lt-rule{width:4.2em;height:1px;background:rgba(184,80,107,.35);margin-block:.55em .2em}
+.lt-h{font-family:var(--sans);font-size:.52em;letter-spacing:.4em;text-transform:uppercase;color:var(--rose);margin-top:.35em;padding-left:.4em}
+.lt-v{font-family:var(--sans);font-size:.62em;letter-spacing:.16em;color:#6B5A63}
 .inv-q{margin-top:1.6rem;font-size:.95rem;font-weight:300;color:#4E434A}
 .inv-accept{
   min-width:230px;height:56px;border-radius:100px;margin-top:.15rem;
@@ -1778,13 +1854,34 @@ a:hover .plan-txt{fill:var(--rose-deep)}
 
 <!-- ================= ENTRANCE — the invitation ================= -->
 <div class="pl" id="pl">
-  <div class="inv-card" id="invCard" role="img" aria-label="MEVE 하우스 초대장">
-    <span class="ic-star" aria-hidden="true">✦</span>
-    <span class="ic-maison">Maison MEVE</span>
-    <img class="ic-mark" src="assets/logo-mark.png" alt="" width="875" height="875">
-    <span class="ic-word">Invitation</span>
-    <span class="ic-kr">하우스 오프닝에 당신을 초대합니다</span>
-    <span class="ic-foot">Seoul · July 2026</span>
+  <div class="env-scene" id="envScene" role="img" aria-label="왁스로 봉인된 MEVE 하우스 초대장 봉투">
+    <div class="env" id="env">
+      <div class="env-back" aria-hidden="true"></div>
+      <div class="letter" id="letter" aria-hidden="true">
+        <span class="lt-maison">Maison MEVE</span>
+        <span class="lt-word">Invitation</span>
+        <svg class="lt-bow" viewBox="0 0 64 36" aria-hidden="true">
+          <path d="M32 18 C20 4 5 8 7 19 C9 29 24 26 32 18 Z" fill="#F3BCCD" stroke="#DE9AB2" stroke-width="1"/>
+          <path d="M32 18 C44 4 59 8 57 19 C55 29 40 26 32 18 Z" fill="#F3BCCD" stroke="#DE9AB2" stroke-width="1"/>
+          <path d="M28 20 L24 33 L29 30 Z" fill="#EBA9BE"/>
+          <path d="M36 20 L40 33 L35 30 Z" fill="#EBA9BE"/>
+          <rect x="28.5" y="14" width="7" height="8" rx="2.6" fill="#E8A0B8" stroke="#D98BA4" stroke-width="1"/>
+        </svg>
+        <span class="lt-kr">미브 하우스 오프닝에<br>당신을 초대합니다</span>
+        <span class="lt-rule" aria-hidden="true"></span>
+        <span class="lt-h">Opening</span>
+        <span class="lt-v">App · July 2026</span>
+        <span class="lt-h">Location</span>
+        <span class="lt-v">meve.beauty · Seoul → Global</span>
+      </div>
+      <div class="env-front" aria-hidden="true"></div>
+      <div class="env-flap" id="envFlap" aria-hidden="true"></div>
+      <div class="env-seal" id="envSeal" aria-hidden="true">
+        <div class="seal-in">
+          <svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="15.5" fill="none" stroke="currentColor" stroke-width=".8" opacity=".6"/><path d="M23 11.5a9.3 9.3 0 1 0 0 17 10.6 10.6 0 0 1 0-17Z" fill="currentColor" opacity=".9"/><circle cx="26.6" cy="14.2" r=".95" fill="currentColor"/></svg>
+        </div>
+      </div>
+    </div>
   </div>
   <p class="inv-q">초대장을 수락하시겠어요?</p>
   <button class="inv-accept" id="invAccept" disabled>봉인 확인 중 · <span id="invPct">0</span>%</button>
@@ -1799,9 +1896,22 @@ a:hover .plan-txt{fill:var(--rose-deep)}
   if(seen){ b.classList.add('ready'); return; }   /* already accepted this session */
   b.classList.add('loading');
   const btn = d.getElementById('invAccept'), pct = d.getElementById('invPct');
-  /* if a Higgsfield invitation face exists, dress the card with it */
+  /* Higgsfield ceremony film, when present — CSS envelope stays as fallback */
+  let ai = false, vid = null;
+  const probeEnv = new Image();
+  probeEnv.onload = () => {
+    ai = true;
+    const scene = d.getElementById('envScene');
+    scene.classList.add('ai');
+    scene.innerHTML = '<video id="envVid" muted playsinline preload="auto" poster="assets/envelope-sealed.jpg">'
+      + '<source src="assets/envelope.mp4" type="video/mp4"></video>';
+    vid = scene.querySelector('video');
+    addEventListener('touchstart', () => { const p = vid.play(); if(p && p.then) p.then(() => vid.pause()).catch(() => {}); }, { once:true, passive:true });
+  };
+  probeEnv.src = 'assets/envelope-sealed.jpg';
+  /* if a Higgsfield invitation face exists, dress the CSS letter with it */
   const face = new Image();
-  face.onload = () => d.getElementById('invCard').classList.add('img');
+  face.onload = () => { const lt = d.getElementById('letter'); if(lt) lt.classList.add('img'); };
   face.src = 'assets/invitation.png';
   let p = 0, loaded = false, armed = false;
   const t0 = performance.now();
@@ -1824,12 +1934,34 @@ a:hover .plan-txt{fill:var(--rose-deep)}
     requestAnimationFrame(tick);
   };
   requestAnimationFrame(tick);
-  btn.addEventListener('click', () => {
-    if(!armed) return;
-    try{ sessionStorage.setItem('mv-inv','1'); }catch(e){}
+  let opened = false;
+  const enterHouse = () => {
     b.classList.add('ready');
     d.getElementById('pl').classList.add('out');
     setTimeout(() => b.classList.remove('loading'), 1200);
+  };
+  btn.addEventListener('click', () => {
+    if(!armed || opened) return;
+    opened = true;
+    try{ sessionStorage.setItem('mv-inv','1'); }catch(e){}
+    btn.style.transition = 'opacity .5s'; btn.style.opacity = '0';
+    d.querySelector('.inv-q').style.opacity = '0';
+    d.querySelector('.inv-note').style.opacity = '0';
+    if(ai && vid){
+      /* the ceremony, on film */
+      const p = vid.play(); if(p && p.catch) p.catch(() => {});
+      let done = false;
+      const fin = () => { if(done) return; done = true; setTimeout(enterHouse, 350); };
+      vid.addEventListener('ended', fin);
+      setTimeout(fin, 6200); /* failsafe */
+      return;
+    }
+    /* CSS fallback ceremony: seal breaks, flap opens, the letter rises */
+    const env = d.getElementById('env');
+    env.classList.add('open');
+    setTimeout(() => env.classList.add('out'), 750);
+    setTimeout(() => env.classList.add('present'), 1750);
+    setTimeout(enterHouse, 3150);
   });
 })();
 </script>
