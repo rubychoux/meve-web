@@ -1576,64 +1576,57 @@ body.loading{overflow:hidden}
 .env-scene.ai.go video{opacity:1;transition:opacity .7s var(--ease)}
 .env-scene.ai.go .env-cut{opacity:0}
 
-/* ---------- assembled envelope — real layers, truly interactive ---------- */
+/* ---------- assembled envelope — photoreal state dissolve, no slices ---------- */
 .env-scene.asm{
-  perspective:1500px;width:min(860px,94vw);aspect-ratio:1775/1224;
+  width:min(1180px,96vw);aspect-ratio:2752/1536;
   position:relative;
   animation:envFloat 7.5s ease-in-out 1.2s infinite;
+  transition:transform .8s var(--ease);
 }
-.asm > img,.asm .e3-flapwrap{position:absolute;inset:0;width:100%;height:100%}
-.asm .e3-back{z-index:1;filter:brightness(.97) blur(.4px)}
-.asm .e3-body{z-index:3}
-.e3-flapwrap{
-  z-index:4;transform-origin:50% 1.5%;
-  transition:transform 1.15s cubic-bezier(.6,0,.25,1);
-  transform-style:preserve-3d;
-}
-.e3-flapwrap img{position:absolute;inset:0;width:100%;height:100%;backface-visibility:hidden}
-.e3-flapback{
-  position:absolute;inset:0;transform:rotateX(180deg);backface-visibility:hidden;
-  background:linear-gradient(180deg,#F1E8DC,#EBE0D2);
-  -webkit-mask-image:url('assets/env-flap.webp');mask-image:url('assets/env-flap.webp');
-  -webkit-mask-size:100% 100%;mask-size:100% 100%;
-}
-.asm.armed:not(.open):hover .e3-flapwrap{transform:rotateX(-11deg)}
-.asm.open .e3-flapwrap{transform:rotateX(-168deg)}
-.asm .e3-sealimg{z-index:5;pointer-events:none;transition:opacity .45s}
-.asm.open .e3-sealimg{opacity:0}
-.asm.armed .e3-sealimg{animation:sealPulse 2.6s ease-in-out infinite}
+.asm.armed:not(.open):hover{transform:translateY(-7px)}
+.asm > img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.asm .e3-open{z-index:2}
+.asm .e3-openfront{z-index:4;clip-path:inset(52% 0 0 0)}
+.asm .e3-half{z-index:5;opacity:0;transition:opacity .5s var(--ease)}
+.asm .e3-closed{z-index:6;transition:opacity .5s var(--ease)}
+.asm .e3-seal2{z-index:7;pointer-events:none;transition:opacity .55s,transform .6s cubic-bezier(.5,0,.8,.5)}
+.asm.armed:not(.open) .e3-seal2{animation:sealPulse 2.6s ease-in-out infinite}
+.asm.armed:not(.open):hover .e3-seal2{filter:brightness(1.07)}
+.asm.s1 .e3-seal2{opacity:0;transform:translateY(4.5%) rotate(4deg)}
+.asm.s1 .e3-closed{opacity:0}
+.asm.s1 .e3-half{opacity:1}
+.asm.s2 .e3-half{opacity:0}
 .e3-seal{
-  position:absolute;left:41.5%;top:29%;width:24.5%;aspect-ratio:1;
-  border-radius:50%;cursor:pointer;z-index:6;
+  position:absolute;left:39.5%;top:32%;width:26%;aspect-ratio:1;
+  border-radius:50%;cursor:pointer;z-index:8;
 }
-.asm.armed:hover .e3-sealimg{filter:brightness(1.06)}
 .e3-seal:focus-visible{outline:2px solid var(--rose);outline-offset:4px}
 .asm.open .e3-seal{opacity:0;pointer-events:none}
-/* the letter — its own layer, clipped at the envelope mouth until free */
+/* the letter — rises from the mouth, clipped at the envelope bottom */
 .e3-clip{
-  position:absolute;left:0;right:0;top:-95%;bottom:5.5%;
-  overflow:hidden;pointer-events:none;z-index:2;
+  position:absolute;left:0;right:0;top:-95%;bottom:11%;
+  overflow:hidden;pointer-events:none;z-index:3;
 }
 .e3-letter{
-  position:absolute;left:50%;top:76%;width:42.5%;
+  position:absolute;left:50%;top:75%;width:25%;
   transform:translateX(-50%);
   filter:drop-shadow(0 18px 34px rgba(120,60,85,.28));
   transition:transform 1.35s cubic-bezier(.22,.9,.24,1);
 }
-.asm.out .e3-letter{transform:translateX(-50%) translateY(-76%)}
+.asm.out .e3-letter{transform:translateX(-50%) translateY(-72%)}
 .asm.present{animation:none}
-.asm.present .e3-clip{overflow:visible;z-index:7}
-.asm.present .e3-back,.asm.present .e3-body,.asm.present .e3-flapwrap,.asm.present .e3-sealimg{
+.asm.present .e3-clip{overflow:visible;z-index:9}
+.asm.present .e3-open,.asm.present .e3-openfront{
   transition:opacity 1s var(--ease),filter 1s var(--ease),transform 1s var(--ease);
-  opacity:.38;filter:blur(1.4px);transform:translateY(4%);
+  opacity:.4;filter:blur(1.4px);transform:translateY(3%);
 }
 .asm.present .e3-letter{
-  transform:translateX(-50%) translateY(-68%) scale(1.24);
+  transform:translateX(-50%) translateY(-62%) scale(1.6);
   filter:drop-shadow(0 44px 80px rgba(120,60,85,.42));
   transition:transform 2.4s cubic-bezier(.2,.85,.25,1),filter 2.4s;
 }
 @media(max-height:820px){
-  .asm.present .e3-letter{transform:translateX(-50%) translateY(-66%) scale(1.1)}
+  .asm.present .e3-letter{transform:translateX(-50%) translateY(-62%) scale(1.5)}
 }
 @keyframes sealPulse{0%,100%{filter:brightness(1)}50%{filter:brightness(1.05)}}
 /* final beat: the letter alone drifts toward you (crisp 2K still) */
@@ -2006,23 +1999,26 @@ a:hover .plan-txt{fill:var(--rose-deep)}
   };
   const loadOk = s => new Promise((res, rej) => { const i = new Image(); i.onload = () => res(s); i.onerror = rej; i.src = s; });
 
-  /* mode 1 — assembled layers: hover tease, seal click, real opening */
-  Promise.all(['assets/env-back.webp','assets/env-body.webp','assets/env-flap.webp','assets/env-seal.webp','assets/letter-piece.webp'].map(loadOk)).then(() => {
+  /* mode 1 — photoreal state dissolve: closed → half-open → open, seal falls, letter rises */
+  Promise.all(['assets/envelope-cut.webp','assets/env-half.webp','assets/env-open.webp','assets/env-seal2.webp','assets/letter-piece.webp'].map(loadOk)).then(() => {
     mode = 'asm';
     scene.classList.remove('ai');
     scene.classList.add('asm');
     scene.innerHTML =
-      '<img class="e3-back" src="assets/env-back.webp" alt="">'
+      '<img class="e3-open" src="assets/env-open.webp" alt="">'
       + '<div class="e3-clip"><img class="e3-letter" src="assets/letter-piece.webp" alt="MEVE 초대장"></div>'
-      + '<img class="e3-body" src="assets/env-body.webp" alt="">'
-      + '<div class="e3-flapwrap"><img src="assets/env-flap.webp" alt=""><div class="e3-flapback"></div></div>'
-      + '<img class="e3-sealimg" src="assets/env-seal.webp" alt="">'
+      + '<img class="e3-openfront" src="assets/env-open.webp" alt="" aria-hidden="true">'
+      + '<img class="e3-half" src="assets/env-half.webp" alt="" aria-hidden="true">'
+      + '<img class="e3-closed" src="assets/envelope-cut.webp" alt="왁스로 봉인된 초대장 봉투">'
+      + '<img class="e3-seal2" src="assets/env-seal2.webp" alt="" aria-hidden="true">'
       + '<button class="e3-seal" aria-label="봉인을 눌러 초대장 열기"></button>';
     openSeq = () => {
       scene.classList.add('open');
-      setTimeout(() => scene.classList.add('out'), 800);
-      setTimeout(() => scene.classList.add('present'), 2150);
-      setTimeout(enterHouse, 4450);
+      scene.classList.add('s1');                                /* wax falls, closed dissolves to half */
+      setTimeout(() => scene.classList.add('s2'), 480);         /* half dissolves to fully open */
+      setTimeout(() => scene.classList.add('out'), 980);        /* the letter rises */
+      setTimeout(() => scene.classList.add('present'), 2400);   /* the letter comes to you */
+      setTimeout(enterHouse, 4700);
     };
     scene.querySelector('.e3-seal').addEventListener('click', accept);
   }).catch(() => {
