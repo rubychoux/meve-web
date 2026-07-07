@@ -1564,6 +1564,17 @@ body.loading{overflow:hidden}
   -webkit-mask-image:radial-gradient(ellipse 72% 68% at 50% 50%,#000 50%,transparent 79%);
   mask-image:radial-gradient(ellipse 72% 68% at 50% 50%,#000 50%,transparent 79%);
 }
+/* sealed cutout floats while waiting; film fades in on accept */
+.env-scene.ai .env-cut{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:contain;
+  filter:drop-shadow(0 30px 55px rgba(120,60,85,.35));
+  animation:envFloat 7s ease-in-out 1.2s infinite;
+  transition:opacity .6s var(--ease);
+  pointer-events:none;
+}
+.env-scene.ai.has-cut video{opacity:0}
+.env-scene.ai.go video{opacity:1;transition:opacity .7s var(--ease)}
+.env-scene.ai.go .env-cut{opacity:0}
 /* final beat: the letter alone drifts toward you (crisp 2K still) */
 .env-scene.ai .letter-close{
   position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
@@ -1924,6 +1935,15 @@ a:hover .plan-txt{fill:var(--rose-deep)}
     scene.innerHTML = '<video id="envVid" muted playsinline preload="auto" poster="assets/envelope-sealed.jpg">'
       + '<source src="assets/envelope.mp4" type="video/mp4"></video>';
     vid = scene.querySelector('video');
+    /* sealed cutout for the waiting state */
+    const envCut = new Image();
+    envCut.onload = () => {
+      envCut.className = 'env-cut';
+      envCut.alt = '';
+      scene.appendChild(envCut);
+      scene.classList.add('has-cut');
+    };
+    envCut.src = 'assets/envelope-cut.webp';
     /* optional final beat still — prefer transparent cutout, fall back to feathered jpg */
     const mountClose = (src, cut) => {
       const close = new Image();
@@ -1936,7 +1956,7 @@ a:hover .plan-txt{fill:var(--rose-deep)}
       close.onerror = () => { if(cut) mountClose('assets/letter-close.jpg', false); };
       close.src = src;
     };
-    mountClose('assets/letter-cut.png', true);
+    mountClose('assets/letter-cut.webp', true);
     addEventListener('touchstart', () => { const p = vid.play(); if(p && p.then) p.then(() => vid.pause()).catch(() => {}); }, { once:true, passive:true });
   };
   probeEnv.src = 'assets/envelope-sealed.jpg';
@@ -1980,6 +2000,7 @@ a:hover .plan-txt{fill:var(--rose-deep)}
     d.querySelector('.inv-note').style.opacity = '0';
     if(ai && vid){
       /* the ceremony, on film */
+      d.getElementById('envScene').classList.add('go');
       const p = vid.play(); if(p && p.catch) p.catch(() => {});
       let done = false;
       const fin = () => {
