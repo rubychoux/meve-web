@@ -1685,6 +1685,49 @@ a:hover .roll>span,button:hover .roll>span{transform:translateY(-1.3em)}
   letter-spacing:.4em;text-transform:uppercase;white-space:nowrap;
 }
 
+/* ---------- 2.5D room stages — look into each room ---------- */
+.room{width:min(1240px,92vw);margin:0 auto clamp(2.2rem,5vh,3.6rem)}
+.room-frame{
+  position:relative;overflow:hidden;border-radius:22px;aspect-ratio:21/9;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.35),
+    0 30px 70px -30px rgba(142,58,80,.4),
+    0 8px 24px -12px rgba(142,58,80,.2);
+  transform-style:preserve-3d;
+  will-change:transform;
+}
+.room-frame img{
+  position:absolute;inset:-6%;width:112%;height:112%;max-width:none;
+  object-fit:cover;will-change:transform;
+}
+.room-haze{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(120% 90% at 50% 110%,rgba(251,247,245,.28),transparent 55%),
+    linear-gradient(180deg,rgba(26,18,22,.08),transparent 30%,transparent 72%,rgba(26,18,22,.14));
+  will-change:transform;
+}
+.room-glow{
+  position:absolute;left:50%;top:50%;width:60%;aspect-ratio:1;border-radius:50%;
+  transform:translate(-50%,-50%);
+  background:radial-gradient(circle,rgba(239,184,200,.16) 0%,transparent 65%);
+  pointer-events:none;mix-blend-mode:screen;opacity:0;transition:opacity .6s var(--ease);
+  will-change:transform;
+}
+.room:hover .room-glow{opacity:1}
+.room-cap{
+  display:flex;align-items:center;justify-content:center;gap:.9rem;
+  margin-top:1rem;
+  font-family:var(--sans);font-size:.6rem;letter-spacing:.4em;text-transform:uppercase;color:#A2949B;
+}
+.room-cap::before,.room-cap::after{content:"";height:1px;width:38px;background:var(--hairline)}
+.nuit .room-cap{color:#A78E9D}
+@media(pointer:coarse){
+  .room-frame img{animation:roomKen 16s ease-in-out infinite alternate}
+  @keyframes roomKen{from{transform:scale(1) translate(0,0)}to{transform:scale(1.05) translate(-1.2%,-1.5%)}}
+}
+@media(prefers-reduced-motion:reduce){.room-frame img{animation:none}}
+
 /* ---------- floor plan — where you are in the house ---------- */
 .plan{
   position:fixed;left:auto;bottom:auto;right:clamp(10px,1.6vw,26px);top:50%;transform:translateY(-50%);z-index:59;
@@ -3062,6 +3105,63 @@ a:hover .plan-txt{fill:var(--rose-deep)}
     const t = a.textContent.trim();
     if(!t) return;
     a.innerHTML = '<span class="roll"><span>' + t + '</span><span aria-hidden="true">' + t + '</span></span>';
+  });
+
+  /* ---------- 2.5D room stages — insert when the image exists ---------- */
+  [
+    ['house','corridor','Toward the Rooms'],
+    ['system','atelier',"L'Atelier"],
+    ['dna','vanity','Vanity Room'],
+    ['mastermind','salon','Salon Privé'],
+    ['waitlist','doorstep','The Doorstep']
+  ].forEach(([secId, file, cap]) => {
+    const sec = document.getElementById(secId);
+    if(!sec) return;
+    const src = 'assets/rooms/' + file + '.jpg';
+    const probe = new Image();
+    probe.onload = () => {
+      const fig = document.createElement('figure');
+      fig.className = 'room reveal in';
+      fig.innerHTML =
+        '<div class="room-frame">'
+        + '<img src="' + src + '" alt="' + cap + ' 인테리어">'
+        + '<div class="room-haze" aria-hidden="true"></div>'
+        + '<div class="room-glow" aria-hidden="true"></div>'
+        + '</div><figcaption class="room-cap">' + cap + '</figcaption>';
+      const th = sec.querySelector('.threshold');
+      if(th && th.nextSibling) sec.insertBefore(fig, th.nextSibling);
+      else sec.insertBefore(fig, sec.firstChild);
+      /* geometry changed — let the film & moon re-measure */
+      dispatchEvent(new Event('resize'));
+      if(window.ScrollTrigger) ScrollTrigger.refresh();
+
+      /* pointer 2.5D — perspective tilt, counter-drift, roaming light */
+      if(!matchMedia('(pointer:fine)').matches || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const frame = fig.querySelector('.room-frame');
+      const img = frame.querySelector('img');
+      const haze = frame.querySelector('.room-haze');
+      const glow = frame.querySelector('.room-glow');
+      let r = null, tx = 0, ty = 0, cx = 0, cy = 0, raf = null;
+      const loop = () => {
+        cx += (tx - cx) * .08; cy += (ty - cy) * .08;
+        frame.style.transform = 'perspective(1100px) rotateY(' + (cx * 3.2) + 'deg) rotateX(' + (-cy * 2.4) + 'deg)';
+        img.style.transform = 'translate(' + (-cx * 16) + 'px,' + (-cy * 11) + 'px)';
+        haze.style.transform = 'translate(' + (cx * 7) + 'px,' + (cy * 5) + 'px)';
+        glow.style.transform = 'translate(' + (-50 + cx * 26) + '%,' + (-50 + cy * 20) + '%)';
+        if(Math.abs(tx - cx) > .001 || Math.abs(ty - cy) > .001) raf = requestAnimationFrame(loop);
+        else raf = null;
+      };
+      const kick = () => { if(raf === null) raf = requestAnimationFrame(loop); };
+      fig.addEventListener('pointerenter', () => { r = frame.getBoundingClientRect(); });
+      fig.addEventListener('pointermove', e => {
+        if(!r) r = frame.getBoundingClientRect();
+        tx = (e.clientX - r.left) / r.width - .5;
+        ty = (e.clientY - r.top) / r.height - .5;
+        kick();
+      });
+      fig.addEventListener('pointerleave', () => { tx = 0; ty = 0; r = null; kick(); });
+    };
+    probe.src = src;
   });
 
   /* ---------- floor plan minimap — where you are in the house ---------- */
