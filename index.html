@@ -1558,11 +1558,20 @@ body.loading{overflow:hidden}
   animation:envIn 1.2s var(--ease) both;
 }
 /* AI ceremony mode — Higgsfield envelope film */
-.env-scene.ai{perspective:none;width:min(680px,92vw)}
+.env-scene.ai{position:relative;perspective:none;width:min(680px,92vw)}
 .env-scene.ai video{
   display:block;width:100%;height:auto;border-radius:20px;
   box-shadow:0 40px 100px -34px rgba(120,60,85,.55),0 10px 28px -14px rgba(120,60,85,.3);
 }
+/* final beat: the letter alone drifts toward you (crisp 2K still) */
+.env-scene.ai .letter-close{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:20px;
+  opacity:0;transform:scale(1);
+  transition:opacity .8s var(--ease),transform 2.6s cubic-bezier(.22,.9,.3,1);
+  pointer-events:none;
+}
+.env-scene.ai.close .letter-close{opacity:1;transform:scale(1.14)}
+.env-scene.ai.close video{filter:blur(2px)}
 @keyframes envIn{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
 .env{
   position:relative;width:100%;aspect-ratio:10/7;
@@ -1906,6 +1915,15 @@ a:hover .plan-txt{fill:var(--rose-deep)}
     scene.innerHTML = '<video id="envVid" muted playsinline preload="auto" poster="assets/envelope-sealed.jpg">'
       + '<source src="assets/envelope.mp4" type="video/mp4"></video>';
     vid = scene.querySelector('video');
+    /* optional final beat still */
+    const close = new Image();
+    close.onload = () => {
+      close.className = 'letter-close';
+      close.alt = '';
+      scene.appendChild(close);
+      window.__hasClose = true;
+    };
+    close.src = 'assets/letter-close.jpg';
     addEventListener('touchstart', () => { const p = vid.play(); if(p && p.then) p.then(() => vid.pause()).catch(() => {}); }, { once:true, passive:true });
   };
   probeEnv.src = 'assets/envelope-sealed.jpg';
@@ -1951,7 +1969,16 @@ a:hover .plan-txt{fill:var(--rose-deep)}
       /* the ceremony, on film */
       const p = vid.play(); if(p && p.catch) p.catch(() => {});
       let done = false;
-      const fin = () => { if(done) return; done = true; setTimeout(enterHouse, 350); };
+      const fin = () => {
+        if(done) return; done = true;
+        if(window.__hasClose){
+          /* the letter alone drifts toward you, then the house opens */
+          d.getElementById('envScene').classList.add('close');
+          setTimeout(enterHouse, 2100);
+        } else {
+          setTimeout(enterHouse, 350);
+        }
+      };
       vid.addEventListener('ended', fin);
       setTimeout(fin, 6200); /* failsafe */
       return;
