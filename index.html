@@ -149,6 +149,20 @@ nav.scrolled{
 }
 @media(max-width:900px){.nav-links a:not(.nav-cta){display:none}}
 
+/* nav over dark rooms — dark frosted variant */
+nav .nav-links a{transition:color .45s var(--ease)}
+nav.dark.scrolled{
+  background:rgba(30,20,28,.55);
+  box-shadow:inset 0 -1px 0 rgba(255,255,255,.06),0 1px 0 rgba(0,0,0,.25);
+}
+nav.dark .nav-links a{color:#D8C6D0}
+nav.dark .nav-links a.cur{color:#F2B9CB}
+nav.dark .nav-links a:not(.nav-cta) .roll>span:last-child{color:#F2B9CB}
+nav.dark .nav-links a::after{background:#F2B9CB}
+nav.dark .nav-mark img{filter:brightness(0) invert(.96)}
+nav.dark .nav-cta{color:#F6CDD9;background:rgba(246,205,217,.16);box-shadow:0 10px 30px -18px rgba(0,0,0,.6)}
+nav.dark .nav-cta:hover{background:rgba(246,205,217,.28)}
+
 /* ---------- prologue : the scroll-scrubbed journey ---------- */
 .prologue-track{height:950vh;position:relative}
 .prologue{
@@ -1545,6 +1559,7 @@ html.lenis, html.lenis body{height:auto}
 body.loading .pl{opacity:1;visibility:visible;pointer-events:auto}
 .pl.out{opacity:0;pointer-events:none}
 body.loading{overflow:hidden}
+html:has(body.loading){overflow:hidden}
 /* the sealed envelope — wax, satin, letterpress */
 .env-scene{
   perspective:1300px;
@@ -1747,13 +1762,17 @@ body.loading{overflow:hidden}
   background:transparent;
   box-shadow:inset 0 0 0 1px rgba(184,80,107,.28);
   opacity:.6;cursor:wait;
-  transition:opacity .5s,color .4s,box-shadow .4s var(--ease),background .4s var(--ease);
+  transition:opacity .5s,color .4s,box-shadow .4s var(--ease),background .4s var(--ease),transform .35s var(--ease);
 }
-.inv-accept.armed{opacity:1;cursor:pointer;color:var(--rose-deep);box-shadow:inset 0 0 0 1px rgba(184,80,107,.55)}
+.inv-accept.armed{
+  opacity:1;cursor:pointer;color:#7C3450;font-weight:600;
+  background:linear-gradient(135deg,#FBDDE7 0%,#F5C3D2 100%);
+  box-shadow:0 12px 30px -14px rgba(214,130,160,.5);
+}
 .inv-accept.armed:hover{
-  color:#fff;
-  background:linear-gradient(135deg,#EFA5BF 0%,#CE5C7E 100%);
-  box-shadow:inset 0 0 0 1px transparent,0 10px 26px -12px rgba(201,78,112,.5);
+  color:#7C3450;transform:translateY(-1px);
+  background:linear-gradient(135deg,#FCE3EB 0%,#F7CBD8 100%);
+  box-shadow:0 16px 36px -14px rgba(214,130,160,.6);
 }
 .inv-accept.armed:focus-visible{outline:2px solid var(--rose);outline-offset:3px}
 .inv-accept i{font-style:normal;font-size:.7em;opacity:.85;margin-left:.3em}
@@ -2023,6 +2042,8 @@ a:hover .plan-txt{fill:var(--rose-deep)}
     vid = scene.querySelector('video');
     vid.load();
     vid.addEventListener('loadeddata', () => { try{ vid.currentTime = 0.001; }catch(e){} }, { once:true });
+    /* the gate only waits for the ceremony itself — not the whole house */
+    vid.addEventListener('canplaythrough', () => { loaded = true; }, { once:true });
     addEventListener('touchstart', () => { const p = vid.play(); if(p && p.then) p.then(() => vid.pause()).catch(() => {}); }, { once:true, passive:true });
     openSeq = () => {
       scene.classList.add('go');
@@ -2058,6 +2079,7 @@ a:hover .plan-txt{fill:var(--rose-deep)}
         setTimeout(enterHouse, 4700);
       };
       scene.querySelector('.e3-seal').addEventListener('click', accept);
+      loaded = true; /* ceremony assets ready — open the gate */
     }).catch(() => {});
   });
   /* mode 3 — CSS envelope ceremony */
@@ -2077,7 +2099,7 @@ a:hover .plan-txt{fill:var(--rose-deep)}
   const t0 = performance.now();
   addEventListener('load', () => loaded = true);
   setTimeout(() => { if(d.readyState === 'complete') loaded = true; }, 120);
-  setTimeout(() => loaded = true, 8000); /* absolute failsafe */
+  setTimeout(() => loaded = true, 4000); /* absolute failsafe */
   const arm = () => {
     if(armed) return; armed = true;
     btn.disabled = false;
@@ -2090,10 +2112,13 @@ a:hover .plan-txt{fill:var(--rose-deep)}
       btn.focus({ preventScroll:true });
     }
   };
+  let lastT = t0;
   const tick = now => {
     const el = (now - t0) / 1000;
+    const dt = Math.min(.12, (now - lastT) / 1000); lastT = now;
     const cap = loaded ? 100 : Math.min(88, el * 52);
-    p += (Math.max(p, cap) - p) * .09;
+    /* time-based easing — immune to rAF starvation while assets stream in */
+    p += (Math.max(p, cap) - p) * Math.min(1, dt * 9);
     pct.textContent = Math.round(p);
     if(p > 99.3 && loaded){ arm(); return; }
     requestAnimationFrame(tick);
@@ -3150,6 +3175,16 @@ a:hover .plan-txt{fill:var(--rose-deep)}
       });
     }, {rootMargin:'-30% 0px -55% 0px'});
     spyMap.forEach((_, sec) => spyIO.observe(sec));
+  }
+
+  /* nav goes dark while a dark room passes beneath it */
+  const darkSecs = ['#moon', '.partners', 'footer'].map(s => document.querySelector(s)).filter(Boolean);
+  if(darkSecs.length){
+    const dIO = new IntersectionObserver(es => {
+      es.forEach(e => { e.target.__dk = e.isIntersecting; });
+      nav.classList.toggle('dark', darkSecs.some(s => s.__dk));
+    }, {rootMargin:'0px 0px -94% 0px'});
+    darkSecs.forEach(s => dIO.observe(s));
   }
 
   /* reveals */
