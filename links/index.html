@@ -55,31 +55,31 @@ img{display:block;max-width:100%}
 .mast{text-align:center}
 .mast img{width:min(144px,39vw);margin-inline:auto}
 .date{
-  margin-top:1.4rem;
-  font-family:var(--sans);font-size:.7rem;font-weight:400;letter-spacing:.12em;color:#6E5A64;
-  display:flex;align-items:center;justify-content:center;gap:.45rem;
+  margin-top:1.2rem;
+  font-family:var(--sans);font-size:.63rem;font-weight:400;letter-spacing:.12em;color:#7A6570;
+  display:flex;align-items:center;justify-content:center;gap:.4rem;
 }
 .date i{font-style:normal;color:var(--rose)}
 .thesis{
-  margin-top:1.8rem;text-align:center;
-  font-weight:300;font-size:.86rem;color:#9A8590;line-height:1.9;letter-spacing:-.01em;
+  margin-top:1.5rem;text-align:center;
+  font-weight:300;font-size:.8rem;color:#9A8590;line-height:1.75;letter-spacing:-.01em;
 }
 .thesis b{
-  display:block;margin-top:.1rem;
-  font-weight:500;font-size:1rem;color:#5C4450;
+  display:block;margin-top:.05rem;
+  font-weight:500;font-size:.92rem;color:#5C4450;
 }
 .thesis b em{font-style:normal;color:var(--rose-deep)}
 
 /* ---------- cards: modern frosted, zero bevel ---------- */
-.links{width:100%;margin-top:2.3rem;display:grid;gap:.8rem}
+.links{width:100%;margin-top:2rem;display:grid;gap:.65rem}
 .lk{
-  display:flex;align-items:center;gap:1rem;
-  padding:1.05rem 1.3rem;
-  border-radius:22px;
+  display:flex;align-items:center;gap:.85rem;
+  padding:.85rem 1.05rem .85rem 1.15rem;
+  border-radius:18px;
   background:rgba(255,255,255,.55);
   -webkit-backdrop-filter:blur(16px) saturate(1.15);backdrop-filter:blur(16px) saturate(1.15);
-  border:1px solid rgba(255,255,255,.85);
-  box-shadow:0 10px 34px -14px rgba(148,90,116,.16);
+  border:1px solid rgba(255,255,255,.7);
+  box-shadow:0 8px 28px -14px rgba(148,90,116,.14);
   transition:transform .35s var(--ease),box-shadow .35s var(--ease),background .35s var(--ease);
   -webkit-tap-highlight-color:transparent;
 }
@@ -91,27 +91,27 @@ img{display:block;max-width:100%}
 .lk:active{transform:scale(.985)}
 .lk:focus-visible{outline:2px solid var(--rose);outline-offset:3px}
 .lk .no{
-  font-family:var(--serif);font-style:italic;font-size:.95rem;color:var(--rose);
-  width:1.5rem;flex:none;text-align:center;
+  font-family:var(--serif);font-style:italic;font-size:.82rem;color:#C29AAB;
+  width:1.3rem;flex:none;text-align:center;
 }
 .lk .tx{flex:1;min-width:0}
 .lk .tx b{
-  display:block;font-weight:600;font-size:1.02rem;letter-spacing:-.02em;color:var(--ink);
+  display:block;font-weight:500;font-size:.92rem;letter-spacing:-.015em;color:#3E2C37;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
 .lk .tx i{
   display:block;font-style:normal;
-  font-size:.76rem;font-weight:300;color:var(--muted);margin-top:.05rem;
+  font-size:.7rem;font-weight:300;color:var(--muted);margin-top:.02rem;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
 .lk .ar{
-  flex:none;width:32px;height:32px;border-radius:50%;
+  flex:none;width:28px;height:28px;border-radius:50%;
   display:grid;place-items:center;
-  background:rgba(184,80,107,.07);
-  color:#A9788C;
+  background:rgba(184,80,107,.06);
+  color:#B18A9B;
   transition:background .35s,transform .35s var(--ease),color .35s;
 }
-.lk .ar svg{width:11px;height:11px;display:block}
+.lk .ar svg{width:10px;height:10px;display:block}
 .lk:hover .ar{background:rgba(184,80,107,.13);color:var(--rose-deep);transform:translate(2px,-2px)}
 
 /* primary — fresh pale pink, dark type (reference grammar) */
@@ -125,7 +125,7 @@ img{display:block;max-width:100%}
   box-shadow:0 18px 44px -16px rgba(214,130,160,.45);
 }
 .lk.primary .no{color:var(--rose-deep)}
-.lk.primary .tx b{color:#7C3450}
+.lk.primary .tx b{color:#7C3450;font-weight:600}
 .lk.primary .tx i{color:#A96C82}
 .lk.primary .ar{background:rgba(255,255,255,.65);color:var(--rose-deep)}
 .lk.primary:hover .ar{background:rgba(255,255,255,.85);color:var(--rose-deep)}
