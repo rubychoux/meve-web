@@ -131,21 +131,22 @@ nav.scrolled{
   background:var(--rose);transition:width .4s var(--ease);
 }
 .nav-links a:hover::after{width:100%}
-.nav-links a.nav-cta{color:#fff}
+.nav-links a.nav-cta{color:#7C3450}
 .nav-links a.nav-cta::after{display:none}
 .nav-cta{
-  position:relative;overflow:hidden;
-  font-family:var(--sans);font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;
-  color:#fff;padding:.72rem 1.5rem;border-radius:100px;
-  background:linear-gradient(135deg,#F0A0BC 0%,#DE7495 45%,#C94E70 100%);
-  box-shadow:
-    0 8px 20px -8px rgba(201,78,112,.5),
-    inset 0 1px 0 rgba(255,255,255,.5),
-    inset 0 -1px 0 rgba(142,58,80,.3);
-  text-shadow:0 1px 2px rgba(142,58,80,.25);
-  transition:transform .35s var(--ease),box-shadow .35s var(--ease);
+  position:relative;
+  font-family:var(--kr);font-size:.74rem;font-weight:600;letter-spacing:.16em;
+  color:#7C3450;padding:.68rem 1.45rem .68rem 1.6rem;border-radius:100px;
+  background:linear-gradient(135deg,#FBDDE7 0%,#F5C3D2 100%);
+  border:1px solid rgba(255,255,255,.9);
+  box-shadow:0 12px 30px -14px rgba(214,130,160,.5);
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease),background .35s var(--ease);
 }
-.nav-cta:hover{transform:translateY(-1px);box-shadow:0 12px 26px -8px rgba(201,78,112,.6),inset 0 1px 0 rgba(255,255,255,.6),inset 0 -1px 0 rgba(142,58,80,.3)}
+.nav-cta:hover{
+  transform:translateY(-1px);
+  background:linear-gradient(135deg,#FCE3EB 0%,#F7CBD8 100%);
+  box-shadow:0 16px 36px -14px rgba(214,130,160,.6);
+}
 @media(max-width:900px){.nav-links a:not(.nav-cta){display:none}}
 
 /* ---------- prologue : the scroll-scrubbed journey ---------- */
@@ -1775,9 +1776,20 @@ body.loading{overflow:hidden}
   font-family:var(--serif);font-style:italic;font-weight:500;
   text-transform:none;letter-spacing:.04em;font-size:1.14em;
 }
-.nav-links a .roll>span:last-child{color:var(--rose)}
 a:hover .roll>span,button:hover .roll>span{transform:translateY(-1.3em)}
 .nav-links a::after{bottom:-3px}
+
+/* nav links: seamless in-place font swap — no roll, no shift */
+.nav-links a:not(.nav-cta) .roll{overflow:visible;position:relative}
+.nav-links a:not(.nav-cta) .roll>span{transition:opacity .3s var(--ease)}
+.nav-links a:not(.nav-cta):hover .roll>span{transform:none}
+.nav-links a:not(.nav-cta):hover .roll>span:first-child{opacity:0}
+.nav-links a:not(.nav-cta) .roll>span:last-child{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-size:1.5em;letter-spacing:.05em;color:var(--rose-deep);
+  opacity:0;pointer-events:none;
+}
+.nav-links a:not(.nav-cta):hover .roll>span:last-child{opacity:1}
 
 /* ---------- N°07 partner ledger — sealed until reveal ---------- */
 .ledger{margin-top:clamp(2.6rem,5vh,3.8rem);border-top:1px solid rgba(253,251,250,.18)}
@@ -3383,7 +3395,7 @@ a:hover .plan-txt{fill:var(--rose-deep)}
   document.querySelectorAll('.nav-links a:not(.nav-cta), .btn, .nav-cta').forEach(a => {
     if(a.childElementCount !== 0) return;
     const t = a.textContent.trim();
-    if(!t) return;
+    if(!t || /[가-힣]/.test(t)) return; /* 한글 라벨은 세리프 롤 금지 — 그대로 둠 */
     a.innerHTML = '<span class="roll"><span>' + t + '</span><span aria-hidden="true">' + t + '</span></span>';
   });
 
