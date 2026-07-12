@@ -1553,10 +1553,16 @@ body.loading{overflow:hidden}
 }
 /* AI ceremony mode — Higgsfield envelope film, feathered into the page (no frame) */
 .env-scene.ai{position:relative;perspective:none;width:min(720px,94vw)}
+/* halo bridge — continues the film's own backdrop past the mask so the cut is invisible */
+.env-scene.ai::before{
+  content:"";position:absolute;inset:-24% -30%;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse 50% 48% at 50% 50%,rgba(226,215,214,.75),rgba(226,215,214,.32) 58%,transparent 76%);
+}
 .env-scene.ai video{
+  position:relative;z-index:1;
   display:block;width:100%;height:auto;
-  -webkit-mask-image:radial-gradient(ellipse 72% 68% at 50% 50%,#000 50%,transparent 79%);
-  mask-image:radial-gradient(ellipse 72% 68% at 50% 50%,#000 50%,transparent 79%);
+  -webkit-mask-image:radial-gradient(ellipse 64% 62% at 50% 50%,#000 48%,transparent 76%);
+  mask-image:radial-gradient(ellipse 64% 62% at 50% 50%,#000 48%,transparent 76%);
 }
 /* sealed cutout floats while waiting; film fades in on accept */
 .env-scene.ai .env-cut{
