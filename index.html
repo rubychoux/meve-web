@@ -433,6 +433,14 @@ nav.dark .nav-cta:hover{background:rgba(246,205,217,.28)}
 .axis .display{font-size:1.6rem;margin-top:.4rem}
 .axis p{font-size:.82rem;color:#6B5E64;margin-top:.2rem}
 @media(max-width:900px){.dna-head{grid-template-columns:1fr;gap:2.2rem}}
+@media(max-width:560px){
+  .axes{grid-template-columns:1fr}
+  .axis+.axis{border-left:0;border-top:1px solid var(--hairline-soft)}
+  .axis{display:grid;grid-template-columns:auto 1fr;align-items:baseline;column-gap:1rem}
+  .axis b{grid-column:1/-1}
+  .axis .display{margin-top:.2rem}
+  .axis p{margin-top:0;text-align:right}
+}
 /* featured DNA card — flip */
 .dna-feature{
   display:grid;grid-template-columns:minmax(0,400px) minmax(0,1fr);
