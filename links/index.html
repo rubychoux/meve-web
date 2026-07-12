@@ -6,7 +6,7 @@
 <title>MEVE · Links</title>
 <link rel="icon" type="image/png" href="/assets/favicon.png">
 <meta name="description" content="MEVE. 출시 알림 · 하우스 · 마스터마인드 · 파트너십.">
-<meta name="theme-color" content="#FBF7F5">
+<meta name="theme-color" content="#FBF6F7">
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,16 +14,13 @@
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
 /* ============================================================
-   MEVE — Links · a couture programme, not a link tree
-   paper, hairlines, type. no cards.
+   MEVE — Links · airy pastel glass, no bevels, no gloom
    ============================================================ */
 :root{
-  --paper:#FBF7F5;
-  --ink:#1A1216;
+  --ink:#221721;
   --rose:#B8506B;
   --rose-deep:#8E3A50;
-  --muted:#8A7C82;
-  --hairline:rgba(26,18,22,.16);
+  --muted:#95848D;
   --serif:'Cormorant Garamond',serif;
   --sans:'Jost','Pretendard Variable',Pretendard,sans-serif;
   --kr:'Pretendard Variable',Pretendard,-apple-system,sans-serif;
@@ -32,7 +29,12 @@
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%}
 body{
-  background:var(--paper);
+  background:
+    radial-gradient(90% 60% at 15% 8%, rgba(240,196,214,.55), transparent 60%),
+    radial-gradient(80% 55% at 88% 22%, rgba(206,190,232,.42), transparent 62%),
+    radial-gradient(90% 60% at 50% 105%, rgba(245,214,206,.5), transparent 65%),
+    linear-gradient(170deg,#FDFAFA 0%, #F8EFF3 55%, #F5ECF3 100%);
+  background-attachment:fixed;
   color:var(--ink);
   font-family:var(--kr);line-height:1.7;letter-spacing:-.008em;
   -webkit-font-smoothing:antialiased;
@@ -42,80 +44,101 @@ img{display:block;max-width:100%}
 
 .page{
   min-height:100%;
-  width:min(480px,100%);
+  width:min(460px,100%);
   margin-inline:auto;
-  padding:calc(clamp(3.2rem,9vh,5rem) + env(safe-area-inset-top)) clamp(1.4rem,6vw,2rem) calc(2.4rem + env(safe-area-inset-bottom));
-  display:flex;flex-direction:column;
+  padding:calc(clamp(3rem,8vh,4.6rem) + env(safe-area-inset-top)) clamp(1.3rem,5.5vw,1.9rem) calc(2.2rem + env(safe-area-inset-bottom));
+  display:flex;flex-direction:column;align-items:center;
 }
 
 /* ---------- masthead ---------- */
 .mast{text-align:center}
-.mast img{width:min(210px,56vw);margin-inline:auto}
-.mast .date{
-  margin-top:1.6rem;
-  font-family:var(--sans);font-size:.62rem;letter-spacing:.34em;color:var(--muted);
-  display:flex;align-items:center;justify-content:center;gap:1rem;
+.mast img{width:min(200px,54vw);margin-inline:auto}
+.date{
+  margin-top:1.5rem;
+  font-family:var(--sans);font-size:.62rem;letter-spacing:.32em;color:var(--muted);
+  display:flex;align-items:center;justify-content:center;gap:.9rem;
 }
-.mast .date::before,.mast .date::after{content:"";height:1px;width:34px;background:var(--hairline)}
+.date i{font-style:normal;color:var(--rose)}
 .thesis{
-  margin-top:2rem;text-align:center;
-  font-weight:300;font-size:.95rem;color:#4E434A;line-height:1.8;
+  margin-top:1.7rem;text-align:center;
+  font-weight:300;font-size:.94rem;color:#5A4A53;line-height:1.8;
 }
 .thesis b{font-weight:600;color:var(--ink)}
 
-/* ---------- programme ---------- */
-.prog{margin-top:2.6rem;border-top:1px solid var(--ink)}
-.row{
-  display:flex;align-items:baseline;gap:1rem;
-  padding:1.15rem .1rem 1.2rem;
-  border-bottom:1px solid var(--hairline);
-  transition:padding .35s var(--ease);
+/* ---------- cards: modern frosted, zero bevel ---------- */
+.links{width:100%;margin-top:2.3rem;display:grid;gap:.8rem}
+.lk{
+  display:flex;align-items:center;gap:1rem;
+  padding:1.05rem 1.3rem;
+  border-radius:22px;
+  background:rgba(255,255,255,.55);
+  -webkit-backdrop-filter:blur(16px) saturate(1.15);backdrop-filter:blur(16px) saturate(1.15);
+  border:1px solid rgba(255,255,255,.85);
+  box-shadow:0 10px 34px -14px rgba(148,90,116,.16);
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease),background .35s var(--ease);
+  -webkit-tap-highlight-color:transparent;
 }
-.row:active{opacity:.6}
-.row .no{
+.lk:hover{
+  transform:translateY(-2px);
+  background:rgba(255,255,255,.72);
+  box-shadow:0 16px 42px -16px rgba(148,90,116,.24);
+}
+.lk:active{transform:scale(.985)}
+.lk:focus-visible{outline:2px solid var(--rose);outline-offset:3px}
+.lk .no{
   font-family:var(--serif);font-style:italic;font-size:.95rem;color:var(--rose);
-  width:1.7rem;flex:none;
+  width:1.5rem;flex:none;text-align:center;
 }
-.row .tx{flex:1;min-width:0}
-.row .tx b{
-  display:block;
-  font-family:var(--kr);font-weight:600;font-size:1.06rem;letter-spacing:-.02em;
-  transition:color .3s;
+.lk .tx{flex:1;min-width:0}
+.lk .tx b{
+  display:block;font-weight:600;font-size:1.02rem;letter-spacing:-.02em;color:var(--ink);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
-.row .tx i{
+.lk .tx i{
   display:block;font-style:normal;
-  font-size:.78rem;font-weight:300;color:var(--muted);margin-top:.1rem;
+  font-size:.76rem;font-weight:300;color:var(--muted);margin-top:.05rem;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
-.row .ar{
-  font-family:var(--serif);font-size:1.1rem;color:#C9BCC1;flex:none;
-  transition:transform .35s var(--ease),color .3s;
+.lk .ar{
+  flex:none;width:34px;height:34px;border-radius:50%;
+  display:grid;place-items:center;
+  background:rgba(184,80,107,.08);
+  color:var(--rose);font-family:var(--serif);font-size:1rem;
+  transition:background .35s,transform .35s var(--ease),color .35s;
 }
-@media(hover:hover){
-  .row:hover{padding-left:.55rem}
-  .row:hover .tx b{color:var(--rose-deep)}
-  .row:hover .ar{transform:translateX(4px);color:var(--rose)}
+.lk:hover .ar{background:rgba(184,80,107,.14);transform:translateX(3px)}
+
+/* primary — soft rose fill, flat and modern */
+.lk.primary{
+  background:linear-gradient(135deg,#EF9FBB 0%,#D66E92 100%);
+  border:1px solid rgba(255,255,255,.55);
+  box-shadow:0 14px 38px -14px rgba(190,90,125,.45);
 }
-/* the first item is the invitation — rose, slightly larger, no box needed */
-.row.first .tx b{font-size:1.16rem;color:var(--rose-deep)}
-.row.first .no{color:var(--rose-deep)}
+.lk.primary:hover{
+  background:linear-gradient(135deg,#F0A6C0 0%,#DB7597 100%);
+  box-shadow:0 18px 46px -16px rgba(190,90,125,.55);
+}
+.lk.primary .no{color:rgba(255,255,255,.9)}
+.lk.primary .tx b{color:#fff}
+.lk.primary .tx i{color:rgba(255,244,248,.9)}
+.lk.primary .ar{background:rgba(255,255,255,.22);color:#fff}
+.lk.primary:hover .ar{background:rgba(255,255,255,.3)}
 
 /* ---------- foot ---------- */
-.foot{
-  margin-top:auto;padding-top:2.8rem;text-align:center;
-}
-.foot .star{color:#C7A76C;font-size:.58rem;letter-spacing:.5em;padding-left:.5em}
+.foot{margin-top:auto;padding-top:2.6rem;text-align:center}
+.foot .star{color:#C7A76C;font-size:.56rem;letter-spacing:.5em;padding-left:.5em}
 .foot p{
-  margin-top:.8rem;
-  font-family:var(--sans);font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:#A2949B;line-height:2;
+  margin-top:.75rem;
+  font-family:var(--sans);font-size:.57rem;letter-spacing:.2em;text-transform:uppercase;color:#A998A2;line-height:2;
+  color:#A796A0;
 }
 .foot a{color:var(--rose-deep)}
 
-/* entrance: quiet rise, no theatrics */
 .up{opacity:0;transform:translateY(10px);animation:up .8s var(--ease) forwards}
 @keyframes up{to{opacity:1;transform:none}}
 .d1{animation-delay:.05s}.d2{animation-delay:.1s}.d3{animation-delay:.16s}
-.d4{animation-delay:.2s}.d5{animation-delay:.24s}.d6{animation-delay:.28s}
-.d7{animation-delay:.32s}.d8{animation-delay:.38s}
+.d4{animation-delay:.21s}.d5{animation-delay:.26s}.d6{animation-delay:.31s}
+.d7{animation-delay:.36s}.d8{animation-delay:.42s}
 @media(prefers-reduced-motion:reduce){.up{opacity:1;transform:none;animation:none}}
 </style>
 </head>
@@ -126,33 +149,33 @@ img{display:block;max-width:100%}
     <a href="https://meve.beauty" aria-label="MEVE 홈">
       <img src="/assets/wordmark2.png" alt="MEVE">
     </a>
-    <p class="date up d1">앱 · 2026년 7월 출시 · 서울</p>
+    <p class="date up d1">앱 <i>·</i> 2026년 7월 출시 <i>·</i> 서울</p>
   </header>
 
   <p class="thesis up d2">감에 기대던 아름다움의 시대는 끝.<br><b>나의 최상은 데이터가 알고 있어요.</b></p>
 
-  <nav class="prog up d3" aria-label="MEVE 링크">
-    <a class="row first up d3" href="https://meve.beauty/#waitlist">
+  <nav class="links up d3" aria-label="MEVE 링크">
+    <a class="lk primary up d3" href="https://meve.beauty/#waitlist">
       <span class="no" aria-hidden="true">i.</span>
       <span class="tx"><b>출시 알림 신청</b><i>얼리 액세스 · 선착순 초대</i></span>
       <span class="ar" aria-hidden="true">→</span>
     </a>
-    <a class="row up d4" href="https://meve.beauty">
+    <a class="lk up d4" href="https://meve.beauty">
       <span class="no" aria-hidden="true">ii.</span>
       <span class="tx"><b>미브 하우스</b><i>브랜드 필름 · 시스템 · 뷰티 DNA</i></span>
       <span class="ar" aria-hidden="true">→</span>
     </a>
-    <a class="row up d5" href="https://meve.beauty/#mastermind">
+    <a class="lk up d5" href="https://meve.beauty/#mastermind">
       <span class="no" aria-hidden="true">iii.</span>
       <span class="tx"><b>마스터마인드</b><i>8주 아카데미 · 1기 모집</i></span>
       <span class="ar" aria-hidden="true">→</span>
     </a>
-    <a class="row up d6" href="https://meve.beauty/partners">
+    <a class="lk up d6" href="https://meve.beauty/partners">
       <span class="no" aria-hidden="true">iv.</span>
       <span class="tx"><b>파트너십</b><i>클리닉 · 브랜드 · 아티스트 · 리테일</i></span>
       <span class="ar" aria-hidden="true">→</span>
     </a>
-    <a class="row up d7" href="mailto:ruby@meve.beauty">
+    <a class="lk up d7" href="mailto:ruby@meve.beauty">
       <span class="no" aria-hidden="true">v.</span>
       <span class="tx"><b>문의</b><i>ruby@meve.beauty</i></span>
       <span class="ar" aria-hidden="true">→</span>
