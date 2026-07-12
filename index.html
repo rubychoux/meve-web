@@ -2007,70 +2007,68 @@ a:hover .plan-txt{fill:var(--rose-deep)}
   };
   const loadOk = s => new Promise((res, rej) => { const i = new Image(); i.onload = () => res(s); i.onerror = rej; i.src = s; });
 
-  /* mode 1 — photoreal state dissolve: closed → half-open → open, seal falls, letter rises */
-  Promise.all(['assets/envelope-cut.webp','assets/env-half.webp','assets/env-open.webp','assets/env-seal2.webp','assets/letter-piece.webp'].map(loadOk)).then(() => {
-    mode = 'asm';
-    scene.classList.remove('ai');
-    scene.classList.add('asm');
-    scene.innerHTML =
-      '<img class="e3-open" src="assets/env-open.webp" alt="">'
-      + '<div class="e3-clip"><img class="e3-letter" src="assets/letter-piece.webp" alt="MEVE 초대장"></div>'
-      + '<img class="e3-openfront" src="assets/env-open.webp" alt="" aria-hidden="true">'
-      + '<img class="e3-half" src="assets/env-half.webp" alt="" aria-hidden="true">'
-      + '<img class="e3-closed" src="assets/envelope-cut.webp" alt="왁스로 봉인된 초대장 봉투">'
-      + '<img class="e3-seal2" src="assets/env-seal2.webp" alt="" aria-hidden="true">'
-      + '<button class="e3-seal" aria-label="봉인을 눌러 초대장 열기"></button>';
+  /* mode 1 — Higgsfield ceremony film: the opening simply plays as film */
+  loadOk('assets/envelope-sealed.jpg').then(() => {
+    mode = 'video';
+    scene.classList.add('ai');
+    scene.innerHTML = '<video id="envVid" muted playsinline preload="auto" poster="assets/envelope-sealed.jpg">'
+      + '<source src="assets/envelope.mp4" type="video/mp4"></video>';
+    vid = scene.querySelector('video');
+    const envCut = new Image();
+    envCut.onload = () => {
+      envCut.className = 'env-cut'; envCut.alt = '';
+      scene.appendChild(envCut); scene.classList.add('has-cut');
+    };
+    envCut.src = 'assets/envelope-cut.webp';
+    const mountClose = (src, cut) => {
+      const close = new Image();
+      close.onload = () => {
+        close.className = 'letter-close' + (cut ? ' cut' : ''); close.alt = '';
+        scene.appendChild(close); window.__hasClose = true;
+      };
+      close.onerror = () => { if(cut) mountClose('assets/letter-close.jpg', false); };
+      close.src = src;
+    };
+    mountClose('assets/letter-cut.webp', true);
+    addEventListener('touchstart', () => { const p = vid.play(); if(p && p.then) p.then(() => vid.pause()).catch(() => {}); }, { once:true, passive:true });
     openSeq = () => {
-      scene.classList.add('open');
-      scene.classList.add('s1');                                /* wax falls, closed dissolves to half */
-      setTimeout(() => scene.classList.add('s2'), 480);         /* half dissolves to fully open */
-      setTimeout(() => scene.classList.add('out'), 980);        /* the letter rises */
-      setTimeout(() => scene.classList.add('present'), 2400);   /* the letter comes to you */
-      setTimeout(enterHouse, 4700);
+      scene.classList.add('go');
+      const p = vid.play(); if(p && p.catch) p.catch(() => {});
+      let done = false;
+      const fin = () => {
+        if(done) return; done = true;
+        if(window.__hasClose){
+          scene.classList.add('close');
+          setTimeout(enterHouse, 2700);
+        } else setTimeout(enterHouse, 350);
+      };
+      vid.addEventListener('ended', fin);
+      setTimeout(fin, 6200);
     };
-    scene.querySelector('.e3-seal').addEventListener('click', accept);
   }).catch(() => {
-    /* mode 2 — Higgsfield ceremony film */
-    const probeEnv = new Image();
-    probeEnv.onload = () => {
-      mode = 'video';
-      scene.classList.add('ai');
-      scene.innerHTML = '<video id="envVid" muted playsinline preload="auto" poster="assets/envelope-sealed.jpg">'
-        + '<source src="assets/envelope.mp4" type="video/mp4"></video>';
-      vid = scene.querySelector('video');
-      const envCut = new Image();
-      envCut.onload = () => {
-        envCut.className = 'env-cut'; envCut.alt = '';
-        scene.appendChild(envCut); scene.classList.add('has-cut');
-      };
-      envCut.src = 'assets/envelope-cut.webp';
-      const mountClose = (src, cut) => {
-        const close = new Image();
-        close.onload = () => {
-          close.className = 'letter-close' + (cut ? ' cut' : ''); close.alt = '';
-          scene.appendChild(close); window.__hasClose = true;
-        };
-        close.onerror = () => { if(cut) mountClose('assets/letter-close.jpg', false); };
-        close.src = src;
-      };
-      mountClose('assets/letter-cut.webp', true);
-      addEventListener('touchstart', () => { const p = vid.play(); if(p && p.then) p.then(() => vid.pause()).catch(() => {}); }, { once:true, passive:true });
+    /* mode 2 — photoreal state dissolve: closed → half-open → open, seal falls, letter rises */
+    Promise.all(['assets/envelope-cut.webp','assets/env-half.webp','assets/env-open.webp','assets/env-seal2.webp','assets/letter-piece.webp'].map(loadOk)).then(() => {
+      mode = 'asm';
+      scene.classList.remove('ai');
+      scene.classList.add('asm');
+      scene.innerHTML =
+        '<img class="e3-open" src="assets/env-open.webp" alt="">'
+        + '<div class="e3-clip"><img class="e3-letter" src="assets/letter-piece.webp" alt="MEVE 초대장"></div>'
+        + '<img class="e3-openfront" src="assets/env-open.webp" alt="" aria-hidden="true">'
+        + '<img class="e3-half" src="assets/env-half.webp" alt="" aria-hidden="true">'
+        + '<img class="e3-closed" src="assets/envelope-cut.webp" alt="왁스로 봉인된 초대장 봉투">'
+        + '<img class="e3-seal2" src="assets/env-seal2.webp" alt="" aria-hidden="true">'
+        + '<button class="e3-seal" aria-label="봉인을 눌러 초대장 열기"></button>';
       openSeq = () => {
-        scene.classList.add('go');
-        const p = vid.play(); if(p && p.catch) p.catch(() => {});
-        let done = false;
-        const fin = () => {
-          if(done) return; done = true;
-          if(window.__hasClose){
-            scene.classList.add('close');
-            setTimeout(enterHouse, 2700);
-          } else setTimeout(enterHouse, 350);
-        };
-        vid.addEventListener('ended', fin);
-        setTimeout(fin, 6200);
+        scene.classList.add('open');
+        scene.classList.add('s1');                                /* wax falls, closed dissolves to half */
+        setTimeout(() => scene.classList.add('s2'), 480);         /* half dissolves to fully open */
+        setTimeout(() => scene.classList.add('out'), 980);        /* the letter rises */
+        setTimeout(() => scene.classList.add('present'), 2400);   /* the letter comes to you */
+        setTimeout(enterHouse, 4700);
       };
-    };
-    probeEnv.src = 'assets/envelope-sealed.jpg';
+      scene.querySelector('.e3-seal').addEventListener('click', accept);
+    }).catch(() => {});
   });
   /* mode 3 — CSS envelope ceremony */
   openSeq = () => {
