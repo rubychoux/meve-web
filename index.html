@@ -1585,8 +1585,9 @@ body.loading{overflow:hidden}
 }
 .asm.armed:not(.open):hover{transform:translateY(-7px)}
 .asm > img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
-.asm .e3-open{z-index:2}
-.asm .e3-openfront{z-index:4;clip-path:inset(52% 0 0 0)}
+.asm .e3-open{z-index:2;opacity:0;transition:opacity .5s var(--ease)}
+.asm .e3-openfront{z-index:4;clip-path:inset(52% 0 0 0);opacity:0;transition:opacity .5s var(--ease)}
+.asm.s1 .e3-open,.asm.s1 .e3-openfront{opacity:1}
 .asm .e3-half{z-index:5;opacity:0;transition:opacity .5s var(--ease)}
 .asm .e3-closed{z-index:6;transition:opacity .5s var(--ease)}
 .asm .e3-seal2{z-index:7;pointer-events:none;transition:opacity .55s,transform .6s cubic-bezier(.5,0,.8,.5)}
