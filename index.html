@@ -234,39 +234,33 @@ nav.scrolled{
 }
 .btn:hover{transform:translateY(-2px)}
 .btn:focus-visible{outline:2px solid var(--rose);outline-offset:3px}
-.btn-ink{ /* primary — rose satin */
-  color:#fff;
-  background:linear-gradient(135deg,#F0A0BC 0%,#DE7495 45%,#C94E70 100%);
-  box-shadow:
-    0 12px 28px -10px rgba(201,78,112,.55),
-    0 2px 6px -2px rgba(201,78,112,.4),
-    inset 0 1.5px 0 rgba(255,255,255,.55),
-    inset 0 -1px 0 rgba(142,58,80,.35);
-  text-shadow:0 1px 2px rgba(142,58,80,.25);
+.btn-ink{ /* primary — pink glass */
+  color:#7C3450;font-weight:500;
+  background:rgba(244,178,199,.34);
+  backdrop-filter:blur(18px) saturate(1.35);-webkit-backdrop-filter:blur(18px) saturate(1.35);
+  box-shadow:0 12px 32px -16px rgba(184,80,107,.45);
 }
 .btn-ink:hover{
-  box-shadow:
-    0 18px 38px -12px rgba(201,78,112,.65),
-    0 3px 8px -2px rgba(201,78,112,.45),
-    inset 0 1.5px 0 rgba(255,255,255,.65),
-    inset 0 -1px 0 rgba(142,58,80,.35);
+  background:rgba(244,178,199,.5);
+  box-shadow:0 16px 38px -16px rgba(184,80,107,.55);
 }
-.btn-ghost{ /* secondary — pearl glass */
-  color:#4E434A;
-  background:rgba(253,251,250,.55);
-  backdrop-filter:blur(14px) saturate(1.1);-webkit-backdrop-filter:blur(14px) saturate(1.1);
-  box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,.85),
-    0 0 0 1px color-mix(in srgb,var(--powder) 55%,transparent),
-    0 8px 22px -12px rgba(142,58,80,.28);
+.btn-ghost{ /* secondary — clear glass */
+  color:#5C4450;
+  background:rgba(255,255,255,.3);
+  backdrop-filter:blur(16px) saturate(1.2);-webkit-backdrop-filter:blur(16px) saturate(1.2);
+  box-shadow:0 10px 26px -16px rgba(142,58,80,.3);
 }
 .btn-ghost:hover{
   color:var(--rose-deep);
-  box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,.9),
-    0 0 0 1px var(--rose),
-    0 12px 28px -12px rgba(142,58,80,.4);
+  background:rgba(255,255,255,.48);
+  box-shadow:0 14px 32px -16px rgba(142,58,80,.4);
 }
+.partners .btn-ink{ /* on dark plum — luminous glass */
+  color:#F6CDD9;
+  background:rgba(246,205,217,.14);
+  box-shadow:0 12px 32px -16px rgba(0,0,0,.5);
+}
+.partners .btn-ink:hover{background:rgba(246,205,217,.24)}
 .btn small{font-size:.62rem;letter-spacing:.2em;opacity:.62}
 .pro-scroll{
   position:absolute;bottom:2.4rem;left:50%;transform:translateX(-50%);
