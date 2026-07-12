@@ -2020,16 +2020,6 @@ a:hover .plan-txt{fill:var(--rose-deep)}
       scene.appendChild(envCut); scene.classList.add('has-cut');
     };
     envCut.src = 'assets/envelope-cut.webp';
-    const mountClose = (src, cut) => {
-      const close = new Image();
-      close.onload = () => {
-        close.className = 'letter-close' + (cut ? ' cut' : ''); close.alt = '';
-        scene.appendChild(close); window.__hasClose = true;
-      };
-      close.onerror = () => { if(cut) mountClose('assets/letter-close.jpg', false); };
-      close.src = src;
-    };
-    mountClose('assets/letter-cut.webp', true);
     addEventListener('touchstart', () => { const p = vid.play(); if(p && p.then) p.then(() => vid.pause()).catch(() => {}); }, { once:true, passive:true });
     openSeq = () => {
       scene.classList.add('go');
@@ -2037,13 +2027,10 @@ a:hover .plan-txt{fill:var(--rose-deep)}
       let done = false;
       const fin = () => {
         if(done) return; done = true;
-        if(window.__hasClose){
-          scene.classList.add('close');
-          setTimeout(enterHouse, 2700);
-        } else setTimeout(enterHouse, 350);
+        setTimeout(enterHouse, 300); /* the film already ends on the card closeup */
       };
       vid.addEventListener('ended', fin);
-      setTimeout(fin, 6200);
+      setTimeout(fin, 6000);
     };
   }).catch(() => {
     /* mode 2 — photoreal state dissolve: closed → half-open → open, seal falls, letter rises */
