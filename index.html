@@ -1785,9 +1785,11 @@ a:hover .roll>span,button:hover .roll>span{transform:translateY(-1.3em)}
 .nav-links a:not(.nav-cta):hover .roll>span:first-child{opacity:0}
 .nav-links a:not(.nav-cta) .roll>span:last-child{
   position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-  font-size:1.5em;letter-spacing:.05em;color:var(--rose-deep);
+  font-size:1.5em;line-height:1;letter-spacing:.05em;color:var(--rose-deep);
   opacity:0;pointer-events:none;
+  transform:translateY(-.14em);
 }
+.nav-links a:not(.nav-cta):hover .roll>span:last-child{transform:translateY(-.14em)}
 .nav-links a:not(.nav-cta):hover .roll>span:last-child{opacity:1}
 
 /* ---------- N°07 partner ledger — sealed until reveal ---------- */
