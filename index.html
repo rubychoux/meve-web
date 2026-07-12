@@ -2011,15 +2011,12 @@ a:hover .plan-txt{fill:var(--rose-deep)}
   loadOk('assets/envelope-sealed.jpg').then(() => {
     mode = 'video';
     scene.classList.add('ai');
-    scene.innerHTML = '<video id="envVid" muted playsinline preload="auto" poster="assets/envelope-sealed.jpg">'
+    /* no poster, no still overlay — the paused video IS the first frame, so nothing ever swaps */
+    scene.innerHTML = '<video id="envVid" muted playsinline preload="auto">'
       + '<source src="assets/envelope.mp4" type="video/mp4"></video>';
     vid = scene.querySelector('video');
-    const envCut = new Image();
-    envCut.onload = () => {
-      envCut.className = 'env-cut'; envCut.alt = '';
-      scene.appendChild(envCut); scene.classList.add('has-cut');
-    };
-    envCut.src = 'assets/envelope-cut.webp';
+    vid.load();
+    vid.addEventListener('loadeddata', () => { try{ vid.currentTime = 0.001; }catch(e){} }, { once:true });
     addEventListener('touchstart', () => { const p = vid.play(); if(p && p.then) p.then(() => vid.pause()).catch(() => {}); }, { once:true, passive:true });
     openSeq = () => {
       scene.classList.add('go');
