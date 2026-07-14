@@ -13,6 +13,9 @@
 <link rel="icon" type="image/png" href="/assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://hangeul.pstatic.net" crossorigin>
+<link rel="preload" href="https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="stylesheet" href="https://hangeul.pstatic.net/hangeul_static/css/maru-buri.css">
@@ -68,36 +71,52 @@ img{display:block;max-width:100%}
 
 /* ---------- masthead ---------- */
 .mast{text-align:center}
-.mast .house{
+.topbar{
+  display:flex;align-items:baseline;justify-content:space-between;gap:1rem;
+  padding-bottom:.85rem;
+  border-bottom:1px solid var(--hairline);
   font-family:var(--sans);font-weight:400;
-  font-size:.64rem;letter-spacing:.4em;text-indent:.4em;text-transform:uppercase;
+  font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;
   color:var(--ink-mute);
 }
-.mast .mark{margin:1.9rem auto 0;width:clamp(116px,30vw,142px)}
-.mast .date{
-  margin-top:1.8rem;
-  display:inline-flex;align-items:center;gap:.7rem;
-  font-family:var(--sans);font-weight:400;
-  font-size:.7rem;letter-spacing:.3em;text-indent:.3em;text-transform:uppercase;
-  color:var(--ink);
-}
-.mast .date i{font-style:normal;width:4px;height:4px;border-radius:50%;background:var(--pink);flex:none}
-.mast .date b{font-weight:500}
-.cd{
-  margin-top:1.4rem;
+.topbar span:last-child{color:var(--ink)}
+.mast .mark{margin:clamp(1.5rem,3.5vh,2rem) auto 0;width:clamp(132px,36vw,168px)}
+.strip{
+  margin-top:clamp(1.5rem,3.5vh,2rem);
+  padding:1rem 0 1.05rem;
+  border-top:1px solid var(--hairline);
+  border-bottom:1px solid var(--hairline);
   display:flex;align-items:baseline;justify-content:center;gap:1rem;
+  position:relative;
 }
-.cd-d{
+.strip::after{
+  content:"";position:absolute;left:0;right:0;bottom:-4px;height:1px;background:var(--hairline-soft);
+}
+.st-label{
+  font-family:var(--sans);font-weight:400;
+  font-size:.62rem;letter-spacing:.26em;text-indent:.26em;text-transform:uppercase;color:var(--ink-mute);
+}
+.st-sep{width:4px;height:4px;border-radius:50%;background:var(--pink);align-self:center;flex:none}
+.st-date{
   font-family:var(--serif);font-weight:600;
-  font-size:2rem;line-height:1;letter-spacing:.02em;color:var(--ink);
+  font-size:1.3rem;letter-spacing:.04em;color:var(--ink);
   font-variant-numeric:tabular-nums;
 }
-.cd-t{
+.st-d{
+  font-family:var(--serif);font-weight:600;
+  font-size:1.3rem;letter-spacing:.02em;color:var(--pink-deep);
+  font-variant-numeric:tabular-nums;
+}
+.st-t{
   font-family:var(--serif);font-weight:500;
-  font-size:1.15rem;letter-spacing:.08em;color:var(--ink-mute);
+  font-size:.95rem;letter-spacing:.06em;color:var(--ink-mute);
   font-variant-numeric:tabular-nums;
 }
-.cd.live .cd-d{color:var(--pink-deep)}
+.strip.live .st-d{color:var(--gold)}
+@media(max-width:420px){
+  .strip{gap:.7rem}
+  .st-label{display:none}
+}
 
 /* double rule, print style */
 .dr{
@@ -108,6 +127,7 @@ img{display:block;max-width:100%}
 }
 
 /* ---------- narrative (left aligned, editorial) ---------- */
+.mast + section{margin-top:clamp(2.8rem,6.5vh,3.8rem)}
 .q{
   font-family:var(--serif);font-style:italic;font-weight:400;
   font-size:1rem;letter-spacing:.1em;
@@ -127,17 +147,31 @@ h1 em{font-style:normal;color:var(--pink-deep)}
   color:var(--ink-soft);
 }
 .lead + .lead{margin-top:1.4rem}
-.pivot{
-  margin-top:clamp(2.6rem,6vh,3.4rem);
+/* wide pivot band: the visual moment */
+.pivot-band{
+  position:relative;overflow:hidden;
+  margin:clamp(2.8rem,6.5vh,3.8rem) calc(50% - 50vw) 0;
+  padding:clamp(2.8rem,7vh,3.8rem) clamp(1.4rem,6vw,2rem);
+  background:
+    radial-gradient(70% 130% at 25% 15%, rgba(239,184,200,.30), transparent 68%),
+    radial-gradient(55% 110% at 78% 85%, rgba(176,141,87,.13), transparent 70%);
   text-align:center;
-  font-family:var(--serif);font-weight:500;font-style:italic;
-  font-size:clamp(1.4rem,5.2vw,1.75rem);line-height:1.5;letter-spacing:.01em;
-  color:var(--ink);
 }
-.pivot .kr{
-  display:block;margin-top:.5rem;
-  font-family:var(--krd);font-style:normal;font-weight:500;
-  font-size:.6em;letter-spacing:-.01em;color:var(--ink-soft);
+.pivot-band .wm{
+  position:absolute;left:50%;top:50%;width:min(340px,80vw);
+  transform:translate(-50%,-52%);
+  opacity:.055;pointer-events:none;
+}
+.pivot-en{
+  position:relative;
+  font-family:var(--serif);font-style:italic;font-weight:500;
+  font-size:.98rem;letter-spacing:.14em;color:var(--gold);
+}
+.pivot-kr{
+  position:relative;margin-top:.8rem;
+  font-family:var(--krd);font-weight:600;
+  font-size:clamp(1.5rem,5.8vw,1.95rem);line-height:1.55;letter-spacing:-.015em;
+  color:var(--ink);
 }
 .signals{
   margin-top:clamp(2.4rem,5.5vh,3.2rem);max-width:30em;
@@ -177,12 +211,19 @@ h1 em{font-style:normal;color:var(--pink-deep)}
   font-family:var(--sans);font-size:.66rem;letter-spacing:.26em;text-indent:.26em;text-transform:uppercase;color:var(--gold);
 }
 .wl-count.on{display:block}
+.wl-teaser{
+  margin-bottom:1.2rem;
+  display:flex;align-items:center;justify-content:center;gap:.9rem;
+  font-weight:600;font-size:.92rem;letter-spacing:-.01em;color:var(--gold);
+}
+.wl-teaser::before,.wl-teaser::after{content:"";width:34px;height:1px;background:rgba(176,141,87,.4)}
+.wl-teaser b{font-family:var(--serif);font-weight:600;font-size:1.1em;letter-spacing:.02em}
 .wl-row{display:flex;flex-direction:column;gap:.75rem}
 .wl input[type=email]{
   height:58px;border-radius:999px;padding-inline:1.6rem;text-align:center;
   font-family:var(--kr);font-size:1rem;color:var(--ink);
   background:#FFFDFA;
-  border:1px solid var(--hairline);
+  border:1px solid rgba(33,28,35,.38);
   outline:none;transition:border-color .25s,box-shadow .25s;
 }
 .wl input[type=email]:focus{border-color:var(--ink);box-shadow:0 0 0 4px rgba(33,28,35,.05)}
@@ -338,8 +379,9 @@ h1 em{font-style:normal;color:var(--pink-deep)}
   text-align:center;font-size:.78rem;font-weight:400;line-height:2;color:var(--ink-mute);
 }
 .legal a{text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--hairline)}
+.orn{width:26px;margin:2.4rem auto 0;opacity:.8}
 .foot{
-  margin-top:2.4rem;padding-top:1.5rem;border-top:1px solid var(--hairline-soft);
+  margin-top:1.6rem;padding-top:1.5rem;border-top:1px solid var(--hairline-soft);
   text-align:center;
 }
 .foot p{
@@ -366,16 +408,20 @@ h1 em{font-style:normal;color:var(--pink-deep)}
 
   <!-- masthead -->
   <header class="mast fade">
-    <p class="house">Maison MEVE · Beauty-Tech House</p>
+    <div class="topbar">
+      <span>Maison MEVE</span>
+      <span>Beauty-Tech House</span>
+    </div>
     <img class="mark" src="/assets/wordmark2.png" alt="MEVE">
-    <p class="date">App Launch <i></i> <b>7.29</b></p>
-    <div class="cd" id="cd" aria-label="런칭까지 남은 시간">
-      <span class="cd-d" id="cdD">D–14</span>
-      <span class="cd-t" id="cdT">00 : 00 : 00</span>
+    <div class="strip" id="cd" aria-label="앱 런칭까지 남은 시간">
+      <span class="st-label">App Launch</span>
+      <span class="st-sep" aria-hidden="true"></span>
+      <span class="st-date">7.29</span>
+      <span class="st-sep" aria-hidden="true"></span>
+      <span class="st-d" id="cdD">D–14</span>
+      <span class="st-t" id="cdT">00 : 00 : 00</span>
     </div>
   </header>
-
-  <hr class="dr fade d1">
 
   <!-- narrative -->
   <section class="fade d1">
@@ -395,10 +441,11 @@ h1 em{font-style:normal;color:var(--pink-deep)}
       언제나 답은 '감'에 맡겨져 있었죠.
     </p>
 
-    <p class="pivot">
-      Is beauty a matter of instinct?
-      <span class="kr">아름다움은 정말, 감의 영역일까요?</span>
-    </p>
+    <div class="pivot-band">
+      <img class="wm" src="/assets/logo-mark.png" alt="" aria-hidden="true">
+      <p class="pivot-en">Is beauty a matter of instinct?</p>
+      <p class="pivot-kr">아름다움은 정말,<br>'감'의 영역일까요?</p>
+    </div>
 
     <p class="signals">
       어젯밤의 <b>수면</b>과 오늘의 <b>습도</b>, <b>생리주기</b>의 리듬,
@@ -425,6 +472,7 @@ h1 em{font-style:normal;color:var(--pink-deep)}
   <section class="fade d2">
     <form class="wl" id="waitlist" novalidate>
       <p class="wl-count" id="wlCount"></p>
+      <p class="wl-teaser">지금 <b>No.100</b> 안에 들면, 프리미엄 3개월 무료</p>
       <div class="wl-row">
         <input type="email" id="wlEmail" name="email" inputmode="email" autocomplete="email" placeholder="이메일 주소" required>
         <button type="submit" id="wlBtn"><span>내 티켓 번호 받기</span><span class="ar">→</span></button>
@@ -503,6 +551,8 @@ h1 em{font-style:normal;color:var(--pink-deep)}
 
   <p class="legal fade d3">신청하시면 확인 메일과 출시 소식을 보내드려요 · <a href="/privacy">개인정보처리방침</a></p>
 
+  <img class="orn fade d3" src="/assets/logo-mark.png" alt="" aria-hidden="true">
+
   <footer class="foot fade d3">
     <p>© 2026 Meve · 대표 김시우 · <span style="white-space:nowrap">사업자등록번호 310-49-01303</span><br>
     <a href="mailto:ruby@meve.beauty">ruby@meve.beauty</a> · <a href="/privacy">Privacy</a> · <a href="/partners">Partners</a></p>
@@ -537,10 +587,10 @@ h1 em{font-style:normal;color:var(--pink-deep)}
     const d = Math.ceil(left / 86400000);
     const rem = left % 86400000;
     $('cdD').textContent = 'D–' + d;
-    $('cdT').textContent = p2(Math.floor(rem/3600000)) + ' : ' + p2(Math.floor(rem%3600000/60000)) + ' : ' + p2(Math.floor(rem%60000/1000));
+    $('cdT').textContent = p2(Math.floor(rem/3600000)) + 'h ' + p2(Math.floor(rem%3600000/60000)) + 'm';
   };
   tick();
-  setInterval(tick, 1000);
+  setInterval(tick, 20000);
 
   /* ---- referral source capture (?r=CODE, or set by /heesun redirect) ---- */
   const qs = new URLSearchParams(location.search);
