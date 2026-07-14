@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>MEVE — 데이터로 설계하는 나의 아름다움</title>
-<meta name="description" content="MEVE는 당신의 피부와 얼굴, 뷰티 아이덴티티를 데이터로 이해해 유행이 아닌 당신에게 맞는 아름다움을 제안합니다. 7월 22일 앱 출시.">
+<meta name="description" content="MEVE는 당신의 피부와 얼굴을 데이터로 이해해 감이나 유행이 아닌, 당신에게 맞는 아름다움을 제안합니다. 7월 29일 앱 출시.">
 <meta property="og:title" content="MEVE — Beauty-Tech House">
-<meta property="og:description" content="화장품, 더 이상 감에만 의존하지 않아도 된다면? 7월 22일, 한정된 인원에게 순차적으로 초대장을 보내드립니다.">
+<meta property="og:description" content="아름다움은 정말, 감의 영역일까요? 7월 29일, 신청 순서대로 초대장이 열립니다.">
 <meta property="og:url" content="https://meve.beauty">
 <meta property="og:image" content="https://meve.beauty/assets/logo-lockup.png">
 <meta name="theme-color" content="#F4E7E6">
@@ -18,7 +18,8 @@
 <link rel="stylesheet" href="https://hangeul.pstatic.net/hangeul_static/css/maru-buri.css">
 <style>
 /* ============================================================
-   MEVE — launch landing · the page IS the invitation
+   MEVE — pre-launch waitlist · the page IS the invitation
+   v2 — 감 vs 데이터 · Beauty DNA Ticket · referral loop
    ============================================================ */
 :root{
   --ink:#221721;
@@ -27,11 +28,13 @@
   --rose:#B8506B;
   --rose-deep:#8E3A50;
   --rose-pop:#D9527A;
+  --gold:#B08D57;
+  --gold-soft:#C7A76C;
   --muted:#95848D;
   --serif:'Bodoni Moda',serif;
   --sans:'Jost','Pretendard Variable',Pretendard,sans-serif;
   --kr:'Pretendard Variable',Pretendard,-apple-system,sans-serif;
-  --krd:'MaruBuri','Noto Serif KR',serif; /* Korean display — invitation serif */
+  --krd:'MaruBuri','Noto Serif KR',serif;
   --ease:cubic-bezier(.19,.6,.22,1);
 }
 *{margin:0;padding:0;box-sizing:border-box}
@@ -44,7 +47,6 @@ body{
   -webkit-font-smoothing:antialiased;
   word-break:keep-all;
 }
-/* the sky — cloud photograph, softened to a porcelain haze */
 .sky{
   position:fixed;inset:0;z-index:-1;
   background:url('/assets/prologue-poster.jpg') center 38%/cover no-repeat #F4E7E6;
@@ -82,12 +84,10 @@ img{display:block;max-width:100%}
   padding:clamp(3.4rem,9vw,4.6rem) clamp(1.5rem,6vw,3.4rem) clamp(2.2rem,6vw,3rem);
   text-align:center;
 }
-/* deckled inner rule — the letterpress frame */
 .card::before{
   content:"";position:absolute;inset:11px;border-radius:6px;pointer-events:none;
   border:1px solid rgba(184,80,107,.14);
 }
-/* the wax seal, pressed onto the card's top edge */
 .seal{
   position:absolute;top:0;left:50%;
   width:clamp(88px,22vw,106px);
@@ -113,14 +113,15 @@ img{display:block;max-width:100%}
 .rule{
   margin:clamp(1.6rem,4vh,2.2rem) auto 0;
   display:flex;align-items:center;gap:.9rem;width:min(300px,72%);
-  color:#C7A76C;font-size:.6rem;
+  color:var(--gold-soft);font-size:.6rem;
 }
 .rule::before,.rule::after{content:"";flex:1;height:1px;background:rgba(34,23,33,.1)}
 
+/* ---------- narrative: 감 → 데이터 ---------- */
 h1{
   margin-top:clamp(1.5rem,3.8vh,2rem);
   font-family:var(--krd);
-  font-weight:600;font-size:clamp(1.5rem,5.7vw,2.05rem);line-height:1.48;letter-spacing:-.015em;color:#2B1D27;
+  font-weight:600;font-size:clamp(1.42rem,5.4vw,1.95rem);line-height:1.5;letter-spacing:-.015em;color:#2B1D27;
 }
 h1 small{
   display:block;margin-bottom:.55rem;
@@ -132,16 +133,48 @@ h1 em{font-style:normal;color:var(--rose-pop)}
   margin-top:clamp(1.2rem,3vh,1.6rem);
   font-weight:300;font-size:clamp(.9rem,3.4vw,.99rem);line-height:1.92;color:#7A6870;
 }
+.pain q{quotes:"“" "”";font-weight:400;color:#6B5A63}
+.pivot{
+  margin-top:clamp(1.4rem,3.4vh,1.9rem);
+  font-family:var(--krd);font-weight:400;font-size:clamp(1.02rem,3.9vw,1.16rem);
+  color:var(--rose-deep);letter-spacing:-.01em;
+}
+.pivot i{font-family:var(--serif);font-style:italic;letter-spacing:.04em}
+.signals{
+  margin-top:clamp(1.2rem,3vh,1.6rem);
+  font-weight:300;font-size:clamp(.88rem,3.3vw,.97rem);line-height:2;color:#7A6870;
+}
+.signals b{font-weight:500;color:var(--plum)}
 .value{
-  margin-top:clamp(1.1rem,2.8vh,1.5rem);
+  margin-top:clamp(1.3rem,3.2vh,1.7rem);
   font-family:var(--krd);
-  font-weight:400;font-size:clamp(.95rem,3.6vw,1.06rem);line-height:2;color:var(--plum);
+  font-weight:400;font-size:clamp(.98rem,3.7vw,1.1rem);line-height:2;color:var(--plum);
 }
 .value b{font-weight:700;color:var(--rose-deep)}
 .value .mv{font-family:var(--serif);font-weight:500;letter-spacing:.05em;font-size:1.04em}
 
+/* ---------- founders (toggle) ---------- */
+.founders{
+  display:none;
+  margin-top:clamp(1.5rem,3.6vh,2rem);
+}
+.founders.on{display:block}
+.founders .names{
+  font-family:var(--serif);font-size:clamp(.92rem,3.4vw,1.02rem);letter-spacing:.12em;color:#3E2C37;
+}
+.founders .names i{font-style:italic;color:var(--gold);padding-inline:.35rem}
+.founders .role{
+  margin-top:.4rem;
+  font-family:var(--sans);font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:#A88898;
+}
+
 /* ---------- form ---------- */
 .wl{width:100%;max-width:400px;margin:clamp(1.8rem,4.2vh,2.4rem) auto 0}
+.wl-count{
+  display:none;margin-bottom:.8rem;
+  font-family:var(--sans);font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);
+}
+.wl-count.on{display:block}
 .wl-row{display:flex;flex-direction:column;gap:.65rem}
 .wl input[type=email]{
   height:56px;border-radius:4px;padding-inline:1.2rem;text-align:center;
@@ -181,51 +214,97 @@ h1 em{font-style:normal;color:var(--rose-pop)}
 }
 .beta input:checked{box-shadow:inset 0 0 0 1px var(--rose-pop)}
 .beta input:checked::after{transform:scale(1)}
+.beta b{font-weight:600;color:var(--rose-deep)}
 .wl-note{
   margin-top:1.2rem;
   font-size:.79rem;font-weight:300;line-height:1.85;color:#8A7C82;
 }
 .wl-note b{font-weight:550;color:var(--rose-deep)}
-.wl-count{
-  margin-top:.45rem;display:none;
-  font-family:var(--sans);font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:#A88898;
-}
-.wl-count.on{display:block}
 .wl-error{display:none;margin-top:.8rem;font-size:.82rem;color:#C4485C}
 .wl-error.on{display:block}
 
-/* ---------- success ---------- */
+/* ---------- success: the ticket ---------- */
 .done{display:none;width:100%;max-width:400px;margin:clamp(1.8rem,4.2vh,2.4rem) auto 0}
 .done.on{display:block}
-.done h2{font-family:var(--krd);font-weight:400;font-size:1.22rem;letter-spacing:-.01em;color:var(--plum)}
-.done h2 b{font-family:var(--serif);font-weight:500;font-size:1.65em;color:var(--rose-deep);letter-spacing:0}
-.done p{margin-top:.95rem;font-size:.88rem;font-weight:300;line-height:1.9;color:#7A6870}
+.ticket-card{
+  position:relative;border-radius:6px;
+  padding:1.6rem 1.4rem 1.5rem;
+  background:
+    radial-gradient(120% 100% at 50% 0%, rgba(244,205,217,.22), transparent 60%),
+    #FFFDF9;
+  border:1px solid rgba(176,141,87,.35);
+}
+.ticket-card::before{
+  content:"";position:absolute;inset:6px;border-radius:3px;pointer-events:none;
+  border:1px dashed rgba(176,141,87,.35);
+}
+.ticket-eyebrow{
+  font-family:var(--sans);font-size:.55rem;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);
+}
+.done h2{
+  margin-top:.7rem;
+  font-family:var(--krd);font-weight:400;font-size:1.08rem;letter-spacing:-.01em;color:var(--plum);
+}
+.done h2 b{
+  display:block;margin-top:.35rem;
+  font-family:var(--serif);font-weight:500;font-size:2.1rem;color:var(--rose-deep);letter-spacing:.03em;
+}
+.ticket-perk{
+  margin-top:.85rem;
+  font-size:.78rem;font-weight:300;line-height:1.8;color:#7A6870;
+}
+.ticket-perk b{font-weight:600;color:var(--rose-deep)}
+.done .boost{
+  margin-top:1.3rem;
+  font-size:.85rem;font-weight:400;line-height:1.9;color:var(--plum);
+}
+.done .boost b{font-weight:700;color:var(--rose-deep)}
+.tiers{
+  margin-top:.9rem;display:grid;gap:.45rem;
+  font-size:.79rem;font-weight:300;color:#7A6870;
+}
+.tiers .t{display:flex;align-items:baseline;justify-content:center;gap:.55rem}
+.tiers .t i{font-family:var(--serif);font-style:italic;font-size:.75rem;color:var(--gold)}
+.tiers .t b{font-weight:600;color:#3E2C37}
 .done-btns{display:flex;gap:.6rem;margin-top:1.5rem}
 .done-btns a,.done-btns button{
   flex:1;height:50px;border-radius:4px;cursor:pointer;
   display:flex;align-items:center;justify-content:center;
-  font-family:var(--kr);font-size:.86rem;font-weight:600;color:var(--rose-deep);
-  background:transparent;border:1px solid rgba(142,58,80,.35);
-  transition:background .3s,border-color .3s,transform .3s var(--ease);
+  font-family:var(--kr);font-size:.86rem;font-weight:600;color:#FDFBF7;
+  background:linear-gradient(160deg,#C25C7E 0%,#A94066 55%,#8E3A50 100%);
+  border:0;box-shadow:0 14px 26px -12px rgba(142,58,80,.5);
+  transition:transform .3s var(--ease),filter .3s;
 }
-.done-btns a:hover,.done-btns button:hover{background:rgba(244,205,217,.25);border-color:rgba(142,58,80,.6);transform:translateY(-1px)}
+.done-btns a{
+  color:var(--rose-deep);background:transparent;box-shadow:none;
+  border:1px solid rgba(142,58,80,.35);
+}
+.done-btns button:hover{transform:translateY(-1px);filter:brightness(1.05)}
+.done-btns a:hover{background:rgba(244,205,217,.25);border-color:rgba(142,58,80,.6);transform:translateY(-1px)}
 
-/* ---------- card colophon: what's inside ---------- */
-.how{margin-top:clamp(2.2rem,5vh,3rem)}
-.how-rule{display:flex;align-items:center;gap:.9rem;margin-inline:auto;width:min(300px,72%);color:#C7A76C;font-size:.6rem}
+/* ---------- the ticket perks (pre-signup) ---------- */
+.perks{margin-top:clamp(2.2rem,5vh,3rem)}
+.perks-rule,.how-rule{
+  display:flex;align-items:center;gap:.9rem;margin-inline:auto;width:min(300px,72%);
+  font-family:var(--serif);font-style:italic;letter-spacing:.14em;
+  color:var(--gold-soft);font-size:.66rem;
+}
+.perks-rule::before,.perks-rule::after,
 .how-rule::before,.how-rule::after{content:"";flex:1;height:1px;background:rgba(34,23,33,.1)}
-.how-rows{margin-top:1.4rem;display:grid;gap:.85rem}
-.how-row{display:flex;align-items:baseline;justify-content:center;gap:.7rem;font-size:.84rem}
-.how-row .no{font-family:var(--serif);font-style:italic;font-size:.8rem;color:#C29AAB}
-.how-row b{font-weight:650;color:#3E2C37;letter-spacing:.02em}
-.how-row span{font-weight:300;color:#8A7C82}
-.ticket{
+.perk-rows,.how-rows{margin-top:1.4rem;display:grid;gap:.85rem}
+.perk-row,.how-row{display:flex;align-items:baseline;justify-content:center;gap:.7rem;font-size:.84rem;flex-wrap:wrap}
+.perk-row .no,.how-row .no{font-family:var(--serif);font-style:italic;font-size:.8rem;color:var(--gold)}
+.perk-row b,.how-row b{font-weight:650;color:#3E2C37;letter-spacing:.02em}
+.perk-row span,.how-row span{font-weight:300;color:#8A7C82}
+
+.how{margin-top:clamp(2.2rem,5vh,3rem)}
+.ticket-line{
   margin-top:clamp(2rem,4.5vh,2.6rem);
   font-family:var(--sans);font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:#B9AAB1;
 }
 
-/* ---------- legal / foot (on the sky, below the card) ---------- */
-.wl-legal{margin-top:1.5rem;font-size:.68rem;font-weight:300;color:#9A8890;text-align:center}
+/* ---------- legal / foot ---------- */
+.wl-legal{margin-top:1.5rem;font-size:.68rem;font-weight:300;color:#9A8890;text-align:center;line-height:1.9}
 .wl-legal a{color:#7E6C75;text-decoration:underline;text-underline-offset:3px}
 .foot{margin-top:auto;padding-top:2.4rem;text-align:center}
 .foot p{
@@ -260,60 +339,99 @@ h1 em{font-style:normal;color:var(--rose-pop)}
       <img src="/assets/wordmark2.png" alt="MEVE">
     </header>
 
-    <p class="rsvp"><i>R.S.V.P</i> — <b>7.22 APP LAUNCH</b></p>
+    <p class="rsvp"><i>R.S.V.P</i> — <b>7.29 APP LAUNCH</b></p>
 
     <div class="rule" aria-hidden="true">✦</div>
 
-    <h1><small>Une question,</small>화장품, 더 이상 <em>감</em>에만<br>의존하지 않아도 된다면?</h1>
+    <h1><small>Une question,</small>내 피부엔 뭐가 맞는지,<br>내 얼굴엔 뭐가 <em>어울리는지</em></h1>
 
     <p class="pain">
-      광고를 보고 구매했다가 실망했던 적, 한 번쯤은 있으셨을 거예요.<br>
-      우리는 왜 아직도 수백 개의 리뷰와 바이럴 속에서,<br>
-      나에게 맞는 화장품을 직접 찾아야 할까요?
+      확실한 답을 모른 채, 우리는 오늘도<br>
+      수백 개의 리뷰 속에서 새로운 제품을 검색해요.<br>
+      실패는 반복되는데 — 이유는 아무도 설명해 주지 않죠.
+    </p>
+
+    <p class="pain">
+      <q>눈썹은 길게 그리세요</q>, <q>쉐딩은 이렇게 넣으세요</q>.<br>
+      조각난 조언들 속에서 내 얼굴의 답은<br>
+      언제나 '감'에 맡겨져 왔어요.
+    </p>
+
+    <p class="pivot">아름다움은 정말, <i>감</i>의 영역일까요?</p>
+
+    <p class="signals">
+      어젯밤의 <b>수면</b>과 오늘의 <b>습도</b>, <b>생리주기</b>의 리듬,<br>
+      스쳐 지나간 <b>성분 조합</b>, 트러블이 앉는 <b>자리</b> —<br>
+      당신도 몰랐던 신호들이 모여, 답이 됩니다.
     </p>
 
     <p class="value">
-      <span class="mv">MEVE</span>는 당신의 피부와 얼굴, 뷰티 아이덴티티를 <b>데이터</b>로 이해해
-      유행이 아닌, 당신에게 맞는 아름다움을 제안합니다.
+      <span class="mv">MEVE</span>는 당신의 피부와 얼굴을 <b>데이터</b>로 이해해<br>
+      감이나 유행이 아닌, 당신에게 맞는 아름다움을 제안합니다.
     </p>
+
+    <!-- founders — flip SHOW_FOUNDERS to true on announcement day -->
+    <div class="founders" id="founders">
+      <p class="names">Ruby Choux <i>×</i> Heesun</p>
+      <p class="role">The Founding Team</p>
+    </div>
 
     <!-- ================ waitlist ================ -->
     <form class="wl" id="waitlist" novalidate>
+      <p class="wl-count" id="wlCount"></p>
       <div class="wl-row">
         <input type="email" id="wlEmail" name="email" inputmode="email" autocomplete="email" placeholder="이메일 주소" required>
-        <button type="submit" id="wlBtn">가장 먼저 만나보기</button>
+        <button type="submit" id="wlBtn">내 초대장 예약하기</button>
       </div>
       <label class="beta">
         <input type="checkbox" id="wlBeta">
-        출시 전 베타 테스트 참여에도 관심 있어요
+        <span>출시 전 <b>베타 테스터 30인</b> 선발에 지원할래요</span>
       </label>
       <p class="wl-error" id="wlError"></p>
-      <p class="wl-note"><b>7월 22일</b>부터, 한정된 인원에게<br>순차적으로 초대장을 보내드립니다.</p>
-      <p class="wl-count" id="wlCount"></p>
+      <p class="wl-note"><b>7월 29일</b>, 신청 순서대로<br>초대장이 열립니다.</p>
     </form>
 
     <section class="done" id="done" aria-live="polite">
-      <h2>당신은 <b id="doneNo">#—</b>번째예요</h2>
-      <p>7월 22일부터 순서대로 초대장이 도착합니다.<br>함께 기다릴 친구에게 미브를 살짝 알려주세요.</p>
+      <div class="ticket-card">
+        <p class="ticket-eyebrow">Beauty DNA Ticket</p>
+        <h2>당신의 티켓 번호는<b id="doneNo">No.—</b></h2>
+        <p class="ticket-perk">이 번호는 런칭 후 앱에서<br><b>파운딩 넘버</b>로 영원히 남아요.</p>
+      </div>
+      <p class="boost">친구가 한 명 올 때마다 <b>10칸 앞으로</b> 이동해요.</p>
+      <div class="tiers">
+        <div class="t"><i>i.</i><b>1명</b><span>— 10칸 앞으로</span></div>
+        <div class="t"><i>ii.</i><b>3명</b><span>— 베타 테스터 30인 후보 확정</span></div>
+        <div class="t"><i>iii.</i><b>10명</b><span>— 런칭 시 프리미엄 연장</span></div>
+      </div>
       <div class="done-btns">
-        <button type="button" id="shareBtn">링크 복사</button>
-        <a id="igBtn" href="https://instagram.com/maison.meve" target="_blank" rel="noopener">인스타그램 팔로우</a>
+        <button type="button" id="shareBtn">내 초대 링크 공유하기</button>
+        <a id="igBtn" href="https://instagram.com/maison.meve" target="_blank" rel="noopener">인스타그램</a>
       </div>
     </section>
 
-    <!-- ================ inside ================ -->
-    <section class="how" aria-label="미브 소개">
-      <div class="how-rule" aria-hidden="true">Inside MEVE</div>
-      <div class="how-rows">
-        <div class="how-row"><span class="no">i.</span><b>스캔</b><span>AI 페이스 스캔으로 피부를 정밀 진단</span></div>
-        <div class="how-row"><span class="no">ii.</span><b>처방</b><span>나에게 맞는 성분과 30일 루틴 설계</span></div>
-        <div class="how-row"><span class="no">iii.</span><b>추적</b><span>매일의 변화를 데이터로 증명</span></div>
+    <!-- ================ the ticket perks ================ -->
+    <section class="perks" aria-label="초대장 혜택">
+      <div class="perks-rule" aria-hidden="true">The Ticket</div>
+      <div class="perk-rows">
+        <div class="perk-row"><span class="no">i.</span><b>Beauty DNA Ticket</b><span>당신의 번호가 파운딩 넘버로 남아요</span></div>
+        <div class="perk-row"><span class="no">ii.</span><b>Early Bird</b><span>웨이트리스트에게만 열리는 시작 가격</span></div>
+        <div class="perk-row"><span class="no">iii.</span><b>Premium</b><span>런칭과 함께 프리미엄 체험이 열려요</span></div>
       </div>
-      <p class="ticket">No. MV-0722 · Seoul → Global</p>
+    </section>
+
+    <!-- ================ the promise ================ -->
+    <section class="how" aria-label="미브의 약속">
+      <div class="how-rule" aria-hidden="true">The Promise</div>
+      <div class="how-rows">
+        <div class="how-row"><span class="no">i.</span><b>이유</b><span>왜 안 맞았는지, 이유부터 알게 돼요</span></div>
+        <div class="how-row"><span class="no">ii.</span><b>계산</b><span>'감'이라 불리던 것들이 데이터로 계산돼요</span></div>
+        <div class="how-row"><span class="no">iii.</span><b>사람</b><span>광고 없는 진짜 이야기들과 연결돼요</span></div>
+      </div>
+      <p class="ticket-line">No. MV-0729 · Seoul → Global</p>
     </section>
   </article>
 
-  <p class="wl-legal">신청 시 이메일이 수집됩니다 · <a href="/privacy">개인정보처리방침</a></p>
+  <p class="wl-legal">신청하시면 확인 메일과 출시 소식을 보내드려요<br><a href="/privacy">개인정보처리방침</a></p>
 
   <footer class="foot">
     <p>© 2026 미브 (Meve) · 대표 김시우 · <span style="white-space:nowrap">사업자등록번호 310-49-01303</span><br>
@@ -323,31 +441,56 @@ h1 em{font-style:normal;color:var(--rose-pop)}
 
 <script>
 (function(){
+  /* ---- config ---- */
+  const SHOW_FOUNDERS = false;           // flip to true on announcement day
+  const SITE = 'https://meve.beauty';
   const SB = 'https://auyqgcppbrhjthvkkwwb.supabase.co';
   const KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF1eXFnY3BwYnJoanRodmtrd3diIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzOTY4NTAsImV4cCI6MjA4ODk3Mjg1MH0.3VjInUooRD1TahI9tgFX3G6yE5A97yAJ2sZH2YMmXLY';
   const H = {'apikey':KEY,'Authorization':'Bearer '+KEY,'Content-Type':'application/json'};
   const $ = id => document.getElementById(id);
   const form = $('waitlist'), done = $('done'), err = $('wlError'), btn = $('wlBtn');
+  const store = { get(k){ try{return localStorage.getItem(k)}catch(e){return null} }, set(k,v){ try{localStorage.setItem(k,v)}catch(e){} } };
 
+  if(SHOW_FOUNDERS) $('founders').classList.add('on');
+
+  /* ---- referral source capture (?r=CODE, or set by /heesun redirect) ---- */
+  const qs = new URLSearchParams(location.search);
+  if(qs.get('r')) store.set('mv-ref-src', qs.get('r'));
+
+  /* ---- render success state ---- */
+  const myLink = () => {
+    const code = store.get('mv-wl-code');
+    return code ? SITE + '/?r=' + code : SITE;
+  };
   const showDone = pos => {
-    $('doneNo').textContent = '#' + pos;
+    $('doneNo').textContent = 'No.' + pos;
     form.style.display = 'none';
     done.classList.add('on');
   };
+  const saved = store.get('mv-wl-pos');
+  if(saved) showDone(saved);
 
-  try{
-    const saved = localStorage.getItem('mv-wl-pos');
-    if(saved) showDone(saved);
-  }catch(e){}
-
+  /* ---- live count (auto-appears past threshold) ---- */
   fetch(SB + '/rest/v1/rpc/waitlist_count', {method:'POST', headers:H, body:'{}'})
     .then(r => r.json())
     .then(n => {
       if(typeof n === 'number' && n >= 30){
-        $('wlCount').textContent = '지금 ' + n.toLocaleString() + '명이 기다리는 중';
+        $('wlCount').textContent = '지금 ' + n.toLocaleString() + '명이 함께 기다리는 중';
         $('wlCount').classList.add('on');
       }
     }).catch(() => {});
+
+  /* ---- join: v2 rpc (with referral) → graceful fallback to v1 ---- */
+  const joinV2 = (email, beta) =>
+    fetch(SB + '/rest/v1/rpc/join_waitlist_v2', {
+      method:'POST', headers:H,
+      body: JSON.stringify({p_email: email, p_beta: beta, p_ref: store.get('mv-ref-src')})
+    });
+  const joinV1 = (email, beta) =>
+    fetch(SB + '/rest/v1/rpc/join_waitlist', {
+      method:'POST', headers:H,
+      body: JSON.stringify({p_email: email, p_beta: beta})
+    });
 
   form.addEventListener('submit', async e => {
     e.preventDefault();
@@ -360,30 +503,37 @@ h1 em{font-style:normal;color:var(--rose-pop)}
     }
     btn.disabled = true; btn.textContent = '초대장 준비 중…';
     try{
-      const r = await fetch(SB + '/rest/v1/rpc/join_waitlist', {
-        method:'POST', headers:H,
-        body: JSON.stringify({p_email: email, p_beta: $('wlBeta').checked})
-      });
-      if(!r.ok) throw new Error('bad status');
-      const pos = await r.json();
-      try{ localStorage.setItem('mv-wl-pos', pos); }catch(e){}
+      let pos, code = null;
+      let r = await joinV2(email, $('wlBeta').checked);
+      if(r.ok){
+        const data = await r.json();
+        pos = data.position ?? data; code = data.ref_code ?? null;
+      }else{
+        r = await joinV1(email, $('wlBeta').checked);
+        if(!r.ok) throw new Error('bad status');
+        pos = await r.json();
+      }
+      store.set('mv-wl-pos', pos);
+      if(code) store.set('mv-wl-code', code);
       showDone(pos);
     }catch(ex){
       err.textContent = '잠시 후 다시 시도해 주세요.';
       err.classList.add('on');
-      btn.disabled = false; btn.textContent = '가장 먼저 만나보기';
+      btn.disabled = false; btn.textContent = '내 초대장 예약하기';
     }
   });
 
+  /* ---- share my invite link ---- */
   $('shareBtn').addEventListener('click', async () => {
-    const data = {title:'MEVE', text:'화장품, 더 이상 감에만 의존하지 않아도 된다면? — 7.22 출시', url:'https://meve.beauty'};
+    const url = myLink();
+    const data = {title:'MEVE', text:'아름다움은 정말, 감의 영역일까요? — 7.29 MEVE', url};
     if(navigator.share){
       try{ await navigator.share(data); return; }catch(e){}
     }
     try{
-      await navigator.clipboard.writeText('https://meve.beauty');
+      await navigator.clipboard.writeText(url);
       $('shareBtn').textContent = '복사 완료 ✦';
-      setTimeout(() => $('shareBtn').textContent = '링크 복사', 2200);
+      setTimeout(() => $('shareBtn').textContent = '내 초대 링크 공유하기', 2200);
     }catch(e){}
   });
 })();
