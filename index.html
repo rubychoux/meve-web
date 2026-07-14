@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://hangeul.pstatic.net" crossorigin>
 <link rel="preload" href="https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.woff2" as="font" type="font/woff2" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="stylesheet" href="https://hangeul.pstatic.net/hangeul_static/css/maru-buri.css">
 <style>
@@ -34,9 +34,9 @@
   --gold:#B08D57;
   --hairline:rgba(33,28,35,.14);
   --hairline-soft:rgba(33,28,35,.08);
-  --serif:'Cormorant Garamond',Georgia,serif;
+  --serif:'Bodoni Moda',Georgia,serif;
   --krd:'MaruBuri','Noto Serif KR',serif;
-  --sans:'Jost','Pretendard Variable',Pretendard,sans-serif;
+  --sans:'Pretendard Variable',Pretendard,-apple-system,sans-serif;
   --kr:'Pretendard Variable',Pretendard,-apple-system,BlinkMacSystemFont,sans-serif;
   --ease:cubic-bezier(.22,.6,.2,1);
 }
@@ -80,7 +80,7 @@ img{display:block;max-width:100%}
   color:var(--ink-mute);
 }
 .topbar span:last-child{color:var(--ink)}
-.mast .mark{margin:clamp(1.5rem,3.5vh,2rem) auto 0;width:clamp(132px,36vw,168px)}
+.mast .mark{margin:clamp(1.6rem,3.8vh,2.2rem) auto 0;width:clamp(158px,44vw,196px)}
 .strip{
   margin-top:clamp(1.5rem,3.5vh,2rem);
   padding:1rem 0 1.05rem;
@@ -184,7 +184,7 @@ img{display:block;max-width:100%}
 }
 h1{
   font-family:var(--krd);
-  font-weight:600;font-size:clamp(1.62rem,6.2vw,2.15rem);
+  font-weight:600;font-size:clamp(1.85rem,7vw,2.5rem);
   line-height:1.5;letter-spacing:-.02em;
   color:var(--ink);
 }
@@ -199,11 +199,15 @@ h1 em{font-style:normal;color:var(--pink-deep)}
 .pivot-band{
   position:relative;overflow:hidden;
   margin:clamp(2.8rem,6.5vh,3.8rem) calc(50% - 50vw) 0;
-  padding:clamp(2.8rem,7vh,3.8rem) clamp(1.4rem,6vw,2rem);
-  background:
-    radial-gradient(70% 130% at 25% 15%, rgba(239,184,200,.30), transparent 68%),
-    radial-gradient(55% 110% at 78% 85%, rgba(176,141,87,.13), transparent 70%);
+  padding:clamp(3.4rem,8vh,4.6rem) clamp(1.4rem,6vw,2rem);
+  background:url('/assets/prologue-poster.jpg') center 42%/cover no-repeat;
   text-align:center;
+}
+.pivot-band::before{
+  content:"";position:absolute;inset:0;
+  background:
+    linear-gradient(180deg, var(--cream) 0%, rgba(251,247,242,.06) 34%, rgba(251,247,242,.06) 62%, var(--cream) 100%),
+    rgba(251,247,242,.38);
 }
 .pivot-band .wm{
   position:absolute;left:50%;top:50%;width:min(340px,80vw);
@@ -233,7 +237,7 @@ h1 em{font-style:normal;color:var(--pink-deep)}
   font-weight:500;font-size:clamp(1.06rem,4vw,1.2rem);line-height:1.95;letter-spacing:-.01em;
   color:var(--ink);
 }
-.decl .mv{font-family:var(--sans);font-weight:500;letter-spacing:.07em}
+.decl .mv{font-family:var(--serif);font-weight:500;letter-spacing:.09em;font-size:1.06em}
 .decl em{
   font-style:normal;
   background:linear-gradient(transparent 62%, rgba(239,184,200,.55) 62%, rgba(239,184,200,.55) 94%, transparent 94%);
@@ -342,7 +346,7 @@ h1 em{font-style:normal;color:var(--pink-deep)}
 .ticket-title{
   margin-top:1.15rem;
   font-family:var(--serif);font-weight:600;font-style:italic;
-  font-size:1.5rem;letter-spacing:.02em;color:var(--ink);
+  font-size:1.26rem;letter-spacing:.02em;color:var(--ink);
 }
 .perk{
   display:grid;grid-template-columns:3rem 1fr;gap:.9rem;align-items:start;
