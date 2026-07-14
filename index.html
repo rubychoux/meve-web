@@ -216,8 +216,14 @@ h1 em{font-style:normal;color:var(--pink-deep)}
   display:flex;align-items:center;justify-content:center;gap:.9rem;
   font-weight:600;font-size:.92rem;letter-spacing:-.01em;color:var(--gold);
 }
-.wl-teaser::before,.wl-teaser::after{content:"";width:34px;height:1px;background:rgba(176,141,87,.4)}
+.wl-teaser::before,.wl-teaser::after{content:"";width:34px;height:1px;background:rgba(176,141,87,.4);flex:none}
+.wl-teaser span{line-height:1.7}
 .wl-teaser b{font-family:var(--serif);font-weight:600;font-size:1.1em;letter-spacing:.02em}
+.wl-teaser .mbr{display:none}
+@media(max-width:480px){
+  .wl-teaser::before,.wl-teaser::after{display:none}
+  .wl-teaser .mbr{display:inline}
+}
 .wl-row{display:flex;flex-direction:column;gap:.75rem}
 .wl input[type=email]{
   height:58px;border-radius:999px;padding-inline:1.6rem;text-align:center;
@@ -472,7 +478,7 @@ h1 em{font-style:normal;color:var(--pink-deep)}
   <section class="fade d2">
     <form class="wl" id="waitlist" novalidate>
       <p class="wl-count" id="wlCount"></p>
-      <p class="wl-teaser">지금 <b>No.100</b> 안에 들면, 프리미엄 3개월 무료</p>
+      <p class="wl-teaser"><span>지금 <b>No.100</b> 안에 들면,<br class="mbr"> 프리미엄 3개월 무료</span></p>
       <div class="wl-row">
         <input type="email" id="wlEmail" name="email" inputmode="email" autocomplete="email" placeholder="이메일 주소" required>
         <button type="submit" id="wlBtn"><span>내 티켓 번호 받기</span><span class="ar">→</span></button>
@@ -555,7 +561,7 @@ h1 em{font-style:normal;color:var(--pink-deep)}
 
   <footer class="foot fade d3">
     <p>© 2026 Meve · 대표 김시우 · <span style="white-space:nowrap">사업자등록번호 310-49-01303</span><br>
-    <a href="mailto:ruby@meve.beauty">ruby@meve.beauty</a> · <a href="/privacy">Privacy</a> · <a href="/partners">Partners</a></p>
+    <a href="mailto:hello@meve.beauty">hello@meve.beauty</a> · <a href="/privacy">Privacy</a> · <a href="/partners">Partners</a></p>
   </footer>
 </main>
 
