@@ -9,22 +9,23 @@
 <meta property="og:description" content="화장품, 더 이상 감에만 의존하지 않아도 된다면? 7월 22일, 한정된 인원에게 순차적으로 초대장을 보내드립니다.">
 <meta property="og:url" content="https://meve.beauty">
 <meta property="og:image" content="https://meve.beauty/assets/logo-lockup.png">
-<meta name="theme-color" content="#FBF4F5">
+<meta name="theme-color" content="#F4E7E6">
 <link rel="icon" type="image/png" href="/assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400;1,6..96,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
 /* ============================================================
-   MEVE — launch landing · one job: the waitlist
+   MEVE — launch landing · the page IS the invitation
    ============================================================ */
 :root{
   --ink:#221721;
+  --paper:#FDFBF7;
   --plum:#5C4450;
   --rose:#B8506B;
   --rose-deep:#8E3A50;
-  --rose-pop:#E0557F;
+  --rose-pop:#D9527A;
   --muted:#95848D;
   --serif:'Bodoni Moda',serif;
   --sans:'Jost','Pretendard Variable',Pretendard,sans-serif;
@@ -34,231 +35,283 @@
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
-  background:
-    radial-gradient(85% 55% at 12% 4%, rgba(248,199,219,.55), transparent 60%),
-    radial-gradient(75% 50% at 90% 14%, rgba(216,211,243,.42), transparent 62%),
-    radial-gradient(70% 45% at 18% 62%, rgba(250,214,206,.38), transparent 60%),
-    radial-gradient(85% 55% at 55% 108%, rgba(247,205,214,.5), transparent 64%),
-    #FBF4F5;
+  min-height:100svh;
+  background:#F4E7E6;
   color:var(--ink);
   font-family:var(--kr);line-height:1.7;letter-spacing:-.01em;
   -webkit-font-smoothing:antialiased;
   word-break:keep-all;
 }
+/* the sky — cloud photograph, softened to a porcelain haze */
+.sky{
+  position:fixed;inset:0;z-index:-1;
+  background:url('/assets/prologue-poster.jpg') center 38%/cover no-repeat #F4E7E6;
+}
+.sky::after{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(120% 90% at 50% 0%, rgba(251,244,245,.42), transparent 55%),
+    linear-gradient(180deg, rgba(251,244,245,.25), rgba(244,225,228,.42));
+}
 a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%}
-::placeholder{color:#A99AA2}
+::placeholder{color:#B4A6AC}
 
 .page{
   min-height:100svh;
-  width:min(560px,100%);
+  width:min(620px,100%);
   margin-inline:auto;
-  padding:calc(clamp(2.6rem,7vh,4.2rem) + env(safe-area-inset-top)) clamp(1.4rem,5.5vw,2rem) calc(2rem + env(safe-area-inset-bottom));
-  display:flex;flex-direction:column;align-items:center;text-align:center;
+  padding:calc(clamp(3.4rem,8vh,5.2rem) + env(safe-area-inset-top)) clamp(1.1rem,4.5vw,2rem) calc(1.8rem + env(safe-area-inset-bottom));
+  display:flex;flex-direction:column;align-items:center;
 }
 
-/* ---------- masthead ---------- */
-.mast img{width:min(120px,32vw);margin-inline:auto}
+/* ---------- the invitation ---------- */
+.card{
+  position:relative;width:100%;
+  background:
+    radial-gradient(140% 90% at 50% -10%, rgba(244,205,217,.16), transparent 55%),
+    var(--paper);
+  border-radius:10px;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.9) inset,
+    0 0 0 1px rgba(34,23,33,.045),
+    0 30px 70px -30px rgba(120,60,85,.4),
+    0 10px 26px -14px rgba(120,60,85,.22);
+  padding:clamp(3.4rem,9vw,4.6rem) clamp(1.5rem,6vw,3.4rem) clamp(2.2rem,6vw,3rem);
+  text-align:center;
+}
+/* deckled inner rule — the letterpress frame */
+.card::before{
+  content:"";position:absolute;inset:11px;border-radius:6px;pointer-events:none;
+  border:1px solid rgba(184,80,107,.14);
+}
+/* the wax seal, pressed onto the card's top edge */
 .seal{
-  width:min(108px,26vw);margin-top:clamp(1.8rem,4.5vh,2.8rem);
-  filter:drop-shadow(0 14px 26px rgba(148,90,116,.28));
-  animation:sealFloat 6.5s ease-in-out infinite;
+  position:absolute;top:0;left:50%;
+  width:clamp(88px,22vw,106px);
+  transform:translate(-50%,-52%) rotate(-4deg);
+  filter:drop-shadow(0 10px 18px rgba(120,60,85,.35));
+  animation:sealIn 1s var(--ease) .2s both;
 }
-@keyframes sealFloat{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-7px) rotate(2deg)}}
-.pill{
-  margin-top:clamp(1.6rem,4vh,2.4rem);
-  font-family:var(--sans);font-size:.6rem;font-weight:500;letter-spacing:.3em;text-transform:uppercase;
-  color:var(--rose-deep);
-  padding:.44rem 1rem .44rem 1.3rem;border-radius:100px;
-  background:rgba(244,178,199,.25);
-  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
-}
-.pill i{font-style:normal;color:var(--rose-pop)}
+@keyframes sealIn{from{opacity:0;transform:translate(-50%,-64%) rotate(-9deg) scale(.92)}to{opacity:1;transform:translate(-50%,-52%) rotate(-4deg)}}
 
-/* ---------- the ask ---------- */
-h1{
-  margin-top:clamp(1.5rem,4vh,2.2rem);
-  font-weight:600;font-size:clamp(1.62rem,6.4vw,2.3rem);line-height:1.32;letter-spacing:-.03em;color:#2B1D27;
+.eyebrow{
+  font-family:var(--sans);font-size:.58rem;font-weight:500;letter-spacing:.42em;text-transform:uppercase;
+  color:#A88898;text-indent:.42em;
 }
-h1 small{display:block;font-weight:300;font-size:.62em;color:var(--plum);letter-spacing:-.01em;margin-bottom:.3rem}
+.mast{margin-top:1.3rem}
+.mast img{width:min(148px,40vw);margin-inline:auto}
+.rsvp{
+  margin-top:1.35rem;display:inline-flex;align-items:baseline;gap:.55rem;
+  font-family:var(--serif);font-size:.78rem;letter-spacing:.14em;color:var(--rose-deep);
+}
+.rsvp i{font-style:italic;font-weight:500}
+.rsvp b{font-weight:500;letter-spacing:.2em}
+
+.rule{
+  margin:clamp(1.6rem,4vh,2.2rem) auto 0;
+  display:flex;align-items:center;gap:.9rem;width:min(300px,72%);
+  color:#C7A76C;font-size:.6rem;
+}
+.rule::before,.rule::after{content:"";flex:1;height:1px;background:rgba(34,23,33,.1)}
+
+h1{
+  margin-top:clamp(1.5rem,3.8vh,2rem);
+  font-weight:650;font-size:clamp(1.56rem,6vw,2.14rem);line-height:1.36;letter-spacing:-.035em;color:#2B1D27;
+}
+h1 small{
+  display:block;margin-bottom:.55rem;
+  font-family:var(--serif);font-weight:400;font-style:italic;
+  font-size:.5em;letter-spacing:.08em;color:var(--rose);
+}
+h1 em{font-style:normal;color:var(--rose-pop)}
 .pain{
-  margin-top:clamp(1.3rem,3.4vh,1.9rem);
-  font-weight:300;font-size:clamp(.94rem,3.6vw,1.04rem);line-height:1.85;color:#75636D;
+  margin-top:clamp(1.2rem,3vh,1.6rem);
+  font-weight:300;font-size:clamp(.9rem,3.4vw,.99rem);line-height:1.92;color:#7A6870;
 }
 .value{
-  margin-top:clamp(1.2rem,3vh,1.7rem);
-  font-weight:400;font-size:clamp(1rem,3.9vw,1.12rem);line-height:1.85;color:var(--plum);
+  margin-top:clamp(1.1rem,2.8vh,1.5rem);
+  font-weight:430;font-size:clamp(.97rem,3.7vw,1.08rem);line-height:1.9;color:var(--plum);
 }
-.value b{font-weight:600;color:var(--rose-deep)}
-.value .mv{font-family:var(--serif);font-weight:500;letter-spacing:.04em}
+.value b{font-weight:650;color:var(--rose-deep)}
+.value .mv{font-family:var(--serif);font-weight:500;letter-spacing:.05em;font-size:1.04em}
 
 /* ---------- form ---------- */
-.wl{width:100%;max-width:430px;margin-top:clamp(1.9rem,4.5vh,2.6rem)}
-.wl-row{display:flex;flex-direction:column;gap:.6rem}
+.wl{width:100%;max-width:400px;margin:clamp(1.8rem,4.2vh,2.4rem) auto 0}
+.wl-row{display:flex;flex-direction:column;gap:.65rem}
 .wl input[type=email]{
-  height:58px;border:0;border-radius:16px;padding-inline:1.35rem;
-  font-family:var(--kr);font-size:1rem;color:var(--ink);
-  background:rgba(255,255,255,.66);
-  -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
-  box-shadow:0 8px 26px -16px rgba(148,90,116,.25);
-  outline:none;transition:box-shadow .3s var(--ease),background .3s;
+  height:56px;border-radius:4px;padding-inline:1.2rem;text-align:center;
+  font-family:var(--kr);font-size:.98rem;color:var(--ink);
+  background:rgba(255,255,255,.65);
+  border:1px solid rgba(34,23,33,.14);
+  outline:none;transition:border-color .3s,box-shadow .3s,background .3s;
 }
-.wl input[type=email]:focus{background:rgba(255,255,255,.85);box-shadow:0 0 0 3px rgba(224,85,127,.18),0 8px 26px -16px rgba(148,90,116,.3)}
+.wl input[type=email]:focus{
+  background:#fff;border-color:rgba(184,80,107,.5);
+  box-shadow:0 0 0 3px rgba(217,82,122,.12);
+}
 .wl button{
-  height:58px;border:0;border-radius:16px;cursor:pointer;
-  font-family:var(--kr);font-size:1rem;font-weight:700;letter-spacing:-.01em;color:#7C3450;
-  background:linear-gradient(135deg,#FBDDE7 0%,#F5C3D2 100%);
-  box-shadow:0 14px 34px -14px rgba(214,130,160,.55);
+  height:56px;border:0;border-radius:4px;cursor:pointer;
+  font-family:var(--kr);font-size:.95rem;font-weight:700;letter-spacing:.02em;color:#FDFBF7;
+  background:linear-gradient(160deg,#C25C7E 0%,#A94066 55%,#8E3A50 100%);
+  box-shadow:0 16px 30px -14px rgba(142,58,80,.55);
   transition:transform .3s var(--ease),box-shadow .3s var(--ease),filter .3s;
 }
-.wl button:hover{transform:translateY(-2px);box-shadow:0 18px 40px -14px rgba(214,130,160,.65)}
-.wl button:active{transform:scale(.985)}
-.wl button:disabled{filter:saturate(.4) opacity(.7);cursor:wait;transform:none}
+.wl button:hover{transform:translateY(-1px);box-shadow:0 20px 36px -14px rgba(142,58,80,.65);filter:brightness(1.05)}
+.wl button:active{transform:scale(.99)}
+.wl button:disabled{filter:saturate(.5) opacity(.75);cursor:wait;transform:none}
 .beta{
   display:flex;align-items:center;justify-content:center;gap:.55rem;
-  margin-top:1rem;cursor:pointer;user-select:none;
-  font-size:.82rem;font-weight:300;color:#75636D;
+  margin-top:1.05rem;cursor:pointer;user-select:none;
+  font-size:.8rem;font-weight:350;color:#7A6870;
 }
 .beta input{
-  appearance:none;width:17px;height:17px;flex:none;border-radius:5.5px;cursor:pointer;
-  background:rgba(255,255,255,.75);
-  box-shadow:inset 0 0 0 1.5px rgba(184,80,107,.4);
-  display:grid;place-items:center;transition:background .25s,box-shadow .25s;
+  appearance:none;width:16px;height:16px;flex:none;border-radius:4px;cursor:pointer;
+  background:#fff;
+  box-shadow:inset 0 0 0 1px rgba(34,23,33,.22);
+  display:grid;place-items:center;transition:box-shadow .25s;
 }
 .beta input::after{
-  content:"";width:9px;height:9px;border-radius:3px;transform:scale(0);
+  content:"";width:8px;height:8px;border-radius:2.5px;transform:scale(0);
   background:var(--rose-pop);transition:transform .2s var(--ease);
 }
-.beta input:checked{box-shadow:inset 0 0 0 1.5px var(--rose-pop)}
+.beta input:checked{box-shadow:inset 0 0 0 1px var(--rose-pop)}
 .beta input:checked::after{transform:scale(1)}
 .wl-note{
-  margin-top:1.15rem;
-  font-size:.8rem;font-weight:300;line-height:1.8;color:#8A7C82;
+  margin-top:1.2rem;
+  font-size:.79rem;font-weight:300;line-height:1.85;color:#8A7C82;
 }
-.wl-note b{font-weight:500;color:var(--rose-deep)}
+.wl-note b{font-weight:550;color:var(--rose-deep)}
 .wl-count{
-  margin-top:.5rem;display:none;
-  font-family:var(--sans);font-size:.63rem;letter-spacing:.22em;text-transform:uppercase;color:#A88898;
+  margin-top:.45rem;display:none;
+  font-family:var(--sans);font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:#A88898;
 }
 .wl-count.on{display:block}
-.wl-legal{margin-top:1.4rem;font-size:.68rem;font-weight:300;color:#A99AA2}
-.wl-legal a{color:#8A7C82;text-decoration:underline;text-underline-offset:3px}
 .wl-error{display:none;margin-top:.8rem;font-size:.82rem;color:#C4485C}
 .wl-error.on{display:block}
 
 /* ---------- success ---------- */
-.done{display:none;width:100%;max-width:430px;margin-top:clamp(1.9rem,4.5vh,2.6rem)}
+.done{display:none;width:100%;max-width:400px;margin:clamp(1.8rem,4.2vh,2.4rem) auto 0}
 .done.on{display:block}
-.done .star{color:#C7A76C;font-size:.72rem;letter-spacing:.5em;padding-left:.5em}
-.done h2{
-  margin-top:1.1rem;font-weight:300;font-size:1.28rem;letter-spacing:-.02em;color:var(--plum);
-}
-.done h2 b{font-family:var(--serif);font-weight:500;font-size:1.5em;color:var(--rose-deep);letter-spacing:0}
-.done p{margin-top:.9rem;font-size:.9rem;font-weight:300;line-height:1.85;color:#75636D}
-.done-btns{display:flex;gap:.6rem;margin-top:1.6rem}
+.done h2{font-weight:300;font-size:1.22rem;letter-spacing:-.02em;color:var(--plum)}
+.done h2 b{font-family:var(--serif);font-weight:500;font-size:1.65em;color:var(--rose-deep);letter-spacing:0}
+.done p{margin-top:.95rem;font-size:.88rem;font-weight:300;line-height:1.9;color:#7A6870}
+.done-btns{display:flex;gap:.6rem;margin-top:1.5rem}
 .done-btns a,.done-btns button{
-  flex:1;height:52px;border:0;border-radius:14px;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;gap:.45rem;
-  font-family:var(--kr);font-size:.88rem;font-weight:600;color:#7C3450;
-  background:rgba(244,178,199,.3);
-  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
-  transition:background .3s,transform .3s var(--ease);
+  flex:1;height:50px;border-radius:4px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--kr);font-size:.86rem;font-weight:600;color:var(--rose-deep);
+  background:transparent;border:1px solid rgba(142,58,80,.35);
+  transition:background .3s,border-color .3s,transform .3s var(--ease);
 }
-.done-btns a:hover,.done-btns button:hover{background:rgba(244,178,199,.45);transform:translateY(-1px)}
+.done-btns a:hover,.done-btns button:hover{background:rgba(244,205,217,.25);border-color:rgba(142,58,80,.6);transform:translateY(-1px)}
 
-/* ---------- what meve does ---------- */
-.how{width:100%;max-width:430px;margin-top:clamp(3.2rem,8vh,4.6rem)}
-.how-cap{font-family:var(--sans);font-size:.6rem;letter-spacing:.34em;text-transform:uppercase;color:#A88898}
-.how-row{
-  display:flex;align-items:baseline;gap:1rem;text-align:left;
-  padding:1.05rem .2rem;border-bottom:1px solid rgba(148,90,116,.12);
+/* ---------- card colophon: what's inside ---------- */
+.how{margin-top:clamp(2.2rem,5vh,3rem)}
+.how-rule{display:flex;align-items:center;gap:.9rem;margin-inline:auto;width:min(300px,72%);color:#C7A76C;font-size:.6rem}
+.how-rule::before,.how-rule::after{content:"";flex:1;height:1px;background:rgba(34,23,33,.1)}
+.how-rows{margin-top:1.4rem;display:grid;gap:.85rem}
+.how-row{display:flex;align-items:baseline;justify-content:center;gap:.7rem;font-size:.84rem}
+.how-row .no{font-family:var(--serif);font-style:italic;font-size:.8rem;color:#C29AAB}
+.how-row b{font-weight:650;color:#3E2C37;letter-spacing:.02em}
+.how-row span{font-weight:300;color:#8A7C82}
+.ticket{
+  margin-top:clamp(2rem,4.5vh,2.6rem);
+  font-family:var(--sans);font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:#B9AAB1;
 }
-.how-row:first-of-type{margin-top:1rem;border-top:1px solid rgba(148,90,116,.12)}
-.how-row .no{font-family:var(--serif);font-style:italic;font-size:.82rem;color:#C29AAB;width:1.4rem;flex:none}
-.how-row b{font-weight:600;font-size:.92rem;color:#3E2C37;flex:none}
-.how-row span{font-weight:300;font-size:.84rem;color:#8A7C82;margin-left:auto;text-align:right}
 
-/* ---------- foot ---------- */
-.foot{margin-top:auto;padding-top:clamp(3rem,7vh,4rem);text-align:center}
-.foot .star{color:#C7A76C;font-size:.56rem;letter-spacing:.5em;padding-left:.5em}
+/* ---------- legal / foot (on the sky, below the card) ---------- */
+.wl-legal{margin-top:1.5rem;font-size:.68rem;font-weight:300;color:#9A8890;text-align:center}
+.wl-legal a{color:#7E6C75;text-decoration:underline;text-underline-offset:3px}
+.foot{margin-top:auto;padding-top:2.4rem;text-align:center}
 .foot p{
-  margin-top:.8rem;
-  font-family:var(--sans);font-size:.57rem;letter-spacing:.18em;text-transform:uppercase;color:#A796A0;line-height:2.1;
+  font-family:var(--sans);font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:#8D7B84;line-height:2.1;
 }
 .foot a{color:var(--rose-deep)}
 
 /* ---------- entrance ---------- */
-.up{opacity:0;transform:translateY(12px);animation:up .85s var(--ease) forwards}
-@keyframes up{to{opacity:1;transform:none}}
-.d1{animation-delay:.06s}.d2{animation-delay:.12s}.d3{animation-delay:.18s}
-.d4{animation-delay:.24s}.d5{animation-delay:.3s}.d6{animation-delay:.38s}
-.d7{animation-delay:.46s}.d8{animation-delay:.54s}
+.card{animation:cardIn 1s var(--ease) both}
+@keyframes cardIn{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+.foot,.wl-legal{animation:fadeIn 1.2s ease .5s both}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @media(prefers-reduced-motion:reduce){
-  .up{opacity:1;transform:none;animation:none}
-  .seal{animation:none}
+  .card,.seal,.foot,.wl-legal{animation:none}
+}
+@media(max-width:420px){
+  .done-btns{flex-direction:column}
 }
 </style>
 </head>
 <body>
+<div class="sky" aria-hidden="true"></div>
 
 <main class="page">
-  <header class="mast up">
-    <img src="/assets/wordmark2.png" alt="MEVE">
-  </header>
 
-  <img class="seal up d1" src="/assets/seal.webp" alt="" aria-hidden="true">
+  <article class="card">
+    <img class="seal" src="/assets/seal.webp" alt="" aria-hidden="true">
 
-  <p class="pill up d2">7.22 <i>·</i> App Launch</p>
+    <p class="eyebrow">Maison MEVE · Beauty-Tech House</p>
 
-  <h1 class="up d3"><small>화장품,</small>더 이상 감에만 의존하지<br>않아도 된다면?</h1>
+    <header class="mast">
+      <img src="/assets/wordmark2.png" alt="MEVE">
+    </header>
 
-  <p class="pain up d4">
-    광고를 보고 구매했다가 실망했던 적, 한 번쯤은 있으셨을 거예요.<br>
-    우리는 왜 아직도 수백 개의 리뷰와 바이럴 속에서,<br>
-    나에게 맞는 화장품을 직접 찾아야 할까요?
-  </p>
+    <p class="rsvp"><i>R.S.V.P</i> — <b>7.22 APP LAUNCH</b></p>
 
-  <p class="value up d5">
-    <span class="mv">MEVE</span>는 당신의 피부와 얼굴, 뷰티 아이덴티티를 <b>데이터</b>로 이해해
-    유행이 아닌, 당신에게 맞는 아름다움을 제안합니다.
-  </p>
+    <div class="rule" aria-hidden="true">✦</div>
 
-  <!-- ================ waitlist ================ -->
-  <form class="wl up d6" id="waitlist" novalidate>
-    <div class="wl-row">
-      <input type="email" id="wlEmail" name="email" inputmode="email" autocomplete="email" placeholder="이메일 주소" required>
-      <button type="submit" id="wlBtn">가장 먼저 만나보기</button>
-    </div>
-    <label class="beta">
-      <input type="checkbox" id="wlBeta">
-      출시 전 베타 테스트 참여에도 관심 있어요
-    </label>
-    <p class="wl-error" id="wlError"></p>
-    <p class="wl-note"><b>7월 22일</b>부터, 한정된 인원에게 순차적으로 초대장을 보내드립니다.</p>
-    <p class="wl-count" id="wlCount"></p>
-    <p class="wl-legal">신청 시 이메일이 수집됩니다 · <a href="/privacy">개인정보처리방침</a></p>
-  </form>
+    <h1><small>Une question,</small>화장품, 더 이상 <em>감</em>에만<br>의존하지 않아도 된다면?</h1>
 
-  <section class="done" id="done" aria-live="polite">
-    <span class="star" aria-hidden="true">✦</span>
-    <h2>당신은 <b id="doneNo">#—</b>번째예요</h2>
-    <p>7월 22일부터 순서대로 초대장이 도착합니다.<br>함께 기다릴 친구에게 미브를 살짝 알려주세요.</p>
-    <div class="done-btns">
-      <button type="button" id="shareBtn">링크 복사</button>
-      <a id="igBtn" href="https://instagram.com/maison.meve" target="_blank" rel="noopener">인스타그램 팔로우</a>
-    </div>
-  </section>
+    <p class="pain">
+      광고를 보고 구매했다가 실망했던 적, 한 번쯤은 있으셨을 거예요.<br>
+      우리는 왜 아직도 수백 개의 리뷰와 바이럴 속에서,<br>
+      나에게 맞는 화장품을 직접 찾아야 할까요?
+    </p>
 
-  <!-- ================ what meve does ================ -->
-  <section class="how up d7" aria-label="미브 소개">
-    <p class="how-cap">Inside MEVE</p>
-    <div class="how-row"><span class="no">i.</span><b>스캔</b><span>AI 페이스 스캔으로 피부를 정밀 진단</span></div>
-    <div class="how-row"><span class="no">ii.</span><b>처방</b><span>나에게 맞는 성분과 30일 루틴 설계</span></div>
-    <div class="how-row"><span class="no">iii.</span><b>추적</b><span>매일의 변화를 데이터로 증명</span></div>
-  </section>
+    <p class="value">
+      <span class="mv">MEVE</span>는 당신의 피부와 얼굴, 뷰티 아이덴티티를 <b>데이터</b>로 이해해
+      유행이 아닌, 당신에게 맞는 아름다움을 제안합니다.
+    </p>
 
-  <footer class="foot up d8">
-    <span class="star" aria-hidden="true">✦</span>
+    <!-- ================ waitlist ================ -->
+    <form class="wl" id="waitlist" novalidate>
+      <div class="wl-row">
+        <input type="email" id="wlEmail" name="email" inputmode="email" autocomplete="email" placeholder="이메일 주소" required>
+        <button type="submit" id="wlBtn">가장 먼저 만나보기</button>
+      </div>
+      <label class="beta">
+        <input type="checkbox" id="wlBeta">
+        출시 전 베타 테스트 참여에도 관심 있어요
+      </label>
+      <p class="wl-error" id="wlError"></p>
+      <p class="wl-note"><b>7월 22일</b>부터, 한정된 인원에게<br>순차적으로 초대장을 보내드립니다.</p>
+      <p class="wl-count" id="wlCount"></p>
+    </form>
+
+    <section class="done" id="done" aria-live="polite">
+      <h2>당신은 <b id="doneNo">#—</b>번째예요</h2>
+      <p>7월 22일부터 순서대로 초대장이 도착합니다.<br>함께 기다릴 친구에게 미브를 살짝 알려주세요.</p>
+      <div class="done-btns">
+        <button type="button" id="shareBtn">링크 복사</button>
+        <a id="igBtn" href="https://instagram.com/maison.meve" target="_blank" rel="noopener">인스타그램 팔로우</a>
+      </div>
+    </section>
+
+    <!-- ================ inside ================ -->
+    <section class="how" aria-label="미브 소개">
+      <div class="how-rule" aria-hidden="true">Inside MEVE</div>
+      <div class="how-rows">
+        <div class="how-row"><span class="no">i.</span><b>스캔</b><span>AI 페이스 스캔으로 피부를 정밀 진단</span></div>
+        <div class="how-row"><span class="no">ii.</span><b>처방</b><span>나에게 맞는 성분과 30일 루틴 설계</span></div>
+        <div class="how-row"><span class="no">iii.</span><b>추적</b><span>매일의 변화를 데이터로 증명</span></div>
+      </div>
+      <p class="ticket">No. MV-0722 · Seoul → Global</p>
+    </section>
+  </article>
+
+  <p class="wl-legal">신청 시 이메일이 수집됩니다 · <a href="/privacy">개인정보처리방침</a></p>
+
+  <footer class="foot">
     <p>© 2026 미브 (Meve) · 대표 김시우 · <span style="white-space:nowrap">사업자등록번호 310-49-01303</span><br>
     <a href="mailto:ruby@meve.beauty">ruby@meve.beauty</a> · <a href="/privacy">개인정보처리방침</a> · <a href="/partners">Partners</a></p>
   </footer>
@@ -278,13 +331,11 @@ h1 small{display:block;font-weight:300;font-size:.62em;color:var(--plum);letter-
     done.classList.add('on');
   };
 
-  /* returning visitor — keep their number on screen */
   try{
     const saved = localStorage.getItem('mv-wl-pos');
     if(saved) showDone(saved);
   }catch(e){}
 
-  /* live counter — only once it's a number worth showing */
   fetch(SB + '/rest/v1/rpc/waitlist_count', {method:'POST', headers:H, body:'{}'})
     .then(r => r.json())
     .then(n => {
@@ -320,7 +371,6 @@ h1 small{display:block;font-weight:300;font-size:.62em;color:var(--plum);letter-
     }
   });
 
-  /* one-tap share */
   $('shareBtn').addEventListener('click', async () => {
     const data = {title:'MEVE', text:'화장품, 더 이상 감에만 의존하지 않아도 된다면? — 7.22 출시', url:'https://meve.beauty'};
     if(navigator.share){
