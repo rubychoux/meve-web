@@ -133,8 +133,31 @@ img{display:block;max-width:100%}
   font-size:1rem;letter-spacing:.1em;
   color:var(--gold);
 }
+/* signature: scan frame around the hero question */
+.scan{
+  position:relative;
+  margin-top:1.3rem;
+  padding:1.25rem 1.15rem 1.35rem;
+}
+.scan .c{position:absolute;width:16px;height:16px;border:0 solid rgba(33,28,35,.6)}
+.scan .c1{top:0;left:0;border-top-width:1.5px;border-left-width:1.5px}
+.scan .c2{top:0;right:0;border-top-width:1.5px;border-right-width:1.5px}
+.scan .c3{bottom:0;left:0;border-bottom-width:1.5px;border-left-width:1.5px}
+.scan .c4{bottom:0;right:0;border-bottom-width:1.5px;border-right-width:1.5px}
+.scanline{
+  position:absolute;left:8px;right:8px;top:10%;height:1px;opacity:0;
+  background:linear-gradient(90deg,transparent,rgba(196,135,156,.95),transparent);
+}
+@media(prefers-reduced-motion:no-preference){
+  .scanline{animation:scan 2s var(--ease) .9s 1 forwards}
+  @keyframes scan{
+    0%{opacity:0;top:10%}
+    12%{opacity:1}
+    88%{opacity:1}
+    100%{top:90%;opacity:0}
+  }
+}
 h1{
-  margin-top:1.2rem;
   font-family:var(--krd);
   font-weight:600;font-size:clamp(1.62rem,6.2vw,2.15rem);
   line-height:1.5;letter-spacing:-.02em;
@@ -432,7 +455,11 @@ h1 em{font-style:normal;color:var(--pink-deep)}
   <!-- narrative -->
   <section class="fade d1">
     <p class="q">Une question,</p>
-    <h1>내 피부엔 뭐가 맞는지,<br>내 얼굴엔 뭐가 <em>어울리는지</em></h1>
+    <div class="scan">
+      <i class="c c1"></i><i class="c c2"></i><i class="c c3"></i><i class="c c4"></i>
+      <div class="scanline" aria-hidden="true"></div>
+      <h1>내 피부엔 뭐가 맞는지,<br>내 얼굴엔 뭐가 <em>어울리는지</em></h1>
+    </div>
 
     <p class="lead">
       확실한 답을 모른 채, 우리는 오늘도 수백 개의 리뷰 속에서
@@ -590,9 +617,9 @@ h1 em{font-style:normal;color:var(--pink-deep)}
       $('cd').classList.add('live');
       return;
     }
-    const d = Math.ceil(left / 86400000);
+    const d = Math.floor(left / 86400000);
     const rem = left % 86400000;
-    $('cdD').textContent = 'D–' + d;
+    $('cdD').textContent = d > 0 ? 'D–' + d : 'D-Day';
     $('cdT').textContent = p2(Math.floor(rem/3600000)) + 'h ' + p2(Math.floor(rem%3600000/60000)) + 'm';
   };
   tick();
