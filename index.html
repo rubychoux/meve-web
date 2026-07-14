@@ -92,30 +92,55 @@ img{display:block;max-width:100%}
 .strip::after{
   content:"";position:absolute;left:0;right:0;bottom:-4px;height:1px;background:var(--hairline-soft);
 }
+.strip{flex-direction:column;align-items:center;gap:1rem}
 .st-label{
+  display:flex;align-items:center;justify-content:center;gap:.65rem;
   font-family:var(--sans);font-weight:400;
-  font-size:.62rem;letter-spacing:.26em;text-indent:.26em;text-transform:uppercase;color:var(--ink-mute);
+  font-size:.62rem;letter-spacing:.28em;text-indent:.28em;text-transform:uppercase;color:var(--ink-mute);
 }
-.st-sep{width:4px;height:4px;border-radius:50%;background:var(--pink);align-self:center;flex:none}
-.st-date{
-  font-family:var(--serif);font-weight:600;
-  font-size:1.3rem;letter-spacing:.04em;color:var(--ink);
+.st-label b{
+  font-family:var(--serif);font-weight:600;font-size:1.25rem;letter-spacing:.04em;color:var(--ink);
   font-variant-numeric:tabular-nums;
 }
-.st-d{
-  font-family:var(--serif);font-weight:600;
-  font-size:1.3rem;letter-spacing:.02em;color:var(--pink-deep);
-  font-variant-numeric:tabular-nums;
+.st-dot{width:4px;height:4px;border-radius:50%;background:var(--pink);flex:none}
+
+/* split-flap countdown */
+.flap{display:flex;align-items:flex-start;justify-content:center;gap:.5rem}
+.cell{display:flex;flex-direction:column;align-items:center;gap:.45rem;perspective:320px}
+.num{
+  position:relative;min-width:58px;padding:.65rem .5rem .75rem;
+  font-family:var(--serif);font-weight:600;font-size:1.9rem;line-height:1;color:var(--ink);
+  font-variant-numeric:tabular-nums;text-align:center;
+  background:linear-gradient(180deg,#FFFEFB 0%,#FFFDF9 49.8%,#F7F0E8 50.2%,#F6EEE5 100%);
+  border:1px solid rgba(33,28,35,.22);border-radius:9px;
+  box-shadow:0 1px 0 rgba(255,255,255,.85) inset, 0 8px 16px -10px rgba(33,28,35,.3);
 }
-.st-t{
-  font-family:var(--serif);font-weight:500;
-  font-size:.95rem;letter-spacing:.06em;color:var(--ink-mute);
-  font-variant-numeric:tabular-nums;
+.num::after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(33,28,35,.16)}
+.num::before{
+  content:"";position:absolute;top:50%;left:-2px;transform:translateY(-50%);
+  width:3px;height:7px;border-radius:2px;background:rgba(33,28,35,.28);
+  box-shadow:59px 0 0 rgba(33,28,35,.28);
 }
-.strip.live .st-d{color:var(--gold)}
+.num.tick{animation:flapTick .32s var(--ease)}
+@keyframes flapTick{
+  0%{transform:rotateX(-64deg)}
+  100%{transform:rotateX(0)}
+}
+.lab{
+  font-family:var(--sans);font-weight:400;
+  font-size:.52rem;letter-spacing:.22em;text-indent:.22em;text-transform:uppercase;color:var(--ink-mute);
+}
+.fsep{
+  font-family:var(--serif);font-weight:600;font-size:1.4rem;color:var(--gold);
+  padding-top:.75rem;
+}
+.strip.live .num{color:var(--pink-deep)}
 @media(max-width:420px){
-  .strip{gap:.7rem}
-  .st-label{display:none}
+  .flap{gap:.4rem}
+  .fsep{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+  .num.tick{animation:none}
 }
 
 /* double rule, print style */
@@ -443,12 +468,16 @@ h1 em{font-style:normal;color:var(--pink-deep)}
     </div>
     <img class="mark" src="/assets/wordmark2.png" alt="MEVE">
     <div class="strip" id="cd" aria-label="앱 런칭까지 남은 시간">
-      <span class="st-label">App Launch</span>
-      <span class="st-sep" aria-hidden="true"></span>
-      <span class="st-date">7.29</span>
-      <span class="st-sep" aria-hidden="true"></span>
-      <span class="st-d" id="cdD">D–14</span>
-      <span class="st-t" id="cdT">00 : 00 : 00</span>
+      <p class="st-label">App Launch <i class="st-dot"></i> <b>7.29</b></p>
+      <div class="flap" id="flap">
+        <div class="cell"><span class="num" id="fD">14</span><span class="lab">Days</span></div>
+        <span class="fsep">:</span>
+        <div class="cell"><span class="num" id="fH">00</span><span class="lab">Hours</span></div>
+        <span class="fsep">:</span>
+        <div class="cell"><span class="num" id="fM">00</span><span class="lab">Min</span></div>
+        <span class="fsep">:</span>
+        <div class="cell"><span class="num" id="fS">00</span><span class="lab">Sec</span></div>
+      </div>
     </div>
   </header>
 
@@ -606,24 +635,33 @@ h1 em{font-style:normal;color:var(--pink-deep)}
 
   if(SHOW_FOUNDERS) $('founders').classList.add('on');
 
-  /* ---- launch countdown (D-day lens) ---- */
+  /* ---- launch countdown: split-flap ---- */
   const LAUNCH = new Date('2026-07-29T09:00:00+09:00').getTime();
   const p2 = n => String(n).padStart(2, '0');
+  const setFlap = (id, v) => {
+    const el = $(id);
+    if(el.textContent !== v){
+      el.textContent = v;
+      el.classList.remove('tick');
+      void el.offsetWidth;   // restart animation
+      el.classList.add('tick');
+    }
+  };
   const tick = () => {
     const left = LAUNCH - Date.now();
     if(left <= 0){
-      $('cdD').textContent = 'D-Day';
-      $('cdT').textContent = 'Now Live';
+      setFlap('fD','LIVE'); setFlap('fH','NOW'); setFlap('fM','●'); setFlap('fS','●');
       $('cd').classList.add('live');
+      clearInterval(timer);
       return;
     }
-    const d = Math.floor(left / 86400000);
-    const rem = left % 86400000;
-    $('cdD').textContent = d > 0 ? 'D–' + d : 'D-Day';
-    $('cdT').textContent = p2(Math.floor(rem/3600000)) + 'h ' + p2(Math.floor(rem%3600000/60000)) + 'm';
+    setFlap('fD', p2(Math.floor(left/86400000)));
+    setFlap('fH', p2(Math.floor(left%86400000/3600000)));
+    setFlap('fM', p2(Math.floor(left%3600000/60000)));
+    setFlap('fS', p2(Math.floor(left%60000/1000)));
   };
   tick();
-  setInterval(tick, 20000);
+  const timer = setInterval(tick, 1000);
 
   /* ---- referral source capture (?r=CODE, or set by /heesun redirect) ---- */
   const qs = new URLSearchParams(location.search);
