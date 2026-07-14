@@ -3,34 +3,36 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>MEVE — 데이터로 설계하는 나의 아름다움</title>
+<title>MEVE · 데이터로 설계하는 나의 아름다움</title>
 <meta name="description" content="MEVE는 당신의 피부와 얼굴을 데이터로 이해해 감이나 유행이 아닌, 당신에게 맞는 아름다움을 제안합니다. 7월 29일 앱 출시.">
-<meta property="og:title" content="MEVE — Beauty-Tech House">
-<meta property="og:description" content="아름다움은 정말, 감의 영역일까요? 7월 29일, 신청 순서대로 초대장이 열립니다.">
+<meta property="og:title" content="MEVE · Beauty-Tech House">
+<meta property="og:description" content="아름다움은 정말, 감의 영역일까요? 7월 29일, 앞 번호부터 순서대로 앱이 열려요.">
 <meta property="og:url" content="https://meve.beauty">
 <meta property="og:image" content="https://meve.beauty/assets/logo-lockup.png">
 <meta name="theme-color" content="#FBF7F2">
 <link rel="icon" type="image/png" href="/assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="https://hangeul.pstatic.net/hangeul_static/css/maru-buri.css">
 <style>
 /* ============================================================
-   MEVE — pre-launch waitlist · quiet editorial
-   cream / ink / one powder accent / hairlines
+   MEVE · pre-launch waitlist · quiet editorial, crafted
+   cream / ink / powder accent / serif KR display / ticket object
    ============================================================ */
 :root{
   --cream:#FBF7F2;
-  --ink:#1F1B21;
+  --ink:#211C23;
   --ink-soft:#4A424A;
   --ink-mute:#8A8088;
   --pink:#EFB8C8;
-  --pink-deep:#C98FA4;
+  --pink-deep:#C4879C;
   --gold:#B08D57;
-  --hairline:rgba(31,27,33,.12);
-  --hairline-soft:rgba(31,27,33,.07);
+  --hairline:rgba(33,28,35,.14);
+  --hairline-soft:rgba(33,28,35,.08);
   --serif:'Cormorant Garamond',Georgia,serif;
+  --krd:'MaruBuri','Noto Serif KR',serif;
   --sans:'Jost','Pretendard Variable',Pretendard,sans-serif;
   --kr:'Pretendard Variable',Pretendard,-apple-system,BlinkMacSystemFont,sans-serif;
   --ease:cubic-bezier(.22,.6,.2,1);
@@ -45,6 +47,13 @@ body{
   -webkit-font-smoothing:antialiased;
   text-rendering:optimizeLegibility;
   word-break:keep-all;
+  position:relative;
+}
+/* paper grain */
+body::after{
+  content:"";position:fixed;inset:0;z-index:9;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+  opacity:.05;mix-blend-mode:multiply;
 }
 a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%}
@@ -52,85 +61,104 @@ img{display:block;max-width:100%}
 ::selection{background:rgba(239,184,200,.4)}
 
 .page{
-  width:min(600px,100%);
+  width:min(560px,100%);
   margin-inline:auto;
-  padding:calc(clamp(3rem,7vh,4.5rem) + env(safe-area-inset-top)) clamp(1.4rem,5vw,2rem) calc(2.5rem + env(safe-area-inset-bottom));
+  padding:calc(clamp(2.8rem,6vh,4rem) + env(safe-area-inset-top)) clamp(1.4rem,5.5vw,2rem) calc(2.5rem + env(safe-area-inset-bottom));
 }
 
 /* ---------- masthead ---------- */
 .mast{text-align:center}
 .mast .house{
   font-family:var(--sans);font-weight:400;
-  font-size:.66rem;letter-spacing:.38em;text-indent:.38em;text-transform:uppercase;
+  font-size:.64rem;letter-spacing:.4em;text-indent:.4em;text-transform:uppercase;
   color:var(--ink-mute);
 }
-.mast .mark{margin:2rem auto 0;width:clamp(120px,32vw,150px)}
+.mast .mark{margin:1.9rem auto 0;width:clamp(116px,30vw,142px)}
 .mast .date{
-  margin-top:1.9rem;
+  margin-top:1.8rem;
+  display:inline-flex;align-items:center;gap:.7rem;
   font-family:var(--sans);font-weight:400;
-  font-size:.72rem;letter-spacing:.3em;text-indent:.3em;text-transform:uppercase;
+  font-size:.7rem;letter-spacing:.3em;text-indent:.3em;text-transform:uppercase;
   color:var(--ink);
 }
-.mast .date b{font-weight:500;color:var(--pink-deep)}
+.mast .date i{font-style:normal;width:4px;height:4px;border-radius:50%;background:var(--pink);flex:none}
+.mast .date b{font-weight:500}
+.cd{
+  margin-top:1.4rem;
+  display:flex;align-items:baseline;justify-content:center;gap:1rem;
+}
+.cd-d{
+  font-family:var(--serif);font-weight:600;
+  font-size:2rem;line-height:1;letter-spacing:.02em;color:var(--ink);
+  font-variant-numeric:tabular-nums;
+}
+.cd-t{
+  font-family:var(--serif);font-weight:500;
+  font-size:1.15rem;letter-spacing:.08em;color:var(--ink-mute);
+  font-variant-numeric:tabular-nums;
+}
+.cd.live .cd-d{color:var(--pink-deep)}
 
-.hr{
-  border:0;height:1px;background:var(--hairline-soft);
-  margin:clamp(2.6rem,6vh,3.6rem) 0;
+/* double rule, print style */
+.dr{
+  margin:clamp(2.4rem,5.5vh,3.4rem) 0;
+  border:0;height:5px;
+  border-top:1px solid var(--hairline);
+  border-bottom:1px solid var(--hairline-soft);
 }
 
-/* ---------- narrative ---------- */
+/* ---------- narrative (left aligned, editorial) ---------- */
 .q{
   font-family:var(--serif);font-style:italic;font-weight:400;
-  font-size:.95rem;letter-spacing:.12em;
+  font-size:1rem;letter-spacing:.1em;
   color:var(--gold);
-  text-align:center;
 }
 h1{
-  margin-top:1.4rem;
-  text-align:center;
-  font-weight:650;font-size:clamp(1.7rem,6.4vw,2.3rem);
-  line-height:1.42;letter-spacing:-.035em;
+  margin-top:1.2rem;
+  font-family:var(--krd);
+  font-weight:600;font-size:clamp(1.62rem,6.2vw,2.15rem);
+  line-height:1.5;letter-spacing:-.02em;
   color:var(--ink);
 }
 h1 em{font-style:normal;color:var(--pink-deep)}
 .lead{
-  margin:2.2rem auto 0;max-width:33em;
-  text-align:center;
-  font-weight:400;font-size:clamp(.98rem,3.6vw,1.05rem);line-height:1.95;
+  margin-top:2rem;max-width:30em;
+  font-weight:400;font-size:clamp(.98rem,3.6vw,1.04rem);line-height:1.98;
   color:var(--ink-soft);
 }
-.lead + .lead{margin-top:1.5rem}
-.lead q{quotes:"“" "”";color:var(--ink)}
+.lead + .lead{margin-top:1.4rem}
 .pivot{
   margin-top:clamp(2.6rem,6vh,3.4rem);
   text-align:center;
   font-family:var(--serif);font-weight:500;font-style:italic;
-  font-size:clamp(1.35rem,5vw,1.7rem);line-height:1.5;letter-spacing:.01em;
+  font-size:clamp(1.4rem,5.2vw,1.75rem);line-height:1.5;letter-spacing:.01em;
   color:var(--ink);
 }
 .pivot .kr{
-  display:block;margin-top:.4rem;
-  font-family:var(--kr);font-style:normal;font-weight:500;
-  font-size:.62em;letter-spacing:-.02em;color:var(--ink-soft);
+  display:block;margin-top:.5rem;
+  font-family:var(--krd);font-style:normal;font-weight:500;
+  font-size:.6em;letter-spacing:-.01em;color:var(--ink-soft);
 }
 .signals{
-  margin:2.6rem auto 0;max-width:32em;
-  text-align:center;
-  font-weight:400;font-size:clamp(.95rem,3.5vw,1.02rem);line-height:2.05;
+  margin-top:clamp(2.4rem,5.5vh,3.2rem);max-width:30em;
+  font-weight:400;font-size:clamp(.96rem,3.5vw,1.02rem);line-height:2.05;
   color:var(--ink-soft);
 }
 .signals b{font-weight:600;color:var(--ink)}
 .decl{
-  margin:2.6rem auto 0;max-width:30em;
-  text-align:center;
-  font-weight:500;font-size:clamp(1.08rem,4.1vw,1.22rem);line-height:1.85;letter-spacing:-.02em;
+  margin-top:2.4rem;max-width:28em;
+  font-family:var(--krd);
+  font-weight:500;font-size:clamp(1.06rem,4vw,1.2rem);line-height:1.95;letter-spacing:-.01em;
   color:var(--ink);
 }
-.decl .mv{font-family:var(--sans);font-weight:500;letter-spacing:.08em}
-.decl em{font-style:normal;border-bottom:2px solid var(--pink);padding-bottom:1px}
+.decl .mv{font-family:var(--sans);font-weight:500;letter-spacing:.07em}
+.decl em{
+  font-style:normal;
+  background:linear-gradient(transparent 62%, rgba(239,184,200,.55) 62%, rgba(239,184,200,.55) 94%, transparent 94%);
+}
 
 /* ---------- founders (toggle) ---------- */
-.founders{display:none;margin-top:2.8rem;text-align:center}
+.founders{display:none;margin-top:2.6rem;text-align:center}
 .founders.on{display:block}
 .founders .names{
   font-family:var(--serif);font-weight:500;
@@ -139,32 +167,39 @@ h1 em{font-style:normal;color:var(--pink-deep)}
 .founders .names i{font-style:italic;color:var(--gold);padding-inline:.4rem;font-size:.85em}
 .founders .role{
   margin-top:.5rem;
-  font-family:var(--sans);font-size:.62rem;letter-spacing:.32em;text-indent:.32em;text-transform:uppercase;color:var(--ink-mute);
+  font-family:var(--sans);font-size:.6rem;letter-spacing:.32em;text-indent:.32em;text-transform:uppercase;color:var(--ink-mute);
 }
 
 /* ---------- form ---------- */
 .wl{max-width:420px;margin:0 auto;text-align:center}
 .wl-count{
   display:none;margin-bottom:1.1rem;
-  font-family:var(--sans);font-size:.68rem;letter-spacing:.26em;text-indent:.26em;text-transform:uppercase;color:var(--gold);
+  font-family:var(--sans);font-size:.66rem;letter-spacing:.26em;text-indent:.26em;text-transform:uppercase;color:var(--gold);
 }
 .wl-count.on{display:block}
-.wl-row{display:flex;flex-direction:column;gap:.7rem}
+.wl-row{display:flex;flex-direction:column;gap:.75rem}
 .wl input[type=email]{
-  height:58px;border-radius:2px;padding-inline:1.2rem;text-align:center;
+  height:58px;border-radius:999px;padding-inline:1.6rem;text-align:center;
   font-family:var(--kr);font-size:1rem;color:var(--ink);
-  background:#fff;
+  background:#FFFDFA;
   border:1px solid var(--hairline);
-  outline:none;transition:border-color .25s;
+  outline:none;transition:border-color .25s,box-shadow .25s;
 }
-.wl input[type=email]:focus{border-color:var(--ink)}
+.wl input[type=email]:focus{border-color:var(--ink);box-shadow:0 0 0 4px rgba(33,28,35,.05)}
 .wl button{
-  height:58px;border:0;border-radius:2px;cursor:pointer;
-  font-family:var(--kr);font-size:.98rem;font-weight:600;letter-spacing:-.01em;
+  height:58px;border:0;border-radius:999px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:.6rem;
+  font-family:var(--kr);font-size:.99rem;font-weight:600;letter-spacing:-.01em;
   color:var(--cream);background:var(--ink);
-  transition:opacity .25s,transform .25s var(--ease);
+  box-shadow:0 1px 0 rgba(255,255,255,.6) inset, 0 10px 24px -14px rgba(33,28,35,.55);
+  transition:transform .25s var(--ease),box-shadow .25s;
 }
-.wl button:hover{opacity:.88;transform:translateY(-1px)}
+.wl button .ar{
+  display:inline-block;transition:transform .25s var(--ease);
+  font-family:var(--sans);font-weight:400;
+}
+.wl button:hover{transform:translateY(-1px);box-shadow:0 1px 0 rgba(255,255,255,.6) inset, 0 14px 28px -14px rgba(33,28,35,.6)}
+.wl button:hover .ar{transform:translateX(4px)}
 .wl button:active{transform:none}
 .wl button:disabled{opacity:.55;cursor:wait;transform:none}
 .beta{
@@ -173,98 +208,138 @@ h1 em{font-style:normal;color:var(--pink-deep)}
   font-size:.86rem;font-weight:400;color:var(--ink-soft);
 }
 .beta input{
-  appearance:none;width:17px;height:17px;flex:none;border-radius:2px;cursor:pointer;
+  appearance:none;width:17px;height:17px;flex:none;border-radius:50%;cursor:pointer;
   background:#fff;border:1px solid var(--hairline);
   display:grid;place-items:center;transition:border-color .2s;
 }
 .beta input::after{
-  content:"";width:9px;height:9px;transform:scale(0);
+  content:"";width:9px;height:9px;border-radius:50%;transform:scale(0);
   background:var(--ink);transition:transform .18s var(--ease);
 }
 .beta input:checked{border-color:var(--ink)}
 .beta input:checked::after{transform:scale(1)}
 .beta b{font-weight:600;color:var(--ink)}
 .wl-note{
-  margin-top:1.6rem;
+  margin-top:1.5rem;
   font-size:.88rem;font-weight:400;line-height:1.9;color:var(--ink-mute);
 }
 .wl-note b{font-weight:600;color:var(--ink)}
 .wl-error{display:none;margin-top:.9rem;font-size:.86rem;color:#B4494E}
 .wl-error.on{display:block}
 
+/* ---------- the ticket (crafted object) ---------- */
+.ticket-wrap{margin-top:clamp(2.6rem,6vh,3.6rem)}
+.ticket{
+  position:relative;
+  background:#FFFDFA;
+  border:1.5px solid var(--ink);
+  border-radius:16px;
+  box-shadow:4px 5px 0 rgba(33,28,35,.9);
+  transform:rotate(-.4deg);
+}
+.ticket-in{padding:1.7rem 1.5rem 1.45rem}
+.ticket-head{
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  font-family:var(--sans);font-size:.6rem;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--ink);
+}
+.ticket-head .adm{color:var(--pink-deep)}
+.ticket-title{
+  margin-top:1.15rem;
+  font-family:var(--serif);font-weight:600;font-style:italic;
+  font-size:1.5rem;letter-spacing:.02em;color:var(--ink);
+}
+.perk{
+  display:grid;grid-template-columns:3rem 1fr;gap:.9rem;align-items:start;
+  padding:1.05rem 0;
+}
+.perk + .perk{border-top:1px dashed var(--hairline)}
+.perks{margin-top:1.1rem}
+.perk .big{
+  font-family:var(--serif);font-weight:600;
+  font-size:1.5rem;line-height:1.1;color:var(--ink);
+  padding-top:.1rem;
+}
+.perk .big small{display:block;font-family:var(--sans);font-weight:400;font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute);margin-top:.2rem}
+.perk .tt{font-weight:700;font-size:.98rem;color:var(--ink);letter-spacing:-.01em}
+.perk .ds{margin-top:.2rem;font-weight:400;font-size:.9rem;line-height:1.8;color:var(--ink-soft)}
+.perk .ds b{font-weight:600;color:var(--ink)}
+.perk .tag{
+  display:inline-block;margin-left:.4rem;padding:.1rem .55rem;
+  border:1px solid var(--pink-deep);border-radius:999px;
+  font-family:var(--sans);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--pink-deep);
+  vertical-align:2px;
+}
+/* stub with notches */
+.stub{
+  position:relative;
+  border-top:1.5px dashed var(--ink);
+  padding:.85rem 1.5rem .95rem;
+  display:flex;align-items:center;justify-content:space-between;
+  font-family:var(--sans);font-size:.58rem;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-mute);
+}
+.stub::before,.stub::after{
+  content:"";position:absolute;top:-13px;width:24px;height:24px;border-radius:50%;
+  background:var(--cream);border:1.5px solid var(--ink);
+}
+.stub::before{left:-14px}
+.stub::after{right:-14px}
+.stub b{color:var(--ink);font-weight:500}
+
+/* ---------- promise ---------- */
+.promise{margin-top:clamp(2.8rem,6vh,3.6rem)}
+.sec-title{
+  font-family:var(--sans);font-weight:400;
+  font-size:.64rem;letter-spacing:.34em;text-transform:uppercase;
+  color:var(--ink-mute);
+  display:flex;align-items:center;gap:1rem;
+}
+.sec-title::after{content:"";flex:1;height:1px;background:var(--hairline-soft)}
+.prom-rows{margin-top:1.5rem;display:grid;gap:1.05rem}
+.prom{display:grid;grid-template-columns:1.6rem 1fr;gap:.9rem;align-items:baseline}
+.prom .st{font-family:var(--serif);font-style:italic;font-size:1rem;color:var(--gold)}
+.prom .tt{font-weight:700;font-size:.96rem;color:var(--ink)}
+.prom .ds{font-weight:400;font-size:.9rem;line-height:1.8;color:var(--ink-soft)}
+
 /* ---------- success ---------- */
 .done{display:none;max-width:420px;margin:0 auto;text-align:center}
 .done.on{display:block}
 .done .t-label{
-  font-family:var(--sans);font-size:.64rem;letter-spacing:.34em;text-indent:.34em;text-transform:uppercase;color:var(--gold);
+  font-family:var(--sans);font-size:.62rem;letter-spacing:.34em;text-indent:.34em;text-transform:uppercase;color:var(--gold);
 }
 .done .t-no{
   margin-top:.9rem;
-  font-family:var(--serif);font-weight:500;
-  font-size:clamp(3.2rem,13vw,4.2rem);line-height:1;letter-spacing:.01em;color:var(--ink);
+  font-family:var(--serif);font-weight:600;
+  font-size:clamp(3.4rem,14vw,4.4rem);line-height:1;letter-spacing:.01em;color:var(--ink);
 }
 .done .t-keep{
-  margin-top:1.1rem;
-  font-size:.92rem;line-height:1.85;color:var(--ink-soft);
+  margin-top:1.2rem;
+  font-size:.94rem;line-height:1.95;color:var(--ink-soft);
 }
 .done .t-keep b{font-weight:600;color:var(--ink)}
-.done .t-rule{border:0;height:1px;background:var(--hairline-soft);margin:2rem auto;width:120px}
-.done .boost{
-  font-size:.95rem;font-weight:500;line-height:1.9;color:var(--ink);
-}
-.tiers{
-  margin-top:1.1rem;display:grid;gap:.5rem;
-  font-size:.88rem;color:var(--ink-soft);
-}
+.done .t-rule{border:0;height:1px;background:var(--hairline-soft);margin:1.9rem auto;width:110px}
+.done .boost{font-size:.96rem;font-weight:500;line-height:1.9;color:var(--ink)}
+.tiers{margin-top:1rem;display:grid;gap:.5rem;font-size:.89rem;color:var(--ink-soft)}
 .tiers .t b{font-weight:600;color:var(--ink)}
 .done-btns{display:flex;gap:.7rem;margin-top:2rem}
 .done-btns button,.done-btns a{
-  flex:1;height:54px;border-radius:2px;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
+  flex:1;height:54px;border-radius:999px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:.5rem;
   font-family:var(--kr);font-size:.9rem;font-weight:600;
-  transition:opacity .25s,transform .25s var(--ease);
+  transition:transform .25s var(--ease),opacity .25s;
 }
-.done-btns button{border:0;color:var(--cream);background:var(--ink)}
+.done-btns button{border:0;color:var(--cream);background:var(--ink);box-shadow:0 10px 24px -14px rgba(33,28,35,.55)}
 .done-btns a{border:1px solid var(--hairline);color:var(--ink);background:transparent}
-.done-btns button:hover,.done-btns a:hover{opacity:.85;transform:translateY(-1px)}
-
-/* ---------- numbered sections ---------- */
-.sec{max-width:460px;margin:0 auto}
-.sec-title{
-  text-align:center;
-  font-family:var(--sans);font-weight:400;
-  font-size:.66rem;letter-spacing:.34em;text-indent:.34em;text-transform:uppercase;
-  color:var(--ink-mute);
-}
-.rows{margin-top:1.9rem}
-.row{
-  display:grid;grid-template-columns:2.4rem 1fr;gap:1rem;align-items:baseline;
-  padding:1.05rem 0;border-top:1px solid var(--hairline-soft);
-}
-.row:last-child{border-bottom:1px solid var(--hairline-soft)}
-.row .no{
-  font-family:var(--sans);font-weight:400;font-size:.72rem;letter-spacing:.08em;color:var(--gold);
-}
-.row .tt{font-weight:600;font-size:.96rem;color:var(--ink);letter-spacing:-.01em}
-.row .tt .en{font-family:var(--sans);font-weight:500;letter-spacing:.02em}
-.row .ds{margin-top:.15rem;font-weight:400;font-size:.88rem;line-height:1.75;color:var(--ink-soft)}
-
-.stamp{
-  margin-top:clamp(2.6rem,6vh,3.4rem);
-  text-align:center;
-  font-family:var(--sans);font-weight:400;
-  font-size:.62rem;letter-spacing:.3em;text-indent:.3em;text-transform:uppercase;
-  color:#B9AEB4;
-}
+.done-btns button:hover,.done-btns a:hover{transform:translateY(-1px)}
 
 /* ---------- foot ---------- */
 .legal{
-  margin-top:clamp(2.8rem,6vh,3.6rem);
+  margin-top:clamp(2.6rem,5.5vh,3.4rem);
   text-align:center;font-size:.78rem;font-weight:400;line-height:2;color:var(--ink-mute);
 }
 .legal a{text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--hairline)}
 .foot{
-  margin-top:2.6rem;padding-top:1.6rem;border-top:1px solid var(--hairline-soft);
+  margin-top:2.4rem;padding-top:1.5rem;border-top:1px solid var(--hairline-soft);
   text-align:center;
 }
 .foot p{
@@ -281,6 +356,7 @@ h1 em{font-style:normal;color:var(--pink-deep)}
 }
 @media(max-width:420px){
   .done-btns{flex-direction:column}
+  .perk{grid-template-columns:2.6rem 1fr}
 }
 </style>
 </head>
@@ -290,28 +366,33 @@ h1 em{font-style:normal;color:var(--pink-deep)}
 
   <!-- masthead -->
   <header class="mast fade">
-    <p class="house">Maison MEVE — Beauty-Tech House</p>
+    <p class="house">Maison MEVE · Beauty-Tech House</p>
     <img class="mark" src="/assets/wordmark2.png" alt="MEVE">
-    <p class="date">App Launch — <b>7.29</b></p>
+    <p class="date">App Launch <i></i> <b>7.29</b></p>
+    <div class="cd" id="cd" aria-label="런칭까지 남은 시간">
+      <span class="cd-d" id="cdD">D–14</span>
+      <span class="cd-t" id="cdT">00 : 00 : 00</span>
+    </div>
   </header>
 
-  <hr class="hr fade d1">
+  <hr class="dr fade d1">
 
   <!-- narrative -->
   <section class="fade d1">
-    <p class="q">Une question</p>
+    <p class="q">Une question,</p>
     <h1>내 피부엔 뭐가 맞는지,<br>내 얼굴엔 뭐가 <em>어울리는지</em></h1>
 
     <p class="lead">
-      확실한 답을 모른 채, 우리는 오늘도<br>
-      수백 개의 리뷰 속에서 새로운 제품을 검색해요.<br>
-      실패는 반복되는데, 이유는 아무도 설명해 주지 않죠.
+      확실한 답을 모른 채, 우리는 오늘도 수백 개의 리뷰 속에서
+      새로운 제품을 검색해요. 실패는 반복되는데,
+      이유는 아무도 설명해 주지 않죠.
     </p>
 
     <p class="lead">
-      <q>눈썹은 길게 그리세요</q>, <q>쉐딩은 이렇게 넣으세요</q> —<br>
-      조각난 조언들 속에서 내 얼굴의 답은<br>
-      언제나 '감'에 맡겨져 왔어요.
+      남들 다 좋다는 세럼이 왜 나한테만 뒤집어지는지,
+      퍼스널컬러 진단을 받고도 왜 그 립만 붕 뜨는지,
+      후기는 넘치는데 내 피부에 맞는 시술은 뭔지.
+      언제나 답은 '감'에 맡겨져 있었죠.
     </p>
 
     <p class="pivot">
@@ -320,25 +401,25 @@ h1 em{font-style:normal;color:var(--pink-deep)}
     </p>
 
     <p class="signals">
-      어젯밤의 <b>수면</b>과 오늘의 <b>습도</b>, <b>생리주기</b>의 리듬,<br>
-      스쳐 지나간 <b>성분 조합</b>, 트러블이 앉는 <b>자리</b>.<br>
-      당신도 몰랐던 신호들이 모여, 답이 됩니다.
+      어젯밤의 <b>수면</b>과 오늘의 <b>습도</b>, <b>생리주기</b>의 리듬,
+      그리고 지금 바르는 제품들 사이의 <b>성분 궁합</b>까지.
+      흩어진 신호들이 <b>교차 분석</b>되는 순간,
+      내 피부에 정말 맞는 스킨케어가 보이기 시작해요.
     </p>
 
     <p class="decl">
-      <span class="mv">MEVE</span>는 당신의 피부와 얼굴을 <em>데이터</em>로 이해해<br>
-      감이나 유행이 아닌,<br>
-      당신에게 맞는 아름다움을 제안합니다.
+      <span class="mv">MEVE</span>는 당신의 피부와 얼굴을 <em>데이터</em>로 이해해
+      감이나 유행이 아닌, 당신에게 맞는 아름다움을 제안합니다.
     </p>
 
-    <!-- founders — flip SHOW_FOUNDERS to true on announcement day -->
+    <!-- founders · flip SHOW_FOUNDERS to true on announcement day -->
     <div class="founders" id="founders">
       <p class="names">Ruby Choux <i>×</i> Heesun</p>
       <p class="role">The Founding Team</p>
     </div>
   </section>
 
-  <hr class="hr fade d2">
+  <hr class="dr fade d2">
 
   <!-- waitlist -->
   <section class="fade d2">
@@ -346,55 +427,78 @@ h1 em{font-style:normal;color:var(--pink-deep)}
       <p class="wl-count" id="wlCount"></p>
       <div class="wl-row">
         <input type="email" id="wlEmail" name="email" inputmode="email" autocomplete="email" placeholder="이메일 주소" required>
-        <button type="submit" id="wlBtn">내 초대장 예약하기</button>
+        <button type="submit" id="wlBtn"><span>내 티켓 번호 받기</span><span class="ar">→</span></button>
       </div>
       <label class="beta">
         <input type="checkbox" id="wlBeta">
         <span>출시 전 <b>베타 테스터 30인</b> 선발에 지원할래요</span>
       </label>
       <p class="wl-error" id="wlError"></p>
-      <p class="wl-note"><b>7월 29일</b>, 신청 순서대로 초대장이 열립니다.</p>
+      <p class="wl-note">지금 신청하면 번호가 바로 나와요.<br><b>7월 29일</b>, 앞 번호부터 순서대로 앱이 열립니다.</p>
     </form>
 
     <section class="done" id="done" aria-live="polite">
       <p class="t-label">Beauty DNA Ticket</p>
       <p class="t-no" id="doneNo">No.—</p>
-      <p class="t-keep">이 번호는 런칭 후 앱에서 <b>파운딩 넘버</b>로 영원히 남아요.</p>
+      <p class="t-keep">런칭하면 이 번호가 당신의 앱 프로필에 그대로 새겨져요.<br>이 번호의 주인은 <b>세상에 당신 한 명</b>이에요.</p>
       <hr class="t-rule">
       <p class="boost">친구가 한 명 올 때마다 <b>10칸 앞으로</b> 이동해요.</p>
       <div class="tiers">
-        <p class="t"><b>1명</b> — 10칸 앞으로</p>
-        <p class="t"><b>3명</b> — 베타 테스터 30인 후보 확정</p>
-        <p class="t"><b>10명</b> — 런칭 시 프리미엄 연장</p>
+        <p class="t"><b>1명</b> = 10칸 앞으로</p>
+        <p class="t"><b>3명</b> = 베타 테스터 30인 후보 확정</p>
+        <p class="t"><b>10명</b> = 프리미엄 3개월 추가</p>
       </div>
       <div class="done-btns">
         <button type="button" id="shareBtn">내 초대 링크 공유하기</button>
         <a id="igBtn" href="https://instagram.com/maison.meve" target="_blank" rel="noopener">인스타그램</a>
       </div>
     </section>
-  </section>
 
-  <hr class="hr fade d3">
-
-  <!-- the ticket -->
-  <section class="sec fade d3" aria-label="초대장 혜택">
-    <p class="sec-title">The Ticket</p>
-    <div class="rows">
-      <div class="row"><span class="no">01</span><div><p class="tt"><span class="en">Beauty DNA Ticket</span></p><p class="ds">당신의 번호가 런칭 후 파운딩 넘버로 남아요</p></div></div>
-      <div class="row"><span class="no">02</span><div><p class="tt"><span class="en">Early Bird</span></p><p class="ds">웨이트리스트에게만 열리는 시작 가격</p></div></div>
-      <div class="row"><span class="no">03</span><div><p class="tt"><span class="en">Skip the Line</span></p><p class="ds">친구를 초대할수록 초대장이 먼저 도착해요</p></div></div>
+    <!-- the ticket -->
+    <div class="ticket-wrap">
+      <article class="ticket" aria-label="웨이트리스트 혜택">
+        <div class="ticket-in">
+          <div class="ticket-head"><span>MEVE Waitlist</span><span class="adm">Admit One</span></div>
+          <p class="ticket-title">What your number gets you</p>
+          <div class="perks">
+            <div class="perk">
+              <p class="big">100<small>limited</small></p>
+              <div>
+                <p class="tt">No.100 안에 들면, 프리미엄 3개월 무료<span class="tag">First 100</span></p>
+                <p class="ds">얼리버드 구독가도 <b>평생 고정</b>돼요. 지금 100자리 중 하나가 비어 있어요.</p>
+              </div>
+            </div>
+            <div class="perk">
+              <p class="big">No.<small>forever</small></p>
+              <div>
+                <p class="tt">번호는 영구 소장</p>
+                <p class="ds">티켓 번호가 앱 프로필에 <b>파운딩 넘버</b>로 새겨져요. 미브가 커질수록, 앞 번호는 다시 나오지 않아요.</p>
+              </div>
+            </div>
+            <div class="perk">
+              <p class="big">+10<small>per friend</small></p>
+              <div>
+                <p class="tt">친구 한 명, 열 칸 앞으로</p>
+                <p class="ds">줄 맨 앞은 <b>출시 전에 먼저</b> 미브를 만나요. 3명이면 베타 30인 후보 확정.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="stub"><span>No. MV-0729</span><b>Seoul → Global</b></div>
+      </article>
     </div>
   </section>
+
+  <hr class="dr fade d3">
 
   <!-- the promise -->
-  <section class="sec fade d3" style="margin-top:3rem" aria-label="미브의 약속">
+  <section class="promise fade d3" aria-label="미브의 약속">
     <p class="sec-title">The Promise</p>
-    <div class="rows">
-      <div class="row"><span class="no">i</span><div><p class="tt">이유</p><p class="ds">왜 안 맞았는지, 이유부터 알게 돼요</p></div></div>
-      <div class="row"><span class="no">ii</span><div><p class="tt">계산</p><p class="ds">'감'이라 불리던 것들이 데이터로 계산돼요</p></div></div>
-      <div class="row"><span class="no">iii</span><div><p class="tt">사람</p><p class="ds">광고 없는 진짜 이야기들과 연결돼요</p></div></div>
+    <div class="prom-rows">
+      <div class="prom"><span class="st">i.</span><p><span class="tt">이유</span> &nbsp;<span class="ds">왜 안 맞았는지, 이유부터 알게 돼요</span></p></div>
+      <div class="prom"><span class="st">ii.</span><p><span class="tt">계산</span> &nbsp;<span class="ds">'감'이라 불리던 것들이 데이터로 계산돼요</span></p></div>
+      <div class="prom"><span class="st">iii.</span><p><span class="tt">사람</span> &nbsp;<span class="ds">광고 없는 진짜 이야기들과 연결돼요</span></p></div>
     </div>
-    <p class="stamp">No. MV-0729 — Seoul → Global</p>
   </section>
 
   <p class="legal fade d3">신청하시면 확인 메일과 출시 소식을 보내드려요 · <a href="/privacy">개인정보처리방침</a></p>
@@ -418,6 +522,25 @@ h1 em{font-style:normal;color:var(--pink-deep)}
   const form = $('waitlist'), done = $('done'), err = $('wlError'), btn = $('wlBtn');
 
   if(SHOW_FOUNDERS) $('founders').classList.add('on');
+
+  /* ---- launch countdown (D-day lens) ---- */
+  const LAUNCH = new Date('2026-07-29T09:00:00+09:00').getTime();
+  const p2 = n => String(n).padStart(2, '0');
+  const tick = () => {
+    const left = LAUNCH - Date.now();
+    if(left <= 0){
+      $('cdD').textContent = 'D-Day';
+      $('cdT').textContent = 'Now Live';
+      $('cd').classList.add('live');
+      return;
+    }
+    const d = Math.ceil(left / 86400000);
+    const rem = left % 86400000;
+    $('cdD').textContent = 'D–' + d;
+    $('cdT').textContent = p2(Math.floor(rem/3600000)) + ' : ' + p2(Math.floor(rem%3600000/60000)) + ' : ' + p2(Math.floor(rem%60000/1000));
+  };
+  tick();
+  setInterval(tick, 1000);
 
   /* ---- referral source capture (?r=CODE, or set by /heesun redirect) ---- */
   const qs = new URLSearchParams(location.search);
@@ -458,6 +581,8 @@ h1 em{font-style:normal;color:var(--pink-deep)}
       body: JSON.stringify({p_email: email, p_beta: beta})
     });
 
+  const btnHome = '<span>내 티켓 번호 받기</span><span class="ar">→</span>';
+
   form.addEventListener('submit', async e => {
     e.preventDefault();
     err.classList.remove('on');
@@ -467,7 +592,7 @@ h1 em{font-style:normal;color:var(--pink-deep)}
       err.classList.add('on');
       return;
     }
-    btn.disabled = true; btn.textContent = '초대장 준비 중…';
+    btn.disabled = true; btn.textContent = '번호 확인 중…';
     try{
       let pos, code = null;
       let r = await joinV2(email, $('wlBeta').checked);
@@ -485,14 +610,14 @@ h1 em{font-style:normal;color:var(--pink-deep)}
     }catch(ex){
       err.textContent = '잠시 후 다시 시도해 주세요.';
       err.classList.add('on');
-      btn.disabled = false; btn.textContent = '내 초대장 예약하기';
+      btn.disabled = false; btn.innerHTML = btnHome;
     }
   });
 
   /* ---- share ---- */
   $('shareBtn').addEventListener('click', async () => {
     const url = myLink();
-    const data = {title:'MEVE', text:'아름다움은 정말, 감의 영역일까요? — 7.29 MEVE', url};
+    const data = {title:'MEVE', text:'아름다움은 정말, 감의 영역일까요? 7.29 MEVE', url};
     if(navigator.share){
       try{ await navigator.share(data); return; }catch(e){}
     }
