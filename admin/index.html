@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>MEVE — Waitlist Admin</title>
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{
+  --ink:#221721; --paper:#FDFBF7; --plum:#5C4450; --rose:#B8506B; --rose-deep:#8E3A50;
+  --gold:#B08D57; --muted:#95848D; --line:rgba(34,23,33,.08);
+  --kr:'Pretendard Variable',Pretendard,-apple-system,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F6EDEC;color:var(--ink);font-family:var(--kr);line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1100px;margin:0 auto;padding:32px 20px 80px}
+header.top{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:26px}
+.brand{font-size:12px;letter-spacing:.34em;color:#A88898;text-transform:uppercase}
+.brand b{color:var(--ink);letter-spacing:.2em}
+.sync{font-size:11px;color:var(--muted)}
+.sync button{margin-left:10px;border:1px solid var(--line);background:#fff;border-radius:6px;padding:4px 10px;font-size:11px;cursor:pointer;color:var(--plum)}
+
+/* login gate */
+.gate{max-width:360px;margin:14vh auto 0;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:40px 28px;text-align:center;box-shadow:0 24px 60px -30px rgba(120,60,85,.3)}
+.gate h1{font-size:15px;font-weight:700;color:var(--plum);letter-spacing:.02em}
+.gate p{font-size:12px;color:var(--muted);margin-top:6px}
+.gate input{width:100%;height:46px;margin-top:18px;border:1px solid rgba(34,23,33,.15);border-radius:6px;padding:0 14px;font-size:14px;text-align:center;outline:none;background:#fff}
+.gate input:focus{border-color:rgba(184,80,107,.5)}
+.gate button{width:100%;height:46px;margin-top:10px;border:0;border-radius:6px;background:#A94066;color:#FDFBF7;font-size:13px;font-weight:700;cursor:pointer}
+.gate .err{display:none;font-size:12px;color:#C4485C;margin-top:10px}
+
+/* dashboard */
+.dash{display:none}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.tile{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+.tile .k{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.tile .v{font-size:26px;font-weight:750;color:var(--rose-deep);margin-top:4px;font-variant-numeric:tabular-nums}
+.tile .s{font-size:11px;color:var(--muted)}
+
+.grid2{display:grid;grid-template-columns:1.4fr 1fr;gap:10px;margin-top:10px}
+@media(max-width:760px){.grid2{grid-template-columns:1fr}}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+.panel h2{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:600}
+
+/* daily bar chart */
+.chart{display:flex;align-items:flex-end;gap:6px;height:120px;margin-top:14px}
+.chart .bar{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;min-width:0}
+.chart .bar i{display:block;width:100%;background:#D48CA4;border-radius:3px 3px 0 0;min-height:2px}
+.chart .bar.today i{background:var(--rose-deep)}
+.chart .bar b{font-size:10px;font-weight:600;color:var(--plum);font-variant-numeric:tabular-nums}
+.chart .bar span{font-size:9px;color:var(--muted);white-space:nowrap}
+
+/* channels */
+.chan{margin-top:12px;display:grid;gap:8px}
+.chan .row{display:grid;grid-template-columns:110px 1fr 40px;align-items:center;gap:10px;font-size:12px}
+.chan .row .nm{color:var(--plum);font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.chan .row .tr{height:10px;background:rgba(34,23,33,.05);border-radius:5px;overflow:hidden}
+.chan .row .tr i{display:block;height:100%;background:var(--gold);border-radius:5px}
+.chan .row .n{text-align:right;color:var(--muted);font-variant-numeric:tabular-nums}
+
+/* table */
+.tablewrap{margin-top:10px}
+.tbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}
+.tbar input[type=search]{flex:1;min-width:180px;height:38px;border:1px solid var(--line);border-radius:8px;padding:0 12px;font-size:13px;outline:none;background:#fff}
+.tbar label{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--plum);cursor:pointer;background:#fff;border:1px solid var(--line);border-radius:8px;padding:0 12px;height:38px}
+.tbar .csv{height:38px;border:1px solid rgba(142,58,80,.35);background:transparent;color:var(--rose-deep);border-radius:8px;padding:0 14px;font-size:12px;font-weight:600;cursor:pointer}
+table{width:100%;border-collapse:collapse;background:var(--paper);border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:12.5px}
+thead th{position:sticky;top:0;background:#F2E6E3;color:#6B5A63;font-size:10px;letter-spacing:.12em;text-transform:uppercase;text-align:left;padding:10px 12px}
+tbody td{padding:9px 12px;border-top:1px solid var(--line);color:#3E2C37;vertical-align:middle}
+tbody tr:hover{background:rgba(244,205,217,.12)}
+td.em{font-weight:600}
+td.no{color:var(--rose-deep);font-weight:700;font-variant-numeric:tabular-nums}
+.pill{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.04em;border-radius:20px;padding:3px 9px}
+.pill.beta{background:rgba(176,141,87,.14);color:#8A6A38}
+.pill.ref{background:rgba(184,80,107,.1);color:var(--rose-deep)}
+select.st{border:1px solid var(--line);border-radius:6px;background:#fff;font-size:12px;padding:4px 6px;color:var(--plum);cursor:pointer}
+select.st.invited{color:#2E6B46;border-color:rgba(46,107,70,.3)}
+select.st.beta_selected{color:#8A6A38;border-color:rgba(176,141,87,.4)}
+.mono{font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--muted)}
+.empty{padding:30px;text-align:center;color:var(--muted);font-size:13px}
+.foot{margin-top:26px;text-align:center;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#B9AAB1}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- gate -->
+  <div class="gate" id="gate">
+    <h1>MEVE Waitlist Admin</h1>
+    <p>운영 패스코드를 입력하세요</p>
+    <input type="password" id="pass" placeholder="passcode" autocomplete="current-password">
+    <button id="enter">열기</button>
+    <p class="err" id="gateErr">패스코드가 맞지 않아요.</p>
+  </div>
+
+  <!-- dashboard -->
+  <div class="dash" id="dash">
+    <header class="top">
+      <p class="brand"><b>MEVE</b> · Waitlist Admin</p>
+      <p class="sync"><span id="syncAt">—</span><button id="refresh">새로고침</button></p>
+    </header>
+
+    <div class="tiles">
+      <div class="tile"><p class="k">Total</p><p class="v" id="stTotal">0</p><p class="s">전체 대기자</p></div>
+      <div class="tile"><p class="k">Today</p><p class="v" id="stToday">0</p><p class="s">오늘 가입 (KST)</p></div>
+      <div class="tile"><p class="k">Beta</p><p class="v" id="stBeta">0</p><p class="s">베타 30인 지원</p></div>
+      <div class="tile"><p class="k">Referred</p><p class="v" id="stRef">0</p><p class="s">추천 유입</p></div>
+    </div>
+
+    <div class="grid2">
+      <div class="panel">
+        <h2>Daily Signups · 14d (KST)</h2>
+        <div class="chart" id="chart"></div>
+      </div>
+      <div class="panel">
+        <h2>Channels</h2>
+        <div class="chan" id="chan"></div>
+      </div>
+    </div>
+
+    <div class="tablewrap panel">
+      <div class="tbar">
+        <input type="search" id="q" placeholder="이메일 · 코드 · 채널 검색">
+        <label><input type="checkbox" id="betaOnly"> 베타 지원자만</label>
+        <button class="csv" id="csv">CSV 내보내기</button>
+      </div>
+      <table>
+        <thead><tr>
+          <th>No.</th><th>이메일</th><th>가입</th><th>베타</th><th>유입</th><th>초대</th><th>코드</th><th>상태</th>
+        </tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+      <p class="empty" id="empty" style="display:none">결과가 없어요</p>
+    </div>
+
+    <p class="foot">Maison MEVE · Internal</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  const SB = 'https://auyqgcppbrhjthvkkwwb.supabase.co';
+  const KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF1eXFnY3BwYnJoanRodmtrd3diIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzOTY4NTAsImV4cCI6MjA4ODk3Mjg1MH0.3VjInUooRD1TahI9tgFX3G6yE5A97yAJ2sZH2YMmXLY';
+  const H = {'apikey':KEY,'Authorization':'Bearer '+KEY,'Content-Type':'application/json'};
+  const $ = id => document.getElementById(id);
+  const STATUSES = {waiting:'대기', invited:'초대장 발송', beta_selected:'베타 선정', beta_declined:'베타 제외'};
+  let PASS = null, DATA = null, timer = null;
+
+  const rpc = (fn, body) =>
+    fetch(SB + '/rest/v1/rpc/' + fn, {method:'POST', headers:H, body:JSON.stringify(body)})
+      .then(async r => { if(!r.ok) throw new Error(await r.text()); return r.json(); });
+
+  /* ---------- gate ---------- */
+  try{ PASS = sessionStorage.getItem('mv-admin-pass'); }catch(e){}
+  const tryEnter = async () => {
+    const p = PASS || $('pass').value.trim();
+    if(!p) return;
+    $('gateErr').style.display = 'none';
+    try{
+      DATA = await rpc('admin_dashboard', {p_pass:p});
+      PASS = p;
+      try{ sessionStorage.setItem('mv-admin-pass', p); }catch(e){}
+      $('gate').style.display = 'none';
+      $('dash').style.display = 'block';
+      render();
+      if(timer) clearInterval(timer);
+      timer = setInterval(load, 15000);
+    }catch(e){
+      PASS = null;
+      try{ sessionStorage.removeItem('mv-admin-pass'); }catch(err){}
+      $('gate').style.display = 'block';
+      $('gateErr').style.display = 'block';
+      $('gateErr').textContent = /rate_limited/.test(e.message) ? '시도가 너무 많아요. 10분 뒤에 다시.' : '패스코드가 맞지 않아요.';
+    }
+  };
+  $('enter').addEventListener('click', tryEnter);
+  $('pass').addEventListener('keydown', e => { if(e.key === 'Enter') tryEnter(); });
+  if(PASS) tryEnter();
+
+  /* ---------- data ---------- */
+  const load = async () => {
+    if(!PASS) return;
+    try{ DATA = await rpc('admin_dashboard', {p_pass:PASS}); render(); }catch(e){}
+  };
+  $('refresh').addEventListener('click', load);
+
+  /* ---------- render ---------- */
+  const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const fmtT = iso => new Date(iso).toLocaleString('ko-KR', {timeZone:'Asia/Seoul', month:'numeric', day:'numeric', hour:'2-digit', minute:'2-digit'});
+
+  function render(){
+    const d = DATA; if(!d) return;
+    $('syncAt').textContent = '업데이트 ' + new Date().toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+    $('stTotal').textContent = d.stats.total.toLocaleString();
+    $('stToday').textContent = d.stats.today.toLocaleString();
+    $('stBeta').textContent  = d.stats.beta.toLocaleString();
+    $('stRef').textContent   = d.stats.referred.toLocaleString();
+
+    // chart
+    const days = d.daily || [];
+    const max = Math.max(1, ...days.map(x => x.n));
+    const todayLbl = new Date().toLocaleDateString('en-CA',{timeZone:'Asia/Seoul'}).slice(5).replace('/','-');
+    $('chart').innerHTML = days.length ? days.map(x =>
+      '<div class="bar'+(x.day===todayLbl?' today':'')+'"><b>'+x.n+'</b><i style="height:'+Math.max(2, Math.round(x.n/max*86))+'px"></i><span>'+esc(x.day)+'</span></div>'
+    ).join('') : '<p class="empty">아직 데이터가 없어요</p>';
+
+    // channels
+    const ch = d.channels || [];
+    const cmax = Math.max(1, ...ch.map(x => x.n));
+    $('chan').innerHTML = ch.length ? ch.map(x =>
+      '<div class="row"><span class="nm">'+esc(x.channel)+'</span><span class="tr"><i style="width:'+Math.round(x.n/cmax*100)+'%"></i></span><span class="n">'+x.n+'</span></div>'
+    ).join('') : '<p class="empty">아직 데이터가 없어요</p>';
+
+    renderRows();
+  }
+
+  function filtered(){
+    const q = $('q').value.trim().toLowerCase();
+    const bo = $('betaOnly').checked;
+    return (DATA.rows || []).filter(r =>
+      (!bo || r.beta_interest) &&
+      (!q || (r.email||'').toLowerCase().includes(q) || (r.ref_code||'').includes(q) || (r.referred_by||'').includes(q))
+    );
+  }
+
+  function renderRows(){
+    const rows = filtered();
+    $('empty').style.display = rows.length ? 'none' : 'block';
+    $('rows').innerHTML = rows.map(r =>
+      '<tr>' +
+      '<td class="no">#'+r.base_no+'</td>' +
+      '<td class="em">'+esc(r.email)+'</td>' +
+      '<td>'+fmtT(r.created_at)+'</td>' +
+      '<td>'+(r.beta_interest?'<span class="pill beta">BETA</span>':'')+'</td>' +
+      '<td>'+(r.referred_by?'<span class="pill ref">'+esc(r.referred_by)+'</span>':'<span class="mono">organic</span>')+'</td>' +
+      '<td>'+(r.referral_count||0)+'명</td>' +
+      '<td class="mono">'+esc(r.ref_code||'')+'</td>' +
+      '<td><select class="st '+esc(r.status)+'" data-id="'+r.id+'">' +
+        Object.entries(STATUSES).map(([k,v]) => '<option value="'+k+'"'+(r.status===k?' selected':'')+'>'+v+'</option>').join('') +
+      '</select></td>' +
+      '</tr>'
+    ).join('');
+    document.querySelectorAll('select.st').forEach(sel => {
+      sel.addEventListener('change', async e => {
+        const id = e.target.dataset.id, val = e.target.value;
+        try{
+          await rpc('admin_set_status', {p_pass:PASS, p_id:id, p_status:val});
+          const row = DATA.rows.find(x => x.id === id); if(row) row.status = val;
+          e.target.className = 'st ' + val;
+        }catch(err){ alert('상태 변경 실패'); load(); }
+      });
+    });
+  }
+
+  $('q').addEventListener('input', renderRows);
+  $('betaOnly').addEventListener('change', renderRows);
+
+  /* ---------- csv ---------- */
+  $('csv').addEventListener('click', () => {
+    const rows = filtered();
+    const head = ['no','email','created_at_kst','beta','channel','referrals','ref_code','status'];
+    const csv = [head.join(',')].concat(rows.map(r => [
+      r.base_no, r.email, new Date(r.created_at).toLocaleString('sv-SE',{timeZone:'Asia/Seoul'}),
+      r.beta_interest ? 'Y' : '', r.referred_by || 'organic', r.referral_count || 0, r.ref_code || '', r.status
+    ].map(v => '"'+String(v).replace(/"/g,'""')+'"').join(','))).join('\n');
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob(['﻿'+csv], {type:'text/csv'}));
+    a.download = 'meve-waitlist-' + new Date().toISOString().slice(0,10) + '.csv';
+    a.click();
+  });
+})();
+</script>
+</body>
+</html>
