@@ -254,7 +254,7 @@ h1 em{font-style:normal;color:var(--pink-deep)}
 }
 
 /* ---------- form ---------- */
-.wl{max-width:420px;margin:0 auto;text-align:center}
+.wl{max-width:420px;margin:2.3rem auto 0;text-align:center}
 .wl-count{
   display:none;margin-bottom:1.1rem;
   font-family:var(--sans);font-size:.66rem;letter-spacing:.26em;text-indent:.26em;text-transform:uppercase;color:var(--gold);
@@ -267,53 +267,66 @@ h1 em{font-style:normal;color:var(--pink-deep)}
 }
 .wl-teaser::before,.wl-teaser::after{content:"";width:34px;height:1px;background:rgba(176,141,87,.4);flex:none}
 .wl-teaser span{line-height:1.7}
-.wl-teaser b{font-family:var(--serif);font-weight:600;font-size:1.1em;letter-spacing:.02em}
+.wl-teaser b{font-family:var(--serif);font-weight:600;font-size:1.1em;letter-spacing:.02em;color:#B8506B}
 .wl-teaser .mbr{display:none}
 @media(max-width:480px){
   .wl-teaser::before,.wl-teaser::after{display:none}
   .wl-teaser .mbr{display:inline}
 }
-.wl-row{display:flex;flex-direction:column;gap:.75rem}
-.wl input[type=email]{
-  height:58px;border-radius:999px;padding-inline:1.6rem;text-align:center;
-  font-family:var(--kr);font-size:1rem;color:var(--ink);
+.wl-row{
+  display:flex;align-items:center;gap:.4rem;
   background:#FFFDFA;
-  border:1px solid rgba(33,28,35,.38);
-  outline:none;transition:border-color .25s,box-shadow .25s;
+  border:1px solid rgba(33,28,35,.34);border-radius:999px;
+  padding:.4rem .4rem .4rem 1.5rem;
+  transition:border-color .25s,box-shadow .25s;
 }
-.wl input[type=email]:focus{border-color:var(--ink);box-shadow:0 0 0 4px rgba(33,28,35,.05)}
+.wl-row:focus-within{border-color:var(--ink);box-shadow:0 0 0 4px rgba(33,28,35,.05)}
+.wl input[type=email]{
+  flex:1;min-width:0;height:48px;border:0;background:transparent;
+  font-family:var(--kr);font-size:.98rem;color:var(--ink);
+  outline:none;text-align:left;
+}
 .wl button{
-  height:58px;border:0;border-radius:999px;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;gap:.6rem;
-  font-family:var(--kr);font-size:.99rem;font-weight:600;letter-spacing:-.01em;
+  flex:none;height:48px;border:0;border-radius:999px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:.5rem;
+  padding-inline:1.35rem;
+  font-family:var(--kr);font-size:.93rem;font-weight:600;letter-spacing:-.01em;
   color:var(--cream);background:var(--ink);
-  box-shadow:0 1px 0 rgba(255,255,255,.6) inset, 0 10px 24px -14px rgba(33,28,35,.55);
-  transition:transform .25s var(--ease),box-shadow .25s;
+  transition:transform .25s var(--ease),opacity .25s;
 }
 .wl button .ar{
   display:inline-block;transition:transform .25s var(--ease);
   font-family:var(--sans);font-weight:400;
 }
-.wl button:hover{transform:translateY(-1px);box-shadow:0 1px 0 rgba(255,255,255,.6) inset, 0 14px 28px -14px rgba(33,28,35,.6)}
+.wl button:hover{opacity:.9}
 .wl button:hover .ar{transform:translateX(4px)}
-.wl button:active{transform:none}
-.wl button:disabled{opacity:.55;cursor:wait;transform:none}
+.wl button:active{transform:scale(.99)}
+.wl button:disabled{opacity:.55;cursor:wait}
+@media(max-width:430px){
+  .wl-row{padding-left:1.1rem}
+  .wl button{padding-inline:1rem;font-size:.88rem}
+}
 .beta{
-  display:flex;align-items:center;justify-content:center;gap:.6rem;
-  margin-top:1.3rem;cursor:pointer;user-select:none;
-  font-size:.86rem;font-weight:400;color:var(--ink-soft);
+  display:inline-flex;align-items:center;gap:.55rem;
+  margin-top:1.15rem;cursor:pointer;user-select:none;
+  padding:.5rem 1.05rem;border-radius:999px;
+  border:1px solid var(--hairline);background:transparent;
+  font-size:.82rem;font-weight:400;color:var(--ink-soft);
+  transition:border-color .25s,background .25s;
 }
 .beta input{
-  appearance:none;width:17px;height:17px;flex:none;border-radius:50%;cursor:pointer;
-  background:#fff;border:1px solid var(--hairline);
-  display:grid;place-items:center;transition:border-color .2s;
+  appearance:none;width:15px;height:15px;flex:none;border-radius:50%;cursor:pointer;
+  border:1px solid rgba(33,28,35,.3);
+  display:grid;place-items:center;transition:border-color .2s,background .2s;
+  position:relative;
 }
-.beta input::after{
-  content:"";width:9px;height:9px;border-radius:50%;transform:scale(0);
-  background:var(--ink);transition:transform .18s var(--ease);
+.beta input:checked{background:var(--ink);border-color:var(--ink)}
+.beta input:checked::after{
+  content:"";width:8px;height:4.5px;margin-top:-1.5px;
+  border-left:1.5px solid var(--cream);border-bottom:1.5px solid var(--cream);
+  transform:rotate(-45deg);
 }
-.beta input:checked{border-color:var(--ink)}
-.beta input:checked::after{transform:scale(1)}
+.beta:has(input:checked){border-color:var(--ink);background:rgba(239,184,200,.14)}
 .beta b{font-weight:600;color:var(--ink)}
 .wl-note{
   margin-top:1.5rem;
@@ -398,7 +411,7 @@ h1 em{font-style:normal;color:var(--pink-deep)}
 .prom .ds{font-weight:400;font-size:.9rem;line-height:1.8;color:var(--ink-soft)}
 
 /* ---------- success ---------- */
-.done{display:none;max-width:420px;margin:0 auto;text-align:center}
+.done{display:none;max-width:420px;margin:2.3rem auto 0;text-align:center}
 .done.on{display:block}
 .done .t-label{
   font-family:var(--sans);font-size:.62rem;letter-spacing:.34em;text-indent:.34em;text-transform:uppercase;color:var(--gold);
@@ -427,6 +440,23 @@ h1 em{font-style:normal;color:var(--pink-deep)}
 .done-btns button{border:0;color:var(--cream);background:var(--ink);box-shadow:0 10px 24px -14px rgba(33,28,35,.55)}
 .done-btns a{border:1px solid var(--hairline);color:var(--ink);background:transparent}
 .done-btns button:hover,.done-btns a:hover{transform:translateY(-1px)}
+
+/* ---------- d-day finale ---------- */
+.dday{margin-top:clamp(2.6rem,6vh,3.4rem)}
+.dday-in{
+  margin-top:1.7rem;
+  display:flex;flex-direction:column;align-items:center;gap:1.5rem;
+}
+.up{
+  height:50px;border:1px solid rgba(33,28,35,.34);border-radius:999px;
+  background:transparent;color:var(--ink);
+  padding-inline:1.5rem;
+  display:inline-flex;align-items:center;gap:.55rem;
+  font-family:var(--kr);font-size:.9rem;font-weight:600;
+  transition:background .25s,border-color .25s;
+}
+.up:hover{background:rgba(239,184,200,.14);border-color:var(--ink)}
+.up .ar{font-family:var(--sans)}
 
 /* ---------- foot ---------- */
 .legal{
@@ -473,17 +503,8 @@ h1 em{font-style:normal;color:var(--pink-deep)}
       <span>Beauty-Tech House</span>
     </div>
     <img class="mark" src="/assets/wordmark2.png" alt="MEVE">
-    <div class="strip" id="cd" aria-label="앱 런칭까지 남은 시간">
+    <div class="strip" aria-label="앱 런칭">
       <p class="st-label">App Launch <i class="st-dot"></i> <b>7.29</b></p>
-      <div class="flap" id="flap">
-        <div class="cell"><span class="num" id="fD">14</span><span class="lab">Days</span></div>
-        <span class="fsep">:</span>
-        <div class="cell"><span class="num" id="fH">00</span><span class="lab">Hours</span></div>
-        <span class="fsep">:</span>
-        <div class="cell"><span class="num" id="fM">00</span><span class="lab">Min</span></div>
-        <span class="fsep">:</span>
-        <div class="cell"><span class="num" id="fS">00</span><span class="lab">Sec</span></div>
-      </div>
     </div>
   </header>
 
@@ -495,6 +516,39 @@ h1 em{font-style:normal;color:var(--pink-deep)}
       <div class="scanline" aria-hidden="true"></div>
       <h1>내 피부엔 뭐가 맞는지,<br>내 얼굴엔 뭐가 <em>어울리는지</em></h1>
     </div>
+
+    <form class="wl" id="waitlist" novalidate>
+      <p class="wl-count" id="wlCount"></p>
+      <p class="wl-teaser"><span>지금 <b>No.100</b> 안에 들면,<br class="mbr"> 프리미엄 3개월 무료</span></p>
+      <div class="wl-row">
+        <input type="email" id="wlEmail" name="email" inputmode="email" autocomplete="email" placeholder="이메일 주소" required>
+        <button type="submit" id="wlBtn"><span>내 티켓 번호 받기</span><span class="ar">→</span></button>
+      </div>
+      <label class="beta">
+        <input type="checkbox" id="wlBeta">
+        <span>출시 전 <b>베타 테스터 30인</b> 선발에 지원할래요</span>
+      </label>
+      <p class="wl-error" id="wlError"></p>
+      <p class="wl-note">지금 신청하면 번호가 바로 나와요.<br><b>7월 29일</b>, 앞 번호부터 순서대로 앱이 열립니다.</p>
+    </form>
+
+    <section class="done" id="done" aria-live="polite">
+      <p class="t-label">Beauty DNA Ticket</p>
+      <p class="t-no" id="doneNo">No.—</p>
+      <p class="t-keep">런칭하면 이 번호가 당신의 앱 프로필에 그대로 새겨져요.<br>이 번호의 주인은 <b>세상에 당신 한 명</b>이에요.</p>
+      <hr class="t-rule">
+      <p class="boost">친구가 한 명 올 때마다 <b>10칸 앞으로</b> 이동해요.</p>
+      <div class="tiers">
+        <p class="t"><b>1명</b> = 10칸 앞으로</p>
+        <p class="t"><b>3명</b> = 베타 테스터 30인 후보 확정</p>
+        <p class="t"><b>10명</b> = 프리미엄 3개월 추가</p>
+      </div>
+      <div class="done-btns">
+        <button type="button" id="shareBtn">내 초대 링크 공유하기</button>
+        <a id="igBtn" href="https://instagram.com/maison.meve" target="_blank" rel="noopener">인스타그램</a>
+      </div>
+    </section>
+
 
     <p class="lead">
       확실한 답을 모른 채, 우리는 오늘도 수백 개의 리뷰 속에서
@@ -535,40 +589,7 @@ h1 em{font-style:normal;color:var(--pink-deep)}
 
   <hr class="dr">
 
-  <!-- waitlist -->
   <section class="rv">
-    <form class="wl" id="waitlist" novalidate>
-      <p class="wl-count" id="wlCount"></p>
-      <p class="wl-teaser"><span>지금 <b>No.100</b> 안에 들면,<br class="mbr"> 프리미엄 3개월 무료</span></p>
-      <div class="wl-row">
-        <input type="email" id="wlEmail" name="email" inputmode="email" autocomplete="email" placeholder="이메일 주소" required>
-        <button type="submit" id="wlBtn"><span>내 티켓 번호 받기</span><span class="ar">→</span></button>
-      </div>
-      <label class="beta">
-        <input type="checkbox" id="wlBeta">
-        <span>출시 전 <b>베타 테스터 30인</b> 선발에 지원할래요</span>
-      </label>
-      <p class="wl-error" id="wlError"></p>
-      <p class="wl-note">지금 신청하면 번호가 바로 나와요.<br><b>7월 29일</b>, 앞 번호부터 순서대로 앱이 열립니다.</p>
-    </form>
-
-    <section class="done" id="done" aria-live="polite">
-      <p class="t-label">Beauty DNA Ticket</p>
-      <p class="t-no" id="doneNo">No.—</p>
-      <p class="t-keep">런칭하면 이 번호가 당신의 앱 프로필에 그대로 새겨져요.<br>이 번호의 주인은 <b>세상에 당신 한 명</b>이에요.</p>
-      <hr class="t-rule">
-      <p class="boost">친구가 한 명 올 때마다 <b>10칸 앞으로</b> 이동해요.</p>
-      <div class="tiers">
-        <p class="t"><b>1명</b> = 10칸 앞으로</p>
-        <p class="t"><b>3명</b> = 베타 테스터 30인 후보 확정</p>
-        <p class="t"><b>10명</b> = 프리미엄 3개월 추가</p>
-      </div>
-      <div class="done-btns">
-        <button type="button" id="shareBtn">내 초대 링크 공유하기</button>
-        <a id="igBtn" href="https://instagram.com/maison.meve" target="_blank" rel="noopener">인스타그램</a>
-      </div>
-    </section>
-
     <!-- the ticket -->
     <div class="ticket-wrap">
       <p class="numero" style="margin-bottom:1.3rem">N°02 · The Ticket</p>
@@ -614,6 +635,22 @@ h1 em{font-style:normal;color:var(--pink-deep)}
       <div class="prom"><span class="st">i.</span><p><span class="tt">이유</span> &nbsp;<span class="ds">왜 안 맞았는지, 이유부터 알게 돼요</span></p></div>
       <div class="prom"><span class="st">ii.</span><p><span class="tt">계산</span> &nbsp;<span class="ds">'감'이라 불리던 것들이 데이터로 계산돼요</span></p></div>
       <div class="prom"><span class="st">iii.</span><p><span class="tt">사람</span> &nbsp;<span class="ds">광고 없는 진짜 이야기들과 연결돼요</span></p></div>
+    </div>
+  </section>
+
+  <section class="dday rv" aria-label="런칭까지 남은 시간">
+    <p class="numero">N°04 · D-Day</p>
+    <div class="dday-in" id="cd">
+      <div class="flap" id="flap">
+        <div class="cell"><span class="num" id="fD">14</span><span class="lab">Days</span></div>
+        <span class="fsep">:</span>
+        <div class="cell"><span class="num" id="fH">00</span><span class="lab">Hours</span></div>
+        <span class="fsep">:</span>
+        <div class="cell"><span class="num" id="fM">00</span><span class="lab">Min</span></div>
+        <span class="fsep">:</span>
+        <div class="cell"><span class="num" id="fS">00</span><span class="lab">Sec</span></div>
+      </div>
+      <button type="button" class="up" id="upBtn">내 티켓 번호 받기 <span class="ar">↑</span></button>
     </div>
   </section>
 
@@ -675,6 +712,13 @@ h1 em{font-style:normal;color:var(--pink-deep)}
     es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
   }, {threshold:.12});
   document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+  /* ---- bottom CTA: back to the form ---- */
+  $('upBtn').addEventListener('click', () => {
+    const target = form.style.display === 'none' ? done : form;
+    target.scrollIntoView({behavior:'smooth', block:'center'});
+    if(form.style.display !== 'none') setTimeout(() => $('wlEmail').focus({preventScroll:true}), 650);
+  });
 
   /* ---- referral source capture (?r=CODE, or set by /heesun redirect) ---- */
   const qs = new URLSearchParams(location.search);
