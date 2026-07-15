@@ -86,7 +86,7 @@ img{display:block;max-width:100%;height:auto}
   position:relative;
   min-height:100svh;
   display:flex;flex-direction:column;
-  padding-bottom:1.9rem;
+  padding-bottom:2.2rem;
 }
 .hero-clouds{
   position:absolute;left:calc(50% - 50vw);width:100vw;bottom:0;height:56%;
@@ -110,17 +110,16 @@ img{display:block;max-width:100%;height:auto}
 .hero-brand{margin-top:clamp(.9rem,2.2vh,1.6rem);text-align:center}
 .hero-brand .mark{margin:0 auto;width:clamp(148px,40vw,180px)}
 .hero-date{
-  margin-top:1.15rem;
-  display:inline-flex;align-items:center;gap:.6rem;
-  padding:.42rem 1rem .42rem 1.15rem;
-  border:1px solid rgba(199,167,108,.45);border-radius:999px;
+  margin-top:1rem;
+  display:inline-flex;align-items:center;gap:.55rem;
 }
 .hero-date span{
   font-family:var(--sans);font-weight:600;
-  font-size:.62rem;letter-spacing:.22em;text-indent:.22em;text-transform:uppercase;color:var(--gold);
+  font-size:.6rem;letter-spacing:.24em;text-indent:.24em;text-transform:uppercase;color:var(--gold);
 }
+.hero-date i{width:3px;height:3px;border-radius:50%;background:var(--gold);opacity:.6}
 .hero-date b{
-  font-family:var(--serif);font-weight:600;font-size:1.02rem;letter-spacing:.05em;color:var(--cream);
+  font-family:var(--serif);font-weight:600;font-size:.98rem;letter-spacing:.06em;color:var(--cream);
   font-variant-numeric:tabular-nums;
 }
 .hero-mid{margin-block:auto;text-align:center;position:relative;padding-block:1.5rem}
@@ -131,8 +130,8 @@ img{display:block;max-width:100%;height:auto}
 }
 .hero-form{position:relative}
 .hero-form .wl{margin-top:0}
-.hero-form .wl-note{margin-top:1rem;font-size:.8rem;color:var(--cream-mute)}
-.hero-form .beta{margin-top:.9rem}
+.hero-form .wl-note{margin-top:.95rem;font-size:.78rem;color:var(--cream-mute)}
+.hero-form .beta{margin-top:.5rem}
 .narr{margin-top:clamp(3rem,7vh,4rem)}
 .narr .lead:first-of-type{margin-top:1.8rem}
 /* plain pivot (text only) */
@@ -334,17 +333,16 @@ h1 em{font-style:normal;color:var(--powder)}
 }
 .wl-count.on{display:block}
 .wl-teaser{
-  margin-bottom:1.2rem;
+  margin-bottom:1.15rem;
   display:flex;align-items:center;justify-content:center;gap:.9rem;
   font-weight:500;font-size:.92rem;letter-spacing:-.01em;color:var(--cream-soft);
 }
 .wl-teaser::before,.wl-teaser::after{content:"";width:34px;height:1px;background:rgba(199,167,108,.45);flex:none}
 .wl-teaser span{line-height:1.7}
 .wl-teaser b{font-family:var(--serif);font-weight:600;font-size:1.1em;letter-spacing:.02em;color:var(--powder)}
-.wl-teaser .mbr{display:none}
 @media(max-width:480px){
+  .wl-teaser{font-size:.87rem}
   .wl-teaser::before,.wl-teaser::after{display:none}
-  .wl-teaser .mbr{display:inline}
 }
 .wl-row{
   display:flex;align-items:center;gap:.4rem;
@@ -381,12 +379,11 @@ h1 em{font-style:normal;color:var(--powder)}
   .wl button{padding-inline:1rem;font-size:.88rem}
 }
 .beta{
-  display:inline-flex;align-items:center;gap:.55rem;
-  margin-top:1.15rem;cursor:pointer;user-select:none;
-  padding:.5rem 1.05rem;border-radius:999px;
-  border:1px solid rgba(246,239,233,.22);background:transparent;
-  font-size:.82rem;font-weight:400;color:var(--cream-soft);
-  transition:border-color .25s,background .25s;
+  display:inline-flex;align-items:center;gap:.5rem;
+  margin-top:.55rem;cursor:pointer;user-select:none;
+  padding:.45rem .6rem;
+  font-size:.78rem;font-weight:400;color:var(--cream-mute);
+  transition:color .25s;
 }
 .beta input{
   appearance:none;width:15px;height:15px;flex:none;border-radius:50%;cursor:pointer;
@@ -400,8 +397,9 @@ h1 em{font-style:normal;color:var(--powder)}
   border-left:1.5px solid #241220;border-bottom:1.5px solid #241220;
   transform:rotate(-45deg);
 }
-.beta:has(input:checked){border-color:var(--powder);background:rgba(239,184,200,.1)}
-.beta b{font-weight:600;color:var(--cream)}
+.beta:has(input:checked){color:var(--cream-soft)}
+.beta:has(input:checked) b{color:var(--powder)}
+.beta b{font-weight:600;color:var(--cream-soft);transition:color .25s}
 .wl-note{
   margin-top:1.5rem;
   font-size:.88rem;font-weight:400;line-height:1.9;color:var(--cream-mute);
@@ -744,7 +742,7 @@ h1 em{font-style:normal;color:var(--powder)}
     <div class="hero-veil" aria-hidden="true"></div>
     <div class="hero-brand fade d1">
       <div class="mark-m" role="img" aria-label="MEVE"></div>
-      <p class="hero-date"><span>App Launch</span><b>7.29</b></p>
+      <p class="hero-date"><span>App Launch</span><i aria-hidden="true"></i><b>7.29</b></p>
     </div>
     <div class="hero-mid fade d2">
       <h1>내 피부엔 뭐가 <em>맞는지</em>,<br>내 얼굴엔 뭐가 <em>어울리는지</em></h1>
@@ -753,12 +751,12 @@ h1 em{font-style:normal;color:var(--powder)}
     <div class="hero-form fade d3">
     <form class="wl" id="waitlist" novalidate>
       <p class="wl-count" id="wlCount"></p>
-      <p class="wl-teaser"><span>지금 <b>No.100</b> 안에 들면,<br class="mbr"> 프리미엄 3개월 무료</span></p>
+      <p class="wl-teaser"><span>지금 <b>No.100</b> 안에 들면, 프리미엄 3개월 무료</span></p>
       <div class="wl-row">
         <input type="email" id="wlEmail" name="email" inputmode="email" autocomplete="email" placeholder="이메일 주소" required>
         <button type="submit" id="wlBtn"><span>내 티켓 번호 받기</span><span class="ar">→</span></button>
       </div>
-      <p class="wl-note">지금 신청하면 번호가 바로 나와요 · <b>7월 29일</b> 앞 번호부터 열려요</p>
+      <p class="wl-note">번호는 바로 나와요 · 앱은 앞 번호부터 열려요</p>
       <label class="beta">
         <input type="checkbox" id="wlBeta">
         <span>출시 전 <b>베타 테스터 30인</b> 선발에 지원할래요</span>
