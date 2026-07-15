@@ -530,6 +530,55 @@ h1 em{font-style:normal;color:var(--powder)}
 }
 .nuit .foot a{color:var(--powder)}
 
+
+/* ---------- luster kit ---------- */
+.mark-m{
+  position:relative;overflow:hidden;
+  width:clamp(148px,40vw,180px);aspect-ratio:2466/1005;
+  margin:0 auto;background:#F2EAE3;
+  -webkit-mask:url('/assets/wordmark2.png') center/contain no-repeat;
+          mask:url('/assets/wordmark2.png') center/contain no-repeat;
+}
+.mark-m .sheen{
+  position:absolute;inset:-30%;
+  background:linear-gradient(115deg,transparent 42%,rgba(255,255,255,.9) 50%,transparent 58%);
+  transform:translateX(-130%);
+}
+.hero-clouds{will-change:transform}
+.ticket{transition:transform .5s var(--ease),box-shadow .5s var(--ease);will-change:transform}
+.ticket .glint{
+  content:"";position:absolute;inset:0;border-radius:14px;pointer-events:none;
+  background:radial-gradient(340px 220px at var(--gx,50%) var(--gy,-30%), rgba(255,255,255,.5), transparent 62%);
+  opacity:0;transition:opacity .4s;
+  mix-blend-mode:soft-light;
+}
+.ticket.lit .glint{opacity:1}
+.wl-row{transition:border-color .25s,box-shadow .45s var(--ease)}
+.wl-row:focus-within{border-color:var(--powder);box-shadow:0 0 0 4px rgba(239,184,200,.1), 0 0 38px rgba(239,184,200,.16)}
+.done .t-no.shimmer{
+  background:linear-gradient(100deg,var(--cream) 42%,#FFE9C9 50%,var(--cream) 58%);
+  background-size:250% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+@media(prefers-reduced-motion:no-preference){
+  .mark-m .sheen{animation:sheenSweep 7s var(--ease) 2.2s infinite}
+  @keyframes sheenSweep{
+    0%{transform:translateX(-130%)}
+    16%{transform:translateX(130%)}
+    100%{transform:translateX(130%)}
+  }
+  .hero-clouds{animation:cloudDrift 26s ease-in-out infinite alternate}
+  @keyframes cloudDrift{
+    from{transform:scale(1) translateY(0)}
+    to{transform:scale(1.07) translateY(-2.2%)}
+  }
+  .done .t-no.shimmer{animation:noShimmer 1.6s var(--ease) .3s 2}
+  @keyframes noShimmer{
+    from{background-position:120% 0}
+    to{background-position:-30% 0}
+  }
+}
+
 /* ---------- motion ---------- */
 @media(prefers-reduced-motion:no-preference){
   .fade{opacity:0;transform:translateY(14px);animation:up .9s var(--ease) forwards}
@@ -552,7 +601,7 @@ h1 em{font-style:normal;color:var(--powder)}
       <span>Beauty-Tech House</span>
     </div>
     <div class="hero-brand fade d1">
-      <img class="mark" src="/assets/wordmark2.png" alt="MEVE" width="2466" height="1005" decoding="async" fetchpriority="high">
+      <div class="mark-m" role="img" aria-label="MEVE"><i class="sheen" aria-hidden="true"></i></div>
       <p class="hero-date">App Launch &nbsp;7 · 29</p>
     </div>
     <div class="hero-mid fade d2">
@@ -639,7 +688,8 @@ h1 em{font-style:normal;color:var(--powder)}
     <!-- the ticket -->
     <div class="ticket-wrap">
       <p class="numero" style="margin-bottom:1.3rem">N°02 · The Ticket</p>
-      <article class="ticket" aria-label="웨이트리스트 혜택">
+      <article class="ticket" id="ticket" aria-label="웨이트리스트 혜택">
+        <i class="glint" aria-hidden="true"></i>
         <div class="ticket-in">
           <div class="ticket-head"><span>MEVE Waitlist</span><span class="adm">Admit One</span></div>
           <p class="ticket-title">What your number gets you</p>
@@ -758,6 +808,23 @@ h1 em{font-style:normal;color:var(--powder)}
   }, {threshold:.12});
   document.querySelectorAll('.rv').forEach(el => io.observe(el));
 
+  /* ---- ticket tilt + glint (pointer devices) ---- */
+  const tk = $('ticket');
+  if(tk && matchMedia('(hover:hover) and (prefers-reduced-motion: no-preference)').matches){
+    tk.addEventListener('pointermove', e => {
+      const r = tk.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
+      tk.style.transform = 'rotate(-.4deg) rotateY(' + ((px - .5) * 7) + 'deg) rotateX(' + ((.5 - py) * 5) + 'deg)';
+      tk.style.setProperty('--gx', (px * 100) + '%');
+      tk.style.setProperty('--gy', (py * 100) + '%');
+      tk.classList.add('lit');
+    });
+    tk.addEventListener('pointerleave', () => {
+      tk.style.transform = 'rotate(-.4deg)';
+      tk.classList.remove('lit');
+    });
+  }
+
   /* ---- bottom CTA: back to the form ---- */
   $('upBtn').addEventListener('click', () => {
     const target = form.style.display === 'none' ? done : form;
@@ -774,10 +841,25 @@ h1 em{font-style:normal;color:var(--powder)}
     const code = store.get('mv-wl-code');
     return code ? SITE + '/?r=' + code : SITE;
   };
-  const showDone = pos => {
-    $('doneNo').textContent = 'No.' + pos;
+  const showDone = (pos, animate) => {
+    const el = $('doneNo');
     form.style.display = 'none';
     done.classList.add('on');
+    const n = parseInt(pos, 10);
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(!animate || reduced || !isFinite(n)){
+      el.textContent = 'No.' + pos;
+      return;
+    }
+    const t0 = performance.now(), dur = 950, from = Math.max(1, n - 40);
+    const step = t => {
+      const p = Math.min(1, (t - t0) / dur);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = 'No.' + Math.round(from + (n - from) * eased);
+      if(p < 1) requestAnimationFrame(step);
+      else el.classList.add('shimmer');
+    };
+    requestAnimationFrame(step);
   };
   const saved = store.get('mv-wl-pos');
   if(saved) showDone(saved);
@@ -829,7 +911,7 @@ h1 em{font-style:normal;color:var(--powder)}
       }
       store.set('mv-wl-pos', pos);
       if(code) store.set('mv-wl-code', code);
-      showDone(pos);
+      showDone(pos, true);
     }catch(ex){
       err.textContent = '잠시 후 다시 시도해 주세요.';
       err.classList.add('on');
