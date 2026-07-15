@@ -440,7 +440,10 @@ h1 em{font-style:normal;color:var(--powder)}
 .done-btns button{border:0;color:#241220;background:var(--powder)}
 .done-btns a{border:1px solid rgba(246,239,233,.3);color:var(--cream);background:transparent}
 .done-btns button:hover,.done-btns a:hover{transform:translateY(-1px)}
-@media(max-width:420px){.done-btns{flex-direction:column}}
+@media(max-width:420px){
+  .done-btns{flex-direction:column}
+  .done-btns button,.done-btns a{flex:0 0 auto;width:100%;height:54px}
+}
 
 /* ---------- the ticket (ivory object, floats on plum) ---------- */
 .ticket-wrap{margin-top:clamp(2.2rem,5vh,3rem)}
