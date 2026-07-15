@@ -1,0 +1,3668 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MEVE · Beauty-Tech House</title>
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<meta name="description" content="감에 기대던 아름다움의 시대는 끝. 나의 최상은 데이터가 알고 있어요. 스킨케어부터 메이크업까지, 초개인화 뷰티 매니저 MEVE. App Launching July 2026.">
+<meta name="theme-color" content="#FBF7F5">
+<meta property="og:title" content="MEVE · Beauty-Tech House">
+<meta property="og:description" content="감에 기대던 아름다움의 시대는 끝. 나의 최상은 데이터가 알고 있어요. App Launching July 2026.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://meve.beauty">
+<meta property="og:image" content="https://meve.beauty/assets/prologue-poster.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400;1,6..96,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+/* ============================================================
+   MEVE — Maison Éditorial
+   porcelain plates · one dark "nuit" chapter · pearl glass
+   ============================================================ */
+:root{
+  --porcelain:#FBF7F5;
+  --blush:#F6E7EA;
+  --powder:#EFB8C8;
+  --powder-soft:#F7DCE3;
+  --rose:#B8506B;
+  --rose-deep:#8E3A50;
+  --dove:#A79CA0;
+  --greige:#CBC1BE;
+  --ink:#1A1216;
+  --plum:#2E1D29;
+  --plum-deep:#221420;
+  --pearl:#FDFBFA;
+  --hairline:rgba(26,18,22,.14);
+  --hairline-soft:rgba(26,18,22,.08);
+  --serif:'Cormorant Garamond',serif;
+  --sans:'Jost','Pretendard Variable',Pretendard,sans-serif;
+  --kr:'Pretendard Variable',Pretendard,-apple-system,sans-serif;
+  --ease:cubic-bezier(.19,.6,.22,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--porcelain);
+  color:var(--ink);
+  font-family:var(--kr);
+  font-weight:400;
+  line-height:1.8;
+  letter-spacing:-0.008em;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--powder);color:var(--ink)}
+img,svg,video{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit}
+button{cursor:pointer;border:none;background:none}
+
+/* ---------- editorial primitives ---------- */
+.wrap{width:min(1240px,92vw);margin-inline:auto}
+.numero{
+  font-family:var(--sans);
+  font-weight:400;
+  font-size:.7rem;
+  letter-spacing:.46em;
+  text-transform:uppercase;
+  color:var(--rose);
+  display:flex;align-items:center;gap:1.1rem;
+  white-space:nowrap;
+}
+.numero::after{content:"";height:1px;width:56px;background:var(--hairline);flex:none}
+.nuit .numero{color:var(--powder)}
+.nuit .numero::after{background:rgba(253,251,250,.22)}
+.display{
+  font-family:var(--serif);
+  font-weight:500;
+  line-height:1.04;
+  letter-spacing:.005em;
+}
+.kr-head{
+  font-family:var(--kr);
+  font-weight:300;
+  line-height:1.42;
+  letter-spacing:-0.02em;
+}
+.kr-body{
+  font-size:.95rem;
+  color:#5D5257;
+  max-width:34em;
+}
+.nuit .kr-body{color:#C9BAC2}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity 1.1s var(--ease),transform 1.1s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+.reveal[data-delay="1"]{transition-delay:.1s}
+.reveal[data-delay="2"]{transition-delay:.2s}
+.reveal[data-delay="3"]{transition-delay:.3s}
+.reveal[data-delay="4"]{transition-delay:.4s}
+
+/* tiny gold-star — used sparingly */
+.etoile{color:#C7A76C;font-size:.72rem;letter-spacing:.4em}
+
+/* ---------- nav ---------- */
+nav{
+  position:fixed;inset:0 0 auto 0;z-index:60;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.4rem clamp(1.2rem,4vw,3.2rem);
+  transition:padding .5s var(--ease),background .5s var(--ease),box-shadow .5s var(--ease);
+}
+nav.scrolled{
+  padding-block:.85rem;
+  background:rgba(251,247,245,.72);
+  backdrop-filter:blur(22px) saturate(1.15);
+  -webkit-backdrop-filter:blur(22px) saturate(1.15);
+  box-shadow:inset 0 -1px 0 rgba(255,255,255,.5),0 1px 0 var(--hairline-soft);
+}
+.nav-mark{width:clamp(84px,8.5vw,108px);transition:opacity .3s}
+.nav-mark img{width:100%;height:auto}
+.nav-mark:hover{opacity:.72}
+.nav-links{display:flex;gap:2.2rem;align-items:center}
+.nav-links a{
+  font-family:var(--sans);font-size:.72rem;font-weight:400;
+  letter-spacing:.3em;text-transform:uppercase;color:#4E434A;
+  position:relative;padding-block:.2rem;
+}
+.nav-links a::after{
+  content:"";position:absolute;left:0;bottom:0;height:1px;width:0;
+  background:var(--rose);transition:width .4s var(--ease);
+}
+.nav-links a:hover::after{width:100%}
+.nav-links a.nav-cta{color:#7C3450}
+.nav-links a.nav-cta::after{display:none}
+.nav-cta{
+  position:relative;
+  font-family:var(--kr);font-size:.74rem;font-weight:600;letter-spacing:.16em;
+  color:#7C3450;padding:.68rem 1.45rem .68rem 1.6rem;border-radius:100px;
+  background:rgba(246,190,209,.4);
+  -webkit-backdrop-filter:blur(22px) saturate(1.6);backdrop-filter:blur(22px) saturate(1.6);
+  box-shadow:0 10px 30px -18px rgba(184,80,107,.4);
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease),background .35s var(--ease);
+}
+.nav-cta:hover{
+  transform:translateY(-1px);
+  background:rgba(246,190,209,.55);
+  box-shadow:0 14px 36px -18px rgba(184,80,107,.5);
+}
+@media(max-width:900px){.nav-links a:not(.nav-cta){display:none}}
+
+/* nav over dark rooms — dark frosted variant */
+nav .nav-links a{transition:color .45s var(--ease)}
+nav.dark.scrolled{
+  background:rgba(30,20,28,.55);
+  box-shadow:inset 0 -1px 0 rgba(255,255,255,.06),0 1px 0 rgba(0,0,0,.25);
+}
+nav.dark .nav-links a{color:#D8C6D0}
+nav.dark .nav-links a.cur{color:#F2B9CB}
+nav.dark .nav-links a:not(.nav-cta) .roll>span:last-child{color:#F2B9CB}
+nav.dark .nav-links a::after{background:#F2B9CB}
+nav.dark .nav-mark img{filter:brightness(0) invert(.96)}
+nav.dark .nav-cta{color:#F6CDD9;background:rgba(246,205,217,.16);box-shadow:0 10px 30px -18px rgba(0,0,0,.6)}
+nav.dark .nav-cta:hover{background:rgba(246,205,217,.28)}
+
+/* ---------- prologue : the scroll-scrubbed journey ---------- */
+.prologue-track{height:950vh;position:relative}
+.prologue{
+  position:sticky;top:0;height:100svh;overflow:hidden;
+  background:var(--porcelain);
+}
+.prologue video{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:center;
+}
+.pro-beat{
+  position:absolute;inset:0;z-index:2;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.4rem;
+  text-align:center;padding-inline:6vw;
+  opacity:0;pointer-events:none;will-change:opacity,transform;
+}
+.pro-beat.on{pointer-events:auto}
+.pro-beat::before{ /* soft porcelain halo for legibility */
+  content:"";position:absolute;z-index:-1;
+  width:min(880px,94vw);height:min(540px,72vh);border-radius:50%;
+  background:radial-gradient(closest-side,rgba(251,247,245,.68),rgba(251,247,245,0));
+  filter:blur(4px);
+}
+.pro-eyebrow{
+  font-family:var(--sans);font-size:.7rem;letter-spacing:.5em;
+  text-transform:uppercase;color:#6B5E64;
+}
+.pro-serif{
+  font-family:'Bodoni Moda',var(--serif);font-weight:400;line-height:1.08;
+  font-size:clamp(2.8rem,7.2vw,6rem);letter-spacing:.005em;
+}
+.pro-serif em{font-style:italic;font-weight:400;color:#E0557F}
+.pro-kr{
+  font-family:var(--kr);font-weight:300;word-break:keep-all;
+  font-size:clamp(1.1rem,2.2vw,1.55rem);letter-spacing:-.02em;color:#3B3036;
+}
+.pro-lines{display:grid;gap:.6rem}
+.pro-lines .pro-serif{font-size:clamp(1.8rem,4vw,3.2rem);font-weight:400}
+.pro-caption{font-family:var(--kr);font-weight:300;font-size:.95rem;color:#6B5E64;margin-top:.6rem}
+.pro-cta{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-top:1.2rem}
+.pro-logo{width:min(330px,64vw);height:auto;filter:drop-shadow(0 4px 24px rgba(251,247,245,.95))}
+/* ----- hero grade : film grain, vignette, couture frame ----- */
+.prologue::before{ /* grain */
+  content:"";position:absolute;inset:-40px;z-index:1;pointer-events:none;opacity:.055;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grainShift 1.4s steps(3) infinite alternate;
+}
+@keyframes grainShift{to{transform:translate(1.6%,-1.8%)}}
+.prologue::after{ /* vignette */
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(125% 125% at 50% 42%,transparent 58%,rgba(28,20,24,.12) 100%);
+}
+.pro-frame{
+  position:absolute;inset:clamp(14px,2.2vw,26px);z-index:3;pointer-events:none;
+}
+.pro-frame span{
+  position:absolute;font-family:var(--sans);font-size:.56rem;font-weight:500;
+  letter-spacing:.34em;text-transform:uppercase;color:#57484F;white-space:nowrap;
+  text-shadow:0 1px 6px rgba(251,247,245,.9),0 0 2px rgba(251,247,245,.9);
+}
+.pro-frame .fm1{bottom:12px;left:16px}
+.pro-frame .fm2{bottom:12px;right:16px;display:flex;align-items:center;gap:.55rem}
+.pro-frame .fm2 i{
+  width:5px;height:5px;border-radius:50%;background:var(--rose);
+  animation:launchPulse 2.4s ease-in-out infinite;
+}
+@keyframes launchPulse{0%,100%{opacity:.35;transform:scale(.85)}50%{opacity:1;transform:scale(1)}}
+/* letter-by-letter title */
+.pro-title{font-size:clamp(3.2rem,8.4vw,7.2rem);letter-spacing:-.01em;line-height:1}
+.pro-title .w{display:inline-block;white-space:nowrap} /* never break inside a word */
+.pro-title i{
+  font-style:normal;display:inline-block;opacity:0;transform:translateY(.5em);
+  animation:charUp .95s cubic-bezier(.19,.8,.22,1) forwards;
+  animation-delay:calc(.45s + var(--i)*.05s);
+}
+.pro-title .amp i{font-style:italic;font-weight:400;color:#E0557F}
+@keyframes charUp{to{opacity:1;transform:none}}
+.btn{
+  position:relative;overflow:hidden;isolation:isolate;
+  display:inline-flex;align-items:center;gap:.8rem;
+  font-family:var(--sans);font-size:.74rem;letter-spacing:.26em;text-transform:uppercase;
+  padding:1.02rem 2.2rem;border-radius:100px;
+  transition:transform .4s var(--ease),box-shadow .4s var(--ease),color .35s var(--ease);
+}
+.btn:hover{transform:translateY(-2px)}
+.btn:focus-visible{outline:2px solid var(--rose);outline-offset:3px}
+.btn-ink{ /* primary — flat frosted pink */
+  color:#7C3450;font-weight:500;
+  background:rgba(246,190,209,.4);
+  backdrop-filter:blur(22px) saturate(1.6);-webkit-backdrop-filter:blur(22px) saturate(1.6);
+  box-shadow:0 12px 32px -18px rgba(184,80,107,.4);
+}
+.btn-ink:hover{
+  background:rgba(246,190,209,.55);
+  box-shadow:0 16px 38px -18px rgba(184,80,107,.5);
+}
+.btn-ghost{ /* secondary — flat frosted clear */
+  color:#5C4450;
+  background:rgba(255,255,255,.35);
+  backdrop-filter:blur(20px) saturate(1.4);-webkit-backdrop-filter:blur(20px) saturate(1.4);
+  box-shadow:0 10px 26px -18px rgba(142,58,80,.3);
+}
+.btn-ghost:hover{
+  color:var(--rose-deep);
+  background:rgba(255,255,255,.5);
+  box-shadow:0 14px 32px -18px rgba(142,58,80,.38);
+}
+.partners .btn-ink{ /* on dark plum — luminous frost */
+  color:#F6CDD9;
+  background:rgba(246,205,217,.14);
+  box-shadow:0 12px 32px -18px rgba(0,0,0,.5);
+}
+.partners .btn-ink:hover{background:rgba(246,205,217,.22)}
+.btn small{font-size:.62rem;letter-spacing:.2em;opacity:.62}
+.pro-scroll{
+  position:absolute;bottom:2.4rem;left:50%;transform:translateX(-50%);
+  font-family:var(--sans);font-size:.62rem;letter-spacing:.5em;text-transform:uppercase;color:#8A7C82;
+  display:flex;flex-direction:column;align-items:center;gap:.7rem;
+}
+.pro-scroll::after{
+  content:"";width:1px;height:44px;background:linear-gradient(var(--rose),transparent);
+  animation:drip 2.4s var(--ease) infinite;
+}
+@media(max-width:700px){
+  .pro-eyebrow{font-size:.6rem;letter-spacing:.32em}
+  .prologue-track{height:680vh}
+  .pro-kr{font-size:1.02rem}
+  .pro-lines .pro-serif{font-size:1.5rem}
+  .pro-caption{font-size:.8rem;word-break:keep-all}
+  .pro-frame{inset:10px}
+  .pro-frame span{font-size:.48rem;letter-spacing:.24em}
+  .pro-frame .fm1,.pro-frame .fm2{display:none} /* corner captions collide on phones */
+  .pro-skip{bottom:20px}
+  .pro-logo{width:min(270px,74vw)}
+  .pro-cta .btn{padding:.9rem 1.6rem;font-size:.68rem}
+}
+@keyframes drip{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ---------- N°01 manifesto quote ---------- */
+.manifesto{padding-block:clamp(7rem,13vh,11rem)}
+.manifesto-grid{display:grid;grid-template-columns:1fr;gap:3rem;text-align:center;justify-items:center}
+.manifesto .display{font-size:clamp(1.9rem,4.3vw,3.4rem);font-weight:400;max-width:21em}
+.manifesto .display em{font-style:italic;color:var(--rose)}
+.manifesto .kr-body{margin-inline:auto}
+
+/* ---------- N°02 thesis ---------- */
+.thesis{border-top:1px solid var(--hairline-soft);padding-block:clamp(6rem,12vh,10rem)}
+.thesis-row{
+  display:grid;grid-template-columns:minmax(64px,1fr) minmax(0,10fr);
+  gap:clamp(1.2rem,4vw,3.4rem);align-items:baseline;
+  padding-block:clamp(2.2rem,4.5vh,3.4rem);
+  border-bottom:1px solid var(--hairline-soft);
+}
+.thesis-row:first-of-type{border-top:1px solid var(--hairline-soft)}
+.thesis-num{
+  font-family:var(--serif);font-style:italic;font-weight:400;
+  font-size:clamp(1.1rem,2vw,1.5rem);color:var(--dove);
+}
+.thesis-line{font-size:clamp(2.1rem,5.4vw,4.4rem);font-weight:500}
+.thesis-line em{font-style:italic;font-weight:400;color:var(--rose)}
+.thesis-kr{
+  margin-top:.8rem;font-family:var(--kr);font-weight:300;
+  font-size:clamp(.95rem,1.6vw,1.15rem);color:#6B5E64;letter-spacing:-0.01em;
+}
+
+/* ---------- N°03 nuit — the moon system ---------- */
+.nuit{
+  background:
+    radial-gradient(120% 90% at 78% 12%,rgba(239,184,200,.14),transparent 55%),
+    linear-gradient(180deg,var(--plum-deep),var(--ink) 42%,var(--plum-deep));
+  color:var(--pearl);
+}
+.nuit-head{padding-top:clamp(6rem,12vh,9rem)}
+.nuit-track{height:340vh;position:relative}
+.nuit-sticky{
+  position:sticky;top:0;height:100svh;
+  display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);
+  align-items:center;gap:clamp(2rem,5vw,5rem);
+}
+.nuit-copy{position:relative;min-height:16em}
+.nuit-step{
+  position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;
+  opacity:0;transform:translateY(18px);
+  transition:opacity .7s var(--ease),transform .7s var(--ease);
+  pointer-events:none;
+}
+.nuit-step.on{opacity:1;transform:none;pointer-events:auto}
+.nuit-step h3{
+  font-family:var(--kr);font-weight:300;line-height:1.44;letter-spacing:-0.02em;
+  font-size:clamp(1.7rem,3.4vw,2.7rem);
+  word-break:keep-all;
+}
+.nuit-step h3 strong{font-weight:500;color:var(--powder)}
+.nuit-step p{margin-top:1.4rem}
+/* the moon — precise phase geometry */
+.lune-stage{position:relative;display:grid;place-items:center}
+.lune{
+  --d:clamp(250px,33vw,430px);
+  width:var(--d);height:var(--d);position:relative;
+}
+.lune svg{width:100%;height:100%;display:block;overflow:visible}
+.lune-gl{position:absolute;inset:0;width:100% !important;height:100% !important;pointer-events:none}
+.lune.gl-on .lu-base,.lune.gl-on .lu-lit{display:none}
+.lune.gl-on svg{position:relative;z-index:2}
+.lu-orbit{fill:none;stroke:rgba(253,251,250,.13);stroke-width:1}
+.lu-tick{stroke:rgba(239,184,200,.28);stroke-width:1.5;stroke-linecap:round;transition:stroke .5s var(--ease)}
+.lu-tick.on{stroke:#EFB8C8}
+.lu-base{
+  fill:rgba(253,251,250,.045);
+  stroke:rgba(253,251,250,.17);stroke-width:1;
+}
+.lu-lit{
+  fill:url(#pearlG);
+  filter:drop-shadow(0 0 22px rgba(239,184,200,.32)) drop-shadow(0 0 70px rgba(239,184,200,.14));
+}
+.lu-star{fill:#C7A76C;opacity:.85}
+.lune-hud{
+  position:absolute;bottom:clamp(-1rem,-2vh,-2rem);left:50%;transform:translate(-50%,100%);
+  display:flex;align-items:baseline;gap:1.2rem;white-space:nowrap;
+}
+.lune-pct{
+  font-family:var(--serif);font-weight:400;font-size:clamp(2.4rem,4.6vw,3.8rem);
+  font-variant-numeric:tabular-nums;color:var(--pearl);
+}
+.lune-phase{
+  font-family:var(--sans);font-size:.72rem;letter-spacing:.42em;text-transform:uppercase;color:var(--powder);
+}
+/* phase marquee */
+.phase-strip{
+  border-top:1px solid rgba(253,251,250,.14);
+  border-bottom:1px solid rgba(253,251,250,.14);
+  overflow:hidden;padding-block:1.35rem;
+}
+.phase-rail{display:flex;gap:4.5rem;width:max-content;animation:rail 36s linear infinite}
+.phase-item{
+  display:flex;align-items:baseline;gap:1.1rem;white-space:nowrap;
+  font-family:var(--serif);font-size:1.25rem;font-weight:500;color:var(--pearl);
+}
+.phase-item span{
+  font-family:var(--sans);font-size:.66rem;letter-spacing:.3em;color:rgba(239,184,200,.75);
+}
+@keyframes rail{to{transform:translateX(-50%)}}
+.nuit-close{padding-block:clamp(4rem,9vh,7rem);text-align:center}
+.nuit-close p{
+  font-family:var(--kr);font-weight:300;font-size:clamp(1.05rem,2vw,1.35rem);color:#D9C8D1;
+}
+.nuit-close .display{font-size:clamp(1.7rem,3.4vw,2.6rem);font-weight:400;color:var(--pearl);margin-top:.6rem}
+.nuit-close .display em{font-style:italic;color:var(--powder)}
+@media(max-width:860px){
+  .nuit-sticky{grid-template-columns:1fr;grid-template-rows:auto auto;align-content:center;gap:4.5rem}
+  .nuit-copy{min-height:11em;order:2}
+  .lune-stage{order:1;margin-top:-2rem}
+  .lune-hud{bottom:auto;top:50%;left:50%;transform:translate(-50%,-50%);flex-direction:column;align-items:center;gap:.1rem;mix-blend-mode:normal}
+  .lune-hud{position:static;transform:none;margin-top:1.6rem}
+}
+
+/* ---------- N°04 beauty dna ---------- */
+.dna{padding-block:clamp(6rem,12vh,10rem)}
+.dna-head{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:3rem;align-items:end;margin-bottom:4.5rem}
+.dna-head .display{font-size:clamp(2.2rem,5vw,4rem);margin-top:1.6rem}
+.dna-head .display em{font-style:italic;color:var(--rose)}
+.dna-head .kr-head{font-size:clamp(1.15rem,2vw,1.45rem);margin-top:1.2rem;color:#3B3036}
+.axes{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--hairline-soft);border-radius:2px;overflow:hidden}
+.axis{padding:1.6rem 1.4rem;background:var(--pearl)}
+.axis+.axis{border-left:1px solid var(--hairline-soft)}
+.axis b{
+  font-family:var(--sans);font-weight:400;font-size:.66rem;letter-spacing:.34em;
+  text-transform:uppercase;color:var(--rose);display:block;
+}
+.axis .display{font-size:1.6rem;margin-top:.4rem}
+.axis p{font-size:.82rem;color:#6B5E64;margin-top:.2rem}
+@media(max-width:900px){.dna-head{grid-template-columns:1fr;gap:2.2rem}}
+@media(max-width:560px){
+  .axes{grid-template-columns:1fr}
+  .axis+.axis{border-left:0;border-top:1px solid var(--hairline-soft)}
+  .axis{display:grid;grid-template-columns:auto 1fr;align-items:baseline;column-gap:1rem}
+  .axis b{grid-column:1/-1}
+  .axis .display{margin-top:.2rem}
+  .axis p{margin-top:0;text-align:right}
+}
+/* featured DNA card — flip */
+.dna-feature{
+  display:grid;grid-template-columns:minmax(0,400px) minmax(0,1fr);
+  gap:clamp(2.5rem,6vw,5rem);align-items:center;
+  margin-bottom:clamp(3rem,6vh,4.5rem);
+}
+.dnaf{perspective:1500px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.dnaf-inner{
+  position:relative;width:100%;aspect-ratio:3/3.8;
+  transform-style:preserve-3d;transition:transform 1s var(--ease);
+}
+@media(hover:hover){.dnaf:hover .dnaf-inner{transform:rotateY(180deg)}}
+.dnaf.flipped .dnaf-inner{transform:rotateY(180deg)}
+.dnaf-face{
+  position:absolute;inset:0;border-radius:16px;overflow:hidden;
+  backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  display:flex;flex-direction:column;text-align:center;
+  padding:clamp(1.6rem,3vw,2.4rem) clamp(1.3rem,2.6vw,2rem);
+}
+.dnaf-front{
+  --tint:#F2BFA9;
+  --deep:color-mix(in srgb,var(--tint) 55%,var(--ink));
+  background:
+    radial-gradient(130% 55% at 50% -6%,color-mix(in srgb,var(--tint) 42%,transparent),transparent 70%),
+    linear-gradient(180deg,color-mix(in srgb,var(--tint) 18%,#FDFBFA),#FDFBFA 60%);
+  box-shadow:
+    0 2px 4px rgba(26,18,22,.06),
+    0 34px 70px -28px color-mix(in srgb,var(--deep) 55%,transparent),
+    inset 0 2px 0 rgba(255,255,255,.95),
+    inset 0 0 0 1px color-mix(in srgb,var(--tint) 50%,transparent);
+}
+.dnaf-front::after{
+  content:"";position:absolute;top:-40%;bottom:-40%;left:-70%;width:34%;
+  transform:skewX(-18deg);pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.65),transparent);
+  animation:foil 4.5s ease-in-out 1.5s infinite;
+}
+.dnaf-front .dc-emblem svg{width:44px;height:44px}
+.dnaf-front .dc-no{font-size:.66rem}
+.dnaf-front .dc-name{font-size:clamp(2rem,3.4vw,2.7rem);margin-top:.45rem}
+.dnaf-front .dc-kr{font-size:.88rem;min-height:0;margin-top:.55rem}
+.dnaf-front .dc-perf{margin:1.2rem -2rem 1rem}
+.dnaf-front .dc-data span{font-size:.72rem;padding:.26rem .7rem}
+.dc-code{
+  margin-top:auto;height:36px;border-radius:2px;opacity:.5;
+  background:repeating-linear-gradient(90deg,
+    var(--deep) 0 2px,transparent 2px 5px,var(--deep) 5px 6px,
+    transparent 6px 11px,var(--deep) 11px 14px,transparent 14px 17px);
+}
+.dnaf-front .dc-serial{margin-top:.7rem;font-size:.56rem}
+.dnaf-back{
+  transform:rotateY(180deg);text-align:left;
+  background:
+    radial-gradient(120% 70% at 85% 0%,rgba(242,191,169,.28),transparent 60%),
+    linear-gradient(180deg,#FDFBFA,#FAF3F0);
+  box-shadow:
+    0 2px 4px rgba(26,18,22,.06),
+    0 34px 70px -28px rgba(142,58,80,.4),
+    inset 0 2px 0 rgba(255,255,255,.95),
+    inset 0 0 0 1px rgba(232,160,184,.4);
+}
+.dbk-eyebrow{font-family:var(--sans);font-size:.58rem;letter-spacing:.4em;text-transform:uppercase;color:var(--rose)}
+.dbk-name{font-family:var(--serif);font-weight:500;font-size:1.5rem;margin-top:.25rem}
+.dbk-meta{
+  font-family:var(--kr);font-size:.66rem;font-weight:400;color:var(--rose-deep);
+  margin-top:.4rem;padding:.3rem .6rem;border-radius:100px;align-self:flex-start;
+  background:rgba(232,160,184,.14);box-shadow:inset 0 0 0 1px rgba(200,130,170,.35);
+}
+.dbk-rows{margin-top:.8rem}
+.dbk-row{
+  display:flex;justify-content:space-between;align-items:baseline;gap:.9rem;
+  padding:.42rem 0;border-bottom:1px dashed rgba(200,130,170,.4);
+}
+.dbk-row b{font-family:var(--sans);font-weight:400;font-size:.54rem;letter-spacing:.22em;text-transform:uppercase;color:var(--dove);flex:none}
+.dbk-row span{font-size:.76rem;font-weight:400;color:#3B3036;text-align:right;word-break:keep-all}
+.dbk-pal{display:flex;gap:.45rem;margin-top:1rem;align-items:center}
+.dbk-pal .p-sw{width:20px;height:20px}
+.dbk-pal em{font-style:normal;font-size:.68rem;color:#8A7C82;margin-left:.3rem}
+.dbk-foot{margin-top:auto;font-family:var(--sans);font-size:.54rem;letter-spacing:.24em;text-transform:uppercase;color:var(--dove);display:flex;justify-content:space-between}
+.dnaf-side .display{font-size:clamp(1.8rem,3.4vw,2.6rem);font-weight:400}
+.dnaf-side .display em{font-style:italic;color:var(--rose)}
+.dnaf-side .kr-body{margin-top:1rem}
+.dnaf-hint{
+  display:inline-flex;align-items:center;gap:.6rem;margin-top:1.6rem;
+  font-family:var(--sans);font-size:.64rem;letter-spacing:.3em;text-transform:uppercase;color:var(--rose-deep);
+}
+.dnaf-hint i{font-style:normal;display:inline-block;animation:hintSpin 3.5s var(--ease) infinite}
+@keyframes hintSpin{0%,60%,100%{transform:rotate(0)}30%{transform:rotate(180deg)}}
+@media(max-width:880px){
+  .dna-feature{grid-template-columns:1fr;gap:2rem}
+  .dnaf{max-width:360px;margin-inline:auto;width:100%}
+}
+/* aura index — DNA ticket cards */
+.dna-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:clamp(.9rem,1.8vw,1.5rem);
+}
+.dna-card{
+  --tint:var(--blush);
+  --deep:color-mix(in srgb,var(--tint) 55%,var(--ink));
+  position:relative;isolation:isolate;overflow:hidden;
+  padding:1.5rem 1.2rem 1.1rem;border-radius:8px;text-align:center;
+  background:
+    radial-gradient(120% 60% at 50% -8%,color-mix(in srgb,var(--tint) 38%,transparent),transparent 70%),
+    linear-gradient(180deg,color-mix(in srgb,var(--tint) 16%,#FDFBFA),#FDFBFA 62%);
+  box-shadow:
+    0 1px 2px rgba(26,18,22,.05),
+    0 14px 34px -18px color-mix(in srgb,var(--deep) 45%,transparent),
+    inset 0 1.5px 0 rgba(255,255,255,.95),
+    inset 0 0 0 1px color-mix(in srgb,var(--tint) 45%,transparent);
+  transition:transform .5s var(--ease),box-shadow .5s var(--ease);
+}
+.dna-card:hover{
+  transform:translateY(-8px);
+  box-shadow:
+    0 2px 3px rgba(26,18,22,.05),
+    0 30px 50px -20px color-mix(in srgb,var(--deep) 55%,transparent),
+    inset 0 1.5px 0 rgba(255,255,255,.95),
+    inset 0 0 0 1px color-mix(in srgb,var(--tint) 65%,transparent);
+}
+.dna-card::after{ /* foil sweep on hover */
+  content:"";position:absolute;top:-40%;bottom:-40%;left:-70%;width:36%;
+  transform:skewX(-18deg);pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.7),transparent);
+}
+.dna-card:hover::after{animation:foil 1.1s ease}
+.dc-emblem{display:grid;place-items:center;margin-bottom:.7rem}
+.dc-emblem svg{width:34px;height:34px;fill:var(--deep);opacity:.9}
+.dc-no{
+  font-family:var(--sans);font-size:.56rem;letter-spacing:.4em;
+  text-transform:uppercase;color:var(--deep);opacity:.75;
+}
+.dc-name{
+  font-family:var(--serif);font-weight:500;font-size:clamp(1.3rem,1.9vw,1.7rem);
+  line-height:1.08;margin-top:.35rem;color:var(--ink);
+}
+.dc-kr{font-size:.72rem;font-weight:300;color:#6B5E64;margin-top:.45rem;min-height:2.2em}
+.dc-perf{position:relative;margin:.9rem -1.2rem .7rem;border-top:1.5px dashed color-mix(in srgb,var(--tint) 65%,#B9A8AE)}
+.dc-perf::before,.dc-perf::after{
+  content:"";position:absolute;top:-7px;width:14px;height:14px;border-radius:50%;
+  background:var(--porcelain);
+  box-shadow:inset -1px 0 2px rgba(26,18,22,.06);
+}
+.dc-perf::before{left:-8px}
+.dc-perf::after{right:-8px;box-shadow:inset 1px 0 2px rgba(26,18,22,.06)}
+.dc-data{display:flex;justify-content:center;gap:.4rem;flex-wrap:wrap}
+.dc-data span{
+  font-family:var(--kr);font-size:.6rem;font-weight:400;color:var(--deep);
+  padding:.18rem .55rem;border-radius:100px;
+  background:color-mix(in srgb,var(--tint) 26%,transparent);
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--tint) 55%,transparent);
+}
+.dc-serial{
+  margin-top:.7rem;font-family:var(--sans);font-size:.5rem;
+  letter-spacing:.3em;text-transform:uppercase;color:var(--dove);
+}
+@media(max-width:980px){.dna-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:460px){.dna-grid{grid-template-columns:1fr 1fr;gap:.7rem}.dc-kr{display:none}.dna-card{padding:1.1rem .8rem .9rem}}
+
+/* ---------- N°05 the system — app mockups in motion ---------- */
+.sys{background:linear-gradient(180deg,var(--blush),var(--porcelain) 90%);padding-block:clamp(6rem,12vh,10rem)}
+.sys-head{max-width:56em}
+.sys-head .display{font-size:clamp(2.4rem,5.6vw,4.4rem);margin-top:1.6rem}
+.sys-head .display em{font-style:italic;color:var(--rose)}
+.sys-head .kr-body{margin-top:1.6rem;font-size:1.02rem;max-width:40em}
+.sys-pains{display:grid;gap:.55rem;margin-top:1.8rem}
+.sys-pain{
+  font-family:var(--kr);font-weight:300;font-size:clamp(.98rem,1.7vw,1.15rem);
+  color:var(--rose-deep);padding-left:1.1rem;position:relative;word-break:keep-all;
+}
+.sys-pain::before{content:"";position:absolute;left:0;top:.62em;width:.45rem;height:1.5px;background:var(--rose)}
+.sys-steps{margin-top:clamp(4rem,8vh,6rem);display:grid;gap:clamp(5rem,11vh,8rem)}
+.sys-step{
+  display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);
+  gap:clamp(2.5rem,6vw,5.5rem);align-items:center;
+}
+.sys-step.rev .sys-copy{order:2}
+.sys-step.rev .sys-stage{order:1}
+.sys-kicker{
+  font-family:var(--sans);font-size:.66rem;letter-spacing:.4em;text-transform:uppercase;
+  color:var(--rose);display:flex;align-items:baseline;gap:.9rem;
+}
+.sys-kicker i{font-family:var(--serif);font-style:italic;font-size:1.25rem;letter-spacing:0;color:var(--dove)}
+.sys-copy h3{font-family:var(--serif);font-weight:500;font-size:clamp(2rem,4vw,3.1rem);line-height:1.08;margin-top:1rem}
+.sys-copy h3 em{font-style:italic;font-weight:400;color:var(--rose)}
+.sys-copy .krsub{font-family:var(--kr);font-weight:300;font-size:clamp(1.05rem,1.8vw,1.3rem);color:#3B3036;margin-top:.7rem}
+.sys-copy p.desc{font-size:.95rem;color:#5D5257;max-width:32em;margin-top:1.1rem}
+.sys-chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.4rem}
+.sys-chip{
+  font-family:var(--sans);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;
+  padding:.42rem .9rem;border-radius:100px;color:#4E434A;
+  background:var(--pearl);box-shadow:inset 0 0 0 1px var(--hairline);
+}
+.sys-note{margin-top:1.4rem;font-size:.8rem;font-weight:300;color:#8A7C82;max-width:30em}
+.sys-note b{font-weight:500;color:var(--rose-deep)}
+/* trust strip + closing */
+.sys-trust{
+  margin-top:clamp(4.5rem,9vh,7rem);padding-top:2rem;border-top:1px solid var(--hairline);
+  display:flex;flex-wrap:wrap;gap:1rem 3rem;justify-content:center;
+  font-family:var(--sans);font-size:.66rem;letter-spacing:.3em;text-transform:uppercase;color:#8A7C82;
+}
+.sys-close{text-align:center;margin-top:3.2rem;font-family:var(--kr);font-weight:300;color:#6B5E64;font-size:.95rem}
+.sys-close em{font-style:normal;color:var(--rose-deep)}
+
+/* ----- phone mockup (values from app coquette.theme.ts) ----- */
+.sys-stage{display:grid;place-items:center}
+.phone{
+  width:min(272px,74vw);aspect-ratio:9/19;
+  padding:11px;border-radius:46px;background:#241A20;
+  box-shadow:0 36px 90px -30px rgba(160,60,110,.38),0 8px 24px -12px rgba(28,20,24,.25);
+}
+.p-screen{
+  height:100%;border-radius:36px;overflow:hidden;position:relative;
+  background:linear-gradient(155deg,#FBF7F6 0%,#FBF7F6 55%,#F6E4E8 100%);
+  font-family:var(--kr);color:#1C1418;
+}
+.p-island{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:84px;height:23px;border-radius:14px;background:#241A20;z-index:3}
+.p-body{position:absolute;inset:0;padding:50px 14px 14px;display:flex;flex-direction:column;gap:9px;overflow:hidden}
+.p-eyebrow{font-family:var(--sans);font-size:.5rem;letter-spacing:.34em;text-transform:uppercase;color:#A88898}
+.p-h{font-size:.82rem;font-weight:600;letter-spacing:-.01em}
+.p-card{
+  background:rgba(255,255,255,.74);border-radius:20px;padding:11px 13px;
+  box-shadow:0 2px 28px rgba(160,60,110,.05),inset 0 1.5px 0 rgba(255,255,255,.98);
+}
+.p-row{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.p-label{font-size:.66rem;color:#A88898}
+.p-strong{font-size:.72rem;font-weight:600}
+.p-chip{
+  display:inline-flex;align-items:center;font-size:.56rem;font-weight:500;
+  padding:.24rem .6rem;border-radius:100px;color:#D05878;
+  background:rgba(235,190,215,.22);box-shadow:inset 0 0 0 1px rgba(200,130,170,.5);
+}
+.p-pill{
+  display:inline-flex;font-family:var(--sans);font-size:.6rem;font-weight:500;letter-spacing:.02em;
+  padding:.26rem .64rem;border-radius:100px;color:#fff;
+  background:linear-gradient(135deg,#F0A0BC,#D05878);
+}
+/* generic step-in animation for mockup elements */
+.m{opacity:0;transform:translateY(12px)}
+.play .m{animation:mIn .6s var(--ease) forwards}
+.play .m1{animation-delay:.15s}.play .m2{animation-delay:.35s}.play .m3{animation-delay:.55s}
+.play .m4{animation-delay:.75s}.play .m5{animation-delay:.95s}.play .m6{animation-delay:1.15s}
+@keyframes mIn{to{opacity:1;transform:none}}
+/* scan mockup */
+.p-face{
+  width:118px;height:146px;margin:4px auto;position:relative;overflow:hidden;
+  border-radius:59px 59px 66px 66px;
+  background:radial-gradient(60% 55% at 50% 38%,#FDF5F9 0%,#F5E8F0 60%,#EBD9E6 100%);
+  box-shadow:inset 0 0 0 1px rgba(220,175,195,.35);
+}
+.p-scanline{
+  position:absolute;left:7%;right:7%;top:12%;height:2px;border-radius:2px;
+  background:linear-gradient(90deg,transparent,#E8A0B8 30%,#D05878 50%,#E8A0B8 70%,transparent);
+  box-shadow:0 0 14px 2px rgba(232,160,184,.55);opacity:0;
+}
+.play .p-scanline{opacity:1;animation:scanSweep 2.8s ease-in-out infinite alternate}
+@keyframes scanSweep{from{top:16%}to{top:76%}}
+.p-grid2{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.p-avoid{
+  border-radius:16px;padding:9px 12px;color:#fff;
+  background:linear-gradient(135deg,#F0A0BC,#E06888);
+  font-size:.62rem;font-weight:500;line-height:1.45;
+}
+.p-avoid b{display:block;font-size:.68rem;font-weight:700}
+/* decode mockup */
+.p-axis{display:grid;gap:4px}
+.p-axis .ax{font-family:var(--sans);font-size:.52rem;letter-spacing:.3em;color:#A88898}
+.p-track{position:relative;height:4px;border-radius:4px;background:#EAE0E4}
+.p-dot{
+  position:absolute;top:50%;left:8%;width:12px;height:12px;border-radius:50%;
+  transform:translate(-50%,-50%);
+  background:radial-gradient(circle at 32% 30%,#fff,#ECA0C0 55%,#D05878);
+  box-shadow:0 1px 5px rgba(160,60,110,.4);
+  transition:left 1.1s var(--ease);
+}
+.play .p-dot[data-x="72"]{left:72%}
+.play .p-dot[data-x="38"]{left:38%}
+.play .p-dot[data-x="60"]{left:60%}
+.p-dna{
+  border-radius:20px;padding:16px 14px;text-align:center;color:#1C1418;
+  background:
+    radial-gradient(120% 90% at 20% 0%,rgba(242,180,162,.4),transparent 60%),
+    radial-gradient(120% 90% at 85% 100%,rgba(232,160,184,.38),transparent 60%),
+    rgba(255,255,255,.8);
+  box-shadow:0 2px 28px rgba(160,60,110,.08),inset 0 1.5px 0 rgba(255,255,255,.98);
+}
+.p-dna .aura-no{font-family:var(--sans);font-size:.52rem;letter-spacing:.4em;color:#A88898}
+.p-dna .aura-name{font-family:var(--serif);font-weight:500;font-size:1.5rem;line-height:1.1;margin-top:.3rem}
+.p-dna .aura-axes{font-size:.58rem;color:#A88898;margin-top:.4rem}
+/* prescribe mockup */
+.p-prod{display:flex;align-items:center;gap:9px}
+.p-thumb{width:34px;height:34px;border-radius:11px;flex:none;background:linear-gradient(155deg,#F6E4E8,#EBD9E6);box-shadow:inset 0 0 0 1px rgba(220,175,195,.35)}
+.p-prod .nm{font-size:.66rem;font-weight:600;line-height:1.3}
+.p-prod .cat{font-size:.56rem;color:#A88898}
+.p-prod .p-pill{margin-left:auto}
+/* rhythm mockup */
+.p-orb{position:relative;width:128px;height:128px;margin:2px auto}
+.p-orb svg{width:100%;height:100%;transform:rotate(-90deg)}
+.p-orb .ring-t{stroke:#EAE0E4}
+.p-orb .ring-p{stroke:#ECA0C0;stroke-dasharray:339.3;stroke-dashoffset:339.3;transition:stroke-dashoffset 1.6s var(--ease) .3s}
+.play .p-orb .ring-p{stroke-dashoffset:112}
+.p-orb .core{
+  position:absolute;inset:16px;border-radius:50%;
+  background:radial-gradient(58% 58% at 36% 30%,#FFFFFF 0%,#FDF5F9 25%,#F5E8F0 55%,#EBD9E6 100%);
+  box-shadow:0 0 24px rgba(221,176,200,.5),inset -4px -6px 14px rgba(160,60,110,.12);
+}
+.p-dday{display:flex;align-items:baseline;gap:9px}
+.p-dday .d{font-family:var(--serif);font-style:italic;font-weight:500;font-size:1.4rem;color:#D05878}
+.p-dday .t{font-size:.66rem;font-weight:600}
+.p-dday .s{font-size:.56rem;color:#A88898;display:block;margin-top:.1rem}
+/* ----- mockup v2 : realistic chrome + advanced motion ----- */
+.sys-stage{perspective:1300px}
+.float{animation:phoneFloat 7.5s ease-in-out infinite}
+.sys-step.rev .float{animation-delay:1.8s}
+@keyframes phoneFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.phone{transform-style:preserve-3d;transition:transform .4s var(--ease);will-change:transform}
+.p-status{
+  position:absolute;top:13px;left:0;right:0;z-index:3;padding-inline:22px;
+  display:flex;justify-content:space-between;align-items:center;
+  font-family:var(--sans);font-size:.56rem;font-weight:500;color:#1C1418;
+}
+.p-sig{display:flex;gap:2.5px;align-items:flex-end}
+.p-sig i{width:2.5px;border-radius:1px;background:#1C1418;display:block}
+.p-sig i:nth-child(1){height:4px}.p-sig i:nth-child(2){height:6px}
+.p-sig i:nth-child(3){height:8px}.p-sig i:nth-child(4){height:8px;opacity:.35}
+.p-batt{width:16px;height:8px;border-radius:2.5px;border:1px solid rgba(28,20,24,.5);position:relative;margin-left:4px}
+.p-batt::before{content:"";position:absolute;inset:1px;right:4px;border-radius:1px;background:#1C1418}
+.p-blob{position:absolute;border-radius:50%;filter:blur(26px);pointer-events:none;z-index:0}
+.p-blob.b1{top:-46px;left:50%;transform:translateX(-50%);width:190px;height:190px;background:rgba(220,170,200,.24)}
+.p-blob.b2{top:160px;right:-52px;width:150px;height:150px;background:rgba(200,185,230,.2)}
+.p-blob.b3{bottom:100px;left:-48px;width:150px;height:150px;background:rgba(215,168,198,.2)}
+.p-body{position:absolute;inset:0;padding:48px 13px 72px;display:flex;flex-direction:column;gap:8px;z-index:1;overflow:hidden}
+.p-tabbar{
+  position:absolute;left:10px;right:10px;bottom:16px;z-index:2;
+  display:flex;align-items:center;justify-content:space-around;padding:7px 8px 6px;
+  border-radius:22px;background:rgba(255,255,255,.78);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  box-shadow:0 2px 28px rgba(160,60,110,.08),inset 0 1.5px 0 rgba(255,255,255,.98);
+}
+.p-tab{display:flex;flex-direction:column;align-items:center;gap:2.5px;font-family:var(--kr);font-size:.46rem;color:#A88898}
+.p-tab svg{width:13px;height:13px;stroke:#A88898;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.p-tab.on{color:#D05878;font-weight:600}
+.p-tab.on svg{stroke:#D05878}
+.p-tab.on::after{content:"";width:3px;height:3px;border-radius:50%;background:linear-gradient(135deg,#F0A0BC,#D05878)}
+.p-scanbtn{
+  width:31px;height:31px;border-radius:50%;margin-top:-16px;flex:none;
+  background:linear-gradient(135deg,#F0A0BC,#D05878);display:grid;place-items:center;
+  box-shadow:0 5px 14px rgba(208,88,120,.42),inset 0 1px 0 rgba(255,255,255,.5);
+}
+.p-scanbtn svg{width:13px;height:13px;stroke:#fff;fill:none;stroke-width:1.8;stroke-linecap:round}
+.p-homebar{position:absolute;bottom:5px;left:50%;transform:translateX(-50%);width:84px;height:4px;border-radius:4px;background:rgba(28,20,24,.26);z-index:3}
+/* spring pop-ins (override mIn) */
+@keyframes mSpring{
+  0%{opacity:0;transform:translateY(16px) scale(.95)}
+  62%{opacity:1;transform:translateY(-3px) scale(1.012)}
+  100%{opacity:1;transform:none}
+}
+.play .m{animation:mSpring .75s cubic-bezier(.2,.8,.25,1) forwards}
+.play .m1{animation-delay:.15s}.play .m2{animation-delay:.32s}.play .m3{animation-delay:.5s}
+.play .m4{animation-delay:.7s}.play .m5{animation-delay:.9s}.play .m6{animation-delay:1.1s}
+.play .m7{animation-delay:1.3s}.play .m8{animation-delay:1.5s}
+/* scan viewfinder + face mesh */
+.p-view{position:relative;height:148px;margin:2px 8px 0}
+.p-corner{position:absolute;width:14px;height:14px;border:1.5px solid #E8A0B8}
+.p-corner.c1{top:0;left:0;border-right:0;border-bottom:0;border-top-left-radius:5px}
+.p-corner.c2{top:0;right:0;border-left:0;border-bottom:0;border-top-right-radius:5px}
+.p-corner.c3{bottom:0;left:0;border-right:0;border-top:0;border-bottom-left-radius:5px}
+.p-corner.c4{bottom:0;right:0;border-left:0;border-top:0;border-bottom-right-radius:5px}
+.play .p-corner{animation:cornerPulse 2.6s ease-in-out infinite}
+@keyframes cornerPulse{0%,100%{opacity:.45}50%{opacity:1}}
+.p-facesvg{position:absolute;inset:4px;width:calc(100% - 8px);height:calc(100% - 8px)}
+.p-outline{stroke:#DCAFC3;stroke-width:1.1;fill:rgba(253,245,249,.5);stroke-dasharray:300;stroke-dashoffset:300}
+.play .p-outline{transition:stroke-dashoffset 1.4s var(--ease) .2s;stroke-dashoffset:0}
+.p-mesh{stroke:rgba(232,160,184,.55);stroke-width:.55;fill:none;stroke-dasharray:240;stroke-dashoffset:240}
+.play .p-mesh{transition:stroke-dashoffset 1.8s var(--ease) .7s;stroke-dashoffset:0}
+.lm{fill:#D05878;r:1.5;opacity:0}
+.play .lm{animation:lmOn .5s both}
+.play .lm:nth-of-type(1){animation-delay:.7s}.play .lm:nth-of-type(2){animation-delay:.82s}
+.play .lm:nth-of-type(3){animation-delay:.94s}.play .lm:nth-of-type(4){animation-delay:1.06s}
+.play .lm:nth-of-type(5){animation-delay:1.18s}.play .lm:nth-of-type(6){animation-delay:1.3s}
+.play .lm:nth-of-type(7){animation-delay:1.42s}.play .lm:nth-of-type(8){animation-delay:1.54s}
+@keyframes lmOn{0%{opacity:0;r:.2}55%{opacity:1;r:2.6}100%{opacity:.9;r:1.5}}
+.p-scanprog{display:flex;justify-content:space-between;align-items:baseline;font-size:.56rem;color:#A88898;padding-inline:4px}
+.p-scanprog b{color:#D05878;font-weight:600}
+/* dna ticket flip + foil shimmer */
+.p-dna{position:relative;overflow:hidden}
+.play .p-dna.m{animation:dnaFlip 1.05s var(--ease) 1.1s forwards}
+@keyframes dnaFlip{
+  0%{opacity:0;transform:perspective(700px) rotateY(72deg) scale(.96)}
+  100%{opacity:1;transform:perspective(700px) rotateY(0) scale(1)}
+}
+.p-dna::after{
+  content:"";position:absolute;top:-40%;bottom:-40%;left:-70%;width:38%;
+  transform:skewX(-18deg);
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.85),transparent);
+}
+.play .p-dna::after{animation:foil 3.4s ease-in-out 2s infinite}
+@keyframes foil{0%{left:-70%}40%,100%{left:135%}}
+.p-serial{
+  margin-top:.55rem;padding-top:.5rem;border-top:1px dashed rgba(200,130,170,.55);
+  font-family:var(--sans);font-size:.46rem;letter-spacing:.22em;text-transform:uppercase;
+  color:#A88898;display:flex;justify-content:space-between;
+}
+.p-dot{transition:left 1.25s cubic-bezier(.3,1.35,.45,1)}
+/* coach chat */
+.p-coach{display:flex;gap:7px;align-items:flex-start}
+.p-ava{
+  width:22px;height:22px;border-radius:50%;flex:none;margin-top:2px;
+  background:radial-gradient(circle at 32% 28%,#fff,#F5E8F0 55%,#ECA0C0);
+  box-shadow:inset 0 0 0 1px rgba(220,175,195,.45),0 1px 4px rgba(160,60,110,.15);
+}
+.p-bubble{
+  position:relative;flex:1;min-height:32px;padding:8px 11px;
+  border-radius:4px 16px 16px 16px;background:rgba(255,255,255,.78);
+  box-shadow:0 2px 28px rgba(160,60,110,.05),inset 0 1.5px 0 rgba(255,255,255,.98);
+}
+.p-dots{display:inline-flex;gap:3px;position:absolute;top:13px;left:11px}
+.p-dots i{width:4px;height:4px;border-radius:50%;background:#DCAFC3}
+.play .p-dots i{animation:tyB 1s ease-in-out infinite}
+.play .p-dots i:nth-child(2){animation-delay:.15s}
+.play .p-dots i:nth-child(3){animation-delay:.3s}
+@keyframes tyB{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(-3px);opacity:1}}
+.play .p-dots{animation:hideEl .3s ease 1.7s forwards}
+@keyframes hideEl{to{opacity:0;visibility:hidden}}
+.p-bubble .msg{font-size:.6rem;line-height:1.55;opacity:0}
+.play .p-bubble .msg{animation:mSpring .5s var(--ease) 1.85s forwards}
+/* prescribe tabs + match bars */
+.p-steps{display:flex;gap:5px}
+.p-step{
+  font-size:.54rem;padding:.26rem .62rem;border-radius:100px;color:#A88898;
+  box-shadow:inset 0 0 0 1px rgba(220,175,195,.45);
+}
+.p-step.on{color:#fff;background:linear-gradient(135deg,#F0A0BC,#D05878);box-shadow:none;font-weight:600}
+.p-prod .grow{flex:1;min-width:0}
+.p-bar{height:3px;border-radius:3px;background:#EAE0E4;margin-top:5px;overflow:hidden}
+.p-bar i{display:block;height:100%;width:0;border-radius:3px;background:linear-gradient(90deg,#F0A0BC,#D05878)}
+.play .p-bar i{transition:width 1.3s var(--ease) .9s;width:var(--w)}
+/* rhythm orb + wave */
+.p-orb .ring-k{stroke:rgba(220,175,195,.5);stroke-dasharray:1 6;stroke-linecap:round}
+.p-spark{position:absolute;inset:0;pointer-events:none}
+.play .p-spark{animation:orbit 7s linear 1.2s infinite}
+@keyframes orbit{to{transform:rotate(360deg)}}
+.p-spark::before{
+  content:"✦";position:absolute;top:-3px;left:50%;transform:translateX(-50%);
+  font-size:9px;color:#C7A76C;text-shadow:0 0 6px rgba(199,167,108,.6);
+}
+.p-wavewrap{position:relative;height:38px;margin-top:2px}
+.p-wave{width:100%;height:100%}
+.p-wave path{stroke:#ECA0C0;stroke-width:1.6;fill:none;stroke-dasharray:220;stroke-dashoffset:220;stroke-linecap:round}
+.play .p-wave path{transition:stroke-dashoffset 1.9s var(--ease) .5s;stroke-dashoffset:0}
+.p-wavedot{
+  position:absolute;top:0;left:0;width:6px;height:6px;border-radius:50%;
+  background:#D05878;box-shadow:0 0 8px rgba(208,88,120,.7);opacity:0;
+  offset-path:path('M0,19 C15,6 30,32 45,19 C60,6 75,32 90,19 C105,6 120,32 135,19 C150,6 165,32 180,19');
+  offset-distance:0%;
+}
+.play .p-wavedot{opacity:1;animation:travel 4.5s ease-in-out 1.4s infinite alternate}
+@keyframes travel{from{offset-distance:0%}to{offset-distance:100%}}
+.p-pagedots{display:flex;gap:4px;justify-content:center;margin-top:auto}
+.p-pagedots i{width:4px;height:4px;border-radius:4px;background:#DCAFC3;transition:width .4s}
+.p-pagedots i.on{width:13px;background:linear-gradient(135deg,#F0A0BC,#D05878)}
+
+/* ----- mockup v3 : feature-highlight components ----- */
+/* archive week strip */
+.p-week{display:flex;justify-content:space-between;padding:2px 4px}
+.p-day{display:flex;flex-direction:column;align-items:center;gap:4px;font-family:var(--sans);font-size:.44rem;color:#A88898}
+.p-day i{width:5px;height:5px;border-radius:50%;background:#EAE0E4}
+.p-day.f i{background:linear-gradient(135deg,#F0A0BC,#D05878)}
+.p-day.td{color:#D05878;font-weight:600}
+.p-day.td i{box-shadow:0 0 0 2.5px rgba(232,160,184,.4)}
+/* mini scan thumb */
+.p-miniface{
+  width:34px;height:42px;flex:none;position:relative;overflow:hidden;
+  border-radius:17px 17px 19px 19px;
+  background:radial-gradient(60% 55% at 50% 38%,#FDF5F9 0%,#F5E8F0 60%,#EBD9E6 100%);
+  box-shadow:inset 0 0 0 1px rgba(220,175,195,.35);
+}
+.p-miniface .p-scanline{left:10%;right:10%}
+/* condition level */
+.p-lvl{display:flex;gap:4px}
+.p-lvl i{width:15px;height:5px;border-radius:4px;background:#EAE0E4}
+.p-lvl i.on{background:linear-gradient(90deg,#F0A0BC,#D05878)}
+/* personal color swatches */
+.p-swatches{display:flex;gap:5px;flex:none}
+.p-sw{
+  width:17px;height:17px;border-radius:50%;display:block;
+  box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.75),0 1px 4px rgba(160,60,110,.28);
+}
+.p-axes3{display:grid;gap:9px}
+/* precision makeup guide */
+.p-guide{position:relative;height:126px;display:grid;place-items:center}
+.p-guide svg{height:100%;width:auto}
+.p-gline{stroke:#D05878;stroke-width:1.5;fill:none;stroke-linecap:round;stroke-dasharray:60;stroke-dashoffset:60}
+.play .p-gline{transition:stroke-dashoffset .9s var(--ease);stroke-dashoffset:0}
+.play .p-gline.g1{transition-delay:.9s}.play .p-gline.g2{transition-delay:1.05s}
+.play .p-gline.g3{transition-delay:1.2s}.play .p-gline.g4{transition-delay:1.35s}
+.play .p-gline.g5{transition-delay:1.5s}
+.p-gtag{
+  position:absolute;font-family:var(--kr);font-size:.5rem;font-weight:500;color:#D05878;
+  padding:.16rem .45rem;border-radius:100px;background:rgba(255,255,255,.85);
+  box-shadow:inset 0 0 0 1px rgba(200,130,170,.45);
+}
+/* muse roadmap */
+.p-road{position:relative;padding-left:17px;display:grid;gap:10px}
+.p-road::before{content:"";position:absolute;left:5px;top:6px;bottom:6px;width:2px;border-radius:2px;background:#EAE0E4}
+.p-road .fill{position:absolute;left:5px;top:6px;width:2px;border-radius:2px;background:linear-gradient(#F0A0BC,#D05878);height:0}
+.play .p-road .fill{transition:height 1.5s var(--ease) .7s;height:60%}
+.p-rstep{position:relative;font-size:.64rem;font-weight:600;color:#4E434A;line-height:1.35}
+.p-rstep::before{content:"";position:absolute;left:-16px;top:3px;width:8px;height:8px;border-radius:50%;background:#EAE0E4}
+.p-rstep.done::before{background:radial-gradient(circle at 32% 30%,#fff,#ECA0C0 55%,#C94E70);box-shadow:0 1px 4px rgba(160,60,110,.35)}
+.p-rstep .st{display:block;font-size:.52rem;font-weight:400;color:#A88898}
+/* muse board tiles */
+.p-mood{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.p-mtile{
+  height:45px;border-radius:12px;position:relative;overflow:hidden;
+  box-shadow:inset 0 0 0 1px rgba(220,175,195,.35),0 2px 8px rgba(160,60,110,.08);
+}
+.p-mtile span{
+  position:absolute;left:7px;bottom:4px;font-family:var(--kr);font-size:.46rem;font-weight:500;
+  color:#fff;text-shadow:0 1px 3px rgba(28,20,24,.45);
+}
+/* ----- mockup v4 : density + real product renders ----- */
+.p-body{gap:6px;padding:44px 12px 64px}
+.p-card{padding:8px 11px;border-radius:15px}
+.p-h{font-size:.78rem}
+.p-bubble{padding:6px 10px;min-height:24px;border-radius:4px 13px 13px 13px}
+.p-bubble .msg{font-size:.58rem;line-height:1.45}
+.p-dots{top:10px}
+.p-prod{gap:8px}
+.p-prod .nm{font-size:.62rem;line-height:1.25}
+.p-prod .cat{font-size:.52rem}
+.p-label{font-size:.6rem}
+.p-strong{font-size:.68rem}
+.p-chip{font-size:.52rem;padding:.2rem .5rem}
+.p-guide{height:110px}
+.p-dna{padding:11px 12px}
+.p-dna .aura-name{font-size:1.3rem}
+.p-mtile{height:40px}
+.p-road{gap:7px}
+.p-rstep{font-size:.6rem}
+.p-rstep .st{font-size:.5rem}
+.p-meta{font-size:.5rem;color:#A88898;line-height:1.4;display:block;margin-top:3px}
+.p-axis .ax{display:flex;justify-content:space-between}
+.p-axis .ax b{color:#D05878;font-weight:600;letter-spacing:0}
+/* CSS product renders */
+.pi{
+  width:25px;height:33px;flex:none;position:relative;align-self:center;
+  border-radius:7px 7px 9px 9px;
+  background:linear-gradient(160deg,#F6C9D6,#DE8FA8);
+  box-shadow:
+    inset 2px 3px 5px rgba(255,255,255,.85),
+    inset -3px -4px 6px rgba(160,60,110,.22),
+    0 2px 5px rgba(160,60,110,.18);
+}
+.pi::before{ /* cap */
+  content:"";position:absolute;top:-5px;left:50%;transform:translateX(-50%);
+  width:11px;height:7px;border-radius:3px 3px 1px 1px;
+  background:linear-gradient(180deg,#9A6379,#6E4256);
+}
+.pi::after{ /* label */
+  content:"";position:absolute;left:4px;right:4px;top:13px;height:10px;border-radius:2.5px;
+  background:rgba(255,255,255,.88);
+  box-shadow:0 0 0 .5px rgba(160,60,110,.14),inset 0 3px 0 rgba(232,160,184,.5);
+}
+.pi-cream{width:29px;height:24px;border-radius:8px;background:linear-gradient(160deg,#FDF3F6,#E9C6D4)}
+.pi-cream::before{width:25px;height:6px;top:-4px;border-radius:4px 4px 1px 1px;background:linear-gradient(180deg,#D89CB2,#B76F8C)}
+.pi-cream::after{top:9px;height:8px}
+.pi-blush{width:29px;height:17px;border-radius:5px;background:linear-gradient(160deg,#F2A9B8,#DE7F95)}
+.pi-blush::before{display:none}
+.pi-blush::after{left:3px;right:3px;top:3px;height:6px;border-radius:2px;background:radial-gradient(circle at 50% 60%,#F8CBD6 0%,#E58FA4 100%);box-shadow:inset 0 0 0 .5px rgba(255,255,255,.5)}
+.pi-dev{background:linear-gradient(160deg,#F0EAF0,#C9B4C6);border-radius:10px 10px 5px 5px}
+.pi-dev::before{width:15px;height:5px;background:linear-gradient(180deg,#8E7C8C,#6B5A69)}
+.pi-dev::after{top:12px;height:5px;background:rgba(255,255,255,.65)}
+.pi-amp{width:21px;background:linear-gradient(160deg,#FBE3D8,#EFB89F)}
+.pi-amp::before{width:9px;height:8px;top:-6px}
+/* extra guide-line delays */
+.play .p-gline.g6{transition-delay:1.65s}
+.play .p-gline.g7{transition-delay:1.8s}
+/* ----- mockup v5 : tab-true screens ----- */
+.p-scanbtn.on{
+  box-shadow:0 0 0 3.5px rgba(232,160,184,.45),0 5px 16px rgba(208,88,120,.55),inset 0 1px 0 rgba(255,255,255,.5);
+}
+.p-feed{display:flex;gap:8px;align-items:flex-start}
+.p-feed .fava{
+  width:24px;height:24px;border-radius:50%;flex:none;margin-top:1px;
+  background:radial-gradient(circle at 32% 28%,#fff,#F5E8F0 55%,#DDB0C8);
+  box-shadow:inset 0 0 0 1px rgba(220,175,195,.45);
+}
+.p-feed .fbody{flex:1;min-width:0}
+.p-feed .fname{font-size:.56rem;font-weight:600;color:#4E434A}
+.p-feed .fname em{font-style:normal;font-weight:400;color:#A88898}
+.p-feed .ftxt{font-size:.6rem;line-height:1.5;color:#3B3036;margin-top:2px;word-break:keep-all}
+.p-feed .ffoot{font-size:.5rem;color:#A88898;margin-top:4px}
+.p-fit{
+  flex:none;font-family:var(--sans);font-size:.5rem;font-weight:600;letter-spacing:.02em;
+  color:#fff;padding:.2rem .5rem;border-radius:100px;
+  background:linear-gradient(135deg,#F0A0BC,#D05878);
+}
+/* ----- mockup v6 : coach chat, checklist, skin phase ----- */
+.p-msgs{display:grid;gap:6px}
+.p-msg{
+  max-width:86%;padding:7px 10px;border-radius:3px 12px 12px 12px;
+  background:rgba(255,255,255,.8);
+  box-shadow:0 2px 20px rgba(160,60,110,.05),inset 0 1px 0 rgba(255,255,255,.95);
+  font-size:.6rem;line-height:1.5;color:#3B3036;word-break:keep-all;
+}
+.p-msg.me{
+  margin-left:auto;border-radius:12px 3px 12px 12px;
+  background:linear-gradient(135deg,#F0A0BC,#D05878);color:#fff;
+  box-shadow:0 3px 12px rgba(208,88,120,.35);
+}
+.p-msg .mini{
+  margin-top:5px;padding:6px 8px;border-radius:9px;
+  background:rgba(246,228,232,.75);
+  box-shadow:inset 0 0 0 1px rgba(220,175,195,.45);
+  font-size:.55rem;color:#6B5E64;line-height:1.45;
+}
+.p-msg .mini b{color:#D05878;font-weight:600}
+.p-quick{display:flex;gap:5px;flex-wrap:wrap}
+.p-quick span{
+  font-family:var(--kr);font-size:.54rem;color:#D05878;
+  padding:.28rem .62rem;border-radius:100px;
+  box-shadow:inset 0 0 0 1px rgba(200,130,170,.5);background:rgba(255,255,255,.6);
+}
+.p-inputbar{
+  display:flex;align-items:center;gap:6px;padding:7px 8px 7px 12px;border-radius:100px;
+  background:rgba(255,255,255,.88);
+  box-shadow:0 2px 20px rgba(160,60,110,.07),inset 0 0 0 1px rgba(220,175,195,.35);
+  font-size:.56rem;color:#A88898;
+}
+.p-inputbar .snd{
+  margin-left:auto;width:20px;height:20px;border-radius:50%;flex:none;
+  background:linear-gradient(135deg,#F0A0BC,#D05878);display:grid;place-items:center;
+}
+.p-inputbar .snd svg{width:9px;height:9px;stroke:#fff;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.p-chk{display:flex;align-items:center;gap:7px;font-size:.6rem;font-weight:500;color:#4E434A}
+.p-chk i{
+  width:13px;height:13px;border-radius:50%;flex:none;display:grid;place-items:center;
+  background:linear-gradient(135deg,#F0A0BC,#E06888);color:#fff;
+  font-size:.44rem;font-style:normal;line-height:1;
+}
+.p-chk.off{color:#A88898;font-weight:400}
+.p-chk.off i{background:#EAE0E4;color:#B9A8AE}
+.p-chk .tm{margin-left:auto;font-size:.5rem;font-weight:400;color:#A88898}
+.p-phase{display:flex;align-items:center;gap:8px}
+.p-phase .ph{
+  width:26px;height:26px;border-radius:50%;flex:none;position:relative;overflow:hidden;
+  background:radial-gradient(circle at 35% 30%,#FFF,#F5E8F0 50%,#ECA0C0);
+  box-shadow:inset -2px -3px 6px rgba(160,60,110,.2),0 1px 5px rgba(160,60,110,.25);
+}
+.p-phase .ph::after{content:"";position:absolute;left:0;top:0;bottom:0;width:34%;background:rgba(110,66,86,.22)}
+/* ----- mockup v7 : per-screen motion ----- */
+@keyframes popIn{0%{opacity:0;transform:scale(.55)}70%{opacity:1;transform:scale(1.14)}100%{opacity:1;transform:scale(1)}}
+/* ambient blob drift (b1 excluded — centered via transform) */
+.play .p-blob.b2{animation:blobDrift 15s ease-in-out infinite alternate}
+.play .p-blob.b3{animation:blobDrift 19s ease-in-out 2s infinite alternate-reverse}
+@keyframes blobDrift{to{transform:translate(7px,-9px) scale(1.07)}}
+/* care: checklist check-in + phase glow */
+.p-screen .p-chk i{opacity:0;transform:scale(.4)}
+.play .p-chk i{animation:popIn .45s var(--ease) forwards}
+.play .p-chk:nth-of-type(1) i{animation-delay:.9s}
+.play .p-chk:nth-of-type(2) i{animation-delay:1.05s}
+.play .p-chk:nth-of-type(3) i{animation-delay:1.2s}
+.play .p-chk:nth-of-type(4) i{animation-delay:1.35s}
+.play .p-phase .ph{animation:phGlow 4.5s ease-in-out 1.6s infinite}
+@keyframes phGlow{
+  0%,100%{box-shadow:inset -2px -3px 6px rgba(160,60,110,.2),0 1px 5px rgba(160,60,110,.25)}
+  50%{box-shadow:inset -2px -3px 6px rgba(160,60,110,.2),0 0 14px rgba(232,160,184,.8)}
+}
+/* coach: my message slides from right, send button pulses */
+@keyframes msgMe{0%{opacity:0;transform:translateX(20px)}100%{opacity:1;transform:none}}
+.play .p-msg.me.m{animation-name:msgMe}
+.play .p-inputbar .snd{animation:sndPulse 2.8s ease-in-out 2.6s infinite}
+@keyframes sndPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.18);box-shadow:0 0 10px rgba(208,88,120,.55)}}
+/* look: guide tags appear after lines, swatches pop */
+.p-screen .p-gtag{opacity:0}
+.play .p-gtag{animation:mSpring .5s var(--ease) forwards}
+.play .p-gtag:nth-of-type(1){animation-delay:1.95s}
+.play .p-gtag:nth-of-type(2){animation-delay:2.1s}
+.play .p-gtag:nth-of-type(3){animation-delay:2.25s}
+.p-screen .p-swatches .p-sw{opacity:0;transform:scale(.5)}
+.play .p-swatches .p-sw{animation:popIn .45s var(--ease) forwards}
+.play .p-swatches .p-sw:nth-of-type(1){animation-delay:1.1s}
+.play .p-swatches .p-sw:nth-of-type(2){animation-delay:1.22s}
+.play .p-swatches .p-sw:nth-of-type(3){animation-delay:1.34s}
+.play .p-swatches .p-sw:nth-of-type(4){animation-delay:1.46s}
+/* home: week dots check in one by one */
+.p-screen .p-day i{opacity:0;transform:scale(.4)}
+.play .p-day i{animation:popIn .4s var(--ease) forwards}
+.play .p-week .p-day:nth-child(1) i{animation-delay:.85s}
+.play .p-week .p-day:nth-child(2) i{animation-delay:.94s}
+.play .p-week .p-day:nth-child(3) i{animation-delay:1.03s}
+.play .p-week .p-day:nth-child(4) i{animation-delay:1.12s}
+.play .p-week .p-day:nth-child(5) i{animation-delay:1.21s}
+.play .p-week .p-day:nth-child(6) i{animation-delay:1.3s}
+.play .p-week .p-day:nth-child(7) i{animation-delay:1.42s}
+/* eve: fit badges pop after their cards */
+.p-screen .p-fit{opacity:0;transform:scale(.6)}
+.play .m2 .p-fit{animation:popIn .5s var(--ease) .85s forwards}
+.play .m3 .p-fit{animation:popIn .5s var(--ease) 1.05s forwards}
+.play .m4 .p-fit{animation:popIn .5s var(--ease) 1.25s forwards}
+/* scan: cause banner draws attention */
+.play .p-avoid.m{
+  animation:mSpring .75s cubic-bezier(.2,.8,.25,1) .9s forwards,
+            avoidGlow 4.2s ease-in-out 2.4s infinite;
+}
+@keyframes avoidGlow{0%,100%{box-shadow:0 0 0 rgba(224,104,136,0)}50%{box-shadow:0 6px 18px rgba(224,104,136,.45)}}
+.p-phase .grow{flex:1;min-width:0}
+.p-phase .nm{font-size:.62rem;font-weight:600;line-height:1.3;color:#1C1418}
+.p-phase .cat{font-size:.52rem;color:#A88898}
+.p-screen{word-break:keep-all}
+.p-msg .mini{display:block}
+
+@media(max-width:840px){
+  .sys-step{grid-template-columns:1fr;gap:2.2rem}
+  .sys-step.rev .sys-copy{order:1}
+  .sys-step.rev .sys-stage{order:2}
+  .sys-steps{gap:4.2rem}
+  .sys-pain{font-size:.95rem}
+  .sys-trust{gap:.8rem 1.6rem;font-size:.58rem;letter-spacing:.22em}
+  .sys-close{word-break:keep-all}
+}
+
+/* ---------- N°06 partners — plum band ---------- */
+.partners{background:var(--plum);color:var(--pearl);padding-block:clamp(5rem,10vh,8rem)}
+.partners .numero{color:var(--powder)}
+.partners .numero::after{background:rgba(253,251,250,.22)}
+.partners-head{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(2rem,6vw,5rem);align-items:end}
+.partners-grid{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:clamp(2.5rem,6vw,5rem);align-items:start}
+.partners .display{font-size:clamp(1.9rem,4vw,3rem);font-weight:400;margin-top:1.6rem}
+.partners .display em{font-style:italic;color:var(--powder)}
+.partners-lede{margin-top:1.4rem;font-size:.95rem;color:#CBB9C4;font-weight:300;max-width:34em}
+.pillars{display:grid;gap:0;border-top:1px solid rgba(253,251,250,.16)}
+.pillar{padding-block:1.6rem;border-bottom:1px solid rgba(253,251,250,.16)}
+.pillar b{
+  font-family:var(--sans);font-weight:400;font-size:.7rem;letter-spacing:.4em;
+  text-transform:uppercase;color:var(--powder);
+}
+.pillar p{margin-top:.5rem;font-size:.9rem;font-weight:300;color:#D9C8D1}
+@media(max-width:820px){.partners-grid{grid-template-columns:1fr}}
+
+/* ---------- N°07 mastermind — the atelier ---------- */
+.mastermind{position:relative;padding-block:clamp(6rem,12vh,10rem);overflow:hidden}
+.mm-eightbg{
+  position:absolute;top:44%;right:-3%;transform:translateY(-50%);z-index:0;pointer-events:none;
+  font-family:var(--serif);font-style:italic;font-weight:300;line-height:1;
+  font-size:clamp(18rem,34vw,32rem);color:transparent;
+  -webkit-text-stroke:1.5px rgba(184,80,107,.16);
+}
+.mm-head{position:relative;z-index:1;max-width:56em}
+.mm-head .display{font-size:clamp(2.4rem,5.4vw,4.2rem);margin-top:1.6rem}
+.mm-head .display em{font-style:italic;color:var(--rose)}
+.mm-head .kr-head{font-size:clamp(1.1rem,2vw,1.4rem);margin-top:1.2rem;color:#3B3036;word-break:keep-all}
+.mm-head .kr-body{margin-top:1rem;max-width:40em}
+.mm-tags{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:2rem;position:relative;z-index:1}
+.mm-tag{
+  font-family:var(--sans);font-size:.68rem;letter-spacing:.26em;text-transform:uppercase;
+  padding:.55rem 1.15rem;border-radius:100px;
+  box-shadow:inset 0 0 0 1px var(--hairline);color:#4E434A;background:var(--pearl);
+}
+/* eight-week rail */
+.mm-line{position:relative;z-index:1;margin-top:clamp(4.5rem,9vh,7rem);padding-block:3.4rem 4rem}
+.mm-rail{position:relative;height:2px;background:var(--hairline);border-radius:2px}
+.mm-fill{
+  position:absolute;inset:0;width:0;border-radius:2px;
+  background:linear-gradient(90deg,#F0A0BC,#C94E70);
+  box-shadow:0 0 12px rgba(232,160,184,.55);
+  transition:width 2.8s var(--ease) .25s;
+}
+.play .mm-fill{width:100%}
+.mm-node{position:absolute;top:50%;transform:translate(-50%,-50%)}
+.mm-node i{
+  display:block;width:10px;height:10px;border-radius:50%;
+  background:radial-gradient(circle at 32% 30%,#fff,#ECA0C0 55%,#C94E70);
+  box-shadow:0 0 0 4px var(--porcelain),0 1px 6px rgba(160,60,110,.45);
+}
+.mm-node b{
+  position:absolute;top:1.15rem;left:50%;transform:translateX(-50%);white-space:nowrap;
+  font-family:var(--sans);font-weight:400;font-size:.56rem;letter-spacing:.3em;
+  text-transform:uppercase;color:var(--dove);
+}
+.mm-node span{
+  position:absolute;bottom:1.15rem;left:50%;transform:translateX(-50%);white-space:nowrap;
+  font-family:var(--kr);font-size:.78rem;font-weight:400;color:#4E434A;
+}
+.mm-node.final i{
+  width:24px;height:24px;
+  background:radial-gradient(circle at 34% 30%,#fff,#F5E8F0 48%,#ECA0C0);
+  box-shadow:0 0 0 4px var(--porcelain),0 0 26px rgba(232,160,184,.9);
+}
+.mm-node.final span{font-weight:600;color:var(--rose-deep)}
+.mm-foot{position:relative;z-index:1;display:flex;justify-content:center}
+@media(max-width:760px){
+  .mm-rail{margin-right:16px}
+  .mm-node span{font-size:.6rem}
+  .mm-node b{display:none}
+  .mm-node:nth-child(odd) span{bottom:auto;top:1.15rem}
+  .mm-node.final{left:96% !important}
+  .mm-node.final span{left:auto;right:0;transform:none}
+  .mm-node.final i{width:18px;height:18px}
+  .mm-node:nth-child(2){left:4% !important}
+  .mm-node:nth-child(2) span{left:0;transform:none}
+  .mm-eightbg{font-size:16rem;opacity:.7}
+  .mm-foot .btn{
+    font-size:.6rem;letter-spacing:.12em;padding:.95rem 1.3rem;
+    white-space:nowrap;gap:.5rem;
+  }
+}
+
+/* ---------- N°08 the house ---------- */
+.house{border-top:1px solid var(--hairline-soft);padding-block:clamp(6rem,12vh,10rem)}
+.house-head{text-align:center;display:grid;justify-items:center}
+.house-head .display{font-size:clamp(2.2rem,5vw,3.8rem);margin-top:1.6rem}
+.house-head .display em{font-style:italic;color:var(--rose)}
+.house-head .kr-body{margin-top:1.2rem;margin-inline:auto}
+.house-stage{position:relative;margin-top:4rem}
+.house-ribbon{
+  position:absolute;left:-5%;right:-5%;top:50%;transform:translateY(-50%);
+  width:110%;height:160px;z-index:0;pointer-events:none;overflow:visible;
+}
+.house-ribbon path{
+  stroke:#E8A0B8;stroke-width:1.8;fill:none;stroke-linecap:round;opacity:.9;
+  filter:drop-shadow(0 1px 6px rgba(232,160,184,.5));
+  stroke-dasharray:1700;stroke-dashoffset:1700;
+}
+.play .house-ribbon path{transition:stroke-dashoffset 3.2s var(--ease) .3s;stroke-dashoffset:0}
+.maisons{position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1rem,2vw,1.6rem)}
+.maison{
+  position:relative;overflow:hidden;border-radius:12px;
+  padding:clamp(1.8rem,3.5vw,2.6rem);
+  display:flex;flex-direction:column;gap:.9rem;min-height:340px;
+  transition:transform .55s var(--ease),box-shadow .55s var(--ease);
+}
+.maison:hover{transform:translateY(-9px)}
+.maison b{
+  font-family:var(--sans);font-weight:400;font-size:.62rem;letter-spacing:.36em;
+  text-transform:uppercase;color:var(--rose);
+}
+.maison h3{font-family:var(--serif);font-weight:500;font-size:clamp(1.7rem,2.6vw,2.2rem);line-height:1.1}
+.maison p{font-size:.88rem;color:#5D5257;font-weight:300}
+.maison .soon{
+  margin-top:auto;font-family:var(--sans);font-size:.6rem;letter-spacing:.34em;
+  text-transform:uppercase;color:var(--dove);
+}
+.maison .mo{height:52px;display:flex;align-items:center}
+/* 1 — the app : pearl glass, daily digital */
+.maison--app{
+  background:rgba(253,251,250,.7);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.92),
+    0 0 0 1px rgba(232,160,184,.4),
+    0 26px 54px -30px rgba(142,58,80,.4);
+}
+.maison--app .mo svg{width:44px;height:44px}
+.maison--app .mo .tr{stroke:#EAE0E4;stroke-width:3.5;fill:none}
+.maison--app .mo .pr{
+  stroke:url(#moGrad);stroke:#ECA0C0;stroke-width:3.5;fill:none;stroke-linecap:round;
+  stroke-dasharray:113;stroke-dashoffset:113;
+}
+.play .maison--app .mo .pr{transition:stroke-dashoffset 1.8s var(--ease) 1s;stroke-dashoffset:38}
+.maison--app .mo circle.core{fill:#F5E8F0}
+/* 2 — mastermind : ink velvet, premium */
+.maison--mm{
+  background:
+    radial-gradient(120% 80% at 85% -5%,rgba(232,160,184,.2),transparent 55%),
+    linear-gradient(160deg,#2E1D29,#1A1216 70%);
+  color:var(--pearl);
+  box-shadow:
+    inset 0 0 0 1px rgba(253,251,250,.14),
+    0 30px 60px -30px rgba(26,18,22,.75);
+}
+.maison--mm b{color:var(--powder)}
+.maison--mm h3{color:var(--pearl)}
+.maison--mm p{color:#C9BAC2}
+.maison--mm .soon{color:#8E7C87}
+.maison--mm .mo{
+  font-family:var(--serif);font-style:italic;font-weight:300;
+  font-size:3rem;line-height:1;color:var(--powder);
+  text-shadow:0 0 26px rgba(232,160,184,.55);
+}
+/* 3 — objets : blush satin, tactile */
+.maison--objets{
+  background:
+    radial-gradient(120% 90% at 82% 0%,rgba(239,184,200,.55),transparent 58%),
+    radial-gradient(100% 80% at 10% 100%,rgba(203,193,190,.4),transparent 60%),
+    linear-gradient(165deg,#F8ECEF,#F3D9E0);
+  box-shadow:
+    inset 0 1.5px 0 rgba(255,255,255,.95),
+    inset 0 0 0 1px rgba(232,160,184,.35),
+    0 26px 54px -30px rgba(142,58,80,.45);
+}
+.maison--objets .mo{gap:10px}
+.maison--objets .pearl{
+  width:26px;height:26px;border-radius:50%;
+  background:radial-gradient(circle at 32% 28%,#fff,#F5E8F0 50%,#DDB0C8);
+  box-shadow:0 2px 8px rgba(160,60,110,.3),inset -2px -3px 6px rgba(160,60,110,.15);
+}
+.maison--objets .star{font-size:.9rem;color:#C7A76C;text-shadow:0 0 8px rgba(199,167,108,.5)}
+.maison--objets .soon{color:var(--rose-deep)}
+@media(max-width:820px){
+  .maisons{grid-template-columns:1fr}
+  .maison{min-height:0}
+  .house-ribbon{display:none}
+}
+
+/* ---------- N°09 waitlist — pearl glass ---------- */
+.waitlist{
+  position:relative;padding-block:clamp(7rem,14vh,11rem);
+  background:
+    radial-gradient(70% 90% at 22% 8%,rgba(239,184,200,.4),transparent 60%),
+    radial-gradient(60% 80% at 82% 90%,rgba(203,193,190,.35),transparent 60%),
+    linear-gradient(180deg,var(--porcelain),var(--powder-soft));
+  overflow:hidden;
+}
+.glass-card{
+  position:relative;max-width:640px;margin-inline:auto;text-align:center;
+  padding:clamp(2.6rem,5vw,4rem) clamp(1.6rem,4vw,3.4rem);
+  border-radius:26px;
+  background:rgba(253,251,250,.44);
+  backdrop-filter:blur(22px) saturate(1.2);
+  -webkit-backdrop-filter:blur(22px) saturate(1.2);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.62),
+    0 30px 80px -20px rgba(142,58,80,.18);
+}
+.glass-card .display{font-size:clamp(1.9rem,4vw,2.9rem);font-weight:400;margin-top:1.4rem}
+.glass-card .display em{font-style:italic;color:var(--rose)}
+.glass-card .kr-body{margin:1.1rem auto 0}
+.wl-form{display:flex;gap:.7rem;margin-top:2.4rem}
+.wl-form input{
+  flex:1;min-width:0;height:56px;padding-inline:1.5rem;
+  border-radius:100px;border:1px solid rgba(26,18,22,.16);
+  background:rgba(255,255,255,.78);color:var(--ink);
+  font-family:var(--kr);font-size:.95rem;outline:none;
+  transition:border-color .3s,box-shadow .3s;
+}
+.wl-form input::placeholder{color:#A2949B}
+.wl-form input:focus{border-color:var(--rose);box-shadow:0 0 0 3px rgba(184,80,107,.14)}
+.wl-form button{
+  position:relative;
+  height:56px;padding-inline:2rem;border-radius:100px;flex:none;
+  color:#7C3450;font-weight:600;
+  background:rgba(246,190,209,.5);
+  backdrop-filter:blur(20px) saturate(1.5);-webkit-backdrop-filter:blur(20px) saturate(1.5);
+  font-family:var(--kr);font-size:.78rem;letter-spacing:.18em;
+  box-shadow:0 12px 30px -16px rgba(184,80,107,.45);
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease),background .35s var(--ease);
+}
+.wl-form button:hover{transform:translateY(-2px);background:rgba(246,190,209,.65);box-shadow:0 16px 36px -16px rgba(184,80,107,.55)}
+.wl-note{margin-top:1.1rem;font-size:.78rem;color:#8A7C82;font-weight:300}
+.wl-done{display:none;margin-top:2rem;font-weight:300;font-size:1.02rem;color:var(--rose-deep)}
+.wl-done .etoile{display:block;margin-top:.6rem}
+@media(max-width:560px){
+  .wl-form{flex-direction:column;gap:.6rem}
+  .wl-form input{flex:none;height:58px;font-size:1rem;padding-inline:1.3rem}
+  .wl-form button{width:100%;height:58px}
+}
+
+/* ---------- footer — credo ---------- */
+footer{background:var(--ink);color:var(--pearl);padding-block:clamp(6rem,11vh,9rem) 3rem}
+.credo{display:grid;gap:2.6rem;max-width:56em}
+.credo-line .display{font-size:clamp(1.5rem,3.2vw,2.4rem);font-weight:400;line-height:1.25}
+.credo-line .display em{font-style:italic;color:var(--powder)}
+.credo-line p{font-weight:200;font-size:.92rem;color:#B9A8B2;margin-top:.4rem;letter-spacing:0}
+.house-sig{
+  margin-top:4.5rem;padding-top:2.6rem;border-top:1px solid rgba(253,251,250,.14);
+  display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;flex-wrap:wrap;
+}
+.sig-mark .m{
+  font-family:var(--serif);font-weight:500;font-size:2.6rem;letter-spacing:.34em;line-height:1;
+}
+.sig-mark .h{
+  font-family:var(--sans);font-weight:300;font-size:.6rem;letter-spacing:.52em;
+  text-transform:uppercase;color:#B9A8B2;margin-top:.5rem;
+}
+.sig-meta{
+  font-family:var(--sans);font-size:.66rem;letter-spacing:.3em;text-transform:uppercase;
+  color:#8E7C87;text-align:right;line-height:2.1;
+}
+.sig-meta a{color:#B9A8B2;text-transform:none;letter-spacing:.14em;transition:color .3s}
+.sig-meta a:hover{color:var(--powder)}
+@media(max-width:640px){.sig-meta{text-align:left}}
+
+/* ---------- refinement pass ---------- */
+[id]{scroll-margin-top:82px}
+.nav-progress{
+  position:fixed;top:0;left:0;height:2px;width:100%;z-index:70;
+  background:linear-gradient(90deg,#F0A0BC,#C94E70);
+  box-shadow:0 0 8px rgba(232,160,184,.55);
+  transform:scaleX(0);transform-origin:left center;will-change:transform;
+}
+.nav-links a.cur{color:var(--rose-deep)}
+.nav-links a.cur::after{width:100%}
+.pro-skip{
+  position:absolute;bottom:12px;left:50%;transform:translateX(-50%);
+  font-family:var(--sans);font-size:.55rem;letter-spacing:.32em;text-transform:uppercase;
+  color:#8A7C82;pointer-events:auto;padding:.3rem .6rem;
+  transition:color .3s;
+}
+.pro-skip:hover{color:var(--rose-deep)}
+/* partners: veiled lineup */
+/* house cards: navigational */
+.maison .go{
+  display:inline-flex;align-items:center;gap:.45rem;margin-top:.7rem;
+  font-family:var(--sans);font-size:.6rem;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--rose-deep);
+}
+.maison .go::after{content:"";position:absolute;inset:0}
+.maison .go i{font-style:normal;transition:transform .35s var(--ease)}
+.maison:hover .go i{transform:translateX(4px)}
+.maison--mm .go{color:var(--powder)}
+/* back to top pearl */
+.totop{
+  position:fixed;right:18px;bottom:18px;z-index:58;
+  width:44px;height:44px;border-radius:50%;
+  background:radial-gradient(circle at 32% 28%,#fff,#F5E8F0 55%,#ECA0C0);
+  box-shadow:0 8px 20px rgba(160,60,110,.35),inset 0 1.5px 0 rgba(255,255,255,.85);
+  display:grid;place-items:center;
+  opacity:0;pointer-events:none;transform:translateY(10px);
+  transition:opacity .45s var(--ease),transform .45s var(--ease);
+}
+.totop.show{opacity:1;pointer-events:auto;transform:none}
+.totop:hover{transform:translateY(-2px)}
+.totop svg{width:14px;height:14px;stroke:#8E3A50;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+
+/* ---------- korean text wrapping ---------- */
+.kr-body,.kr-head,.thesis-kr,.sys-copy p.desc,.sys-copy .krsub,.sys-note,
+.maison p,.partners-lede,.pillar p,.credo-line p,.dc-kr,.wl-note,.sys-close,
+.nuit-step h3,.nuit-close p,.mm-head .kr-head{word-break:keep-all;overflow-wrap:break-word}
+
+/* ---------- mobile typography ---------- */
+@media(max-width:700px){
+  .numero{font-size:.6rem;letter-spacing:.28em}
+  .numero::after{width:32px}
+  .kr-body{font-size:1rem;line-height:1.85}
+  .sys-copy p.desc{font-size:.98rem;line-height:1.82}
+  .sys-copy .krsub{font-size:1.08rem}
+  .sys-note{font-size:.85rem;line-height:1.7}
+  .sys-kicker{font-size:.62rem;letter-spacing:.3em}
+  .thesis-kr{font-size:.98rem}
+  .nuit-step h3{font-size:1.6rem;line-height:1.5}
+  .nuit .kr-body{font-size:.98rem}
+  .partners-lede{font-size:.98rem;line-height:1.8}
+  .pillar p{font-size:.94rem;line-height:1.75}
+  .maison p{font-size:.94rem;line-height:1.75}
+  .maison h3{font-size:1.6rem}
+  .dc-name{font-size:1.15rem}
+  .dc-data span{font-size:.56rem}
+  .dc-serial{font-size:.46rem;letter-spacing:.22em}
+  .mm-head .kr-head{font-size:1.08rem}
+  .mm-tag{font-size:.62rem;letter-spacing:.2em;padding:.5rem 1rem}
+  .credo-line .display{font-size:1.35rem;line-height:1.35}
+  .credo-line p{font-size:.92rem}
+  .glass-card .kr-body{font-size:.95rem}
+  .wl-note{font-size:.8rem}
+  .sig-meta{font-size:.6rem;line-height:2}
+  .house-head .kr-body,.sys-head .kr-body,.manifesto .kr-body{font-size:1.02rem}
+}
+
+/* ---------- reduced motion ---------- */
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .prologue-track{height:auto}
+  .prologue{position:relative;height:auto;overflow:visible}
+  .prologue video{display:none}
+  .pro-beat{position:relative;inset:auto;opacity:1;pointer-events:auto;padding-block:14vh}
+  .pro-beat[data-static="skip"]{display:none}
+  .reveal{opacity:1;transform:none;transition:none}
+  .phase-rail{animation:none}
+  .pro-scroll::after{animation:none}
+  .m{opacity:1;transform:none;animation:none}
+  .pro-title i{opacity:1;transform:none;animation:none}
+  .prologue::before{animation:none}
+  .pro-frame .fm2 i{animation:none}
+  .play .m,.play .p-dna.m,.play .p-avoid.m{animation:none;opacity:1;transform:none}
+  .p-screen .p-chk i,.p-screen .p-swatches .p-sw,.p-screen .p-day i,.p-screen .p-fit,.p-screen .p-gtag{opacity:1;transform:none;animation:none}
+  .play .p-phase .ph,.play .p-inputbar .snd,.play .p-blob.b2,.play .p-blob.b3{animation:none}
+  .p-scanline,.p-spark,.p-wavedot,.p-dna::after{display:none}
+  .p-dot,.p-orb .ring-p,.p-bar i,.p-wave path,.p-outline,.p-mesh{transition:none}
+  .p-outline,.p-mesh{stroke-dashoffset:0}
+  .lm{opacity:.9;animation:none}
+  .play .p-bar i{width:var(--w)}
+  .p-dots{display:none}
+  .p-bubble .msg{opacity:1;animation:none}
+  .float,.p-corner{animation:none}
+  .nuit-track{height:auto}
+  .nuit-sticky{position:static;height:auto;padding-block:4rem}
+  .nuit-copy{min-height:0}
+  .nuit-step{position:static;opacity:1;transform:none;margin-bottom:3rem}
+}
+
+/* ---------- premium motion layer (GSAP + Lenis) ---------- */
+html.lenis, html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto !important}
+.lenis.lenis-stopped{overflow:hidden}
+/* magnetic buttons: transform handed over to GSAP */
+.magnet{transition:box-shadow .4s var(--ease),color .35s var(--ease) !important}
+/* manifesto word scrub */
+.manifesto .display .mw{opacity:.13;will-change:opacity}
+/* cursor ring — desktop fine pointer only */
+.cur-ring{
+  position:fixed;left:0;top:0;z-index:998;pointer-events:none;
+  width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;
+  border:1px solid color-mix(in srgb,var(--rose) 65%,transparent);
+  transition:opacity .3s,border-color .3s,background .3s;
+  opacity:0;will-change:transform;
+}
+.cur-ring.on{opacity:1}
+.cur-ring.hot{border-color:var(--rose);background:rgba(184,80,107,.07)}
+@media(pointer:coarse){.cur-ring{display:none}}
+
+/* ---------- preloader — the moon fills ---------- */
+.pl{
+  position:fixed;inset:0;z-index:200;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.15rem;
+  background:
+    radial-gradient(90% 70% at 72% 16%,rgba(239,184,200,.28),transparent 60%),
+    radial-gradient(70% 60% at 14% 92%,rgba(246,231,234,.9),transparent 65%),
+    var(--porcelain);
+  opacity:0;visibility:hidden;pointer-events:none;
+  transition:opacity 1.15s ease,visibility 0s 1.2s;
+}
+body.loading .pl{opacity:1;visibility:visible;pointer-events:auto}
+.pl.out{opacity:0;pointer-events:none}
+body.loading{overflow:hidden}
+html:has(body.loading){overflow:hidden}
+/* the sealed envelope — wax, satin, letterpress */
+.env-scene{
+  perspective:1300px;
+  width:min(380px,84vw);
+  animation:envIn 1.2s var(--ease) both;
+}
+/* AI ceremony mode — Higgsfield envelope film, feathered into the page (no frame) */
+.env-scene.ai{position:relative;perspective:none;width:min(720px,94vw)}
+/* halo bridge — continues the film's own backdrop past the mask so the cut is invisible */
+.env-scene.ai::before{
+  content:"";position:absolute;inset:-24% -30%;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse 50% 48% at 50% 50%,rgba(226,215,214,.75),rgba(226,215,214,.32) 58%,transparent 76%);
+}
+.env-scene.ai video{
+  position:relative;z-index:1;
+  display:block;width:100%;height:auto;
+  -webkit-mask-image:radial-gradient(ellipse 64% 62% at 50% 50%,#000 48%,transparent 76%);
+  mask-image:radial-gradient(ellipse 64% 62% at 50% 50%,#000 48%,transparent 76%);
+}
+/* sealed cutout floats while waiting; film fades in on accept */
+.env-scene.ai .env-cut{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:contain;
+  filter:drop-shadow(0 30px 55px rgba(120,60,85,.35));
+  animation:envFloat 7s ease-in-out 1.2s infinite;
+  transition:opacity .6s var(--ease);
+  pointer-events:none;
+}
+.env-scene.ai.has-cut video{opacity:0}
+.env-scene.ai.go video{opacity:1;transition:opacity .7s var(--ease)}
+.env-scene.ai.go .env-cut{opacity:0}
+
+/* ---------- assembled envelope — photoreal state dissolve, no slices ---------- */
+.env-scene.asm{
+  width:min(1180px,96vw);aspect-ratio:2752/1536;
+  position:relative;
+  animation:envFloat 7.5s ease-in-out 1.2s infinite;
+  transition:transform .8s var(--ease);
+}
+.asm.armed:not(.open):hover{transform:translateY(-7px)}
+.asm > img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.asm .e3-open{z-index:2;opacity:0;transition:opacity .5s var(--ease)}
+.asm .e3-openfront{z-index:4;clip-path:inset(52% 0 0 0);opacity:0;transition:opacity .5s var(--ease)}
+.asm.s1 .e3-open,.asm.s1 .e3-openfront{opacity:1}
+.asm .e3-half{z-index:5;opacity:0;transition:opacity .5s var(--ease)}
+.asm .e3-closed{z-index:6;transition:opacity .5s var(--ease)}
+.asm .e3-seal2{z-index:7;pointer-events:none;transition:opacity .55s,transform .6s cubic-bezier(.5,0,.8,.5)}
+.asm.armed:not(.open) .e3-seal2{animation:sealPulse 2.6s ease-in-out infinite}
+.asm.armed:not(.open):hover .e3-seal2{filter:brightness(1.07)}
+.asm.s1 .e3-seal2{opacity:0;transform:translateY(4.5%) rotate(4deg)}
+.asm.s1 .e3-closed{opacity:0}
+.asm.s1 .e3-half{opacity:1}
+.asm.s2 .e3-half{opacity:0}
+.e3-seal{
+  position:absolute;left:39.5%;top:32%;width:26%;aspect-ratio:1;
+  border-radius:50%;cursor:pointer;z-index:8;
+}
+.e3-seal:focus-visible{outline:2px solid var(--rose);outline-offset:4px}
+.asm.open .e3-seal{opacity:0;pointer-events:none}
+/* the letter — rises from the mouth, clipped at the envelope bottom */
+.e3-clip{
+  position:absolute;left:0;right:0;top:-95%;bottom:11%;
+  overflow:hidden;pointer-events:none;z-index:3;
+}
+.e3-letter{
+  position:absolute;left:50%;top:75%;width:25%;
+  transform:translateX(-50%);
+  filter:drop-shadow(0 18px 34px rgba(120,60,85,.28));
+  transition:transform 1.35s cubic-bezier(.22,.9,.24,1);
+}
+.asm.out .e3-letter{transform:translateX(-50%) translateY(-72%)}
+.asm.present{animation:none}
+.asm.present .e3-clip{overflow:visible;z-index:9}
+.asm.present .e3-open,.asm.present .e3-openfront{
+  transition:opacity 1s var(--ease),filter 1s var(--ease),transform 1s var(--ease);
+  opacity:.4;filter:blur(1.4px);transform:translateY(3%);
+}
+.asm.present .e3-letter{
+  transform:translateX(-50%) translateY(-62%) scale(1.6);
+  filter:drop-shadow(0 44px 80px rgba(120,60,85,.42));
+  transition:transform 2.4s cubic-bezier(.2,.85,.25,1),filter 2.4s;
+}
+@media(max-height:820px){
+  .asm.present .e3-letter{transform:translateX(-50%) translateY(-62%) scale(1.5)}
+}
+@keyframes sealPulse{0%,100%{filter:brightness(1)}50%{filter:brightness(1.05)}}
+/* final beat: the letter alone drifts toward you (crisp 2K still) */
+.env-scene.ai .letter-close{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  opacity:0;transform:scale(.94);
+  transition:opacity .9s var(--ease),transform 3.2s cubic-bezier(.2,.85,.25,1);
+  pointer-events:none;
+  -webkit-mask-image:radial-gradient(ellipse 72% 68% at 50% 50%,#000 50%,transparent 79%);
+  mask-image:radial-gradient(ellipse 72% 68% at 50% 50%,#000 50%,transparent 79%);
+}
+/* transparent cutout version: no mask, true floating card */
+.env-scene.ai .letter-close.cut{
+  object-fit:contain;
+  -webkit-mask-image:none;mask-image:none;
+  filter:drop-shadow(0 34px 60px rgba(120,60,85,.38));
+}
+.env-scene.ai.close .letter-close{opacity:1;transform:scale(1.22)}
+.env-scene.ai.close video{filter:blur(2px);opacity:.35;transition:filter .9s,opacity .9s}
+@keyframes envIn{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+.env{
+  position:relative;width:100%;aspect-ratio:10/7;
+  transform-style:preserve-3d;
+  animation:envFloat 7s ease-in-out 1.4s infinite;
+  transition:transform 1s var(--ease),opacity .9s var(--ease);
+  pointer-events:none;
+}
+@keyframes envFloat{0%,100%{transform:translateY(0) rotate(-1.2deg)}50%{transform:translateY(-7px) rotate(-.5deg)}}
+.env-back,.env-front,.env-flap{
+  position:absolute;left:0;width:100%;
+  background:linear-gradient(168deg,#F6EFE6 0%,#F1E7DC 60%,#ECE0D4 100%);
+}
+.env-back{
+  top:0;height:100%;border-radius:10px;
+  box-shadow:0 36px 80px -30px rgba(120,60,85,.5),0 10px 26px -12px rgba(120,60,85,.3);
+}
+.env-front{
+  bottom:0;height:72%;border-radius:0 0 10px 10px;z-index:3;
+  clip-path:polygon(0 0,50% 34%,100% 0,100% 100%,0 100%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.7),inset 0 0 0 1px rgba(184,80,107,.1);
+}
+.env-flap{
+  top:0;height:56%;z-index:4;
+  clip-path:polygon(0 0,100% 0,50% 100%);
+  border-radius:10px 10px 0 0;
+  background:linear-gradient(180deg,#F4EDE3 0%,#EFE4D7 100%);
+  box-shadow:inset 0 -1px 0 rgba(184,80,107,.14);
+  transform-origin:top center;
+  transition:transform .85s cubic-bezier(.6,0,.3,1);
+}
+.env.open .env-flap{transform:rotateX(-179deg)}
+/* debossed hairline following the flap edge */
+.env-flap::before{
+  content:"";position:absolute;inset:7px 10px;
+  clip-path:polygon(0 0,100% 0,50% 100%);
+  background:linear-gradient(180deg,rgba(184,80,107,.1),rgba(184,80,107,.05));
+  opacity:.6;
+}
+/* pearl-pink wax seal, moon emblem pressed in */
+.env-seal{
+  position:absolute;left:50%;top:56%;z-index:5;
+  width:76px;height:76px;margin:-38px 0 0 -38px;
+  border-radius:46% 54% 52% 48% / 50% 47% 53% 50%;
+  background:radial-gradient(circle at 36% 30%,#F0B5C8 0%,#E39FB8 45%,#CF87A3 100%);
+  box-shadow:
+    inset 0 2px 3px rgba(255,255,255,.55),
+    inset 0 -3px 5px rgba(142,58,80,.35),
+    0 4px 10px -3px rgba(142,58,80,.4);
+  transform:rotate(-6deg);
+  transition:opacity .45s,transform .85s cubic-bezier(.6,0,.3,1);
+  animation:sealPulse 2.6s ease-in-out infinite;
+}
+@keyframes sealPulse{0%,100%{filter:brightness(1)}50%{filter:brightness(1.05)}}
+.env.open .env-seal{opacity:0;transform:rotate(-6deg) translateY(-30px) scale(.9)}
+.seal-in{
+  position:absolute;inset:9px;border-radius:50%;
+  background:radial-gradient(circle at 40% 32%,#EBADC1 0%,#DD97B1 60%,#D28CA7 100%);
+  box-shadow:inset 0 2px 4px rgba(142,58,80,.3),inset 0 -1px 2px rgba(255,255,255,.4);
+  display:grid;place-items:center;
+  color:#B46886;
+}
+.seal-in svg{width:70%;height:70%;filter:drop-shadow(0 1px 0 rgba(255,255,255,.45))}
+/* the letter inside */
+.letter{
+  position:absolute;left:50%;top:4%;z-index:2;
+  width:52%;aspect-ratio:4/5;transform:translateX(-50%);
+  font-size:min(10.5px,2.7vw);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.3em;
+  padding:1.6em 1.2em;text-align:center;
+  background:linear-gradient(170deg,#FEFCFA 0%,#FBF4EF 100%);
+  border-radius:6px;
+  box-shadow:inset 0 0 0 1px #EFD8DE,0 10px 30px -14px rgba(120,60,85,.35);
+  transition:transform 1s cubic-bezier(.22,.9,.24,1),box-shadow 1s;
+}
+.env.out .letter{transform:translateX(-50%) translateY(-62%)}
+.env.present .letter{
+  z-index:6;
+  transform:translateX(-50%) translateY(-50%) scale(1.9);
+  box-shadow:inset 0 0 0 1px #EFD8DE,0 40px 90px -30px rgba(120,60,85,.55);
+}
+.env.present .env-back,.env.present .env-front,.env.present .env-flap{opacity:.55;filter:blur(1px)}
+.env.present{animation:none;transform:translateY(6%)}
+.letter.img{background-image:url('assets/invitation.png');background-size:cover;background-position:center}
+.letter.img > *{visibility:hidden}
+.lt-maison{font-family:var(--sans);font-size:.55em;letter-spacing:.46em;text-transform:uppercase;color:var(--rose);padding-left:.46em}
+.lt-word{font-family:var(--serif);font-style:italic;font-weight:500;font-size:2.1em;line-height:1.05;color:var(--ink);margin-top:.2em}
+.lt-bow{width:4.4em;height:auto;margin-block:.35em}
+.lt-kr{font-size:.76em;font-weight:300;color:#5D5257;line-height:1.7}
+.lt-rule{width:4.2em;height:1px;background:rgba(184,80,107,.35);margin-block:.55em .2em}
+.lt-h{font-family:var(--sans);font-size:.52em;letter-spacing:.4em;text-transform:uppercase;color:var(--rose);margin-top:.35em;padding-left:.4em}
+.lt-v{font-family:var(--sans);font-size:.62em;letter-spacing:.16em;color:#6B5A63}
+.inv-q{margin-top:1.6rem;font-size:.95rem;font-weight:300;color:#4E434A}
+.inv-accept{
+  height:46px;padding:0 2.1rem;border-radius:100px;margin-top:.15rem;
+  font-family:var(--sans);font-size:.66rem;font-weight:400;letter-spacing:.34em;text-transform:uppercase;
+  text-indent:.34em;color:#8A7C82;
+  background:transparent;
+  box-shadow:inset 0 0 0 1px rgba(184,80,107,.28);
+  opacity:.6;cursor:wait;
+  transition:opacity .5s,color .4s,box-shadow .4s var(--ease),background .4s var(--ease),transform .35s var(--ease);
+}
+.inv-accept.armed{
+  opacity:1;cursor:pointer;color:#7C3450;font-weight:600;
+  background:linear-gradient(135deg,#FBDDE7 0%,#F5C3D2 100%);
+  box-shadow:0 12px 30px -14px rgba(214,130,160,.5);
+}
+.inv-accept.armed:hover{
+  color:#7C3450;transform:translateY(-1px);
+  background:linear-gradient(135deg,#FCE3EB 0%,#F7CBD8 100%);
+  box-shadow:0 16px 36px -14px rgba(214,130,160,.6);
+}
+.inv-accept.armed:focus-visible{outline:2px solid var(--rose);outline-offset:3px}
+.inv-accept i{font-style:normal;font-size:.7em;opacity:.85;margin-left:.3em}
+.inv-note{font-family:var(--sans);font-size:.56rem;letter-spacing:.4em;text-transform:uppercase;color:#A2949B;padding-left:.4em}
+
+/* entrance orchestration after the veil lifts */
+@media(prefers-reduced-motion:no-preference){
+  body.loading nav,body.loading .pro-frame{opacity:0}
+  body.loading .pro-title i{animation-play-state:paused}
+  body.ready nav{animation:plIn 1s var(--ease) .45s both}
+  body.ready .pro-frame{animation:plIn 1.1s var(--ease) .7s both}
+  @keyframes plIn{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:none}}
+}
+
+/* ---------- rolling links — label rolls up into italic serif ---------- */
+.roll{display:block;overflow:hidden;height:1.3em}
+.roll>span{display:block;height:1.3em;line-height:1.3em;transition:transform .5s var(--ease)}
+.roll>span:last-child{
+  font-family:var(--serif);font-style:italic;font-weight:500;
+  text-transform:none;letter-spacing:.04em;font-size:1.14em;
+}
+a:hover .roll>span,button:hover .roll>span{transform:translateY(-1.3em)}
+.nav-links a::after{bottom:-3px}
+
+/* nav links: seamless in-place font swap — no roll, no shift */
+.nav-links a:not(.nav-cta) .roll{overflow:visible;position:relative}
+.nav-links a:not(.nav-cta) .roll>span{transition:opacity .3s var(--ease)}
+.nav-links a:not(.nav-cta):hover .roll>span{transform:none}
+.nav-links a:not(.nav-cta):hover .roll>span:first-child{opacity:0}
+.nav-links a:not(.nav-cta) .roll>span:last-child{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-size:1.5em;line-height:1;letter-spacing:.05em;color:var(--rose-deep);
+  opacity:0;pointer-events:none;
+  transform:translateY(-.14em);
+}
+.nav-links a:not(.nav-cta):hover .roll>span:last-child{transform:translateY(-.14em)}
+.nav-links a:not(.nav-cta):hover .roll>span:last-child{opacity:1}
+
+/* ---------- N°07 partner ledger — sealed until reveal ---------- */
+.ledger{margin-top:clamp(2.6rem,5vh,3.8rem);border-top:1px solid rgba(253,251,250,.18)}
+.lg-row{
+  display:grid;grid-template-columns:72px minmax(0,1.1fr) minmax(0,1fr) auto;
+  gap:clamp(.9rem,2.5vw,1.6rem);align-items:center;
+  padding:1.25rem .4rem;border-bottom:1px solid rgba(253,251,250,.14);
+  transition:background .45s var(--ease);
+}
+.lg-row:hover{background:rgba(253,251,250,.045)}
+.lg-no{font-family:var(--sans);font-size:.66rem;letter-spacing:.22em;color:#A78E9D}
+.lg-cat b{display:block;font-family:var(--serif);font-weight:500;font-size:clamp(1.15rem,2vw,1.45rem);line-height:1.15;color:var(--pearl)}
+.lg-cat i{font-style:normal;font-size:.76rem;font-weight:300;color:#B9A2AF}
+.lg-seal{display:flex;align-items:center;gap:.75rem;color:var(--powder)}
+.lg-seal svg{width:40px;height:40px;flex:none;transition:transform .5s var(--ease),color .4s}
+.lg-row:hover .lg-seal svg{transform:rotate(-8deg) scale(1.06);color:#F6CDD9}
+.lg-seal .st{
+  position:relative;overflow:hidden;
+  font-family:var(--sans);font-size:.6rem;letter-spacing:.36em;text-transform:uppercase;color:#CBB0BE;
+}
+.lg-seal .st::after{
+  content:"";position:absolute;top:0;left:-70%;width:45%;height:100%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.5),transparent);
+  transform:skewX(-18deg);
+}
+.lg-row:hover .lg-seal .st::after{animation:foil 1.2s var(--ease)}
+.lg-right{display:flex;flex-direction:column;align-items:flex-end;gap:.4rem}
+.lg-status{
+  font-family:var(--sans);font-size:.62rem;letter-spacing:.18em;white-space:nowrap;
+  padding:.34rem .9rem;border-radius:100px;
+}
+.lg-status.on{color:#fff;background:linear-gradient(135deg,#F0A0BC,#C94E70);box-shadow:inset 0 1px 0 rgba(255,255,255,.4),0 6px 16px -8px rgba(201,78,112,.5);text-shadow:0 1px 2px rgba(142,58,80,.25)}
+.lg-status.mid{color:var(--powder);box-shadow:inset 0 0 0 1px rgba(239,184,200,.5)}
+.lg-status.dim{color:#A78E9D;box-shadow:inset 0 0 0 1px rgba(253,251,250,.2)}
+.lg-date{font-family:var(--sans);font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:#8A7186}
+.pledge{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.2rem,3vw,2.4rem);
+  margin-top:clamp(2.4rem,5vh,3.4rem);
+}
+.pledge b{
+  display:block;font-family:var(--sans);font-size:.66rem;font-weight:500;
+  letter-spacing:.26em;text-transform:uppercase;color:var(--powder);
+}
+.pledge p{margin-top:.5rem;font-size:.84rem;font-weight:300;color:#C9B4BF;line-height:1.85}
+.partners-cta{display:flex;align-items:center;gap:1.4rem;flex-wrap:wrap;margin-top:clamp(2.4rem,5vh,3.2rem)}
+.partners-cta .note{font-family:var(--sans);font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:#A78E9D}
+@media(max-width:820px){
+  .partners-head{grid-template-columns:1fr}
+  .lg-row{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"cat seal" "right right";row-gap:.8rem}
+  .lg-no{display:none}
+  .lg-cat{grid-area:cat}
+  .lg-seal{grid-area:seal}
+  .lg-right{grid-area:right;flex-direction:row;align-items:center;justify-content:space-between;width:100%}
+  .pledge{grid-template-columns:1fr}
+}
+
+/* ---------- house thresholds — a door plate at every room ---------- */
+.threshold{
+  display:flex;align-items:center;justify-content:center;gap:1.2rem;
+  color:rgba(26,18,22,.42);
+  margin-bottom:clamp(2.4rem,5vh,4rem);
+  padding-inline:8vw;
+}
+.nuit .threshold,.partners .threshold{color:rgba(253,251,250,.42)}
+.th-line{height:1px;flex:1;max-width:150px;background:currentColor;opacity:.4}
+.th-arch{width:22px;height:27px;flex:none;opacity:.85}
+.th-name{
+  font-family:var(--sans);font-size:.62rem;font-weight:400;
+  letter-spacing:.4em;text-transform:uppercase;white-space:nowrap;
+}
+
+/* ---------- 2.5D room stages — look into each room ---------- */
+.room{width:min(1240px,92vw);margin:0 auto clamp(2.2rem,5vh,3.6rem)}
+.room-frame{
+  position:relative;overflow:hidden;border-radius:22px;aspect-ratio:21/9;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.35),
+    0 30px 70px -30px rgba(142,58,80,.4),
+    0 8px 24px -12px rgba(142,58,80,.2);
+  transform-style:preserve-3d;
+  will-change:transform;
+}
+.room-frame img{
+  position:absolute;inset:-6%;width:112%;height:112%;max-width:none;
+  object-fit:cover;will-change:transform;
+}
+.room-haze{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(120% 90% at 50% 110%,rgba(251,247,245,.28),transparent 55%),
+    linear-gradient(180deg,rgba(26,18,22,.08),transparent 30%,transparent 72%,rgba(26,18,22,.14));
+  will-change:transform;
+}
+.room-glow{
+  position:absolute;left:50%;top:50%;width:60%;aspect-ratio:1;border-radius:50%;
+  transform:translate(-50%,-50%);
+  background:radial-gradient(circle,rgba(239,184,200,.16) 0%,transparent 65%);
+  pointer-events:none;mix-blend-mode:screen;opacity:0;transition:opacity .6s var(--ease);
+  will-change:transform;
+}
+.room:hover .room-glow{opacity:1}
+.room-cap{
+  display:flex;align-items:center;justify-content:center;gap:.9rem;
+  margin-top:1rem;
+  font-family:var(--sans);font-size:.6rem;letter-spacing:.4em;text-transform:uppercase;color:#A2949B;
+}
+.room-cap::before,.room-cap::after{content:"";height:1px;width:38px;background:var(--hairline)}
+.nuit .room-cap{color:#A78E9D}
+@media(pointer:coarse){
+  .room-frame img{animation:roomKen 16s ease-in-out infinite alternate}
+  @keyframes roomKen{from{transform:scale(1) translate(0,0)}to{transform:scale(1.05) translate(-1.2%,-1.5%)}}
+}
+@media(prefers-reduced-motion:reduce){.room-frame img{animation:none}}
+
+/* ---------- floor plan — where you are in the house ---------- */
+.plan{
+  position:fixed;left:auto;bottom:auto;right:clamp(10px,1.6vw,26px);top:50%;transform:translateY(-50%);z-index:59;
+  width:auto;
+  display:flex;flex-direction:column;align-items:center;gap:.55rem;
+  padding:.85rem .8rem .7rem;border-radius:16px;
+  background:rgba(251,247,245,.55);
+  backdrop-filter:blur(18px) saturate(1.1);-webkit-backdrop-filter:blur(18px) saturate(1.1);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.6),0 10px 30px -18px rgba(142,58,80,.35);
+  opacity:0;pointer-events:none;transition:opacity .6s var(--ease);
+}
+.plan.vis{opacity:1;pointer-events:auto}
+.plan-line{stroke:rgba(26,18,22,.32);stroke-width:1;fill:none}
+.plan-cell{
+  fill:rgba(255,255,255,.25);stroke:rgba(26,18,22,.26);stroke-width:1;
+  cursor:pointer;transition:fill .4s var(--ease),stroke .4s var(--ease);
+}
+.plan a:hover .plan-cell{fill:rgba(239,184,200,.38)}
+.plan a:focus-visible{outline:2px solid var(--rose);outline-offset:1px}
+.plan-cell.on{fill:rgba(239,184,200,.85);stroke:var(--rose)}
+.plan.allon .plan-cell{fill:rgba(239,184,200,.35);stroke:rgba(184,80,107,.55)}
+.plan-txt{
+  font-family:var(--sans);font-size:7px;font-weight:500;letter-spacing:.14em;
+  fill:rgba(26,18,22,.45);text-anchor:middle;pointer-events:none;
+  transition:fill .4s;
+}
+a:hover .plan-txt{fill:var(--rose-deep)}
+.plan-cell.on + .plan-txt,a .plan-cell.on ~ .plan-txt{fill:var(--rose-deep)}
+.plan-label{
+  font-family:var(--sans);font-size:.54rem;letter-spacing:.18em;text-transform:uppercase;
+  color:#6B5A63;white-space:nowrap;text-align:center;max-width:150px;
+}
+@media(max-width:1099px){.plan{display:none}}
+
+/* ---------- editorial scale-up — headlines carry the page ---------- */
+.manifesto .display{font-size:clamp(2.3rem,5.8vw,4.9rem);max-width:17em}
+.house-head .display{font-size:clamp(2.5rem,6vw,4.8rem)}
+.sys-head .display{font-size:clamp(2.6rem,6.4vw,5.2rem)}
+.dna-head .display{font-size:clamp(2.5rem,6vw,4.8rem)}
+.mm-head .display{font-size:clamp(2.6rem,6.2vw,5rem)}
+.partners .display{font-size:clamp(2.1rem,4.8vw,3.8rem)}
+.thesis-line.display{font-size:clamp(2rem,4.6vw,3.6rem)}
+.glass-card .display{font-size:clamp(2rem,4.4vw,3.2rem)}
+.credo-line .display{font-size:clamp(1.6rem,3.6vw,2.7rem)}
+</style>
+</head>
+<body id="top">
+
+<!-- ================= ENTRANCE — the invitation ================= -->
+<div class="pl" id="pl">
+  <div class="env-scene" id="envScene" role="img" aria-label="왁스로 봉인된 MEVE 하우스 초대장 봉투">
+    <div class="env" id="env">
+      <div class="env-back" aria-hidden="true"></div>
+      <div class="letter" id="letter" aria-hidden="true">
+        <span class="lt-maison">Maison MEVE</span>
+        <span class="lt-word">Invitation</span>
+        <svg class="lt-bow" viewBox="0 0 64 36" aria-hidden="true">
+          <path d="M32 18 C20 4 5 8 7 19 C9 29 24 26 32 18 Z" fill="#F3BCCD" stroke="#DE9AB2" stroke-width="1"/>
+          <path d="M32 18 C44 4 59 8 57 19 C55 29 40 26 32 18 Z" fill="#F3BCCD" stroke="#DE9AB2" stroke-width="1"/>
+          <path d="M28 20 L24 33 L29 30 Z" fill="#EBA9BE"/>
+          <path d="M36 20 L40 33 L35 30 Z" fill="#EBA9BE"/>
+          <rect x="28.5" y="14" width="7" height="8" rx="2.6" fill="#E8A0B8" stroke="#D98BA4" stroke-width="1"/>
+        </svg>
+        <span class="lt-kr">미브 하우스 오프닝에<br>당신을 초대합니다</span>
+        <span class="lt-rule" aria-hidden="true"></span>
+        <span class="lt-h">Opening</span>
+        <span class="lt-v">App · July 2026</span>
+        <span class="lt-h">Location</span>
+        <span class="lt-v">meve.beauty · Seoul → Global</span>
+      </div>
+      <div class="env-front" aria-hidden="true"></div>
+      <div class="env-flap" id="envFlap" aria-hidden="true"></div>
+      <div class="env-seal" id="envSeal" aria-hidden="true">
+        <div class="seal-in">
+          <svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="15.5" fill="none" stroke="currentColor" stroke-width=".8" opacity=".6"/><path d="M23 11.5a9.3 9.3 0 1 0 0 17 10.6 10.6 0 0 1 0-17Z" fill="currentColor" opacity=".9"/><circle cx="26.6" cy="14.2" r=".95" fill="currentColor"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="inv-q">초대장을 수락하시겠어요?</p>
+  <button class="inv-accept" id="invAccept" disabled>봉인 확인 중 · <span id="invPct">0</span>%</button>
+  <p class="inv-note">House opens July 2026</p>
+</div>
+<script>
+(function(){
+  const d = document, b = d.body;
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){ b.classList.add('ready'); return; }
+  let seen = false;
+  try{ seen = !!sessionStorage.getItem('mv-inv'); }catch(e){}
+  if(seen){ b.classList.add('ready'); return; }   /* already accepted this session */
+  b.classList.add('loading');
+  const btn = d.getElementById('invAccept'), pct = d.getElementById('invPct');
+  const scene = d.getElementById('envScene');
+  let mode = 'css', vid = null, openSeq = null, opened = false;
+  const hideCta = () => {
+    btn.style.transition = 'opacity .5s'; btn.style.opacity = '0';
+    d.querySelector('.inv-q').style.opacity = '0';
+    d.querySelector('.inv-note').style.opacity = '0';
+  };
+  const accept = () => {
+    if(!armed || opened) return;
+    opened = true;
+    try{ sessionStorage.setItem('mv-inv','1'); }catch(e){}
+    hideCta();
+    openSeq();
+  };
+  const loadOk = s => new Promise((res, rej) => { const i = new Image(); i.onload = () => res(s); i.onerror = rej; i.src = s; });
+
+  /* mode 1 — Higgsfield ceremony film: the opening simply plays as film */
+  loadOk('assets/envelope-sealed.jpg').then(() => {
+    mode = 'video';
+    scene.classList.add('ai');
+    /* no poster, no still overlay — the paused video IS the first frame, so nothing ever swaps */
+    scene.innerHTML = '<video id="envVid" muted playsinline preload="auto">'
+      + '<source src="assets/envelope.mp4" type="video/mp4"></video>';
+    vid = scene.querySelector('video');
+    vid.load();
+    vid.addEventListener('loadeddata', () => { try{ vid.currentTime = 0.001; }catch(e){} }, { once:true });
+    /* the gate only waits for the ceremony itself — not the whole house */
+    vid.addEventListener('canplaythrough', () => { loaded = true; }, { once:true });
+    addEventListener('touchstart', () => { const p = vid.play(); if(p && p.then) p.then(() => vid.pause()).catch(() => {}); }, { once:true, passive:true });
+    openSeq = () => {
+      scene.classList.add('go');
+      const p = vid.play(); if(p && p.catch) p.catch(() => {});
+      let done = false;
+      const fin = () => {
+        if(done) return; done = true;
+        setTimeout(enterHouse, 1900); /* linger on the closing card before the fade */
+      };
+      vid.addEventListener('ended', fin);
+      setTimeout(fin, 6000);
+    };
+  }).catch(() => {
+    /* mode 2 — photoreal state dissolve: closed → half-open → open, seal falls, letter rises */
+    Promise.all(['assets/envelope-cut.webp','assets/env-half.webp','assets/env-open.webp','assets/env-seal2.webp','assets/letter-piece.webp'].map(loadOk)).then(() => {
+      mode = 'asm';
+      scene.classList.remove('ai');
+      scene.classList.add('asm');
+      scene.innerHTML =
+        '<img class="e3-open" src="assets/env-open.webp" alt="">'
+        + '<div class="e3-clip"><img class="e3-letter" src="assets/letter-piece.webp" alt="MEVE 초대장"></div>'
+        + '<img class="e3-openfront" src="assets/env-open.webp" alt="" aria-hidden="true">'
+        + '<img class="e3-half" src="assets/env-half.webp" alt="" aria-hidden="true">'
+        + '<img class="e3-closed" src="assets/envelope-cut.webp" alt="왁스로 봉인된 초대장 봉투">'
+        + '<img class="e3-seal2" src="assets/env-seal2.webp" alt="" aria-hidden="true">'
+        + '<button class="e3-seal" aria-label="봉인을 눌러 초대장 열기"></button>';
+      openSeq = () => {
+        scene.classList.add('open');
+        scene.classList.add('s1');                                /* wax falls, closed dissolves to half */
+        setTimeout(() => scene.classList.add('s2'), 480);         /* half dissolves to fully open */
+        setTimeout(() => scene.classList.add('out'), 980);        /* the letter rises */
+        setTimeout(() => scene.classList.add('present'), 2400);   /* the letter comes to you */
+        setTimeout(enterHouse, 4700);
+      };
+      scene.querySelector('.e3-seal').addEventListener('click', accept);
+      loaded = true; /* ceremony assets ready — open the gate */
+    }).catch(() => {});
+  });
+  /* mode 3 — CSS envelope ceremony */
+  openSeq = () => {
+    const env = d.getElementById('env');
+    if(scene.classList.contains('asm') || scene.classList.contains('ai')) return;
+    env.classList.add('open');
+    setTimeout(() => env.classList.add('out'), 750);
+    setTimeout(() => env.classList.add('present'), 1750);
+    setTimeout(enterHouse, 3150);
+  };
+  /* if a Higgsfield invitation face exists, dress the CSS letter with it */
+  const face = new Image();
+  face.onload = () => { const lt = d.getElementById('letter'); if(lt) lt.classList.add('img'); };
+  face.src = 'assets/invitation.png';
+  let p = 0, loaded = false, armed = false;
+  const t0 = performance.now();
+  addEventListener('load', () => loaded = true);
+  setTimeout(() => { if(d.readyState === 'complete') loaded = true; }, 120);
+  setTimeout(() => loaded = true, 4000); /* absolute failsafe */
+  const arm = () => {
+    if(armed) return; armed = true;
+    btn.disabled = false;
+    btn.classList.add('armed');
+    btn.innerHTML = '초대 수락';
+    scene.classList.add('armed');
+    if(mode === 'asm'){
+      d.querySelector('.inv-q').textContent = '봉인을 눌러 초대장을 열어보세요';
+    } else {
+      btn.focus({ preventScroll:true });
+    }
+  };
+  let lastT = t0;
+  const tick = now => {
+    const el = (now - t0) / 1000;
+    const dt = Math.min(.12, (now - lastT) / 1000); lastT = now;
+    const cap = loaded ? 100 : Math.min(88, el * 52);
+    /* time-based easing — immune to rAF starvation while assets stream in */
+    p += (Math.max(p, cap) - p) * Math.min(1, dt * 9);
+    pct.textContent = Math.round(p);
+    if(p > 99.3 && loaded){ arm(); return; }
+    requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+  const enterHouse = () => {
+    b.classList.add('ready');
+    d.getElementById('pl').classList.add('out');
+    setTimeout(() => b.classList.remove('loading'), 1200);
+  };
+  btn.addEventListener('click', accept);
+})();
+</script>
+
+<!-- ================= NAV ================= -->
+<nav id="nav" aria-label="주 메뉴">
+  <a class="nav-mark" href="#top" aria-label="MEVE 홈">
+    <img src="assets/wordmark2.png" alt="MEVE · Beauty-Tech House" width="1466" height="408">
+  </a>
+  <div class="nav-links">
+    <a href="#house">The House</a>
+    <a href="#system">System</a>
+    <a href="#moon">Moon System</a>
+    <a href="#dna">Beauty DNA</a>
+    <a href="#mastermind">Mastermind</a>
+    <a class="nav-cta" href="#waitlist">알림 신청</a>
+  </div>
+</nav>
+
+<!-- ================= PROLOGUE — "Into the House" scroll film ================= -->
+<div class="prologue-track" id="proTrack">
+<header class="prologue" aria-label="MEVE 프롤로그 필름. 스크롤하면 여정이 진행됩니다">
+  <video id="proVideo" muted playsinline preload="auto" poster="assets/prologue-poster.jpg" aria-hidden="true">
+    <source src="assets/prologue.mp4" type="video/mp4">
+  </video>
+  <div class="pro-frame">
+    <span class="fm1" aria-hidden="true">Seoul → Global</span>
+    <span class="fm2" aria-hidden="true"><i></i>App · Launching July 2026</span>
+    <a class="pro-skip" href="#manifesto">Skip Intro ↓</a>
+  </div>
+
+  <!-- B0 · title -->
+  <section class="pro-beat" data-in="-0.05" data-out="0.085">
+    <p class="pro-eyebrow">Maison MEVE · Beauty-Tech House</p>
+    <h1 class="pro-serif pro-title" aria-label="Your best, by design.">
+      <span class="w"><i style="--i:0">Y</i><i style="--i:1">o</i><i style="--i:2">u</i><i style="--i:3">r</i></span>
+      <span class="w"><i style="--i:4">b</i><i style="--i:5">e</i><i style="--i:6">s</i><i style="--i:7">t</i><i style="--i:8">,</i></span>
+      <span class="w"><i style="--i:9">b</i><i style="--i:10">y</i></span>
+      <span class="w amp"><i style="--i:11">d</i><i style="--i:12">e</i><i style="--i:13">s</i><i style="--i:14">i</i><i style="--i:15">g</i><i style="--i:16">n</i><i style="--i:17">.</i></span>
+    </h1>
+    <p class="pro-kr">감에 기대던 아름다움의 시대는 끝.<br>나의 최상은 데이터가 알고 있습니다.</p>
+    <a class="pro-scroll" href="#manifesto">Scroll</a>
+  </section>
+
+  <!-- B1 · inside the clouds -->
+  <section class="pro-beat" data-in="0.10" data-out="0.185">
+    <h2 class="pro-serif">Your <em>best</em>.</h2>
+    <p class="pro-kr">감에 기대던 시대는 끝,</p>
+  </section>
+
+  <!-- B2 · the ribbon flight -->
+  <section class="pro-beat" data-in="0.25" data-out="0.42">
+    <h2 class="pro-serif">by <em>design</em>.</h2>
+    <p class="pro-kr">나의 최상은 데이터가 알고 있습니다.</p>
+  </section>
+
+  <!-- B3 · at the door · thesis -->
+  <section class="pro-beat" data-in="0.585" data-out="0.71">
+    <div class="pro-lines">
+      <p class="pro-serif">Growth has <em>rhythm</em>.</p>
+      <p class="pro-serif">Beauty has <em>structure</em>.</p>
+      <p class="pro-serif">Transformation can be <em>designed</em>.</p>
+    </div>
+    <p class="pro-caption">성장에는 리듬이, 아름다움에는 구조가. 변화는 설계될 수 있습니다.</p>
+  </section>
+
+  <!-- B4 · into the light · logo reveal -->
+  <section class="pro-beat" data-in="0.865" data-out="9" data-static="keep">
+    <img class="pro-logo" src="assets/logo-lockup.png" alt="MEVE · Beauty-Tech House">
+    <p class="pro-kr">피부부터 메이크업까지, 데이터로 설계하는 나의 최상.</p>
+    <div class="pro-cta">
+      <a class="btn btn-ink" href="#waitlist">출시 알림 신청</a>
+      <a class="btn btn-ghost" href="#house">App Store <small>July 2026</small></a>
+    </div>
+  </section>
+</header>
+</div>
+
+<!-- ================= N°01 MANIFESTO ================= -->
+<section class="manifesto" id="manifesto">
+  <div class="wrap manifesto-grid">
+    <p class="numero reveal">N°01 · Foyer · Manifesto</p>
+    <h2 class="display reveal" data-delay="1">
+      The age of intuition is over.<br>
+      Your best is in the <em>data</em>.
+    </h2>
+    <p class="kr-body reveal" data-delay="2" style="font-size:1.05rem;color:#3B3036">
+      감에 기대던 아름다움의 시대는 끝.<br><b style="font-weight:600">나의 최상은 데이터가 알고 있어요.</b>
+    </p>
+    <span class="etoile reveal" data-delay="3" aria-hidden="true">✦</span>
+  </div>
+</section>
+
+<!-- ================= N°02 THE HOUSE ================= -->
+<section class="house" id="house">
+  <div class="wrap">
+    <div class="house-head">
+      <p class="numero reveal">N°02 · Grand Salon · The House</p>
+      <h2 class="display reveal" data-delay="1">One House.<br><em>Every Ritual.</em></h2>
+      <p class="kr-body reveal" data-delay="2">
+        MEVE는 앱 하나가 아니라 하나의 하우스입니다.<br>모두 하나의 세계관 안에서 이어집니다.
+      </p>
+    </div>
+    <div class="house-stage reveal" data-sys>
+      <svg class="house-ribbon" viewBox="0 0 1300 160" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M-30,86 C120,30 260,128 430,80 C560,44 600,116 760,84 C900,56 950,120 1110,78 C1210,52 1270,90 1330,70"/>
+      </svg>
+      <div class="maisons">
+        <div class="maison maison--app m m1">
+          <div class="mo" aria-hidden="true">
+            <svg viewBox="0 0 44 44">
+              <circle class="tr" cx="22" cy="22" r="18"/>
+              <circle class="pr" cx="22" cy="22" r="18" transform="rotate(-90 22 22)"/>
+              <circle class="core" cx="22" cy="22" r="11"/>
+            </svg>
+          </div>
+          <b>Daily · The App</b>
+          <h3>MEVE App</h3>
+          <p>매일의 진단과 처방. AI 스캔, Beauty DNA, 글로우 문, 루틴·리듬 트래킹. 데이터가 매일 나를 읽는 곳.</p>
+          <span class="soon">July 2026 · Launching</span>
+          <a class="go" href="#system">Explore <i>→</i></a>
+        </div>
+        <div class="maison maison--mm m m2">
+          <div class="mo" aria-hidden="true">8</div>
+          <b>8 Weeks · Premium</b>
+          <h3>MEVE Mastermind</h3>
+          <p>데이터 위에 전문가의 손길. 강남·청담 전문가진과 8주, 나의 최상을 꺼내는 프라이빗 아틀리에.</p>
+          <span class="soon">Cohort 01 · Open Soon</span>
+          <a class="go" href="#mastermind">Explore <i>→</i></a>
+        </div>
+        <div class="maison maison--objets m m3">
+          <div class="mo" aria-hidden="true"><span class="pearl"></span><span class="star">✦</span></div>
+          <b>Objets · Ritual Goods</b>
+          <h3>MEVE Objets</h3>
+          <p>하우스의 세계관을 손끝으로. 향수, 스테이셔너리, 리본 문 오브제. 데이터가 아닌 감촉으로 남는 미브.</p>
+          <span class="soon">Coming Soon</span>
+          <a class="go" href="#waitlist">Waitlist <i>→</i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= N°03 THE SYSTEM — app in motion ================= -->
+<section class="sys" id="system">
+  <div class="wrap">
+    <div class="sys-head">
+      <p class="numero reveal">N°03 · L'Atelier · The System</p>
+      <h2 class="display reveal" data-delay="1">Beauty, engineered<br>with <em>kindness</em>.</h2>
+      <div class="sys-pains reveal" data-delay="2">
+        <p class="sys-pain">"분명 후기는 다 좋았는데, 왜 나한테만 뒤집어질까?"</p>
+        <p class="sys-pain">"퍼스널컬러 진단, 받을 때마다 결과가 달라."</p>
+        <p class="sys-pain">"추구미는 확실한데, 거기까지 가는 방법을 모르겠어."</p>
+      </div>
+      <p class="kr-body reveal" data-delay="3">
+        문제는 당신이 아니라 '감'이에요. 미브는 스캔부터 컨디션 기록, 제품 반응, 시술 이력까지
+        나의 모든 뷰티 데이터를 한곳에 모으고, 각 분야 전문가의 지식을 그대로 클론한 AI가
+        그 데이터를 해석하고 처방하는 초개인화 뷰티 매니저입니다. 더 이상 감이 아니라,
+        구조화되고, 체계적이고, 정확하게.
+      </p>
+    </div>
+
+    <div class="sys-steps">
+
+      <div class="sys-step reveal" data-sys>
+        <div class="sys-copy">
+          <p class="sys-kicker"><i>01</i> Scan 탭 · 진단</p>
+          <h3>Six lenses,<br><em>one truth.</em></h3>
+          <p class="krsub">468개 포인트를 읽는 정밀 스캔.</p>
+          <p class="desc">여섯 개의 AI 스캐너가 피부·성분·제품을 다각도로 읽습니다. 얼굴 분석은 회차가 쌓일수록 변화 추이를 비교하고, 회피 성분 Finder는 안 맞았던 제품들의 공통 성분을 역추적하고, 세 축의 교차점에서 Beauty DNA가 리빌돼요.</p>
+          <div class="sys-chips">
+            <span class="sys-chip">얼굴 분석</span><span class="sys-chip">피부 스캔</span><span class="sys-chip">성분 스캔</span><span class="sys-chip">제품 검색</span><span class="sys-chip">회피 성분 Finder</span><span class="sys-chip">메이크업 스캔</span><span class="sys-chip">DNA 리빌</span><span class="sys-chip">스캔 히스토리</span>
+          </div>
+          <p class="sys-note"><b>Bare Face Vault</b> · 모든 민낯 기록은 필터 제로, 암호화된 비밀 금고에만.</p>
+        </div>
+        <div class="sys-stage">
+          <div class="float"><div class="phone"><div class="p-screen">
+            <span class="p-island"></span>
+            <div class="p-status" aria-hidden="true"><span>9:41</span><span style="display:flex;align-items:center"><span class="p-sig"><i></i><i></i><i></i><i></i></span><span class="p-batt"></span></span></div>
+            <span class="p-blob b1"></span><span class="p-blob b2"></span><span class="p-blob b3"></span>
+            <div class="p-body">
+              <p class="p-eyebrow">AI Scanner</p>
+              <div class="p-row"><p class="p-h">정밀 스캔</p><span class="p-label">신뢰도 92%</span></div>
+              <div class="p-steps m m1">
+                <span class="p-step on">얼굴</span><span class="p-step">성분</span><span class="p-step">제품</span><span class="p-step">회피</span>
+              </div>
+              <div class="p-view" style="height:116px">
+                <span class="p-corner c1"></span><span class="p-corner c2"></span>
+                <span class="p-corner c3"></span><span class="p-corner c4"></span>
+                <svg class="p-facesvg" viewBox="0 0 110 140" aria-hidden="true">
+                  <path class="p-outline" d="M55,12 C78,12 88,30 88,52 C88,80 74,104 55,112 C36,104 22,80 22,52 C22,30 32,12 55,12 Z"/>
+                  <path class="p-mesh" d="M37,50 L55,40 L73,50 L64,66 L55,88 L46,66 Z M46,66 L64,66 M37,50 L32,68 L46,66 M73,50 L78,68 L64,66 M55,40 L55,64"/>
+                  <circle class="lm" cx="37" cy="50" r="1.5"/><circle class="lm" cx="73" cy="50" r="1.5"/>
+                  <circle class="lm" cx="35" cy="42" r="1.5"/><circle class="lm" cx="75" cy="42" r="1.5"/>
+                  <circle class="lm" cx="55" cy="64" r="1.5"/><circle class="lm" cx="32" cy="68" r="1.5"/>
+                  <circle class="lm" cx="78" cy="68" r="1.5"/><circle class="lm" cx="55" cy="88" r="1.5"/>
+                </svg>
+                <span class="p-scanline"></span>
+              </div>
+              <p class="p-scanprog"><span>468개 포인트 분석</span><b><span class="cnt" data-to="100">0</span>%</b></p>
+              <div class="p-grid2">
+                <div class="p-card m m2"><p class="p-label">수분 · 유분</p><p class="p-strong">62 · 38 균형</p></div>
+                <div class="p-card m m3"><p class="p-label">모공 · 결</p><p class="p-strong">양호 · 고움</p></div>
+              </div>
+              <div class="p-card m m4"><div class="p-row"><span class="p-label">지난 스캔 대비</span><span class="p-strong" style="color:#D05878">수분 +6 · 홍조 −2</span></div></div>
+              <div class="p-avoid m m5"><b>원인 발견 · 공통 성분 2개</b>안 맞았던 제품 4개의 교집합 · 향료 · 변성알코올</div>
+              <p class="p-meta m m6" style="text-align:center">스캔 12회 축적 · Beauty DNA 리빌 완료</p>
+            </div>
+            <div class="p-tabbar" aria-hidden="true">
+              <span class="p-tab"><svg viewBox="0 0 24 24"><path d="M4 11.5 12 4.5l8 7v7.5a1 1 0 0 1-1 1h-4.5v-5.5h-5V20H5a1 1 0 0 1-1-1z"/></svg>홈</span>
+              <span class="p-tab"><svg viewBox="0 0 24 24"><path d="M12 4.5c3.3 4 5.6 6.8 5.6 9.4a5.6 5.6 0 1 1-11.2 0C6.4 11.3 8.7 8.5 12 4.5z"/></svg>케어</span>
+              <span class="p-scanbtn on"><svg viewBox="0 0 24 24"><path d="M4 8V6.5A2.5 2.5 0 0 1 6.5 4H8M16 4h1.5A2.5 2.5 0 0 1 20 6.5V8M20 16v1.5a2.5 2.5 0 0 1-2.5 2.5H16M8 20H6.5A2.5 2.5 0 0 1 4 17.5V16M7.5 12h9"/></svg></span>
+              <span class="p-tab"><svg viewBox="0 0 24 24"><path d="M12 3.5l1.9 6.6 6.6 1.9-6.6 1.9L12 20.5l-1.9-6.6-6.6-1.9 6.6-1.9z"/></svg>룩</span>
+              <span class="p-tab"><svg viewBox="0 0 24 24"><path d="M4.5 6.5a3 3 0 0 1 3-3h9a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3H10l-5.5 4z"/></svg>eve</span>
+              </div>
+            <span class="p-homebar"></span>
+          </div></div></div>
+        </div>
+      </div>
+      <div class="sys-step rev reveal" data-sys>
+        <div class="sys-copy">
+          <p class="sys-kicker"><i>02</i> Care 탭 · 케어</p>
+          <h3>Prescribed by phase,<br><em>proven by tracking.</em></h3>
+          <p class="krsub">위상이 처방하고, 트래킹이 증명하는 케어.</p>
+          <p class="desc">오늘의 피부 위상에 맞는 미니멀 루틴이 처방되고, 아침·저녁 체크로 완주를 관리합니다. 새 제품의 반응 곡선, 시술 회복, 트러블 로그, 글로우 저널까지. 케어의 모든 순간이 데이터로 남아 다음 처방을 더 정확하게 만들어요.</p>
+          <div class="sys-chips">
+            <span class="sys-chip">위상 루틴 처방</span><span class="sys-chip">루틴 빌더</span><span class="sys-chip">데일리 체크</span><span class="sys-chip">제품 반응 트래킹</span><span class="sys-chip">시술 회복 트래킹</span><span class="sys-chip">트러블 로그</span><span class="sys-chip">글로우 저널</span>
+          </div>
+          <p class="sys-note"><b>Skin Phase</b> · 점수 대신 달의 위상. 강박적 과잉 케어 대신 오늘에 맞는 만큼만.</p>
+        </div>
+        <div class="sys-stage">
+          <div class="float"><div class="phone"><div class="p-screen">
+            <span class="p-island"></span>
+            <div class="p-status" aria-hidden="true"><span>9:41</span><span style="display:flex;align-items:center"><span class="p-sig"><i></i><i></i><i></i><i></i></span><span class="p-batt"></span></span></div>
+            <span class="p-blob b1"></span><span class="p-blob b2"></span><span class="p-blob b3"></span>
+            <div class="p-body">
+              <p class="p-eyebrow">Care · Skin Phase</p>
+              <div class="p-row"><p class="p-h">오늘의 케어</p><span class="p-label">7월 6일 · 일</span></div>
+              <div class="p-card m m1">
+                <div class="p-phase">
+                  <span class="ph"></span>
+                  <span class="grow"><span class="nm">위상 5 · 차오르는 달</span><br><span class="cat">오늘 피부에 맞는 미니멀 루틴</span></span>
+                  <span class="p-chip">위상 루틴</span>
+                </div>
+              </div>
+              <div class="p-card m m2" style="display:grid;gap:6px">
+                <div class="p-chk"><i>✓</i>저자극 클렌징<span class="tm">아침 07:40</span></div>
+                <div class="p-chk"><i>✓</i>수분 세럼 · 적합 94%<span class="tm">아침 07:43</span></div>
+                <div class="p-chk off"><i></i>시카 진정 크림<span class="tm">저녁</span></div>
+                <div class="p-chk off"><i></i>배리어 크림 · 위상 케어<span class="tm">저녁</span></div>
+              </div>
+              <div class="p-card p-prod m m3">
+                <span class="pi pi-cream"></span>
+                <span class="grow"><span class="nm">시카 진정 크림 · 3일차</span><br><span class="cat">반응 트래킹 · 수분 +4 · 홍조 −2</span></span>
+                <span class="p-chip">순항</span>
+              </div>
+              <div class="p-card p-prod m m4">
+                <span class="pi pi-dev"></span>
+                <span class="grow"><span class="nm">레이저 토닝 · D+14</span><br><span class="cat">회복 곡선 정상 · 다음 시술 D-16</span></span>
+                <span class="p-chip">회복 <span class="cnt" data-to="92">0</span>%</span>
+              </div>
+              <p class="p-meta m m5" style="text-align:center">트러블 로그 · 턱 D+2 진정 중 · 글로우 저널 자동 기록</p>
+            </div>
+            <div class="p-tabbar" aria-hidden="true">
+              <span class="p-tab"><svg viewBox="0 0 24 24"><path d="M4 11.5 12 4.5l8 7v7.5a1 1 0 0 1-1 1h-4.5v-5.5h-5V20H5a1 1 0 0 1-1-1z"/></svg>홈</span>
+              <span class="p-tab on"><svg viewBox="0 0 24 24"><path d="M12 4.5c3.3 4 5.6 6.8 5.6 9.4a5.6 5.6 0 1 1-11.2 0C6.4 11.3 8.7 8.5 12 4.5z"/></svg>케어</span>
+              <span class="p-scanbtn"><svg viewBox="0 0 24 24"><path d="M4 8V6.5A2.5 2.5 0 0 1 6.5 4H8M16 4h1.5A2.5 2.5 0 0 1 20 6.5V8M20 16v1.5a2.5 2.5 0 0 1-2.5 2.5H16M8 20H6.5A2.5 2.5 0 0 1 4 17.5V16M7.5 12h9"/></svg></span>
+              <span class="p-tab"><svg viewBox="0 0 24 24"><path d="M12 3.5l1.9 6.6 6.6 1.9-6.6 1.9L12 20.5l-1.9-6.6-6.6-1.9 6.6-1.9z"/></svg>룩</span>
+              <span class="p-tab"><svg viewBox="0 0 24 24"><path d="M4.5 6.5a3 3 0 0 1 3-3h9a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3H10l-5.5 4z"/></svg>eve</span>
+              </div>
+            <span class="p-homebar"></span>
+          </div></div></div>
+        </div>
+      </div>
+      <div class="sys-step reveal" data-sys>
+        <div class="sys-copy">
+          <p class="sys-kicker"><i>03</i> AI Coach · 코치 채팅</p>
+          <h3>An expert clone<br><em>who knows your skin.</em></h3>
+          <p class="krsub">내 38일 기록을 아는 코치와의 대화.</p>
+          <p class="desc">각 분야 전문가의 지식을 클론한 코치가 24시간 대기합니다. 일반론이 아니라 내 스캔·컨디션·사이클 기록을 인용해 답하고, 대화 한 번으로 오늘의 루틴이 즉시 조정돼요. SKIN과 LOOK, 두 모드의 전문 코치.</p>
+          <div class="sys-chips">
+            <span class="sys-chip">24시간 상담</span><span class="sys-chip">내 기록 인용 답변</span><span class="sys-chip">루틴 즉시 조정</span><span class="sys-chip">제품·성분 Q&A</span><span class="sys-chip">시술 상담</span><span class="sys-chip">SKIN·LOOK 모드</span>
+          </div>
+          <p class="sys-note"><b>Gentle Guardrails</b> · 너무 오래 들여다보면 코치가 먼저 말을 건네요. "오늘은 충분히 아름다워요."</p>
+        </div>
+        <div class="sys-stage">
+          <div class="float"><div class="phone"><div class="p-screen">
+            <span class="p-island"></span>
+            <div class="p-status" aria-hidden="true"><span>9:41</span><span style="display:flex;align-items:center"><span class="p-sig"><i></i><i></i><i></i><i></i></span><span class="p-batt"></span></span></div>
+            <span class="p-blob b1"></span><span class="p-blob b2"></span><span class="p-blob b3"></span>
+            <div class="p-body">
+              <p class="p-eyebrow">AI Coach · Expert Clone</p>
+              <div class="p-row"><p class="p-h">코치와 대화</p><span class="p-label">SKIN 모드</span></div>
+              <div class="p-msgs">
+                <div class="p-msg m m1">어젯밤 턱에 올라온 트러블, 기록 봤어요. 최근 3일 수면이 5시간대였고 사이클 D-9라 예상 범위예요.</div>
+                <div class="p-msg me m m2">오늘 레티놀 써도 될까?</div>
+                <div class="p-msg m m3">오늘은 쉬어가요. 위상 5 + 트러블 진정 중이라 자극을 더하면 회복이 느려져요.
+                  <span class="mini">저녁 루틴 자동 조정 · <b>레티놀 제외</b> · 시카 크림 → 배리어 크림 순서로</span>
+                </div>
+              </div>
+              <div class="p-quick m m4">
+                <span>대체 성분 추천</span><span>내일은 가능해?</span><span>시술 상담</span>
+              </div>
+              <div class="p-inputbar m m5">
+                무엇이든 물어보세요
+                <span class="snd"><svg viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
+              </div>
+              <p class="p-meta m m6" style="text-align:center">내 38일 기록을 아는 전문가 클론 · 24시간</p>
+            </div>
+            <div class="p-tabbar" aria-hidden="true">
+              <span class="p-tab"><svg viewBox="0 0 24 24"><path d="M4 11.5 12 4.5l8 7v7.5a1 1 0 0 1-1 1h-4.5v-5.5h-5V20H5a1 1 0 0 1-1-1z"/></svg>홈</span>
+              <span class="p-tab on"><svg viewBox="0 0 24 24"><path d="M12 4.5c3.3 4 5.6 6.8 5.6 9.4a5.6 5.6 0 1 1-11.2 0C6.4 11.3 8.7 8.5 12 4.5z"/></svg>케어</span>
+              <span class="p-scanbtn"><svg viewBox="0 0 24 24"><path d="M4 8V6.5A2.5 2.5 0 0 1 6.5 4H8M16 4h1.5A2.5 2.5 0 0 1 20 6.5V8M20 16v1.5a2.5 2.5 0 0 1-2.5 2.5H16M8 20H6.5A2.5 2.5 0 0 1 4 17.5V16M7.5 12h9"/></svg></span>
+              <span class="p-tab"><svg viewBox="0 0 24 24"><path d="M12 3.5l1.9 6.6 6.6 1.9-6.6 1.9L12 20.5l-1.9-6.6-6.6-1.9 6.6-1.9z"/></svg>룩</span>
+              <span class="p-tab"><svg viewBox="0 0 24 24"><path d="M4.5 6.5a3 3 0 0 1 3-3h9a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3H10l-5.5 4z"/></svg>eve</span>
+              </div>
+            <span class="p-homebar"></span>
+          </div></div></div>
+        </div>
+      </div>
+      <div class="sys-step rev reveal" data-sys>
+        <div class="sys-copy">
+          <p class="sys-kicker"><i>04</i> Look 탭 · 스타일</p>
+          <h3>Precision, from<br><em>your own face.</em></h3>
+          <p class="krsub">내 얼굴 데이터에서 나온 정밀 가이드.</p>
+          <p class="desc">얼굴 분석 기반으로 각도와 위치까지 짚어주는 정밀 메이크업 가이드, 흔들리지 않는 피부 퍼스널컬러, 추구미 보드와 무드별 색조 추천, 그리고 바로 시작할 수 있는 스타터킷 구성까지. 유행이 아니라 내 골격과 톤에서 출발합니다.</p>
+          <div class="sys-chips">
+            <span class="sys-chip">정밀 메이크업 가이드</span><span class="sys-chip">피부 퍼스널컬러</span><span class="sys-chip">추구미 보드</span><span class="sys-chip">색조 추천</span><span class="sys-chip">스타터킷</span><span class="sys-chip">룩 히스토리</span>
+          </div>
+          <p class="sys-note"><b>30cm Mirror</b> · 결점 확대 대신, 타인이 나를 보는 거리에서의 전체 아우라 가이드.</p>
+        </div>
+        <div class="sys-stage">
+          <div class="float"><div class="phone"><div class="p-screen">
+            <span class="p-island"></span>
+            <div class="p-status" aria-hidden="true"><span>9:41</span><span style="display:flex;align-items:center"><span class="p-sig"><i></i><i></i><i></i><i></i></span><span class="p-batt"></span></span></div>
+            <span class="p-blob b1"></span><span class="p-blob b2"></span><span class="p-blob b3"></span>
+            <div class="p-body">
+              <p class="p-eyebrow">Look · Precision Guide</p>
+              <div class="p-row"><p class="p-h">정밀 메이크업</p><span class="p-label">얼굴 분석 기반</span></div>
+              <div class="p-steps m m1">
+                <span class="p-step on">메이크업</span><span class="p-step">퍼스널컬러</span><span class="p-step">추구미</span><span class="p-step">스타터킷</span>
+              </div>
+              <div class="p-card m m2" style="padding:7px 9px">
+                <div class="p-guide" style="height:98px">
+                  <svg viewBox="0 0 110 140" aria-hidden="true">
+                    <path class="p-outline" d="M55,12 C78,12 88,30 88,52 C88,80 74,104 55,112 C36,104 22,80 22,52 C22,30 32,12 55,12 Z"/>
+                    <path class="p-gline g1" d="M28,64 Q37,72 46,66"/>
+                    <path class="p-gline g2" d="M64,66 Q73,72 82,64"/>
+                    <path class="p-gline g3" d="M33,44 Q40,39 47,43"/>
+                    <path class="p-gline g4" d="M63,43 Q70,39 77,44"/>
+                    <path class="p-gline g5" d="M47,90 Q55,95 63,90"/>
+                    <path class="p-gline g6" d="M55,48 L55,66"/>
+                  </svg>
+                  <span class="p-gtag" style="left:0;top:36%">블러셔 15°</span>
+                  <span class="p-gtag" style="right:0;top:6%">아치 브로우</span>
+                  <span class="p-gtag" style="left:2%;bottom:4%">MLBB 립</span>
+                </div>
+                <span class="p-meta" style="text-align:center">시작점 · 눈꼬리 수직선과 콧볼 수평선 교차 1.2cm 아래</span>
+              </div>
+              <div class="p-card m m3">
+                <div class="p-row">
+                  <span><span class="p-label">피부 퍼스널컬러</span><br><span class="p-strong">웜 라이트 · 스프링</span></span>
+                  <span class="p-swatches">
+                    <i class="p-sw" style="background:#F5C9A9"></i><i class="p-sw" style="background:#F2A9A0"></i>
+                    <i class="p-sw" style="background:#E8A0B8"></i><i class="p-sw" style="background:#D8B98F"></i>
+                  </span>
+                </div>
+                <span class="p-meta">드레이프 매치 91% · 골드가 실버보다 +23%</span>
+              </div>
+              <div class="p-card p-prod m m4">
+                <span class="pi pi-blush"></span>
+                <span class="grow"><span class="nm">크림 블러셔 · 코랄 04</span><br><span class="cat">웜 스프링 매치 · 회피 성분 0</span><span class="p-bar"><i style="--w:94%"></i></span></span>
+                <span class="p-pill"><span class="cnt" data-to="94">0</span>%</span>
+              </div>
+              <div class="p-card m m5"><div class="p-row"><span class="p-label">추구미 스타터킷</span><span class="p-strong" style="color:#D05878">3종 구성 완료 · 코랄 무드</span></div></div>
+            </div>
+            <div class="p-tabbar" aria-hidden="true">
+              <span class="p-tab"><svg viewBox="0 0 24 24"><path d="M4 11.5 12 4.5l8 7v7.5a1 1 0 0 1-1 1h-4.5v-5.5h-5V20H5a1 1 0 0 1-1-1z"/></svg>홈</span>
+              <span class="p-tab"><svg viewBox="0 0 24 24"><path d="M12 4.5c3.3 4 5.6 6.8 5.6 9.4a5.6 5.6 0 1 1-11.2 0C6.4 11.3 8.7 8.5 12 4.5z"/></svg>케어</span>
+              <span class="p-scanbtn"><svg viewBox="0 0 24 24"><path d="M4 8V6.5A2.5 2.5 0 0 1 6.5 4H8M16 4h1.5A2.5 2.5 0 0 1 20 6.5V8M20 16v1.5a2.5 2.5 0 0 1-2.5 2.5H16M8 20H6.5A2.5 2.5 0 0 1 4 17.5V16M7.5 12h9"/></svg></span>
+              <span class="p-tab on"><svg viewBox="0 0 24 24"><path d="M12 3.5l1.9 6.6 6.6 1.9-6.6 1.9L12 20.5l-1.9-6.6-6.6-1.9 6.6-1.9z"/></svg>룩</span>
+              <span class="p-tab"><svg viewBox="0 0 24 24"><path d="M4.5 6.5a3 3 0 0 1 3-3h9a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3H10l-5.5 4z"/></svg>eve</span>
+              </div>
+            <span class="p-homebar"></span>
+          </div></div></div>
+        </div>
+      </div>
+      <div class="sys-step reveal" data-sys>
+        <div class="sys-copy">
+          <p class="sys-kicker"><i>05</i> Home 탭 · 리듬</p>
+          <h3>Every trace,<br><em>one rhythm.</em></h3>
+          <p class="krsub">모든 기록이 하나의 리듬으로.</p>
+          <p class="desc">흩어진 기록 전부가 홈에서 하나의 리듬이 됩니다. 달의 위상으로 차오르는 글로우, 사이클 연동 인사이트, 주간 스트릭, 추구미 일치도, D-day 역산 플랜, 오늘의 팁까지. 위젯 캐러셀로 매일 아침 3초면 나의 흐름이 읽혀요.</p>
+          <div class="sys-chips">
+            <span class="sys-chip">글로우 문</span><span class="sys-chip">위젯 캐러셀</span><span class="sys-chip">D-day 플랜</span><span class="sys-chip">사이클 리듬</span><span class="sys-chip">주간 스트릭</span><span class="sys-chip">추구미 일치도</span><span class="sys-chip">오늘의 팁</span>
+          </div>
+          <p class="sys-note"><b>Glow Moon</b> · 조급한 숫자 대신, 매일 조금씩 차오르는 나만의 위상.</p>
+        </div>
+        <div class="sys-stage">
+          <div class="float"><div class="phone"><div class="p-screen">
+            <span class="p-island"></span>
+            <div class="p-status" aria-hidden="true"><span>9:41</span><span style="display:flex;align-items:center"><span class="p-sig"><i></i><i></i><i></i><i></i></span><span class="p-batt"></span></span></div>
+            <span class="p-blob b1"></span><span class="p-blob b2"></span><span class="p-blob b3"></span>
+            <div class="p-body">
+              <p class="p-eyebrow">Home · My Rhythm</p>
+              <div class="p-row"><p class="p-h">나의 리듬</p><span class="p-label">사이클 D-9 · 황체기</span></div>
+              <div class="p-orb m m1" style="width:88px;height:88px">
+                <svg viewBox="0 0 120 120" aria-hidden="true">
+                  <circle class="ring-k" cx="60" cy="60" r="59" fill="none" stroke-width="1.4"/>
+                  <circle class="ring-t" cx="60" cy="60" r="54" fill="none" stroke-width="5"/>
+                  <circle class="ring-p" cx="60" cy="60" r="54" fill="none" stroke-width="5" stroke-linecap="round"/>
+                </svg>
+                <span class="core"></span>
+                <span class="p-spark" aria-hidden="true"></span>
+              </div>
+              <p class="m m2" style="text-align:center;font-size:.6rem;color:#A88898">글로우 <b style="color:#D05878"><span class="cnt" data-to="67">0</span>%</b> · 차오르는 달 · 위상 5</p>
+              <div class="p-card m m3">
+                <div class="p-week">
+                  <span class="p-day f">월<i></i></span><span class="p-day f">화<i></i></span>
+                  <span class="p-day f">수<i></i></span><span class="p-day f">목<i></i></span>
+                  <span class="p-day f">금<i></i></span><span class="p-day f">토<i></i></span>
+                  <span class="p-day f td">일<i></i></span>
+                </div>
+                <span class="p-meta" style="text-align:center">연속 12일 · 오늘 루틴 2/4 · 스캔 완료</span>
+              </div>
+              <div class="p-card m m4">
+                <div class="p-row">
+                  <span class="p-label">추구미 일치도</span>
+                  <b style="font-size:.68rem;color:#D05878"><span class="cnt" data-to="68">0</span>%</b>
+                </div>
+                <div class="p-bar" style="margin-top:5px"><i style="--w:68%"></i></div>
+                <span class="p-meta">이번 주 +6%p · 예상 도달 7월 24일</span>
+              </div>
+              <div class="p-card p-dday m m5">
+                <span class="d">D-12</span>
+                <span><span class="t">제주 여행</span><span class="s">추구미 목표일 · 플랜 자동 조정 중</span></span>
+              </div>
+              <div class="p-card m m6"><div class="p-row"><span class="p-label">오늘의 팁</span><span class="cat" style="font-size:.56rem">자외선 차단제는 흐린 날에도 꼭.</span></div></div>
+              <div class="p-pagedots m m7" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></div>
+            </div>
+            <div class="p-tabbar" aria-hidden="true">
+              <span class="p-tab on"><svg viewBox="0 0 24 24"><path d="M4 11.5 12 4.5l8 7v7.5a1 1 0 0 1-1 1h-4.5v-5.5h-5V20H5a1 1 0 0 1-1-1z"/></svg>홈</span>
+              <span class="p-tab"><svg viewBox="0 0 24 24"><path d="M12 4.5c3.3 4 5.6 6.8 5.6 9.4a5.6 5.6 0 1 1-11.2 0C6.4 11.3 8.7 8.5 12 4.5z"/></svg>케어</span>
+              <span class="p-scanbtn"><svg viewBox="0 0 24 24"><path d="M4 8V6.5A2.5 2.5 0 0 1 6.5 4H8M16 4h1.5A2.5 2.5 0 0 1 20 6.5V8M20 16v1.5a2.5 2.5 0 0 1-2.5 2.5H16M8 20H6.5A2.5 2.5 0 0 1 4 17.5V16M7.5 12h9"/></svg></span>
+              <span class="p-tab"><svg viewBox="0 0 24 24"><path d="M12 3.5l1.9 6.6 6.6 1.9-6.6 1.9L12 20.5l-1.9-6.6-6.6-1.9 6.6-1.9z"/></svg>룩</span>
+              <span class="p-tab"><svg viewBox="0 0 24 24"><path d="M4.5 6.5a3 3 0 0 1 3-3h9a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3H10l-5.5 4z"/></svg>eve</span>
+              </div>
+            <span class="p-homebar"></span>
+          </div></div></div>
+        </div>
+      </div>
+      <div class="sys-step rev reveal" data-sys>
+        <div class="sys-copy">
+          <p class="sys-kicker"><i>06</i> eve 탭 · 커뮤니티</p>
+          <h3>Personalization,<br><em>even together.</em></h3>
+          <p class="krsub">나와 같은 DNA의 검증된 후기만.</p>
+          <p class="desc">초개인화는 커뮤니티까지 이어집니다. '내 핏' 필터는 나와 같은 Beauty DNA·피부 타입의 후기만 골라 보여주고, 팁·고민·닮은꼴 피드와 댓글·친구로 이어져요. 반응 데이터가 첨부된, 나에게 유효한 이야기들만.</p>
+          <div class="sys-chips">
+            <span class="sys-chip">내 핏 필터</span><span class="sys-chip">팁 피드</span><span class="sys-chip">고민 피드</span><span class="sys-chip">닮은꼴 피드</span><span class="sys-chip">반응 데이터 첨부</span><span class="sys-chip">댓글 · 친구</span><span class="sys-chip">필터 제로</span>
+          </div>
+          <p class="sys-note"><b>필터 제로 컬처</b> · 보정 없는 기록과 후기가 기본값인 공간.</p>
+        </div>
+        <div class="sys-stage">
+          <div class="float"><div class="phone"><div class="p-screen">
+            <span class="p-island"></span>
+            <div class="p-status" aria-hidden="true"><span>9:41</span><span style="display:flex;align-items:center"><span class="p-sig"><i></i><i></i><i></i><i></i></span><span class="p-batt"></span></span></div>
+            <span class="p-blob b1"></span><span class="p-blob b2"></span><span class="p-blob b3"></span>
+            <div class="p-body">
+              <p class="p-eyebrow">eve · Community</p>
+              <div class="p-row"><p class="p-h">내 핏 피드</p><span class="p-label">같은 타입 1,204명</span></div>
+              <div class="p-steps m m1">
+                <span class="p-step on">내 핏 ✦</span><span class="p-step">팁</span><span class="p-step">고민</span><span class="p-step">닮은꼴</span>
+              </div>
+              <div class="p-card m m2">
+                <div class="p-feed">
+                  <span class="fava"></span>
+                  <span class="fbody">
+                    <p class="fname">달빛토끼 <em>· Sunlit Rose · 웜 라이트</em></p>
+                    <p class="ftxt">저랑 같은 타입이면 이 선크림 백탁 걱정 없어요. 3주째 홍조 반응 0.</p>
+                    <p class="ffoot">공감 128 · 댓글 24 · 반응 데이터 첨부</p>
+                  </span>
+                  <span class="p-fit">내 핏 98%</span>
+                </div>
+              </div>
+              <div class="p-card m m3">
+                <div class="p-feed">
+                  <span class="fava" style="background:radial-gradient(circle at 32% 28%,#fff,#F5E0D8 55%,#E0B3A4)"></span>
+                  <span class="fbody">
+                    <p class="fname">미미 <em>· Sunlit Rose · 수분광</em></p>
+                    <p class="ftxt">D-day 플랜 2주차 후기. 글로우 문 셋째 주부터 확실히 달라져요.</p>
+                    <p class="ffoot">공감 92 · 댓글 17 · 로드맵 공유</p>
+                  </span>
+                  <span class="p-fit">내 핏 95%</span>
+                </div>
+              </div>
+              <div class="p-card m m4">
+                <div class="p-feed">
+                  <span class="fava" style="background:radial-gradient(circle at 32% 28%,#fff,#EBD9E6 55%,#C9A6C4)"></span>
+                  <span class="fbody">
+                    <p class="fname">새벽결 <em>· Sunlit Rose · 민감</em></p>
+                    <p class="ftxt">회피 성분 리스트 겹치는 분들, 이 토너 성분표 확인해 보세요.</p>
+                    <p class="ffoot">공감 77 · 저장 63 · 친구 12명 공감</p>
+                  </span>
+                  <span class="p-fit">내 핏 93%</span>
+                </div>
+              </div>
+              <p class="p-meta m m5" style="text-align:center">필터 제로 · 보정 없는 기록만 · 민낯 인증 커뮤니티</p>
+            </div>
+            <div class="p-tabbar" aria-hidden="true">
+              <span class="p-tab"><svg viewBox="0 0 24 24"><path d="M4 11.5 12 4.5l8 7v7.5a1 1 0 0 1-1 1h-4.5v-5.5h-5V20H5a1 1 0 0 1-1-1z"/></svg>홈</span>
+              <span class="p-tab"><svg viewBox="0 0 24 24"><path d="M12 4.5c3.3 4 5.6 6.8 5.6 9.4a5.6 5.6 0 1 1-11.2 0C6.4 11.3 8.7 8.5 12 4.5z"/></svg>케어</span>
+              <span class="p-scanbtn"><svg viewBox="0 0 24 24"><path d="M4 8V6.5A2.5 2.5 0 0 1 6.5 4H8M16 4h1.5A2.5 2.5 0 0 1 20 6.5V8M20 16v1.5a2.5 2.5 0 0 1-2.5 2.5H16M8 20H6.5A2.5 2.5 0 0 1 4 17.5V16M7.5 12h9"/></svg></span>
+              <span class="p-tab"><svg viewBox="0 0 24 24"><path d="M12 3.5l1.9 6.6 6.6 1.9-6.6 1.9L12 20.5l-1.9-6.6-6.6-1.9 6.6-1.9z"/></svg>룩</span>
+              <span class="p-tab on"><svg viewBox="0 0 24 24"><path d="M4.5 6.5a3 3 0 0 1 3-3h9a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3H10l-5.5 4z"/></svg>eve</span>
+              </div>
+            <span class="p-homebar"></span>
+          </div></div></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="sys-trust reveal">
+      <span>각 분야 전문가 지식 클론</span>
+      <span>GPT-4 Vision AI</span>
+      <span>개인정보보호법(PIPA) 준수</span>
+      <span>비주얼 데이터 암호화</span>
+    </div>
+    <p class="sys-close reveal">그리고 이 모든 시스템은 다정함을 위해 존재합니다. <em>느슨한 매듭도 아름답다.</em></p>
+  </div>
+</section>
+
+<!-- ================= N°04 NUIT — MOON SYSTEM ================= -->
+<section class="nuit" id="moon">
+  <div class="wrap nuit-head">
+    <p class="numero reveal">N°04 · The Courtyard · Moon System</p>
+  </div>
+  <div class="nuit-track" id="luneTrack">
+    <div class="nuit-sticky wrap">
+      <div class="nuit-copy">
+        <div class="nuit-step on" data-step="0">
+          <h3>분석은 정밀하게,<br><strong>전달은 다정하게.</strong></h3>
+          <p class="kr-body">AI의 분석은 차갑도록 정확하지만, 그 결과까지 차가울 필요는 없어요.</p>
+        </div>
+        <div class="nuit-step" data-step="1">
+          <h3>미브는 오늘의 나를<br><strong>은은하게 차오르는 달의 위상</strong>으로 읽어냅니다.</h3>
+          <p class="kr-body">조급한 숫자가 아니라, 매일 조금씩 차오르는 흐름으로.</p>
+        </div>
+        <div class="nuit-step" data-step="2">
+          <h3>초승달에서 보름달로,<br><strong>어제보다 조금 더 선명하게</strong> 차오르는 나만의 흐름.</h3>
+          <p class="kr-body">스크롤을 따라 차오른 이 달이, 앱 안에서는 당신의 글로우 업이 됩니다.</p>
+        </div>
+      </div>
+      <div class="lune-stage">
+        <div class="lune" role="img" aria-label="스크롤에 따라 차오르는 진주빛 달">
+          <svg viewBox="-110 -110 220 220" aria-hidden="true">
+            <defs>
+              <radialGradient id="pearlG" cx="38%" cy="32%" r="78%">
+                <stop offset="0%" stop-color="#FFFDFC"/>
+                <stop offset="42%" stop-color="#F4E6E8"/>
+                <stop offset="78%" stop-color="#E0C3CC"/>
+                <stop offset="100%" stop-color="#C9A3B4"/>
+              </radialGradient>
+            </defs>
+            <circle class="lu-orbit" r="104"/>
+            <g id="luneTicks">
+              <line class="lu-tick" x1="0" y1="-104" x2="0" y2="-97"/>
+              <line class="lu-tick" x1="0" y1="-104" x2="0" y2="-97" transform="rotate(45)"/>
+              <line class="lu-tick" x1="0" y1="-104" x2="0" y2="-97" transform="rotate(90)"/>
+              <line class="lu-tick" x1="0" y1="-104" x2="0" y2="-97" transform="rotate(135)"/>
+              <line class="lu-tick" x1="0" y1="-104" x2="0" y2="-97" transform="rotate(180)"/>
+              <line class="lu-tick" x1="0" y1="-104" x2="0" y2="-97" transform="rotate(225)"/>
+              <line class="lu-tick" x1="0" y1="-104" x2="0" y2="-97" transform="rotate(270)"/>
+              <line class="lu-tick" x1="0" y1="-104" x2="0" y2="-97" transform="rotate(315)"/>
+            </g>
+            <circle class="lu-base" r="88"/>
+            <path class="lu-lit" id="lunePath" d=""/>
+            <path class="lu-star" d="M96,-88 l1.6,4.4 4.4,1.6 -4.4,1.6 -1.6,4.4 -1.6,-4.4 -4.4,-1.6 4.4,-1.6 z"/>
+          </svg>
+        </div>
+        <div class="lune-hud" aria-hidden="true">
+          <span class="lune-pct" id="lunePct">0%</span>
+          <span class="lune-phase" id="lunePhase">New</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="phase-strip" aria-hidden="true">
+    <div class="phase-rail" id="phaseRail">
+      <span class="phase-item">New <span>0%</span></span>
+      <span class="phase-item">Crescent <span>16.67%</span></span>
+      <span class="phase-item">Quarter <span>33.33%</span></span>
+      <span class="phase-item">Half <span>50%</span></span>
+      <span class="phase-item">Gibbous <span>66.67%</span></span>
+      <span class="phase-item">Near Full <span>83.33%</span></span>
+      <span class="phase-item">Full <span>100%</span></span>
+    </div>
+  </div>
+  <div class="nuit-close wrap">
+    <p class="reveal">✦&nbsp;&nbsp;Cycles of Beauty. Guided by MEVE.&nbsp;&nbsp;✦</p>
+    <h3 class="display reveal" data-delay="1">Not a score. <em>A phase.</em></h3>
+  </div>
+</section>
+
+<!-- ================= N°05 BEAUTY DNA ================= -->
+<section class="dna" id="dna">
+  <div class="wrap">
+    <div class="dna-head">
+      <div>
+        <p class="numero reveal">N°05 · Vanity Room · Beauty DNA</p>
+        <h2 class="display reveal" data-delay="1">One identity,<br><em>entirely yours.</em></h2>
+        <p class="kr-head reveal" data-delay="2" style="font-size:1.2rem">나를 설명하는 단 하나의 아이덴티티.</p>
+        <p class="kr-body reveal" data-delay="2" style="margin-top:1rem">
+          세 축이 교차하는 지점에서 당신만을 위해 설계된 Beauty DNA 카드가 완성됩니다.
+          랭킹이나 등급이 아닌, 나라는 사람 고유의 아우라.
+        </p>
+      </div>
+      <div class="axes reveal" data-delay="3">
+        <div class="axis"><b>Axis 01</b><span class="display">Skin</span><p>피부의 결</p></div>
+        <div class="axis"><b>Axis 02</b><span class="display">Tone</span><p>타고난 톤</p></div>
+        <div class="axis"><b>Axis 03</b><span class="display">Mood</span><p>나만의 무드</p></div>
+      </div>
+    </div>
+
+    <div class="dna-feature">
+      <div class="dnaf reveal" id="dnaFlip" role="button" tabindex="0" aria-label="Sunlit Rose 카드 — 클릭하면 뒷면 상세를 볼 수 있어요">
+        <div class="dnaf-inner">
+          <div class="dnaf-face dnaf-front">
+            <div class="dc-emblem" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M26 6 A15 15 0 1 0 26 34 A12 12 0 1 1 26 6 Z"/><path d="M31 8.5l1 2.7 2.7 1-2.7 1-1 2.7-1-2.7-2.7-1 2.7-1z"/></svg></div>
+            <p class="dc-no">Aura · 05</p>
+            <h3 class="dc-name">Sunlit Rose</h3>
+            <p class="dc-kr">햇살을 머금은 로즈 톤</p>
+            <div class="dc-perf" aria-hidden="true"></div>
+            <div class="dc-data"><span>수분광</span><span>웜 라이트</span><span>러블리</span></div>
+            <div class="dc-code" aria-hidden="true"></div>
+            <p class="dc-serial"><span>No. MV-0705</span> · <span>8 Types · One You</span></p>
+          </div>
+          <div class="dnaf-face dnaf-back">
+            <p class="dbk-eyebrow">Aura · 05 — 나의 데이터 종합</p>
+            <h3 class="dbk-name">Sunlit Rose</h3>
+            <p class="dbk-meta">스캔 12회 · 기록 38일 · 제품 반응 9종 · 시술 2회 분석</p>
+            <div class="dbk-rows">
+              <div class="dbk-row"><b>Skin</b><span>수분광 결 · 수분 72 유분 38 · 장벽 안정</span></div>
+              <div class="dbk-row"><b>Tone</b><span>웜 라이트 스프링 · 드레이프 매치 91%</span></div>
+              <div class="dbk-row"><b>Mood</b><span>러블리 · 코랄 · 부드러운 인상</span></div>
+              <div class="dbk-row"><b>원인</b><span>향료 · 변성알코올 회피 — 4개 제품 교집합</span></div>
+              <div class="dbk-row"><b>Cycle</b><span>황체기 홍조 +12% · D-9 저자극 권장</span></div>
+              <div class="dbk-row"><b>Best</b><span>코랄 블러셔 · MLBB 립 · 골드 액세서리</span></div>
+              <div class="dbk-row"><b>Care</b><span>수분 유지 · 홍조 진정 · 주 1회 각질 케어</span></div>
+            </div>
+            <div class="dbk-pal" aria-label="시그니처 팔레트">
+              <i class="p-sw" style="background:#F5C9A9"></i><i class="p-sw" style="background:#F2A9A0"></i>
+              <i class="p-sw" style="background:#E8A0B8"></i><i class="p-sw" style="background:#D8B98F"></i>
+              <em>시그니처 팔레트</em>
+            </div>
+            <p class="dbk-foot"><span>분석 신뢰도 92% · 전체의 12%</span><span>38일의 나로부터</span></p>
+          </div>
+        </div>
+      </div>
+      <div class="dnaf-side">
+        <h3 class="display reveal">One scan,<br>one <em>ticket</em>.</h3>
+        <p class="kr-body reveal" data-delay="1">
+          첫 스캔이 끝나면 세 축의 교차점에서 나만의 DNA 카드가 발급됩니다.
+          앞면은 나의 아우라, 뒷면은 데이터가 찾아낸 나의 설명서.
+          잘 맞는 컬러부터 케어 포커스까지, 카드 한 장에 담겨요.
+        </p>
+        <p class="dnaf-hint reveal" data-delay="2"><i>↻</i>카드에 올려보세요</p>
+      </div>
+    </div>
+
+    <div class="dna-grid">
+      <article class="dna-card reveal" style="--tint:#F5C9C4">
+        <div class="dc-emblem" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M26 6 A15 15 0 1 0 26 34 A12 12 0 1 1 26 6 Z"/><path d="M31 8.5l1 2.7 2.7 1-2.7 1-1 2.7-1-2.7-2.7-1 2.7-1z"/></svg></div>
+        <p class="dc-no">Aura · 01</p>
+        <h3 class="dc-name">Warm Petal</h3>
+        <p class="dc-kr">따뜻하게 번지는 꽃잎의 결</p>
+        <div class="dc-perf" aria-hidden="true"></div>
+        <div class="dc-data"><span>촉촉</span><span>웜</span><span>포근</span></div>
+        <p class="dc-serial">MEVE · N°01</p>
+      </article>
+      <article class="dna-card reveal" style="--tint:#CDDEE9;transition-delay:.08s">
+        <div class="dc-emblem" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M26 6 A15 15 0 1 0 26 34 A12 12 0 1 1 26 6 Z"/><path d="M31 8.5l1 2.7 2.7 1-2.7 1-1 2.7-1-2.7-2.7-1 2.7-1z"/></svg></div>
+        <p class="dc-no">Aura · 02</p>
+        <h3 class="dc-name">Icy Glow</h3>
+        <p class="dc-kr">차갑게 빛나는 투명한 윤기</p>
+        <div class="dc-perf" aria-hidden="true"></div>
+        <div class="dc-data"><span>윤광</span><span>쿨</span><span>시크</span></div>
+        <p class="dc-serial">MEVE · N°02</p>
+      </article>
+      <article class="dna-card reveal" style="--tint:#DFDAE6;transition-delay:.16s">
+        <div class="dc-emblem" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M26 6 A15 15 0 1 0 26 34 A12 12 0 1 1 26 6 Z"/><path d="M31 8.5l1 2.7 2.7 1-2.7 1-1 2.7-1-2.7-2.7-1 2.7-1z"/></svg></div>
+        <p class="dc-no">Aura · 03</p>
+        <h3 class="dc-name">Soft Mist</h3>
+        <p class="dc-kr">부드럽게 내려앉는 안개의 무드</p>
+        <div class="dc-perf" aria-hidden="true"></div>
+        <div class="dc-data"><span>보송</span><span>뉴트럴</span><span>차분</span></div>
+        <p class="dc-serial">MEVE · N°03</p>
+      </article>
+      <article class="dna-card reveal" style="--tint:#E2A9B4;transition-delay:.24s">
+        <div class="dc-emblem" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M26 6 A15 15 0 1 0 26 34 A12 12 0 1 1 26 6 Z"/><path d="M31 8.5l1 2.7 2.7 1-2.7 1-1 2.7-1-2.7-2.7-1 2.7-1z"/></svg></div>
+        <p class="dc-no">Aura · 04</p>
+        <h3 class="dc-name">Bold Aura</h3>
+        <p class="dc-kr">선명하게 각인되는 존재감</p>
+        <div class="dc-perf" aria-hidden="true"></div>
+        <div class="dc-data"><span>매트</span><span>딥</span><span>강렬</span></div>
+        <p class="dc-serial">MEVE · N°04</p>
+      </article>
+      <article class="dna-card reveal" style="--tint:#C08A93;transition-delay:.08s">
+        <div class="dc-emblem" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M26 6 A15 15 0 1 0 26 34 A12 12 0 1 1 26 6 Z"/><path d="M31 8.5l1 2.7 2.7 1-2.7 1-1 2.7-1-2.7-2.7-1 2.7-1z"/></svg></div>
+        <p class="dc-no">Aura · 06</p>
+        <h3 class="dc-name">Velvet Ember</h3>
+        <p class="dc-kr">벨벳처럼 깊게 타오르는 온기</p>
+        <div class="dc-perf" aria-hidden="true"></div>
+        <div class="dc-data"><span>벨벳</span><span>딥 웜</span><span>관능</span></div>
+        <p class="dc-serial">MEVE · N°06</p>
+      </article>
+      <article class="dna-card reveal" style="--tint:#D5B3D0;transition-delay:.16s">
+        <div class="dc-emblem" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M26 6 A15 15 0 1 0 26 34 A12 12 0 1 1 26 6 Z"/><path d="M31 8.5l1 2.7 2.7 1-2.7 1-1 2.7-1-2.7-2.7-1 2.7-1z"/></svg></div>
+        <p class="dc-no">Aura · 07</p>
+        <h3 class="dc-name">Dewy Mauve</h3>
+        <p class="dc-kr">이슬을 머금은 모브 빛</p>
+        <div class="dc-perf" aria-hidden="true"></div>
+        <div class="dc-data"><span>이슬광</span><span>쿨 라이트</span><span>몽환</span></div>
+        <p class="dc-serial">MEVE · N°07</p>
+      </article>
+      <article class="dna-card reveal" style="--tint:#DCCBB6;transition-delay:.24s">
+        <div class="dc-emblem" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M26 6 A15 15 0 1 0 26 34 A12 12 0 1 1 26 6 Z"/><path d="M31 8.5l1 2.7 2.7 1-2.7 1-1 2.7-1-2.7-2.7-1 2.7-1z"/></svg></div>
+        <p class="dc-no">Aura · 08</p>
+        <h3 class="dc-name">Muted Sand</h3>
+        <p class="dc-kr">고요하게 가라앉은 모래의 결</p>
+        <div class="dc-perf" aria-hidden="true"></div>
+        <div class="dc-data"><span>세미매트</span><span>뉴트럴 웜</span><span>고요</span></div>
+        <p class="dc-serial">MEVE · N°08</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= N°06 THESIS ================= -->
+<section class="thesis" id="thesis">
+  <div class="wrap">
+    <p class="numero reveal">N°06 · The Library · House Thesis</p>
+    <div style="margin-top:3.2rem">
+      <div class="thesis-row reveal">
+        <span class="thesis-num">i.</span>
+        <div>
+          <h2 class="thesis-line display">Growth has <em>rhythm</em>.</h2>
+          <p class="thesis-kr">성장에는 저마다의 리듬이 있고, 데이터는 나의 리듬을 읽어냅니다.</p>
+        </div>
+      </div>
+      <div class="thesis-row reveal">
+        <span class="thesis-num">ii.</span>
+        <div>
+          <h2 class="thesis-line display">Beauty has <em>structure</em>.</h2>
+          <p class="thesis-kr">아름다움에는 지적인 구조가 있고, AI는 그 구조를 해석합니다.</p>
+        </div>
+      </div>
+      <div class="thesis-row reveal">
+        <span class="thesis-num">iii.</span>
+        <div>
+          <h2 class="thesis-line display">Transformation can be <em>designed</em>.</h2>
+          <p class="thesis-kr">변화는 정밀하게 설계될 수 있습니다. 감이 아니라 분석으로.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= N°07 PARTNERS — plum band ================= -->
+<section class="partners" id="partners">
+  <div class="wrap">
+    <div class="partners-head">
+      <div>
+        <p class="numero reveal">N°07 · The Archive · Partners</p>
+        <h2 class="display reveal" data-delay="1">Cheongdam &amp; Gangnam,<br><em>behind the veil.</em></h2>
+      </div>
+      <p class="partners-lede reveal" data-delay="2">
+        하우스가 소개하는 모든 이름은 계약과 검증이 끝난 뒤에만 공개됩니다.
+        강남·청담권 라인업은 봉인된 채 준비 중. 공개는 계약 확정 순.
+      </p>
+    </div>
+
+    <div class="ledger reveal" data-delay="2" aria-label="파트너 라인업 레저. 이름은 공개 전까지 봉인">
+      <div class="lg-row">
+        <span class="lg-no">N°01</span>
+        <div class="lg-cat"><b>Clinic</b><i>청담 · 피부과</i></div>
+        <div class="lg-seal" aria-label="파트너명 봉인">
+          <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18.5" fill="none" stroke="currentColor" stroke-width="1"/><circle cx="20" cy="20" r="14.6" fill="none" stroke="currentColor" stroke-width=".55" opacity=".5"/><path d="M23 11.5a9.3 9.3 0 1 0 0 17 10.6 10.6 0 0 1 0-17Z" fill="currentColor" opacity=".9"/><circle cx="26.6" cy="14.2" r=".95" fill="currentColor"/></svg>
+          <span class="st">Sealed</span>
+        </div>
+        <div class="lg-right">
+          <span class="lg-status on">계약 확정</span>
+          <span class="lg-date">Reveal · 2026.08</span>
+        </div>
+      </div>
+      <div class="lg-row">
+        <span class="lg-no">N°02</span>
+        <div class="lg-cat"><b>Clinic</b><i>압구정 · 피부과</i></div>
+        <div class="lg-seal" aria-label="파트너명 봉인">
+          <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18.5" fill="none" stroke="currentColor" stroke-width="1"/><circle cx="20" cy="20" r="14.6" fill="none" stroke="currentColor" stroke-width=".55" opacity=".5"/><path d="M23 11.5a9.3 9.3 0 1 0 0 17 10.6 10.6 0 0 1 0-17Z" fill="currentColor" opacity=".9"/><circle cx="26.6" cy="14.2" r=".95" fill="currentColor"/></svg>
+          <span class="st">Sealed</span>
+        </div>
+        <div class="lg-right">
+          <span class="lg-status mid">최종 협의</span>
+          <span class="lg-date">Reveal · 2026.08</span>
+        </div>
+      </div>
+      <div class="lg-row">
+        <span class="lg-no">N°03</span>
+        <div class="lg-cat"><b>Aesthetic</b><i>프라이빗 에스테틱</i></div>
+        <div class="lg-seal" aria-label="파트너명 봉인">
+          <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18.5" fill="none" stroke="currentColor" stroke-width="1"/><circle cx="20" cy="20" r="14.6" fill="none" stroke="currentColor" stroke-width=".55" opacity=".5"/><path d="M23 11.5a9.3 9.3 0 1 0 0 17 10.6 10.6 0 0 1 0-17Z" fill="currentColor" opacity=".9"/><circle cx="26.6" cy="14.2" r=".95" fill="currentColor"/></svg>
+          <span class="st">Sealed</span>
+        </div>
+        <div class="lg-right">
+          <span class="lg-status on">계약 확정</span>
+          <span class="lg-date">Reveal · 2026.09</span>
+        </div>
+      </div>
+      <div class="lg-row">
+        <span class="lg-no">N°04</span>
+        <div class="lg-cat"><b>Artist</b><i>메이크업 · 지식 클론</i></div>
+        <div class="lg-seal" aria-label="파트너명 봉인">
+          <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18.5" fill="none" stroke="currentColor" stroke-width="1"/><circle cx="20" cy="20" r="14.6" fill="none" stroke="currentColor" stroke-width=".55" opacity=".5"/><path d="M23 11.5a9.3 9.3 0 1 0 0 17 10.6 10.6 0 0 1 0-17Z" fill="currentColor" opacity=".9"/><circle cx="26.6" cy="14.2" r=".95" fill="currentColor"/></svg>
+          <span class="st">Sealed</span>
+        </div>
+        <div class="lg-right">
+          <span class="lg-status mid">클론 제작 중</span>
+          <span class="lg-date">Reveal · 2026.09</span>
+        </div>
+      </div>
+      <div class="lg-row">
+        <span class="lg-no">N°05</span>
+        <div class="lg-cat"><b>Brand</b><i>스킨케어 · 성분 검증</i></div>
+        <div class="lg-seal" aria-label="파트너명 봉인">
+          <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18.5" fill="none" stroke="currentColor" stroke-width="1"/><circle cx="20" cy="20" r="14.6" fill="none" stroke="currentColor" stroke-width=".55" opacity=".5"/><path d="M23 11.5a9.3 9.3 0 1 0 0 17 10.6 10.6 0 0 1 0-17Z" fill="currentColor" opacity=".9"/><circle cx="26.6" cy="14.2" r=".95" fill="currentColor"/></svg>
+          <span class="st">Sealed</span>
+        </div>
+        <div class="lg-right">
+          <span class="lg-status dim">검증 진행</span>
+          <span class="lg-date">Reveal · 2026 F/W</span>
+        </div>
+      </div>
+      <div class="lg-row">
+        <span class="lg-no">N°06</span>
+        <div class="lg-cat"><b>Retail</b><i>글로벌 · MEVE Objets</i></div>
+        <div class="lg-seal" aria-label="파트너명 봉인">
+          <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18.5" fill="none" stroke="currentColor" stroke-width="1"/><circle cx="20" cy="20" r="14.6" fill="none" stroke="currentColor" stroke-width=".55" opacity=".5"/><path d="M23 11.5a9.3 9.3 0 1 0 0 17 10.6 10.6 0 0 1 0-17Z" fill="currentColor" opacity=".9"/><circle cx="26.6" cy="14.2" r=".95" fill="currentColor"/></svg>
+          <span class="st">Sealed</span>
+        </div>
+        <div class="lg-right">
+          <span class="lg-status dim">협의 중</span>
+          <span class="lg-date">Reveal · 2026 F/W</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pledge reveal" data-delay="3">
+      <div>
+        <b>Intelligence</b>
+        <p>이공계 출신 파운더가 공학적으로 시스템화한 테크니컬 뷰티 매뉴얼 위에서 협업해요.</p>
+      </div>
+      <div>
+        <b>Proof</b>
+        <p>모든 파트너는 데이터와 정밀 분석으로 증명하는 하이엔드 비포 &amp; 애프터로 검증돼요.</p>
+      </div>
+      <div>
+        <b>Security</b>
+        <p>개인정보보호법(PIPA) 준수. 모든 비주얼 데이터는 암호화되어 안전하게 보관돼요.</p>
+      </div>
+    </div>
+
+    <div class="partners-cta reveal" data-delay="3">
+      <a class="btn btn-ink" href="/partners">파트너 하우스 신청 →</a>
+      <span class="note">Clinic · Brand · Artist · Retail</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= N°08 MASTERMIND — the atelier ================= -->
+<section class="mastermind" id="mastermind">
+  <span class="mm-eightbg" aria-hidden="true">8</span>
+  <div class="wrap">
+    <div class="mm-head">
+      <p class="numero reveal">N°08 · Salon Privé · Mastermind</p>
+      <h2 class="display reveal" data-delay="1">Eight weeks to<br><em>your finest self.</em></h2>
+      <p class="kr-head reveal" data-delay="2">전문가의 손으로, 데이터의 눈으로. 나의 최상을 꺼내는 8주.</p>
+      <p class="kr-body reveal" data-delay="2">
+        스캔과 Beauty DNA 진단 위에서 시작합니다. 강남·청담 탑클래스 전문가진이
+        8주 동안 1:1로 밀착 디렉팅하며, 내 안에 이미 있는 최상의 아름다움을
+        체계적으로 꺼내는 프리미엄 프로그램.
+      </p>
+      <div class="mm-tags reveal" data-delay="3">
+        <span class="mm-tag">Skincare</span>
+        <span class="mm-tag">Makeup</span>
+        <span class="mm-tag">Hair</span>
+        <span class="mm-tag">Personal Styling</span>
+      </div>
+    </div>
+
+    <div class="mm-line reveal" data-sys>
+      <div class="mm-rail">
+        <i class="mm-fill"></i>
+        <div class="mm-node m m1" style="left:2%"><i></i><b>W1</b><span>정밀 진단</span></div>
+        <div class="mm-node m m2" style="left:21%"><i></i><b>W2–3</b><span>스킨케어</span></div>
+        <div class="mm-node m m3" style="left:41%"><i></i><b>W4–5</b><span>메이크업</span></div>
+        <div class="mm-node m m4" style="left:61%"><i></i><b>W6</b><span>헤어</span></div>
+        <div class="mm-node m m5" style="left:80%"><i></i><b>W7</b><span>스타일링</span></div>
+        <div class="mm-node final m m6" style="left:98%"><i></i><b>W8</b><span>나의 최상</span></div>
+      </div>
+    </div>
+
+    <div class="mm-foot reveal">
+      <a class="btn btn-ink" href="#waitlist">Mastermind 1기 프리패스 입학 상담 신청 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= N°09 WAITLIST ================= -->
+<section class="waitlist" id="waitlist">
+  <div class="wrap">
+    <div class="glass-card reveal">
+      <p class="numero" style="justify-content:center">N°09 · The Doorstep · Waitlist</p>
+      <h2 class="display">Be the first<br>to tie <em>your knot</em>.</h2>
+      <p class="kr-body">
+        가장 먼저 나만의 매듭을 완성하기.<br>
+        미브의 정식 출시 소식과 얼리 액세스를 이메일로 가장 먼저 받아보세요.
+      </p>
+      <form class="wl-form" id="wlForm" novalidate>
+        <input type="email" id="wlEmail" name="email" placeholder="이메일 주소" autocomplete="email" required aria-label="이메일 주소">
+        <button type="submit">알림 신청</button>
+      </form>
+      <p class="wl-note" id="wlNote">스팸은 보내지 않아요 · 얼리 액세스는 선착순으로 초대돼요 · <a href="/privacy" style="text-decoration:underline;text-underline-offset:3px">개인정보처리방침</a></p>
+      <p class="wl-done" id="wlDone">신청이 완료되었어요. 곧 만나요. MEVE<span class="etoile" aria-hidden="true">✦</span></p>
+    </div>
+  </div>
+</section>
+
+<span class="nav-progress" id="navProg" aria-hidden="true"></span>
+<button class="totop" id="toTop" aria-label="맨 위로 이동">
+  <svg viewBox="0 0 24 24"><path d="M6 14l6-6 6 6"/></svg>
+</button>
+
+<!-- ================= FOOTER — credo ================= -->
+<footer>
+  <div class="wrap">
+    <div class="credo">
+      <div class="credo-line reveal">
+        <h3 class="display">We do not chase perfection. <em>We design possibility.</em></h3>
+        <p>우리는 완벽을 쫓지 않습니다. 가능성을 설계합니다.</p>
+      </div>
+      <div class="credo-line reveal">
+        <h3 class="display">We do not manufacture beauty. <em>We reveal it.</em></h3>
+        <p>우리는 아름다움을 제조하지 않습니다. 본연의 것을 드러냅니다.</p>
+      </div>
+      <div class="credo-line reveal">
+        <h3 class="display">Every transformation deserves <em>kindness</em>.</h3>
+        <p>우리는 믿습니다. 모든 변화에는 다정함이 필요하다는 것을.</p>
+      </div>
+      <div class="credo-line reveal">
+        <h3 class="display" style="color:var(--powder)">This is the House of MEVE.</h3>
+      </div>
+    </div>
+    <div class="house-sig">
+      <div class="sig-mark">
+        <div class="m">MEVE</div>
+        <div class="h">Beauty-Tech House</div>
+      </div>
+      <div class="sig-meta">
+        <a href="mailto:ruby@meve.beauty">ruby@meve.beauty</a><br>
+        미브 (Meve) · 대표 김시우 · <span style="white-space:nowrap">사업자등록번호 310-49-01303</span><br>
+        <a href="/privacy">개인정보처리방침</a> · Seoul → Global<br>
+        © 2026 MEVE. All rights reserved.
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* house thresholds — a door plate at the entry of every room
+     (injected before any geometry is measured) */
+  [
+    ['manifesto','Foyer'],['house','Grand Salon'],['system',"L'Atelier"],['moon','The Courtyard'],
+    ['dna','Vanity Room'],['thesis','The Library'],['partners','The Archive'],
+    ['mastermind','Salon Privé'],['waitlist','The Doorstep']
+  ].forEach(([id,name]) => {
+    const sec = document.getElementById(id);
+    if(!sec) return;
+    const d = document.createElement('div');
+    d.className = 'threshold reveal';
+    d.setAttribute('aria-hidden','true');
+    d.innerHTML =
+      '<span class="th-line"></span>' +
+      '<svg class="th-arch" viewBox="0 0 28 34"><path d="M3 33 V15 A11 11 0 0 1 25 15 V33" fill="none" stroke="currentColor" stroke-width="1.1"/><path d="M14 33 V21" stroke="currentColor" stroke-width="1" opacity=".55"/></svg>' +
+      '<span class="th-name">' + name + '</span>' +
+      '<span class="th-line"></span>';
+    sec.insertBefore(d, sec.firstChild);
+  });
+
+  /* nav + progress + back-to-top */
+  const nav = document.getElementById('nav');
+  const prog = document.getElementById('navProg');
+  const toTop = document.getElementById('toTop');
+  /* cache document height — reading scrollHeight per frame forces reflow */
+  let docMax = 0, vh3 = 0;
+  const measureDoc = () => {
+    docMax = document.documentElement.scrollHeight - innerHeight;
+    vh3 = innerHeight * 3;
+  };
+  measureDoc();
+  addEventListener('resize', measureDoc, {passive:true});
+  addEventListener('load', measureDoc);
+  let navScrolled = null, topShown = null;
+  const onScrollNav = () => {
+    const sc = scrollY > 24;
+    if(sc !== navScrolled){ nav.classList.toggle('scrolled', sc); navScrolled = sc; }
+    if(prog && docMax > 0) prog.style.transform = 'scaleX(' + Math.min(1, scrollY / docMax).toFixed(4) + ')';
+    if(toTop){
+      const show = scrollY > vh3;
+      if(show !== topShown){ toTop.classList.toggle('show', show); topShown = show; }
+    }
+  };
+  addEventListener('scroll', onScrollNav, {passive:true}); onScrollNav();
+  if(toTop) toTop.addEventListener('click', () => scrollTo({top:0, behavior: reduced ? 'auto' : 'smooth'}));
+
+  /* nav scrollspy */
+  const spyLinks = [...document.querySelectorAll('.nav-links a[href^="#"]:not(.nav-cta)')];
+  const spyMap = new Map();
+  spyLinks.forEach(a => {
+    const sec = document.querySelector(a.getAttribute('href'));
+    if(sec) spyMap.set(sec, a);
+  });
+  if(spyMap.size){
+    const spyIO = new IntersectionObserver(es => {
+      es.forEach(e => {
+        if(e.isIntersecting){
+          spyLinks.forEach(a => a.classList.remove('cur'));
+          const link = spyMap.get(e.target);
+          if(link) link.classList.add('cur');
+        }
+      });
+    }, {rootMargin:'-30% 0px -55% 0px'});
+    spyMap.forEach((_, sec) => spyIO.observe(sec));
+  }
+
+  /* nav goes dark while a dark room passes beneath it */
+  const darkSecs = ['#moon', '.partners', 'footer'].map(s => document.querySelector(s)).filter(Boolean);
+  if(darkSecs.length){
+    const dIO = new IntersectionObserver(es => {
+      es.forEach(e => { e.target.__dk = e.isIntersecting; });
+      nav.classList.toggle('dark', darkSecs.some(s => s.__dk));
+    }, {rootMargin:'0px 0px -94% 0px'});
+    darkSecs.forEach(s => dIO.observe(s));
+  }
+
+  /* reveals */
+  if(!reduced){
+    const io = new IntersectionObserver(es => {
+      es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, {threshold:.16, rootMargin:'0px 0px -6% 0px'});
+    document.querySelectorAll('.reveal:not(.in)').forEach(el => io.observe(el));
+  } else {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+  }
+
+  /* prologue — scroll-scrubbed journey film with text beats */
+  const proTrack = document.getElementById('proTrack');
+  const proVideo = document.getElementById('proVideo');
+  const beats = [...document.querySelectorAll('.pro-beat')].map(el => ({
+    el, a: parseFloat(el.dataset.in), b: parseFloat(el.dataset.out)
+  }));
+  if(proTrack && proVideo && !reduced){
+    /* mobile: portrait-native film */
+    if(innerWidth <= 700){
+      const s = proVideo.querySelector('source');
+      if(s){
+        s.src = 'assets/prologue-mobile.mp4';
+        proVideo.poster = 'assets/prologue-poster-m.jpg';
+        proVideo.load();
+      }
+    }
+    /* iOS/Android: unlock frame rendering on first touch */
+    const unlockVideo = () => {
+      const pr = proVideo.play();
+      if(pr && pr.then) pr.then(() => proVideo.pause()).catch(() => {});
+    };
+    addEventListener('touchstart', unlockVideo, {once:true, passive:true});
+    let target = 0, current = 0, raf = null;
+    const F = .045; /* fade window as fraction of journey */
+    /* cache track geometry — per-frame getBoundingClientRect forces reflow */
+    let trackTop = 0, trackTotal = 1;
+    const measureTrack = () => {
+      const r = proTrack.getBoundingClientRect();
+      trackTop = r.top + scrollY;
+      trackTotal = Math.max(1, r.height - innerHeight);
+    };
+    measureTrack();
+    addEventListener('resize', measureTrack, {passive:true});
+    addEventListener('load', measureTrack);
+    const measure = () => Math.min(1, Math.max(0, (scrollY - trackTop) / trackTotal));
+    const tick = () => {
+      current += (target - current) * (window.__proK || .14);
+      if(proVideo.duration){
+        const t = current * Math.max(0, proVideo.duration - .06);
+        if(Math.abs(proVideo.currentTime - t) > .012) proVideo.currentTime = t;
+      }
+      beats.forEach(({el, a, b}) => {
+        const fadeIn  = Math.min(1, Math.max(0, (current - a) / F));
+        const fadeOut = Math.min(1, Math.max(0, (b - current) / F));
+        const o = Math.min(fadeIn, fadeOut);
+        el.style.opacity = o.toFixed(3);
+        el.style.transform = `translateY(${((1 - fadeIn) * 34 - (1 - fadeOut) * 34).toFixed(1)}px)`;
+        el.classList.toggle('on', o > .55);
+      });
+      if(Math.abs(target - current) > .0004){ raf = requestAnimationFrame(tick); }
+      else raf = null;
+    };
+    const onScroll = () => {
+      target = measure();
+      if(raf === null) raf = requestAnimationFrame(tick);
+    };
+    proVideo.addEventListener('loadedmetadata', onScroll);
+    addEventListener('scroll', onScroll, {passive:true});
+    addEventListener('resize', onScroll, {passive:true});
+    onScroll();
+  } else if(reduced){
+    /* motion-reduced: show title and arrival statically */
+    beats.forEach(({el}, i) => {
+      if(i !== 0 && i !== beats.length - 1) el.setAttribute('data-static','skip');
+    });
+  }
+
+  /* lune — scroll-driven waxing moon (real phase geometry) */
+  const track = document.getElementById('luneTrack');
+  const lunePath = document.getElementById('lunePath');
+  const luneTicks = lunePath ? [...document.querySelectorAll('#luneTicks .lu-tick')] : [];
+  const pct   = document.getElementById('lunePct');
+  const phase = document.getElementById('lunePhase');
+  const steps = [...document.querySelectorAll('.nuit-step')];
+  const names = ['New','Crescent','Quarter','Half','Gibbous','Near Full','Full'];
+  const R = 88;
+  const moonD = f => {
+    if(f <= 0.004) return '';
+    if(f >= 0.996) return `M 0,${-R} A ${R},${R} 0 1 1 0,${R} A ${R},${R} 0 1 1 0,${-R} Z`;
+    const rx = (R * Math.abs(1 - 2 * f)).toFixed(2);
+    const sweep = f < 0.5 ? 0 : 1;
+    return `M 0,${-R} A ${R},${R} 0 0 1 0,${R} A ${rx},${R} 0 0 ${sweep} 0,${-R} Z`;
+  };
+
+  if(track && lunePath && !reduced){
+    let ticking = false;
+    /* cached geometry + change-guarded writes: no per-frame reflow, no redundant DOM writes */
+    let luneTop = 0, luneTotal = 1, lastP = -1, lastPc = -1, lastN = -1, lastS = -1;
+    const measureLune = () => {
+      const r = track.getBoundingClientRect();
+      luneTop = r.top + scrollY;
+      luneTotal = Math.max(1, r.height - innerHeight);
+    };
+    measureLune();
+    addEventListener('resize', measureLune, {passive:true});
+    addEventListener('load', measureLune);
+    const update = () => {
+      ticking = false;
+      const p = Math.min(1, Math.max(0, (scrollY - luneTop) / luneTotal));
+      window.__mp = p; /* 3D moon reads this */
+      if(Math.abs(p - lastP) < .0015) return;
+      lastP = p;
+      lunePath.setAttribute('d', moonD(p));
+      luneTicks.forEach((t, i) => t.classList.toggle('on', i <= p * 7.99 - 0.5));
+      const pc = Math.round(p * 100);
+      if(pc !== lastPc){ pct.textContent = pc + '%'; lastPc = pc; }
+      const ni = Math.min(6, Math.floor(p * 6.999));
+      if(ni !== lastN){ phase.textContent = names[ni]; lastN = ni; }
+      const s = p < .3 ? 0 : p < .68 ? 1 : 2;
+      if(s !== lastS){ steps.forEach((el,i) => el.classList.toggle('on', i === s)); lastS = s; }
+    };
+    addEventListener('scroll', () => {
+      if(!ticking){ ticking = true; requestAnimationFrame(update); }
+    }, {passive:true});
+    update();
+  } else if(reduced){
+    if(lunePath) lunePath.setAttribute('d', moonD(1));
+    luneTicks.forEach(t => t.classList.add('on'));
+    pct.textContent = '100%'; phase.textContent = 'Full';
+    steps.forEach(el => el.classList.add('on'));
+  }
+
+  /* system section — play mockup motion & counters on scroll */
+  const sysSteps = document.querySelectorAll('[data-sys]');
+  const runCounters = root => {
+    root.querySelectorAll('.cnt').forEach(el => {
+      const to = +el.dataset.to, t0 = performance.now(), dur = 1100;
+      const step = now => {
+        const p = Math.min(1, (now - t0) / dur);
+        el.textContent = Math.round(to * (1 - Math.pow(1 - p, 3)));
+        if(p < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    });
+  };
+  if(!reduced){
+    const sysIO = new IntersectionObserver(es => {
+      es.forEach(e => {
+        if(e.isIntersecting){
+          e.target.classList.add('play');
+          setTimeout(() => runCounters(e.target), 500);
+          sysIO.unobserve(e.target);
+        }
+      });
+    }, {threshold:.35});
+    sysSteps.forEach(el => sysIO.observe(el));
+  } else {
+    sysSteps.forEach(el => {
+      el.classList.add('play');
+      el.querySelectorAll('.cnt').forEach(c => c.textContent = c.dataset.to);
+    });
+  }
+
+  /* phone tilt — desktop pointer only */
+  if(!reduced && matchMedia('(pointer:fine)').matches){
+    document.querySelectorAll('.sys-stage .phone').forEach(ph => {
+      const stage = ph.closest('.sys-stage');
+      let r = null;
+      stage.addEventListener('mouseenter', () => { r = ph.getBoundingClientRect(); });
+      stage.addEventListener('mousemove', e => {
+        if(!r) r = ph.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - .5;
+        const y = (e.clientY - r.top) / r.height - .5;
+        ph.style.transform = `rotateY(${(x * 10).toFixed(2)}deg) rotateX(${(-y * 8).toFixed(2)}deg)`;
+      });
+      stage.addEventListener('mouseleave', () => { ph.style.transform = ''; r = null; });
+    });
+  }
+
+  /* phase marquee — duplicate rail for seamless loop */
+  const rail = document.getElementById('phaseRail');
+  if(rail){ rail.innerHTML += rail.innerHTML; }
+
+  /* featured dna card — tap/keyboard flip */
+  const dnaFlip = document.getElementById('dnaFlip');
+  if(dnaFlip){
+    dnaFlip.addEventListener('click', () => dnaFlip.classList.toggle('flipped'));
+    dnaFlip.addEventListener('keydown', e => {
+      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); dnaFlip.classList.toggle('flipped'); }
+    });
+  }
+
+  /* waitlist */
+  const form = document.getElementById('wlForm');
+  if(form){
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const email = document.getElementById('wlEmail');
+      if(!email.value || !email.checkValidity()){
+        email.focus();
+        email.style.borderColor = 'var(--rose)';
+        return;
+      }
+      form.style.display = 'none';
+      document.getElementById('wlNote').style.display = 'none';
+      document.getElementById('wlDone').style.display = 'block';
+    });
+  }
+})();
+</script>
+
+<!-- ================= PEARL RIBBON MOON — WebGL (desktop) ================= -->
+<script type="importmap">{"imports":{"three":"/assets/vendor/three.module.min.js"}}</script>
+<script type="module" src="assets/moon3d.js"></script>
+
+<!-- ================= PREMIUM MOTION LAYER — GSAP + Lenis ================= -->
+<script src="assets/vendor/gsap.min.js"></script>
+<script src="assets/vendor/ScrollTrigger.min.js"></script>
+<script src="assets/vendor/lenis.min.js"></script>
+<script>
+(function(){
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* rolling labels — nav links + text-only pill buttons (works without GSAP) */
+  document.querySelectorAll('.nav-links a:not(.nav-cta), .btn, .nav-cta').forEach(a => {
+    if(a.childElementCount !== 0) return;
+    const t = a.textContent.trim();
+    if(!t || /[가-힣]/.test(t)) return; /* 한글 라벨은 세리프 롤 금지 — 그대로 둠 */
+    a.innerHTML = '<span class="roll"><span>' + t + '</span><span aria-hidden="true">' + t + '</span></span>';
+  });
+
+  /* ---------- 2.5D room stages — insert when the image exists ---------- */
+  [
+    ['house','corridor','Toward the Rooms'],
+    ['system','atelier',"L'Atelier"],
+    ['dna','vanity','Vanity Room'],
+    ['mastermind','salon','Salon Privé'],
+    ['waitlist','doorstep','The Doorstep']
+  ].forEach(([secId, file, cap]) => {
+    const sec = document.getElementById(secId);
+    if(!sec) return;
+    const src = 'assets/rooms/' + file + '.jpg';
+    const probe = new Image();
+    probe.onload = () => {
+      const fig = document.createElement('figure');
+      fig.className = 'room reveal in';
+      fig.innerHTML =
+        '<div class="room-frame">'
+        + '<img src="' + src + '" alt="' + cap + ' 인테리어">'
+        + '<div class="room-haze" aria-hidden="true"></div>'
+        + '<div class="room-glow" aria-hidden="true"></div>'
+        + '</div><figcaption class="room-cap">' + cap + '</figcaption>';
+      const th = sec.querySelector('.threshold');
+      if(th && th.nextSibling) sec.insertBefore(fig, th.nextSibling);
+      else sec.insertBefore(fig, sec.firstChild);
+      /* geometry changed — let the film & moon re-measure */
+      dispatchEvent(new Event('resize'));
+      if(window.ScrollTrigger) ScrollTrigger.refresh();
+
+      /* pointer 2.5D — perspective tilt, counter-drift, roaming light */
+      if(!matchMedia('(pointer:fine)').matches || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const frame = fig.querySelector('.room-frame');
+      const img = frame.querySelector('img');
+      const haze = frame.querySelector('.room-haze');
+      const glow = frame.querySelector('.room-glow');
+      let r = null, tx = 0, ty = 0, cx = 0, cy = 0, raf = null;
+      const loop = () => {
+        cx += (tx - cx) * .08; cy += (ty - cy) * .08;
+        frame.style.transform = 'perspective(1100px) rotateY(' + (cx * 3.2) + 'deg) rotateX(' + (-cy * 2.4) + 'deg)';
+        img.style.transform = 'translate(' + (-cx * 16) + 'px,' + (-cy * 11) + 'px)';
+        haze.style.transform = 'translate(' + (cx * 7) + 'px,' + (cy * 5) + 'px)';
+        glow.style.transform = 'translate(' + (-50 + cx * 26) + '%,' + (-50 + cy * 20) + '%)';
+        if(Math.abs(tx - cx) > .001 || Math.abs(ty - cy) > .001) raf = requestAnimationFrame(loop);
+        else raf = null;
+      };
+      const kick = () => { if(raf === null) raf = requestAnimationFrame(loop); };
+      fig.addEventListener('pointerenter', () => { r = frame.getBoundingClientRect(); });
+      fig.addEventListener('pointermove', e => {
+        if(!r) r = frame.getBoundingClientRect();
+        tx = (e.clientX - r.left) / r.width - .5;
+        ty = (e.clientY - r.top) / r.height - .5;
+        kick();
+      });
+      fig.addEventListener('pointerleave', () => { tx = 0; ty = 0; r = null; kick(); });
+    };
+    probe.src = src;
+  });
+
+  /* ---------- floor plan minimap — where you are in the house ---------- */
+  if(matchMedia('(min-width:1100px)').matches){
+    const ROOMS = [
+      ['manifesto','N°01 · Foyer'],['house','N°02 · Grand Salon'],
+      ['system',"N°03 · L'Atelier"],['moon','N°04 · The Courtyard'],
+      ['dna','N°05 · Vanity Room'],['thesis','N°06 · The Library'],
+      ['partners','N°07 · The Archive'],['mastermind','N°08 · Salon Privé'],
+      ['waitlist','N°09 · The Doorstep']
+    ];
+    /* one floor, three rooms — App · Mastermind · Objets (the maison itself) */
+    const plan = document.createElement('aside');
+    plan.className = 'plan';
+    plan.setAttribute('role','navigation');
+    plan.setAttribute('aria-label','하우스 평면도 내비게이션');
+    plan.innerHTML =
+      '<svg viewBox="0 0 150 100" width="150" height="100" aria-hidden="true">'
+      + '<a href="#moon" data-cell="moon" aria-label="Moon System으로 이동"><circle class="plan-cell" cx="127" cy="13" r="6"/></a>'
+      + '<path class="plan-line" d="M6 38 L75 12 L144 38"/>'
+      + '<a href="#system" data-cell="app" aria-label="MEVE App 소개로 이동">'
+      +   '<rect class="plan-cell" x="10" y="38" width="43.3" height="48" rx="3"/>'
+      +   '<text class="plan-txt" x="31.6" y="65">APP</text></a>'
+      + '<a href="#mastermind" data-cell="mm" aria-label="Mastermind로 이동">'
+      +   '<rect class="plan-cell" x="53.3" y="38" width="43.3" height="48" rx="3"/>'
+      +   '<text class="plan-txt" x="75" y="65">MM</text></a>'
+      + '<a href="#house" data-cell="objets" aria-label="MEVE Objets로 이동">'
+      +   '<rect class="plan-cell" x="96.6" y="38" width="43.4" height="48" rx="3"/>'
+      +   '<text class="plan-txt" x="118.3" y="65">OBJ</text></a>'
+      + '<a href="#manifesto" data-cell="door" aria-label="처음으로 이동">'
+      +   '<rect class="plan-cell plan-door" x="27" y="79" width="9" height="7" rx="1"/></a>'
+      + '</svg><span class="plan-label" id="planLabel">MEVE House</span>';
+    document.body.appendChild(plan);
+
+    const label = plan.querySelector('#planLabel');
+    const roomName = Object.fromEntries(ROOMS);
+    /* which part of the house each chapter lights up */
+    const secCell = {
+      manifesto:'door', house:'all', system:'app', moon:'moon', dna:'app',
+      thesis:'all', partners:'mm', mastermind:'mm', waitlist:'door'
+    };
+    const cellEls = {};
+    plan.querySelectorAll('a[data-cell]').forEach(a => {
+      cellEls[a.dataset.cell] = a.querySelector('.plan-cell');
+    });
+    const planIO = new IntersectionObserver(es => {
+      es.forEach(e => {
+        if(!e.isIntersecting) return;
+        const id = e.target.id;
+        Object.values(cellEls).forEach(c => c.classList.remove('on'));
+        plan.classList.toggle('allon', secCell[id] === 'all');
+        const c = cellEls[secCell[id]];
+        if(c) c.classList.add('on');
+        label.textContent = roomName[id] || 'MEVE House';
+        plan.classList.add('vis');
+      });
+    }, { rootMargin:'-32% 0px -52% 0px' });
+    ROOMS.forEach(([id]) => {
+      const sec = document.getElementById(id);
+      if(sec) planIO.observe(sec);
+    });
+    /* hide while inside the prologue film */
+    addEventListener('scroll', () => {
+      if(scrollY < innerHeight * 2) plan.classList.remove('vis');
+    }, { passive:true });
+  }
+
+  if(reduced || !window.gsap || !window.Lenis) return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* ---------- Lenis smooth scroll (?nolenis to compare native feel) ---------- */
+  const noLenis = /(\?|&)nolenis/.test(location.search);
+  if(!noLenis){
+    document.documentElement.style.scrollBehavior = 'auto';
+    const lenis = new Lenis({ lerp:.125, wheelMultiplier:1 });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(t => lenis.raf(t * 1000));
+    gsap.ticker.lagSmoothing(0);
+    /* Lenis already smooths the scroll — let the prologue film track it near-directly
+       instead of stacking a second heavy lerp on top */
+    window.__proK = .42;
+
+    /* anchor links through Lenis */
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const id = a.getAttribute('href');
+        if(id.length < 2) return;
+        const el = document.querySelector(id);
+        if(!el) return;
+        e.preventDefault();
+        lenis.scrollTo(el, { offset:-64, duration:1.5, easing: x => 1 - Math.pow(1 - x, 4) });
+        history.pushState(null, '', id);
+      });
+    });
+  }
+
+  /* ---------- masked headline reveals (all chapters, prologue untouched) ---------- */
+  document.querySelectorAll('section h2.display.reveal').forEach(h => {
+    if(h.closest('.manifesto')) return; /* manifesto gets the word scrub instead */
+    h.classList.remove('reveal');
+    gsap.fromTo(h,
+      { clipPath:'inset(-10% 0 102% 0)', y:52, opacity:1 },
+      { clipPath:'inset(-10% 0 -14% 0)', y:0, duration:1.3, ease:'power4.out',
+        scrollTrigger:{ trigger:h, start:'top 84%', once:true } });
+  });
+
+  /* ---------- manifesto — word-by-word ink fill on scrub ---------- */
+  const mh = document.querySelector('.manifesto h2.display');
+  if(mh){
+    mh.classList.remove('reveal');
+    const splitWords = node => {
+      [...node.childNodes].forEach(ch => {
+        if(ch.nodeType === 3){
+          const frag = document.createDocumentFragment();
+          ch.textContent.split(/(\s+)/).forEach(tk => {
+            if(!tk) return;
+            if(/^\s+$/.test(tk)){ frag.appendChild(document.createTextNode(tk)); return; }
+            const s = document.createElement('span');
+            s.className = 'mw'; s.textContent = tk;
+            frag.appendChild(s);
+          });
+          node.replaceChild(frag, ch);
+        } else if(ch.nodeType === 1 && ch.tagName !== 'BR'){
+          splitWords(ch);
+        }
+      });
+    };
+    splitWords(mh);
+    gsap.to('.manifesto .mw', {
+      opacity:1, stagger:.055, ease:'none',
+      scrollTrigger:{ trigger:'.manifesto', start:'top 72%', end:'center 42%', scrub:true }
+    });
+  }
+
+  /* ---------- parallax — key visual objects drift against scroll ---------- */
+  const drift = (el, y) => gsap.fromTo(el, { y:-y }, { y:y, ease:'none', force3D:true,
+    scrollTrigger:{ trigger:el, start:'top bottom', end:'bottom top', scrub:true } });
+  document.querySelectorAll('.float').forEach(f => { if(f.parentElement) drift(f.parentElement, 26); });
+  const lune = document.querySelector('.lune-stage'); if(lune) drift(lune, 30);
+  const dnaF = document.querySelector('.dna-feature'); if(dnaF) drift(dnaF, 22);
+  const eight = document.querySelector('.mm-eightbg');
+  if(eight) gsap.fromTo(eight, { y:-46 }, { y:46, ease:'none', force3D:true,
+    scrollTrigger:{ trigger:'#mastermind', start:'top bottom', end:'bottom top', scrub:true } });
+
+  /* ---------- desktop only: magnetic buttons + cursor ring ---------- */
+  if(!matchMedia('(pointer:fine)').matches) return;
+
+  document.querySelectorAll('.btn, .nav-cta').forEach(b => {
+    b.classList.add('magnet');
+    const xTo = gsap.quickTo(b, 'x', { duration:.4, ease:'power3.out' });
+    const yTo = gsap.quickTo(b, 'y', { duration:.4, ease:'power3.out' });
+    let r = null; /* cache rect on enter — reading it per move forces reflow and feeds back its own transform */
+    b.addEventListener('pointerenter', () => { r = b.getBoundingClientRect(); });
+    b.addEventListener('pointermove', e => {
+      if(!r) r = b.getBoundingClientRect();
+      xTo((e.clientX - r.left - r.width/2) * .22);
+      yTo((e.clientY - r.top - r.height/2) * .34);
+    });
+    b.addEventListener('pointerleave', () => {
+      r = null;
+      gsap.to(b, { x:0, y:0, duration:.8, ease:'elastic.out(1,.45)' });
+    });
+  });
+
+  const ring = document.createElement('div');
+  ring.className = 'cur-ring'; ring.setAttribute('aria-hidden','true');
+  document.body.appendChild(ring);
+  const rx = gsap.quickTo(ring, 'x', { duration:.42, ease:'power3.out' });
+  const ry = gsap.quickTo(ring, 'y', { duration:.42, ease:'power3.out' });
+  const rs = gsap.quickTo(ring, 'scale', { duration:.35, ease:'power3.out' });
+  let seen = false;
+  addEventListener('pointermove', e => {
+    if(!seen){ ring.classList.add('on'); seen = true; gsap.set(ring, { x:e.clientX, y:e.clientY }); }
+    rx(e.clientX); ry(e.clientY);
+    const hot = e.target.closest('a, button, [role="button"], input, .dna-card, #dnaFlip');
+    ring.classList.toggle('hot', !!hot);
+    rs(hot ? 1.75 : 1);
+  }, { passive:true });
+  addEventListener('pointerleave', () => ring.classList.remove('on'));
+})();
+</script>
+</body>
+</html>
