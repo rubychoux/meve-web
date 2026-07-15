@@ -79,6 +79,46 @@ img{display:block;max-width:100%;height:auto}
   padding:calc(clamp(1.9rem,4.5vh,3rem) + env(safe-area-inset-top)) clamp(1.4rem,5.5vw,2rem) 0;
 }
 
+
+/* ---------- hero: one-screen, comp-B ---------- */
+.hero{
+  position:relative;
+  min-height:100svh;
+  display:flex;flex-direction:column;
+  padding-bottom:1.9rem;
+}
+.hero-clouds{
+  position:absolute;left:calc(50% - 50vw);width:100vw;bottom:0;height:56%;
+  background:url('/assets/prologue-poster.jpg') center 28%/cover no-repeat;
+  opacity:.32;pointer-events:none;
+  -webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 48%);
+  mask-image:linear-gradient(180deg,transparent 0%,#000 48%);
+  filter:saturate(.85);
+}
+.hero .topbar{border-bottom:0;padding-bottom:0;padding-top:.4rem}
+.hero-brand{margin-top:clamp(1.6rem,4.5vh,2.6rem);text-align:center}
+.hero-brand .mark{margin:0 auto;width:clamp(148px,40vw,180px);filter:invert(1) brightness(.98)}
+.hero-date{
+  margin-top:.9rem;
+  font-family:var(--serif);font-weight:500;
+  font-size:.92rem;letter-spacing:.34em;text-indent:.34em;color:var(--gold);
+  font-variant-numeric:tabular-nums;
+}
+.hero-mid{margin-block:auto;text-align:center;position:relative;padding-block:1.5rem}
+.hero-mid h1{text-align:center}
+.hero-sub{
+  margin-top:1.05rem;
+  font-size:clamp(.95rem,3.5vw,1.02rem);font-weight:450;color:var(--cream-soft);
+}
+.hero-form{position:relative}
+.hero-form .wl{margin-top:0}
+.hero-form .wl-note{margin-top:1rem;font-size:.8rem;color:var(--cream-mute)}
+.hero-form .beta{margin-top:.9rem}
+.narr{margin-top:clamp(3rem,7vh,4rem)}
+.narr .lead:first-of-type{margin-top:1.8rem}
+/* plain pivot (text only) */
+.pivot{margin-top:clamp(2.6rem,6vh,3.4rem);text-align:center}
+
 /* ---------- masthead ---------- */
 .mast{text-align:center}
 .topbar{
@@ -504,27 +544,22 @@ h1 em{font-style:normal;color:var(--powder)}
 
 <main class="page">
 
-  <!-- masthead -->
-  <header class="mast fade">
-    <div class="topbar">
+  <!-- hero · one screen ----------------------------------- -->
+  <header class="hero">
+    <div class="hero-clouds" aria-hidden="true"></div>
+    <div class="topbar fade">
       <span>Maison MEVE</span>
       <span>Beauty-Tech House</span>
     </div>
-    <img class="mark" src="/assets/wordmark2.png" alt="MEVE" width="2466" height="1005" decoding="async" fetchpriority="high">
-    <div class="strip" aria-label="앱 런칭">
-      <p class="st-label">App Launch <i class="st-dot"></i> <b>7.29</b></p>
+    <div class="hero-brand fade d1">
+      <img class="mark" src="/assets/wordmark2.png" alt="MEVE" width="2466" height="1005" decoding="async" fetchpriority="high">
+      <p class="hero-date">App Launch &nbsp;7 · 29</p>
     </div>
-  </header>
-
-  <!-- narrative -->
-  <section class="fade d1">
-    <p class="numero">N°01 · Une Question</p>
-    <div class="scan">
-      <i class="c c1"></i><i class="c c2"></i><i class="c c3"></i><i class="c c4"></i>
-      <div class="scanline" aria-hidden="true"></div>
+    <div class="hero-mid fade d2">
       <h1>내 피부엔 뭐가 맞는지,<br>내 얼굴엔 뭐가 <em>어울리는지</em></h1>
+      <p class="hero-sub">이제 감이 아니라, 데이터가 답해요.</p>
     </div>
-
+    <div class="hero-form fade d3">
     <form class="wl" id="waitlist" novalidate>
       <p class="wl-count" id="wlCount"></p>
       <p class="wl-teaser"><span>지금 <b>No.100</b> 안에 들면,<br class="mbr"> 프리미엄 3개월 무료</span></p>
@@ -532,12 +567,12 @@ h1 em{font-style:normal;color:var(--powder)}
         <input type="email" id="wlEmail" name="email" inputmode="email" autocomplete="email" placeholder="이메일 주소" required>
         <button type="submit" id="wlBtn"><span>내 티켓 번호 받기</span><span class="ar">→</span></button>
       </div>
+      <p class="wl-note">지금 신청하면 번호가 바로 나와요 · <b>7월 29일</b> 앞 번호부터 열려요</p>
       <label class="beta">
         <input type="checkbox" id="wlBeta">
         <span>출시 전 <b>베타 테스터 30인</b> 선발에 지원할래요</span>
       </label>
       <p class="wl-error" id="wlError"></p>
-      <p class="wl-note">지금 신청하면 번호가 바로 나와요.<br><b>7월 29일</b>, 앞 번호부터 순서대로 앱이 열립니다.</p>
     </form>
 
     <section class="done" id="done" aria-live="polite">
@@ -556,8 +591,12 @@ h1 em{font-style:normal;color:var(--powder)}
         <a id="igBtn" href="https://instagram.com/maison.meve" target="_blank" rel="noopener">인스타그램</a>
       </div>
     </section>
+    </div>
+  </header>
 
-
+  <!-- narrative -->
+  <section class="narr">
+    <p class="numero rv">N°01 · Une Question</p>
     <p class="lead">
       확실한 답을 모른 채, 우리는 오늘도 수백 개의 리뷰 속에서
       새로운 제품을 검색해요. 실패는 반복되는데,
@@ -571,7 +610,7 @@ h1 em{font-style:normal;color:var(--powder)}
       언제나 답은 '감'에 맡겨져 있었죠.
     </p>
 
-    <div class="pivot-band">
+    <div class="pivot rv">
       <p class="pivot-en">Is beauty a matter of instinct?</p>
       <p class="pivot-kr">아름다움은 정말,<br>'감'의 영역일까요?</p>
     </div>
@@ -595,7 +634,6 @@ h1 em{font-style:normal;color:var(--powder)}
     </div>
   </section>
 
-  <hr class="dr">
 
   <section class="rv">
     <!-- the ticket -->
@@ -634,7 +672,6 @@ h1 em{font-style:normal;color:var(--powder)}
     </div>
   </section>
 
-  <hr class="dr">
 
   <!-- the promise -->
   <section class="promise rv" aria-label="미브의 약속">
