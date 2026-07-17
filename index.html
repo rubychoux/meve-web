@@ -581,6 +581,9 @@ h1 em{font-style:normal;color:var(--powder)}
   padding:2.6rem clamp(1.4rem,5.5vw,2rem) calc(2.6rem + env(safe-area-inset-bottom));
   background:var(--bg-deep);
   text-align:center;
+  /* paint far past the document end — kills the pale band under the footer
+     on Safari's dynamic viewport without adding scrollable height */
+  box-shadow:0 100vh 0 0 var(--bg-deep);
 }
 .nuit .orn{width:26px;margin:0 auto;filter:invert(1) brightness(1.6);opacity:.9}
 .nuit .foot{margin-top:1.4rem;padding-top:1.4rem;border-top:1px solid rgba(246,239,233,.1)}
