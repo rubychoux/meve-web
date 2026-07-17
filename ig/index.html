@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MEVE · IG Kit (internal)</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+body{background:#191019;color:#F6EFE9;font-family:'Pretendard Variable',sans-serif;margin:0;padding:32px;display:flex;flex-wrap:wrap;gap:28px;justify-content:center}
+.card{display:flex;flex-direction:column;gap:12px;align-items:center}
+canvas{width:324px;height:auto;border-radius:8px;box-shadow:0 20px 50px rgba(0,0,0,.5)}
+button{height:44px;padding:0 22px;border:0;border-radius:99px;background:#EFB8C8;color:#241220;font-weight:700;font-size:14px;cursor:pointer;font-family:inherit}
+p{font-size:12px;color:rgba(246,239,233,.5);margin:0}
+</style>
+</head>
+<body>
+<div class="card"><canvas id="c1" width="1080" height="1350"></canvas><button data-c="c1" data-n="meve-ig-1-question">① 질문 카드 저장</button><p>1080×1350</p></div>
+<div class="card"><canvas id="c2" width="1080" height="1350"></canvas><button data-c="c2" data-n="meve-ig-2-seal-d1">② 봉인 D–1 저장</button><p>1080×1350</p></div>
+<div class="card"><canvas id="c3" width="1080" height="1350"></canvas><button data-c="c3" data-n="meve-ig-3-ticket">③ 티켓 예고 저장</button><p>1080×1350</p></div>
+
+<script>
+(async function(){
+  const W = 1080, H = 1350;
+  const INK = '#211C23', CREAM = '#F6EFE9', POWDER = '#EFB8C8', GOLD = '#C7A76C', ROSE = '#C25B7C', BG = '#191019';
+
+  await Promise.all([
+    document.fonts.load('600 200px "Bodoni Moda"'),
+    document.fonts.load('600 34px "Bodoni Moda"'),
+    document.fonts.load('700 72px "Pretendard Variable"'),
+    document.fonts.load('500 34px "Pretendard Variable"'),
+  ]).catch(()=>{});
+
+  const loadImg = src => new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = src; });
+  const rr = (x,a,b,w,h,r) => { x.beginPath(); x.moveTo(a+r,b); x.arcTo(a+w,b,a+w,b+h,r); x.arcTo(a+w,b+h,a,b+h,r); x.arcTo(a,b+h,a,b,r); x.arcTo(a,b,a+w,b,r); x.closePath(); };
+
+  /* cream-recolored wordmark (safari-safe) */
+  let markC = null;
+  try{
+    const img = await loadImg('/assets/wordmark2.png');
+    markC = document.createElement('canvas');
+    markC.width = img.naturalWidth; markC.height = img.naturalHeight;
+    const c2 = markC.getContext('2d');
+    c2.drawImage(img, 0, 0);
+    const px = c2.getImageData(0,0,markC.width,markC.height), d = px.data;
+    for(let i=0;i<d.length;i+=4){ d[i]=246; d[i+1]=239; d[i+2]=233; }
+    c2.putImageData(px,0,0);
+  }catch(e){}
+
+  const ground = x => {
+    x.fillStyle = BG; x.fillRect(0,0,W,H);
+    const g = x.createRadialGradient(W/2,H*.55,60,W/2,H*.55,760);
+    g.addColorStop(0,'rgba(239,184,200,.10)'); g.addColorStop(1,'rgba(239,184,200,0)');
+    x.fillStyle = g; x.fillRect(0,0,W,H);
+  };
+  const wm = (x, y, w) => {
+    if(!markC) return;
+    const h = w * markC.height / markC.width;
+    x.drawImage(markC, (W-w)/2, y, w, h);
+    return h;
+  };
+  const caps = (x, text, y, color, size, ls) => {
+    x.fillStyle = color; x.textAlign = 'center';
+    x.font = '600 ' + size + 'px "Pretendard Variable", sans-serif';
+    x.letterSpacing = ls + 'px';
+    x.fillText(text, W/2 + ls/2, y);
+    x.letterSpacing = '0px';
+  };
+
+  /* ── ① question ─────────────────────────────────────── */
+  {
+    const x = document.getElementById('c1').getContext('2d');
+    ground(x);
+    caps(x, 'MAISON MEVE · BEAUTY-TECH HOUSE', 250, GOLD, 27, 9);
+    x.textAlign = 'center';
+    x.font = '700 88px "Pretendard Variable", sans-serif';
+    x.fillStyle = CREAM;
+    x.fillText('아름다움은 정말,', W/2, 620);
+    const q = ['‘', '감', '’', '의 영역일까요?'];
+    x.font = '700 88px "Pretendard Variable", sans-serif';
+    let total = 0; const widths = q.map(t => { const w = x.measureText(t).width; total += w; return w; });
+    let cx = W/2 - total/2;
+    q.forEach((t, i) => {
+      x.fillStyle = (i === 1) ? POWDER : CREAM;
+      x.textAlign = 'left';
+      x.fillText(t, cx, 750);
+      cx += widths[i];
+    });
+    x.textAlign = 'center';
+    x.font = '400 40px "Pretendard Variable", sans-serif';
+    x.fillStyle = 'rgba(246,239,233,.6)';
+    x.fillText('이제 감이 아니라, 데이터가 답해요.', W/2, 860);
+    wm(x, 1080, 240);
+    caps(x, 'COMING · 7.18', 1240, 'rgba(246,239,233,.45)', 24, 7);
+  }
+
+  /* ── ② seal · D-1 ───────────────────────────────────── */
+  {
+    const x = document.getElementById('c2').getContext('2d');
+    ground(x);
+    caps(x, 'THE INVITATION', 230, GOLD, 27, 10);
+    try{
+      const seal = await loadImg('/assets/seal.webp');
+      const sw = 560, sh = sw * seal.height / seal.width;
+      x.save();
+      x.shadowColor = 'rgba(0,0,0,.5)'; x.shadowBlur = 70; x.shadowOffsetY = 30;
+      x.drawImage(seal, (W-sw)/2, 330, sw, sh);
+      x.restore();
+    }catch(e){}
+    x.textAlign = 'center';
+    x.font = '400 42px "Pretendard Variable", sans-serif';
+    x.fillStyle = 'rgba(246,239,233,.72)';
+    x.fillText('봉인이 열리기까지', W/2, 985);
+    x.font = '600 150px "Bodoni Moda", serif';
+    x.fillStyle = CREAM;
+    x.fillText('D–1', W/2, 1130);
+    caps(x, 'MEVE.BEAUTY', 1240, 'rgba(246,239,233,.45)', 24, 7);
+  }
+
+  /* ── ③ ticket teaser ────────────────────────────────── */
+  {
+    const x = document.getElementById('c3').getContext('2d');
+    ground(x);
+    wm(x, 150, 250);
+    caps(x, 'APP LAUNCH · 8.1', 360, GOLD, 26, 8);
+    /* ticket */
+    const tw = 880, th = 620;
+    x.save();
+    x.translate(W/2, 800); x.rotate(-1.3 * Math.PI/180);
+    x.shadowColor = 'rgba(0,0,0,.55)'; x.shadowBlur = 80; x.shadowOffsetY = 36;
+    rr(x, -tw/2, -th/2, tw, th, 28); x.fillStyle = '#FFFDF9'; x.fill();
+    x.shadowColor = 'transparent';
+    const hb = -th/2 + 88, mg = 60;
+    x.textAlign = 'left'; x.fillStyle = INK;
+    x.font = '600 25px "Bodoni Moda", serif'; x.letterSpacing = '6px';
+    x.fillText('MEVE', -tw/2 + mg, hb);
+    x.textAlign = 'center'; x.fillStyle = '#A79CA3';
+    x.font = '500 21px "Pretendard Variable", sans-serif'; x.letterSpacing = '5px';
+    x.fillText('BEAUTY DNA TICKET', 0, hb - 1);
+    x.textAlign = 'right'; x.fillStyle = ROSE;
+    x.font = '600 25px "Bodoni Moda", serif'; x.letterSpacing = '6px';
+    x.fillText('ADMIT ONE', tw/2 - mg, hb);
+    x.letterSpacing = '0px';
+    x.strokeStyle = 'rgba(33,28,35,.16)'; x.lineWidth = 2;
+    x.beginPath(); x.moveTo(-tw/2+mg-8, hb+38); x.lineTo(tw/2-mg+8, hb+38); x.stroke();
+    x.textAlign = 'center'; x.fillStyle = INK;
+    x.font = '600 190px "Bodoni Moda", serif';
+    x.fillText('No. —', 0, 66);
+    x.font = '700 32px "Pretendard Variable", sans-serif';
+    x.fillStyle = '#8C6B2F';
+    x.fillText('이 자리에 당신의 번호가 새겨져요', 0, 168);
+    const ty = th/2 - 110;
+    x.strokeStyle = 'rgba(33,28,35,.3)'; x.lineWidth = 4; x.setLineDash([18,14]);
+    x.beginPath(); x.moveTo(-tw/2+26, ty); x.lineTo(tw/2-26, ty); x.stroke();
+    x.setLineDash([]);
+    x.fillStyle = BG;
+    x.beginPath(); x.arc(-tw/2, ty, 20, 0, 7); x.fill();
+    x.beginPath(); x.arc(tw/2, ty, 20, 0, 7); x.fill();
+    const bars = [4,2,7,3,2,5,2,8,3,2,6,2,4,7,2,3,5,2,7,4];
+    let bx = -tw/2 + mg;
+    x.fillStyle = 'rgba(33,28,35,.85)';
+    bars.forEach((w,i) => { if(i%2===0) x.fillRect(bx, ty+26, w, 54); bx += w+3; });
+    x.textAlign = 'right';
+    x.fillStyle = INK; x.font = '600 34px "Bodoni Moda", serif';
+    x.fillText('8.1', tw/2 - mg, ty + 64);
+    x.fillStyle = '#8F848B'; x.font = '500 21px "Pretendard Variable", sans-serif'; x.letterSpacing = '3px';
+    x.fillText('MV-0801', tw/2 - 140, ty + 62);
+    x.letterSpacing = '0px';
+    x.restore();
+    x.textAlign = 'center';
+    x.font = '500 36px "Pretendard Variable", sans-serif';
+    x.fillStyle = 'rgba(246,239,233,.7)';
+    x.fillText('내일, 웨이팅리스트가 열려요 · 첫 500명 입장', W/2, 1200);
+    caps(x, 'MEVE.BEAUTY', 1268, 'rgba(246,239,233,.45)', 24, 7);
+  }
+
+  /* download buttons */
+  document.querySelectorAll('button').forEach(b => {
+    b.addEventListener('click', () => {
+      const c = document.getElementById(b.dataset.c);
+      c.toBlob(blob => {
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = b.dataset.n + '.png';
+        a.click();
+        setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+      }, 'image/png');
+    });
+  });
+})();
+</script>
+</body>
+</html>
