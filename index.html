@@ -497,7 +497,7 @@ h1 em{font-style:normal;color:var(--powder)}
   transition:transform .25s var(--ease),opacity .25s;
 }
 .done-btns button{border:0;color:#241220;background:var(--powder)}
-.done-btns a{border:1px solid rgba(246,239,233,.3);color:var(--cream);background:transparent}
+.done-btns a,.done-btns #saveBtn{border:1px solid rgba(246,239,233,.3);color:var(--cream);background:transparent}
 .done-btns button:hover,.done-btns a:hover{transform:translateY(-1px)}
 @media(max-width:420px){
   .done-btns{flex-direction:column}
@@ -826,6 +826,7 @@ h1 em{font-style:normal;color:var(--powder)}
       </div>
       <div class="done-btns">
         <button type="button" id="shareBtn">내 초대 링크 공유하기</button>
+        <button type="button" id="saveBtn">티켓 이미지 저장</button>
         <a id="igBtn" href="https://instagram.com/maison.meve" target="_blank" rel="noopener">인스타그램</a>
       </div>
     </section>
@@ -1156,6 +1157,119 @@ h1 em{font-style:normal;color:var(--powder)}
       err.classList.add('on');
       btn.disabled = false; btn.innerHTML = btnHome;
     }
+  });
+
+  /* ---- story ticket image (1080x1920, canvas) ---- */
+  const loadImg = src => new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = src; });
+  const rr = (x, a, b, w, h, r) => { x.beginPath(); x.moveTo(a+r,b); x.arcTo(a+w,b,a+w,b+h,r); x.arcTo(a+w,b+h,a,b+h,r); x.arcTo(a,b+h,a,b,r); x.arcTo(a,b,a+w,b,r); x.closePath(); };
+  async function ticketImage(pos){
+    try{ await Promise.all([
+      document.fonts.load('600 200px "Bodoni Moda"'),
+      document.fonts.load('600 34px "Bodoni Moda"'),
+      document.fonts.load('700 40px "Pretendard Variable"'),
+      document.fonts.load('500 34px "Pretendard Variable"')
+    ]); }catch(e){}
+    const W = 1080, H = 1920, c = document.createElement('canvas');
+    c.width = W; c.height = H;
+    const x = c.getContext('2d');
+    /* nuit ground */
+    x.fillStyle = '#191019'; x.fillRect(0, 0, W, H);
+    const g = x.createRadialGradient(W/2, H*.52, 80, W/2, H*.52, 760);
+    g.addColorStop(0, 'rgba(239,184,200,.12)'); g.addColorStop(1, 'rgba(239,184,200,0)');
+    x.fillStyle = g; x.fillRect(0, 0, W, H);
+    /* wordmark */
+    try{
+      const img = await loadImg('/assets/wordmark2.png');
+      const w = 300, h = w * img.height / img.width;
+      x.save(); x.filter = 'invert(1) brightness(.98)';
+      x.drawImage(img, (W-w)/2, 270, w, h); x.restore();
+      x.fillStyle = '#C7A76C';
+      x.font = '600 26px "Pretendard Variable", sans-serif';
+      x.textAlign = 'center'; x.letterSpacing = '8px';
+      x.fillText('APP LAUNCH · 8.1', W/2, 300 + h + 46);
+      x.letterSpacing = '0px';
+    }catch(e){}
+    /* the ticket */
+    const tw = 900, th = 760;
+    x.save();
+    x.translate(W/2, H*.55); x.rotate(-1.3 * Math.PI/180);
+    x.shadowColor = 'rgba(0,0,0,.55)'; x.shadowBlur = 90; x.shadowOffsetY = 40;
+    rr(x, -tw/2, -th/2, tw, th, 30); x.fillStyle = '#FFFDF9'; x.fill();
+    x.shadowColor = 'transparent';
+    /* head */
+    x.textAlign = 'left'; x.fillStyle = '#211C23';
+    x.font = '600 30px "Bodoni Moda", serif'; x.letterSpacing = '7px';
+    x.fillText('MEVE', -tw/2 + 64, -th/2 + 92);
+    x.textAlign = 'right'; x.fillStyle = '#C25B7C';
+    x.fillText('ADMIT ONE', tw/2 - 64, -th/2 + 92);
+    x.strokeStyle = 'rgba(33,28,35,.16)'; x.lineWidth = 2;
+    x.beginPath(); x.moveTo(-tw/2 + 56, -th/2 + 126); x.lineTo(tw/2 - 56, -th/2 + 126); x.stroke();
+    x.textAlign = 'center'; x.fillStyle = '#A79CA3';
+    x.font = '500 24px "Pretendard Variable", sans-serif'; x.letterSpacing = '6px';
+    x.fillText('BEAUTY DNA TICKET', 0, -th/2 + 172);
+    x.letterSpacing = '0px';
+    /* the number */
+    const label = 'No.' + pos;
+    let fs = 210;
+    x.font = '600 ' + fs + 'px "Bodoni Moda", serif';
+    const maxW = tw - 160;
+    const mw = x.measureText(label).width;
+    if(mw > maxW) fs = Math.floor(fs * maxW / mw);
+    x.font = '600 ' + fs + 'px "Bodoni Moda", serif';
+    x.fillStyle = '#211C23';
+    x.fillText(label, 0, 108);
+    /* batch line */
+    const n = parseInt(pos, 10);
+    x.font = '700 34px "Pretendard Variable", sans-serif';
+    if(isFinite(n) && n <= 500){
+      x.fillStyle = '#8C6B2F';
+      x.fillText('\u2726 8.1 \uCCAB \uC785\uC7A5 500\uBA85 \uC548 \u2014 \uC790\uB9AC \uD655\uC815', 0, 196);
+    }else{
+      x.fillStyle = '#C25B7C';
+      x.fillText('8.1 \uCCAB \uC785\uC7A5\uC740 No.500\uAE4C\uC9C0 \u2014 \uCD08\uB300\uB85C \uC55E\uC73C\uB85C', 0, 196);
+    }
+    /* tear line + punches */
+    const ty = th/2 - 130;
+    x.strokeStyle = 'rgba(33,28,35,.3)'; x.lineWidth = 4; x.setLineDash([18, 14]);
+    x.beginPath(); x.moveTo(-tw/2 + 26, ty); x.lineTo(tw/2 - 26, ty); x.stroke();
+    x.setLineDash([]);
+    x.fillStyle = '#191019';
+    x.beginPath(); x.arc(-tw/2, ty, 22, 0, 7); x.fill();
+    x.beginPath(); x.arc(tw/2, ty, 22, 0, 7); x.fill();
+    /* stub */
+    const bars = [4,2,7,3,2,5,2,8,3,2,6,2,4,7,2,3,5,2,7,4,2,6,3,2];
+    let bx = -tw/2 + 64;
+    x.fillStyle = 'rgba(33,28,35,.85)';
+    bars.forEach((w, i) => { if(i % 2 === 0) x.fillRect(bx, ty + 44, w, 78); bx += w + 3; });
+    x.textAlign = 'right';
+    x.fillStyle = '#211C23'; x.font = '600 40px "Bodoni Moda", serif';
+    x.fillText('8.1', tw/2 - 64, ty + 108);
+    x.fillStyle = '#8F848B'; x.font = '500 24px "Pretendard Variable", sans-serif'; x.letterSpacing = '4px';
+    x.fillText('MV-0801 · SEOUL \u2192 GLOBAL', tw/2 - 150, ty + 104);
+    x.letterSpacing = '0px';
+    x.restore();
+    /* site line */
+    x.textAlign = 'center';
+    x.fillStyle = 'rgba(246,239,233,.6)';
+    x.font = '500 30px "Pretendard Variable", sans-serif'; x.letterSpacing = '6px';
+    x.fillText('MEVE.BEAUTY', W/2, H - 150);
+    return new Promise(res => c.toBlob(res, 'image/png'));
+  }
+  $('saveBtn').addEventListener('click', async () => {
+    const btnEl = $('saveBtn'), old = btnEl.textContent;
+    btnEl.textContent = '티켓 준비 중…';
+    try{
+      const pos = (store.get('mv-wl-pos') || $('doneNo').textContent.replace(/[^0-9]/g, '')) || '—';
+      const blob = await ticketImage(pos);
+      const file = new File([blob], 'meve-ticket.png', {type: 'image/png'});
+      if(navigator.canShare && navigator.canShare({files: [file]})){
+        try{ await navigator.share({files: [file]}); btnEl.textContent = old; return; }catch(e){}
+      }
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob); a.download = 'meve-ticket.png'; a.click();
+      setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+    }catch(e){}
+    btnEl.textContent = old;
   });
 
   /* ---- share ---- */
