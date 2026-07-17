@@ -812,7 +812,7 @@ h1 em{font-style:normal;color:var(--powder)}
         <div class="ptk-tear" aria-hidden="true"></div>
         <div class="ptk-stub">
           <i class="bars" aria-hidden="true"></i>
-          <span>MV-0801 · Seoul → Global</span>
+          <span>MV-0801</span>
           <b>8.1</b>
         </div>
       </article>
@@ -915,7 +915,7 @@ h1 em{font-style:normal;color:var(--powder)}
             </div>
           </div>
         </div>
-        <div class="stub"><span>No. MV-0801</span><b>Seoul → Global</b></div>
+        <div class="stub"><span>No. MV-0801</span><b>8.1</b></div>
       </article>
     </div>
   </section>
@@ -1229,7 +1229,7 @@ h1 em{font-style:normal;color:var(--powder)}
     if(mw > maxW) fs = Math.floor(fs * maxW / mw);
     x.font = '600 ' + fs + 'px "Bodoni Moda", serif';
     x.fillStyle = '#211C23';
-    x.fillText(label, 0, 92);
+    x.fillText(label, 0, 50);
     /* batch line */
     const n = parseInt(pos, 10);
     x.font = '700 34px "Pretendard Variable", sans-serif';
@@ -1252,12 +1252,12 @@ h1 em{font-style:normal;color:var(--powder)}
     const bars = [4,2,7,3,2,5,2,8,3,2,6,2,4,7,2,3,5,2,7,4,2,6,3,2];
     let bx = -tw/2 + 64;
     x.fillStyle = 'rgba(33,28,35,.85)';
-    bars.forEach((w, i) => { if(i % 2 === 0) x.fillRect(bx, ty + 44, w, 78); bx += w + 3; });
+    bars.forEach((w, i) => { if(i % 2 === 0) x.fillRect(bx, ty + 30, w, 64); bx += w + 3; });
     x.textAlign = 'right';
     x.fillStyle = '#211C23'; x.font = '600 40px "Bodoni Moda", serif';
-    x.fillText('8.1', tw/2 - 64, ty + 108);
+    x.fillText('8.1', tw/2 - 64, ty + 72);
     x.fillStyle = '#8F848B'; x.font = '500 24px "Pretendard Variable", sans-serif'; x.letterSpacing = '4px';
-    x.fillText('MV-0801 · SEOUL \u2192 GLOBAL', tw/2 - 150, ty + 104);
+    x.fillText('MV-0801', tw/2 - 150, ty + 70);
     x.letterSpacing = '0px';
     x.restore();
     /* site line */
