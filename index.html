@@ -6,7 +6,7 @@
 <title>MEVE · 데이터로 설계하는 나의 아름다움</title>
 <meta name="description" content="MEVE는 당신의 피부와 얼굴을 데이터로 이해해 감이나 유행이 아닌, 당신에게 맞는 아름다움을 제안합니다. 8월 1일 앱 출시.">
 <meta property="og:title" content="MEVE · Beauty-Tech House">
-<meta property="og:description" content="아름다움은 정말, 감의 영역일까요? 8월 1일, 앞 번호부터 순서대로 앱이 열려요.">
+<meta property="og:description" content="아름다움은 정말, 감의 영역일까요? 8월 1일, 입장 줄 순서대로 문이 열려요.">
 <meta property="og:url" content="https://meve.beauty">
 <meta property="og:image" content="https://meve.beauty/assets/og.png">
 <meta property="og:image:width" content="1200">
@@ -1074,20 +1074,35 @@ h1 em{font-style:normal;color:var(--powder)}
     const code = store.get('mv-wl-code');
     return code ? SITE + '/?r=' + code : SITE;
   };
+  const setVerdict = en => {
+    const tb = $('tBatch');
+    if(!tb || !isFinite(en)) return;
+    tb.classList.remove('yes', 'no');
+    tb.classList.add('on', en <= 500 ? 'yes' : 'no');
+    tb.textContent = en <= 500
+      ? '\u2726 8.1 \uCCAB \uC785\uC7A5 500\uBA85 \uC548\uC774\uC5D0\uC694 \u2014 \uC790\uB9AC\uAC00 \uD655\uC815\uB410\uC5B4\uC694'
+      : '8.1 \uCCAB \uC785\uC7A5\uC740 \uC904 \uC55E 500\uBA85 \u2014 \uCE5C\uAD6C \uCD08\uB300\uB85C \uC904\uC744 \uB2F9\uACA8\uC694';
+  };
+  /* returning visitor \u2014 refresh the entry queue from the server (invites may have moved them up) */
+  const refreshStatus = () => {
+    const code = store.get('mv-wl-code');
+    if(!code) return;
+    fetch(SB + '/rest/v1/rpc/get_waitlist_status', {method:'POST', headers:H, body: JSON.stringify({p_code: code})})
+      .then(r => r.json())
+      .then(d => {
+        if(d && d.entry_position){
+          store.set('mv-wl-entry', d.entry_position);
+          setVerdict(parseInt(d.entry_position, 10));
+        }
+      }).catch(() => {});
+  };
   const showDone = (pos, animate) => {
     const el = $('doneNo');
     form.style.display = 'none';
     done.classList.add('on');
     const n = parseInt(pos, 10);
     /* entry queue position (referral boost applies here, not to the number) */
-    const en = parseInt(store.get('mv-wl-entry') || pos, 10);
-    const tb = $('tBatch');
-    if(tb && isFinite(en)){
-      tb.classList.add('on', en <= 500 ? 'yes' : 'no');
-      tb.textContent = en <= 500
-        ? '\u2726 8.1 \uCCAB \uC785\uC7A5 500\uBA85 \uC548\uC774\uC5D0\uC694 \u2014 \uC790\uB9AC\uAC00 \uD655\uC815\uB410\uC5B4\uC694'
-        : '8.1 \uCCAB \uC785\uC7A5\uC740 \uC904 \uC55E 500\uBA85 \u2014 \uCE5C\uAD6C \uCD08\uB300\uB85C \uC904\uC744 \uB2F9\uACA8\uC694';
-    }
+    setVerdict(parseInt(store.get('mv-wl-entry') || pos, 10));
     const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
     if(!animate || reduced || !isFinite(n)){
       el.textContent = 'No.' + pos;
@@ -1104,7 +1119,7 @@ h1 em{font-style:normal;color:var(--powder)}
     requestAnimationFrame(step);
   };
   const saved = store.get('mv-wl-pos');
-  if(saved) showDone(saved);
+  if(saved){ showDone(saved); refreshStatus(); }
 
   /* ---- live count (auto-appears past threshold) ---- */
   fetch(SB + '/rest/v1/rpc/waitlist_count', {method:'POST', headers:H, body:'{}'})
