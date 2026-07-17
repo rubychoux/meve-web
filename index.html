@@ -792,7 +792,7 @@ h1 em{font-style:normal;color:var(--powder)}
     <form class="wl" id="waitlist" novalidate>
       <p class="wl-count" id="wlCount"></p>
       <p class="wl-teaser"><span>지금 <b>No.100</b> 안에 들면, 프리미엄 3개월 무료</span></p>
-      <p class="wl-note"><b>8.1</b> 오픈 · 앞 번호 <b>500명</b>부터 입장</p>
+      <p class="wl-note"><b>8.1</b> 오픈 · 입장 줄 앞 <b>500명</b>부터 입장</p>
       <div class="wl-row">
         <input type="email" id="wlEmail" name="email" inputmode="email" autocomplete="email" placeholder="이메일 주소" required>
         <button type="submit" id="wlBtn"><span>내 티켓 번호 받기</span><span class="ar">→</span></button>
@@ -818,9 +818,9 @@ h1 em{font-style:normal;color:var(--powder)}
       </article>
       <p class="t-keep">런칭하면 이 번호가 당신의 앱 프로필에 그대로 새겨져요.<br>이 번호의 주인은 <b>세상에 당신 한 명</b>이에요.</p>
       <hr class="t-rule">
-      <p class="boost">친구가 한 명 올 때마다 <b>10칸 앞으로</b> 이동해요.</p>
+      <p class="boost">친구가 한 명 올 때마다 입장 줄에서 <b>10칸 앞으로</b> 이동해요.<br>번호는 그대로 — 입장만 빨라져요.</p>
       <div class="tiers">
-        <p class="t"><b>1명</b> = 10칸 앞으로</p>
+        <p class="t"><b>1명</b> = 입장 10칸 앞으로</p>
         <p class="t"><b>3명</b> = 베타 테스터 30인 후보 확정</p>
         <p class="t"><b>10명</b> = 프리미엄 3개월 추가</p>
       </div>
@@ -909,8 +909,8 @@ h1 em{font-style:normal;color:var(--powder)}
             <div class="perk">
               <p class="big">+10<small>per friend</small></p>
               <div>
-                <p class="tt">친구 한 명, 열 칸 앞으로</p>
-                <p class="ds">줄 맨 앞은 <b>출시 전에 먼저</b> 미브를 만나요. 3명이면 베타 30인 후보 확정.</p>
+                <p class="tt">친구 한 명, 입장 줄 열 칸 앞으로</p>
+                <p class="ds">번호는 그대로, 줄 맨 앞은 <b>출시 전에 먼저</b> 미브를 만나요. 3명이면 베타 30인 후보 확정.</p>
               </div>
             </div>
           </div>
@@ -1079,12 +1079,14 @@ h1 em{font-style:normal;color:var(--powder)}
     form.style.display = 'none';
     done.classList.add('on');
     const n = parseInt(pos, 10);
+    /* entry queue position (referral boost applies here, not to the number) */
+    const en = parseInt(store.get('mv-wl-entry') || pos, 10);
     const tb = $('tBatch');
-    if(tb && isFinite(n)){
-      tb.classList.add('on', n <= 500 ? 'yes' : 'no');
-      tb.textContent = n <= 500
+    if(tb && isFinite(en)){
+      tb.classList.add('on', en <= 500 ? 'yes' : 'no');
+      tb.textContent = en <= 500
         ? '\u2726 8.1 \uCCAB \uC785\uC7A5 500\uBA85 \uC548\uC774\uC5D0\uC694 \u2014 \uC790\uB9AC\uAC00 \uD655\uC815\uB410\uC5B4\uC694'
-        : '8.1 \uCCAB \uC785\uC7A5\uC740 No.500\uAE4C\uC9C0 \u2014 \uCE5C\uAD6C \uCD08\uB300\uB85C \uC904\uC744 \uB2F9\uACA8\uC694';
+        : '8.1 \uCCAB \uC785\uC7A5\uC740 \uC904 \uC55E 500\uBA85 \u2014 \uCE5C\uAD6C \uCD08\uB300\uB85C \uC904\uC744 \uB2F9\uACA8\uC694';
     }
     const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
     if(!animate || reduced || !isFinite(n)){
@@ -1144,6 +1146,7 @@ h1 em{font-style:normal;color:var(--powder)}
       if(r.ok){
         const data = await r.json();
         pos = data.position ?? data; code = data.ref_code ?? null;
+        if(data.entry_position) store.set('mv-wl-entry', data.entry_position);
       }else{
         r = await joinV1(email, $('wlBeta').checked);
         if(!r.ok) throw new Error('bad status');
@@ -1230,15 +1233,15 @@ h1 em{font-style:normal;color:var(--powder)}
     x.font = '600 ' + fs + 'px "Bodoni Moda", serif';
     x.fillStyle = '#211C23';
     x.fillText(label, 0, 50);
-    /* batch line */
-    const n = parseInt(pos, 10);
+    /* batch line \u2014 entry queue position (boosted), not the founding number */
+    const n = parseInt(store.get('mv-wl-entry') || pos, 10);
     x.font = '700 34px "Pretendard Variable", sans-serif';
     if(isFinite(n) && n <= 500){
       x.fillStyle = '#8C6B2F';
       x.fillText('\u2726 8.1 \uCCAB \uC785\uC7A5 500\uBA85 \uC548 \u2014 \uC790\uB9AC \uD655\uC815', 0, 188);
     }else{
       x.fillStyle = '#C25B7C';
-      x.fillText('8.1 \uCCAB \uC785\uC7A5\uC740 No.500\uAE4C\uC9C0 \u2014 \uCD08\uB300\uB85C \uC55E\uC73C\uB85C', 0, 188);
+      x.fillText('8.1 \uCCAB \uC785\uC7A5\uC740 \uC904 \uC55E 500\uBA85 \u2014 \uCD08\uB300\uB85C \uC904\uC744 \uB2F9\uACA8\uC694', 0, 188);
     }
     /* tear line + punches */
     const ty = th/2 - 128;
