@@ -722,6 +722,11 @@ h1 em{font-style:normal;color:var(--powder)}
   }
 }
 
+.t-batch{margin-top:.9rem;font-family:var(--sans);font-size:.78rem;font-weight:600;letter-spacing:.01em;display:none}
+.t-batch.on{display:block}
+.t-batch.yes{color:var(--gold)}
+.t-batch.no{color:var(--powder)}
+
 /* ---------- motion ---------- */
 @media(prefers-reduced-motion:no-preference){
   .fade{opacity:0;transform:translateY(14px);animation:up .9s var(--ease) forwards}
@@ -756,7 +761,7 @@ h1 em{font-style:normal;color:var(--powder)}
         <input type="email" id="wlEmail" name="email" inputmode="email" autocomplete="email" placeholder="이메일 주소" required>
         <button type="submit" id="wlBtn"><span>내 티켓 번호 받기</span><span class="ar">→</span></button>
       </div>
-      <p class="wl-note">번호는 바로 나와요 · 앱은 앞 번호부터 열려요</p>
+      <p class="wl-note">번호는 바로 나와요 · <b>8.1, 앞 번호 500명</b>부터 입장</p>
       <label class="beta">
         <input type="checkbox" id="wlBeta">
         <span>출시 전 <b>베타 테스터 30인</b> 선발에 지원할래요</span>
@@ -768,6 +773,7 @@ h1 em{font-style:normal;color:var(--powder)}
       <p class="t-label">Beauty DNA Ticket</p>
       <p class="t-no" id="doneNo">No.—</p>
       <p class="t-keep">런칭하면 이 번호가 당신의 앱 프로필에 그대로 새겨져요.<br>이 번호의 주인은 <b>세상에 당신 한 명</b>이에요.</p>
+      <p class="t-batch" id="tBatch"></p>
       <hr class="t-rule">
       <p class="boost">친구가 한 명 올 때마다 <b>10칸 앞으로</b> 이동해요.</p>
       <div class="tiers">
@@ -895,7 +901,7 @@ h1 em{font-style:normal;color:var(--powder)}
           </g>
         </svg>
       </div>
-      <p class="moon-line">달이 차오르면, 문이 열려요</p>
+      <p class="moon-line">달이 차오르면, 첫 500명의 문이 열려요</p>
       <p class="moon-count"><b id="cdD">D–14</b><span id="cdT">00:00:00</span></p>
       <button type="button" class="up" id="upBtn">내 티켓 번호 받기 <span class="ar">↑</span></button>
     </div>
@@ -1030,6 +1036,13 @@ h1 em{font-style:normal;color:var(--powder)}
     form.style.display = 'none';
     done.classList.add('on');
     const n = parseInt(pos, 10);
+    const tb = $('tBatch');
+    if(tb && isFinite(n)){
+      tb.classList.add('on', n <= 500 ? 'yes' : 'no');
+      tb.textContent = n <= 500
+        ? '\u2726 8.1 \uCCAB \uC785\uC7A5 500\uBA85 \uC548\uC774\uC5D0\uC694 \u2014 \uC790\uB9AC\uAC00 \uD655\uC815\uB410\uC5B4\uC694'
+        : '8.1 \uCCAB \uC785\uC7A5\uC740 No.500\uAE4C\uC9C0 \u2014 \uCE5C\uAD6C \uCD08\uB300\uB85C \uC904\uC744 \uB2F9\uACA8\uC694';
+    }
     const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
     if(!animate || reduced || !isFinite(n)){
       el.textContent = 'No.' + pos;
