@@ -89,7 +89,7 @@ img{display:block;max-width:100%;height:auto}
   padding-bottom:clamp(3.6rem,9vh,5.4rem);
 }
 .hero-clouds{
-  position:absolute;left:calc(50% - 50vw);width:100vw;bottom:0;height:56%;
+  position:absolute;left:calc(50% - 50vw);width:100vw;bottom:0;height:65%;
   background:url('/assets/prologue-poster.jpg') center 28%/cover no-repeat;
   opacity:.32;pointer-events:none;
   filter:saturate(.85);
@@ -130,7 +130,13 @@ img{display:block;max-width:100%;height:auto}
 }
 .hero-form{position:relative}
 .hero-form .wl{margin-top:0}
-.hero-form .wl-note{margin-top:.3rem;margin-bottom:1.15rem;font-size:.76rem;color:var(--cream-mute)}
+.hero-form .wl-note{
+  margin-top:.15rem;margin-bottom:1.2rem;
+  font-family:var(--sans);font-size:.62rem;font-weight:500;
+  letter-spacing:.18em;text-indent:.18em;text-transform:uppercase;
+  color:rgba(246,239,233,.55);
+}
+.hero-form .wl-note b{font-weight:600;color:rgba(246,239,233,.78)}
 .hero-form .beta{margin-top:.5rem}
 .narr{margin-top:clamp(3rem,7vh,4rem)}
 .narr .lead:first-of-type{margin-top:1.8rem}
@@ -761,7 +767,7 @@ h1 em{font-style:normal;color:var(--powder)}
     <form class="wl" id="waitlist" novalidate>
       <p class="wl-count" id="wlCount"></p>
       <p class="wl-teaser"><span>지금 <b>No.100</b> 안에 들면, 프리미엄 3개월 무료</span></p>
-      <p class="wl-note"><b>8.1</b> · 앞 번호 <b>500명</b>부터 입장해요</p>
+      <p class="wl-note"><b>8.1</b> 오픈 · 앞 번호 <b>500명</b>부터 입장</p>
       <div class="wl-row">
         <input type="email" id="wlEmail" name="email" inputmode="email" autocomplete="email" placeholder="이메일 주소" required>
         <button type="submit" id="wlBtn"><span>내 티켓 번호 받기</span><span class="ar">→</span></button>
