@@ -1180,9 +1180,17 @@ h1 em{font-style:normal;color:var(--powder)}
     /* wordmark */
     try{
       const img = await loadImg('/assets/wordmark2.png');
-      const w = 300, h = w * img.height / img.width;
-      x.save(); x.filter = 'invert(1) brightness(.98)';
-      x.drawImage(img, (W-w)/2, 270, w, h); x.restore();
+      /* recolor to cream in pixels — ctx.filter is not supported on iOS Safari */
+      const oc = document.createElement('canvas');
+      oc.width = img.naturalWidth; oc.height = img.naturalHeight;
+      const c2 = oc.getContext('2d');
+      c2.drawImage(img, 0, 0);
+      const px = c2.getImageData(0, 0, oc.width, oc.height);
+      const d = px.data;
+      for(let i = 0; i < d.length; i += 4){ d[i] = 246; d[i+1] = 239; d[i+2] = 233; }
+      c2.putImageData(px, 0, 0);
+      const w = 300, h = w * img.naturalHeight / img.naturalWidth;
+      x.drawImage(oc, (W-w)/2, 270, w, h);
       x.fillStyle = '#C7A76C';
       x.font = '600 26px "Pretendard Variable", sans-serif';
       x.textAlign = 'center'; x.letterSpacing = '8px';
