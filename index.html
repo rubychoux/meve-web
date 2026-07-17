@@ -742,7 +742,7 @@ h1 em{font-style:normal;color:var(--powder)}
     <div class="hero-veil" aria-hidden="true"></div>
     <div class="hero-brand fade d1">
       <div class="mark-m" role="img" aria-label="MEVE"></div>
-      <p class="hero-date"><span>App Launch</span><i aria-hidden="true"></i><b>7.29</b></p>
+      <p class="hero-date"><span>App Launch</span><i aria-hidden="true"></i><b>8.1</b></p>
     </div>
     <div class="hero-mid fade d2">
       <h1>내 피부엔 뭐가 <em>맞는지</em>,<br>내 얼굴엔 뭐가 <em>어울리는지</em></h1>
@@ -866,7 +866,7 @@ h1 em{font-style:normal;color:var(--powder)}
             </div>
           </div>
         </div>
-        <div class="stub"><span>No. MV-0729</span><b>Seoul → Global</b></div>
+        <div class="stub"><span>No. MV-0801</span><b>Seoul → Global</b></div>
       </article>
     </div>
   </section>
@@ -927,8 +927,8 @@ h1 em{font-style:normal;color:var(--powder)}
   if(SHOW_FOUNDERS) $('founders').classList.add('on');
 
   /* ---- launch countdown: waxing moon ---- */
-  const LAUNCH = new Date('2026-07-29T09:00:00+09:00').getTime();
-  const OPENED = new Date('2026-07-15T00:00:00+09:00').getTime();
+  const LAUNCH = new Date('2026-08-01T09:00:00+09:00').getTime();
+  const OPENED = new Date('2026-07-18T00:00:00+09:00').getTime();
   const p2 = n => String(n).padStart(2, '0');
   const shade = document.getElementById('moonShade');
   var moonCharging = false;
@@ -1106,7 +1106,7 @@ h1 em{font-style:normal;color:var(--powder)}
   /* ---- share ---- */
   $('shareBtn').addEventListener('click', async () => {
     const url = myLink();
-    const data = {title:'MEVE', text:'아름다움은 정말, 감의 영역일까요? 7.29 MEVE', url};
+    const data = {title:'MEVE', text:'아름다움은 정말, 감의 영역일까요? 8.1 MEVE', url};
     if(navigator.share){
       try{ await navigator.share(data); return; }catch(e){}
     }
