@@ -421,13 +421,64 @@ h1 em{font-style:normal;color:var(--powder)}
 /* ---------- success ---------- */
 .done{display:none;max-width:420px;margin:2.3rem auto 0;text-align:center}
 .done.on{display:block}
-.done .t-label{
-  font-family:var(--sans);font-size:.62rem;letter-spacing:.34em;text-indent:.34em;text-transform:uppercase;color:var(--gold);
+/* --- the personal ticket: a printed ivory object --- */
+.ptk{
+  position:relative;
+  background:var(--card);color:var(--ink);
+  border-radius:14px;
+  box-shadow:0 36px 80px -30px rgba(0,0,0,.8), 0 10px 26px -14px rgba(0,0,0,.5);
+  transform:rotate(-1.1deg);
+  padding:1.35rem 1.4rem 0;
+  text-align:center;
+  /* punched holes at the tear line */
+  -webkit-mask:radial-gradient(circle 9px at 0 calc(100% - 58px), transparent 8px, #000 9px),
+               radial-gradient(circle 9px at 100% calc(100% - 58px), transparent 8px, #000 9px);
+  -webkit-mask-composite:source-in;
+  mask:radial-gradient(circle 9px at 0 calc(100% - 58px), transparent 8px, #000 9px),
+       radial-gradient(circle 9px at 100% calc(100% - 58px), transparent 8px, #000 9px);
+  mask-composite:intersect;
 }
+.done.on .ptk{animation:ptkIn .9s var(--ease) both}
+@keyframes ptkIn{from{opacity:0;transform:rotate(-1.1deg) translateY(18px) scale(.97)}to{opacity:1;transform:rotate(-1.1deg)}}
+.ptk-head{
+  display:flex;align-items:baseline;justify-content:space-between;gap:.8rem;
+  padding-bottom:.85rem;border-bottom:1px solid rgba(33,28,35,.16);
+}
+.ptk-head span{
+  font-family:var(--serif);font-weight:600;font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ink);
+}
+.ptk-head span:last-child{color:var(--rose)}
+.ptk-head i{font-style:normal;font-family:var(--sans);font-weight:500;font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:#A79CA3}
 .done .t-no{
-  margin-top:.9rem;
+  margin-top:1.05rem;
   font-family:var(--serif);font-weight:500;
-  font-size:var(--fs-num);line-height:1;letter-spacing:.01em;color:var(--cream);
+  font-size:var(--fs-num);line-height:1;letter-spacing:.01em;color:var(--ink);
+}
+.ptk .t-batch{padding-bottom:1.15rem}
+.ptk-tear{
+  border-top:2px dashed rgba(33,28,35,.28);
+  margin:0 2px;
+}
+.ptk-stub{
+  display:flex;align-items:center;justify-content:space-between;gap:.9rem;
+  padding:.85rem .15rem .95rem;
+}
+.ptk-stub span{
+  font-family:var(--sans);font-weight:500;font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:#8F848B;
+  white-space:nowrap;
+}
+.ptk-stub b{
+  font-family:var(--serif);font-weight:600;font-size:.85rem;letter-spacing:.06em;color:var(--ink);
+  font-variant-numeric:tabular-nums;flex:none;
+}
+.ptk-stub .bars{
+  flex:none;width:64px;height:26px;
+  background:repeating-linear-gradient(90deg,
+    var(--ink) 0 2px, transparent 2px 4px,
+    var(--ink) 4px 5px, transparent 5px 9px,
+    var(--ink) 9px 12px, transparent 12px 14px,
+    var(--ink) 14px 15px, transparent 15px 17px);
+  opacity:.85;
 }
 .done .t-keep{
   margin-top:1.2rem;
@@ -708,8 +759,8 @@ h1 em{font-style:normal;color:var(--powder)}
 
 .t-batch{margin-top:.9rem;font-family:var(--sans);font-size:.78rem;font-weight:600;letter-spacing:.01em;display:none}
 .t-batch.on{display:block}
-.t-batch.yes{color:var(--gold)}
-.t-batch.no{color:var(--powder)}
+.t-batch.yes{color:#8C6B2F}
+.t-batch.no{color:var(--rose)}
 
 /* ---------- motion ---------- */
 @media(prefers-reduced-motion:no-preference){
@@ -754,10 +805,18 @@ h1 em{font-style:normal;color:var(--powder)}
     </form>
 
     <section class="done" id="done" aria-live="polite">
-      <p class="t-label">Beauty DNA Ticket</p>
-      <p class="t-no" id="doneNo">No.—</p>
+      <article class="ptk" aria-label="나의 Beauty DNA 티켓">
+        <div class="ptk-head"><span>MEVE</span><i>Beauty DNA Ticket</i><span>Admit One</span></div>
+        <p class="t-no" id="doneNo">No.—</p>
+        <p class="t-batch" id="tBatch"></p>
+        <div class="ptk-tear" aria-hidden="true"></div>
+        <div class="ptk-stub">
+          <i class="bars" aria-hidden="true"></i>
+          <span>MV-0801 · Seoul → Global</span>
+          <b>8.1</b>
+        </div>
+      </article>
       <p class="t-keep">런칭하면 이 번호가 당신의 앱 프로필에 그대로 새겨져요.<br>이 번호의 주인은 <b>세상에 당신 한 명</b>이에요.</p>
-      <p class="t-batch" id="tBatch"></p>
       <hr class="t-rule">
       <p class="boost">친구가 한 명 올 때마다 <b>10칸 앞으로</b> 이동해요.</p>
       <div class="tiers">
