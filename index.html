@@ -1004,7 +1004,7 @@ h1 em{font-style:normal;color:var(--powder)}
   const KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF1eXFnY3BwYnJoanRodmtrd3diIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzOTY4NTAsImV4cCI6MjA4ODk3Mjg1MH0.3VjInUooRD1TahI9tgFX3G6yE5A97yAJ2sZH2YMmXLY';
   const H = {'apikey':KEY,'Authorization':'Bearer '+KEY,'Content-Type':'application/json'};
   const $ = id => document.getElementById(id);
-  const store = { get(k){ try{return localStorage.getItem(k)}catch(e){return null} }, set(k,v){ try{localStorage.setItem(k,v)}catch(e){} } };
+  const store = { get(k){ try{return localStorage.getItem(k)}catch(e){return null} }, set(k,v){ try{localStorage.setItem(k,v)}catch(e){} }, del(k){ try{localStorage.removeItem(k)}catch(e){} } };
   const form = $('waitlist'), done = $('done'), err = $('wlError'), btn = $('wlBtn');
 
   if(SHOW_FOUNDERS) $('founders').classList.add('on');
@@ -1114,19 +1114,28 @@ h1 em{font-style:normal;color:var(--powder)}
     tb.classList.remove('yes', 'no');
     tb.classList.add('on', en <= 500 ? 'yes' : 'no');
     tb.textContent = en <= 500
-      ? '\u2726 8.1 \uCCAB \uC785\uC7A5 500\uBA85 \uC548\uC774\uC5D0\uC694 \u2014 \uC790\uB9AC\uAC00 \uD655\uC815\uB410\uC5B4\uC694'
-      : '8.1 \uCCAB \uC785\uC7A5\uC740 \uC904 \uC55E 500\uBA85 \u2014 \uCE5C\uAD6C \uCD08\uB300\uB85C \uC904\uC744 \uB2F9\uACA8\uC694';
+      ? '\u2726 8.1 \uCCAB \uC785\uC7A5 500\uBA85 \uC548\uC774\uC5D0\uC694 \u00B7 \uC790\uB9AC\uAC00 \uD655\uC815\uB410\uC5B4\uC694'
+      : '8.1 \uCCAB \uC785\uC7A5\uC740 \uC904 \uC55E 500\uBA85 \u00B7 \uCE5C\uAD6C \uCD08\uB300\uB85C \uC904\uC744 \uB2F9\uACA8\uC694';
   };
-  /* returning visitor \u2014 refresh the entry queue from the server (invites may have moved them up) */
+  /* returning visitor: refresh from the server (invites may have moved them up) */
   const refreshStatus = () => {
     const code = store.get('mv-wl-code');
     if(!code) return;
     fetch(SB + '/rest/v1/rpc/get_waitlist_status', {method:'POST', headers:H, body: JSON.stringify({p_code: code})})
       .then(r => r.json())
       .then(d => {
-        if(d && d.entry_position){
+        if(d && d.position){
+          /* founding number can only shrink (row removals) but keep it exact */
+          store.set('mv-wl-pos', d.position);
+          $('doneNo').textContent = 'No.' + d.position;
           store.set('mv-wl-entry', d.entry_position);
           setVerdict(parseInt(d.entry_position, 10));
+        }else if(d === null){
+          /* stale ticket: this code no longer exists on the server. reset. */
+          ['mv-wl-pos','mv-wl-entry','mv-wl-code'].forEach(k => store.del(k));
+          done.classList.remove('on');
+          form.style.display = '';
+          btn.disabled = false; btn.innerHTML = btnHome;
         }
       }).catch(() => {});
   };
