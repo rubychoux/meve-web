@@ -122,6 +122,17 @@ select.st.beta_selected{color:#8A6A38;border-color:rgba(176,141,87,.4)}
       </div>
     </div>
 
+    <div class="panel" style="margin-top:10px">
+      <h2>Instagram 인증 · DM 코드 확인</h2>
+      <div class="tbar" style="margin-top:12px;margin-bottom:0">
+        <input type="search" id="igCode" placeholder="DM으로 받은 6자리 코드" maxlength="6" style="flex:0 1 220px">
+        <button class="csv" id="igLookup">조회</button>
+        <span id="igInfo" style="font-size:12px;color:#6B5A63;flex:1"></span>
+        <button class="csv" id="igApprove" style="display:none;border-color:rgba(46,107,70,.4);color:#2E6B46">승인</button>
+        <button class="csv" id="igReject" style="display:none">거절</button>
+      </div>
+    </div>
+
     <div class="tablewrap panel">
       <div class="tbar">
         <input type="search" id="q" placeholder="이메일 · 코드 · 채널 검색">
@@ -261,6 +272,38 @@ select.st.beta_selected{color:#8A6A38;border-color:rgba(176,141,87,.4)}
 
   $('q').addEventListener('input', renderRows);
   $('betaOnly').addEventListener('change', renderRows);
+
+  /* ---------- instagram verification ---------- */
+  const igBtns = show => {
+    $('igApprove').style.display = show ? '' : 'none';
+    $('igReject').style.display = show ? '' : 'none';
+  };
+  $('igLookup').addEventListener('click', async () => {
+    const code = $('igCode').value.trim();
+    if(code.length !== 6){ $('igInfo').textContent = '6자리 코드를 입력하세요'; return; }
+    igBtns(false);
+    $('igInfo').textContent = '조회 중…';
+    try{
+      const d = await rpc('admin_ig_lookup', {p_pass:PASS, p_code:code});
+      if(d && d.handle){
+        $('igInfo').innerHTML = '@' + esc(d.handle) + ' · ' + esc(d.email || '') +
+          (d.display_name ? ' (' + esc(d.display_name) + ')' : '') + ' · 상태 ' + esc(d.status);
+        if(d.status === 'pending') igBtns(true);
+      }else{
+        $('igInfo').textContent = '해당 코드가 없어요';
+      }
+    }catch(e){ $('igInfo').textContent = '조회 실패'; }
+  });
+  const igDecide = async approve => {
+    const code = $('igCode').value.trim();
+    try{
+      const ok = await rpc('admin_ig_verify', {p_pass:PASS, p_code:code, p_approve:approve});
+      $('igInfo').textContent = ok ? (approve ? '승인 완료 · 배지 적용됨' : '거절 처리됨') : '처리 실패 (pending 아님)';
+      igBtns(false);
+    }catch(e){ $('igInfo').textContent = '처리 실패'; }
+  };
+  $('igApprove').addEventListener('click', () => igDecide(true));
+  $('igReject').addEventListener('click', () => igDecide(false));
 
   /* ---------- csv ---------- */
   $('csv').addEventListener('click', () => {
