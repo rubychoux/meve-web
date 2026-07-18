@@ -75,6 +75,7 @@ td.no{color:var(--rose-deep);font-weight:700;font-variant-numeric:tabular-nums}
 .pill{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.04em;border-radius:20px;padding:3px 9px}
 .pill.beta{background:rgba(176,141,87,.14);color:#8A6A38}
 .pill.ref{background:rgba(184,80,107,.1);color:var(--rose-deep)}
+.pill.adm{background:rgba(46,107,70,.12);color:#2E6B46}
 select.st{border:1px solid var(--line);border-radius:6px;background:#fff;font-size:12px;padding:4px 6px;color:var(--plum);cursor:pointer}
 select.st.invited{color:#2E6B46;border-color:rgba(46,107,70,.3)}
 select.st.beta_selected{color:#8A6A38;border-color:rgba(176,141,87,.4)}
@@ -105,6 +106,7 @@ select.st.beta_selected{color:#8A6A38;border-color:rgba(176,141,87,.4)}
     <div class="tiles">
       <div class="tile"><p class="k">Total</p><p class="v" id="stTotal">0</p><p class="s">전체 대기자</p></div>
       <div class="tile"><p class="k">Today</p><p class="v" id="stToday">0</p><p class="s">오늘 가입 (KST)</p></div>
+      <div class="tile"><p class="k">Admitted</p><p class="v" id="stAdm">0</p><p class="s" id="stAdmS">8.1 입장권 (컷 500)</p></div>
       <div class="tile"><p class="k">Beta</p><p class="v" id="stBeta">0</p><p class="s">베타 30인 지원</p></div>
       <div class="tile"><p class="k">Referred</p><p class="v" id="stRef">0</p><p class="s">추천 유입</p></div>
     </div>
@@ -128,7 +130,7 @@ select.st.beta_selected{color:#8A6A38;border-color:rgba(176,141,87,.4)}
       </div>
       <table>
         <thead><tr>
-          <th>No.</th><th>이메일</th><th>가입</th><th>베타</th><th>유입</th><th>초대</th><th>코드</th><th>상태</th>
+          <th>No.</th><th>입장줄</th><th>이메일</th><th>가입</th><th>베타</th><th>유입</th><th>초대</th><th>코드</th><th>상태</th>
         </tr></thead>
         <tbody id="rows"></tbody>
       </table>
@@ -197,6 +199,8 @@ select.st.beta_selected{color:#8A6A38;border-color:rgba(176,141,87,.4)}
     $('stToday').textContent = d.stats.today.toLocaleString();
     $('stBeta').textContent  = d.stats.beta.toLocaleString();
     $('stRef').textContent   = d.stats.referred.toLocaleString();
+    $('stAdm').textContent   = (d.stats.admitted ?? 0).toLocaleString();
+    $('stAdmS').textContent  = '8.1 입장권 (컷 ' + (d.stats.cutoff ?? 500) + ')';
 
     // chart
     const days = d.daily || [];
@@ -231,6 +235,7 @@ select.st.beta_selected{color:#8A6A38;border-color:rgba(176,141,87,.4)}
     $('rows').innerHTML = rows.map(r =>
       '<tr>' +
       '<td class="no">#'+r.base_no+'</td>' +
+      '<td>'+(r.admitted?'<span class="pill adm">IN · '+r.entry_no+'</span>':'<span class="mono">'+r.entry_no+'</span>')+'</td>' +
       '<td class="em">'+esc(r.email)+'</td>' +
       '<td>'+fmtT(r.created_at)+'</td>' +
       '<td>'+(r.beta_interest?'<span class="pill beta">BETA</span>':'')+'</td>' +
@@ -260,9 +265,9 @@ select.st.beta_selected{color:#8A6A38;border-color:rgba(176,141,87,.4)}
   /* ---------- csv ---------- */
   $('csv').addEventListener('click', () => {
     const rows = filtered();
-    const head = ['no','email','created_at_kst','beta','channel','referrals','ref_code','status'];
+    const head = ['no','entry_no','admitted','email','created_at_kst','beta','channel','referrals','ref_code','status'];
     const csv = [head.join(',')].concat(rows.map(r => [
-      r.base_no, r.email, new Date(r.created_at).toLocaleString('sv-SE',{timeZone:'Asia/Seoul'}),
+      r.base_no, r.entry_no, r.admitted ? 'Y' : '', r.email, new Date(r.created_at).toLocaleString('sv-SE',{timeZone:'Asia/Seoul'}),
       r.beta_interest ? 'Y' : '', r.referred_by || 'organic', r.referral_count || 0, r.ref_code || '', r.status
     ].map(v => '"'+String(v).replace(/"/g,'""')+'"').join(','))).join('\n');
     const a = document.createElement('a');
