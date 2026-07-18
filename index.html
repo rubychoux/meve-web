@@ -816,7 +816,7 @@ h1 em{font-style:normal;color:var(--powder)}
     <div class="hero-form fade d3">
     <form class="wl" id="waitlist" novalidate>
       <p class="wl-count" id="wlCount"></p>
-      <p class="wl-teaser"><span>지금 <b>No.100</b> 안에 들면, 프리미엄 3개월 무료</span></p>
+      <p class="wl-teaser"><span id="wlTeaser">지금 <b>No.100</b> 안에 들면, 프리미엄 3개월 무료</span></p>
       <p class="wl-note"><b>8.1</b> 오픈 · 입장 줄 앞 <b>500명</b>부터 입장</p>
       <div class="wl-row">
         <input type="email" id="wlEmail" name="email" inputmode="email" autocomplete="email" placeholder="이메일 주소" required>
@@ -928,8 +928,8 @@ h1 em{font-style:normal;color:var(--powder)}
             <div class="perk">
               <p class="big">100<small>limited</small></p>
               <div>
-                <p class="tt">No.100 안에 들면, 프리미엄 3개월 무료<span class="tag">First 100</span></p>
-                <p class="ds">얼리버드 구독가도 <b>평생 고정</b>돼요. 지금 100자리가 채워지고 있어요.</p>
+                <p class="tt" id="perk100tt">No.100 안에 들면, 프리미엄 3개월 무료<span class="tag">First 100</span></p>
+                <p class="ds" id="perk100ds">얼리버드 구독가도 <b>평생 고정</b>돼요. 지금 100자리가 채워지고 있어요.</p>
               </div>
             </div>
             <div class="perk">
@@ -1171,6 +1171,12 @@ h1 em{font-style:normal;color:var(--powder)}
       if(typeof n === 'number' && n >= 30){
         $('wlCount').textContent = '지금 ' + n.toLocaleString() + '명이 함께 기다리는 중';
         $('wlCount').classList.add('on');
+      }
+      /* First 100 sold out: swap the incentive ladder to the 500-door */
+      if(typeof n === 'number' && n >= 100){
+        $('wlTeaser').innerHTML = '<b>First 100</b> 마감 · 8.1 첫 입장 <b>500</b>자리는 아직 열려 있어요';
+        $('perk100tt').innerHTML = 'First 100, 마감됐어요<span class="tag">Closed</span>';
+        $('perk100ds').innerHTML = '프리미엄 3개월 무료와 <b>평생 고정</b> 얼리버드가는 첫 100명에게 돌아갔어요. 다음 문은 <b>8.1 첫 입장 500</b>이에요.';
       }
     }).catch(() => {});
 
