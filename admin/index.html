@@ -225,7 +225,7 @@ select.st.beta_selected{color:#8A6A38;border-color:rgba(176,141,87,.4)}
     const bo = $('betaOnly').checked;
     return (DATA.rows || []).filter(r =>
       (!bo || r.beta_interest) &&
-      (!q || (r.email||'').toLowerCase().includes(q) || (r.ref_code||'').includes(q) || (r.referred_by||'').includes(q))
+      (!q || (r.email||'').toLowerCase().includes(q) || (r.ref_code||'').includes(q) || (r.referred_by||'').includes(q) || (r.referrer_email||'').toLowerCase().includes(q))
     );
   }
 
@@ -239,7 +239,7 @@ select.st.beta_selected{color:#8A6A38;border-color:rgba(176,141,87,.4)}
       '<td class="em">'+esc(r.email)+'</td>' +
       '<td>'+fmtT(r.created_at)+'</td>' +
       '<td>'+(r.beta_interest?'<span class="pill beta">BETA</span>':'')+'</td>' +
-      '<td>'+(r.referred_by?'<span class="pill ref">'+esc(r.referred_by)+'</span>':'<span class="mono">organic</span>')+'</td>' +
+      '<td>'+(r.referrer_email?'<span class="pill ref" title="'+esc(r.referred_by)+'">'+esc(r.referrer_email)+'</span>':(r.referred_by?'<span class="pill ref">'+esc(r.referred_by)+'</span>':'<span class="mono">organic</span>'))+'</td>' +
       '<td>'+(r.referral_count||0)+'명</td>' +
       '<td class="mono">'+esc(r.ref_code||'')+'</td>' +
       '<td><select class="st '+esc(r.status)+'" data-id="'+r.id+'">' +
@@ -268,7 +268,7 @@ select.st.beta_selected{color:#8A6A38;border-color:rgba(176,141,87,.4)}
     const head = ['no','entry_no','admitted','email','created_at_kst','beta','channel','referrals','ref_code','status'];
     const csv = [head.join(',')].concat(rows.map(r => [
       r.base_no, r.entry_no, r.admitted ? 'Y' : '', r.email, new Date(r.created_at).toLocaleString('sv-SE',{timeZone:'Asia/Seoul'}),
-      r.beta_interest ? 'Y' : '', r.referred_by || 'organic', r.referral_count || 0, r.ref_code || '', r.status
+      r.beta_interest ? 'Y' : '', r.referrer_email || r.referred_by || 'organic', r.referral_count || 0, r.ref_code || '', r.status
     ].map(v => '"'+String(v).replace(/"/g,'""')+'"').join(','))).join('\n');
     const a = document.createElement('a');
     a.href = URL.createObjectURL(new Blob(['﻿'+csv], {type:'text/csv'}));
