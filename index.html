@@ -1219,6 +1219,7 @@ h1 em{font-style:normal;color:var(--powder)}
       store.set('mv-wl-pos', pos);
       if(code) store.set('mv-wl-code', code);
       showDone(pos, true);
+      try{ window.mvTrack && window.mvTrack('signup'); }catch(e){}
     }catch(ex){
       err.textContent = '잠시 후 다시 시도해 주세요.';
       err.classList.add('on');
@@ -1367,5 +1368,6 @@ h1 em{font-style:normal;color:var(--powder)}
 })();
 </script>
 
+<script defer src="/assets/track.js"></script>
 </body>
 </html>
