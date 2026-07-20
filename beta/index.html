@@ -160,6 +160,12 @@
     </div>
 
     <div class="q">
+      <label class="qlabel">초대받은 이메일<span class="opt">선택</span></label>
+      <div class="hint">폼 링크를 받은 메일이 Apple ID와 다르면 적어주세요. 신청자 확인에만 써요.</div>
+      <input type="email" id="contact" placeholder="예: 평소 쓰는 이메일" inputmode="email" />
+    </div>
+
+    <div class="q">
       <label class="qlabel">사용 기기<span class="req">*</span></label>
       <div class="hint">아이폰 전용이에요. 기종과 iOS 버전을 적어주세요.</div>
       <input type="text" id="device" placeholder="예: 아이폰 13 · iOS 17" />
@@ -282,7 +288,7 @@ document.getElementById('form').addEventListener('submit',async(e)=>{
       method:'POST',
       headers:{apikey:KEY,Authorization:'Bearer '+KEY,'Content-Type':'application/json',Prefer:'return=minimal'},
       body:JSON.stringify({
-        name, apple_email:email, device, can_test:canTest==='yes',
+        name, apple_email:email, contact_email:val('contact')||null, device, can_test:canTest==='yes',
         skin_type:skin, concerns:val('concerns'), reason,
         instagram:val('instagram'), other_apps:val('apps'),
         nda_agree:true, user_agent:navigator.userAgent.slice(0,300)
