@@ -81,6 +81,30 @@ select.st.invited{color:#2E6B46;border-color:rgba(46,107,70,.3)}
 select.st.beta_selected{color:#8A6A38;border-color:rgba(176,141,87,.4)}
 .mono{font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--muted)}
 .empty{padding:30px;text-align:center;color:var(--muted);font-size:13px}
+
+/* beta signups live */
+.bbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:12px}
+.bcount{display:inline-flex;align-items:baseline;gap:5px;background:rgba(184,80,107,.08);border-radius:10px;padding:6px 14px;color:var(--rose-deep);font-size:12px;font-weight:600}
+.bcount b{font-size:24px;font-weight:750;font-variant-numeric:tabular-nums}
+.bcount.flash{animation:bflash 2.4s ease}
+@keyframes bflash{0%{background:#EFB6C6;box-shadow:0 0 0 0 rgba(184,80,107,.55)}60%{box-shadow:0 0 0 12px rgba(184,80,107,0)}100%{background:rgba(184,80,107,.08)}}
+.bnote{font-size:11px;color:var(--muted)}
+.bcards{display:grid;gap:10px;margin-top:12px}
+.bcard{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:12.5px}
+.bcard .bh{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.bcard .bh b{font-size:13.5px;color:var(--ink)}
+.bcard .bh .tm{margin-left:auto;font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.bcard .bm{margin-top:5px;color:#3E2C37;word-break:break-all;line-height:1.5}
+.bcard .bm .lbl{color:var(--muted);font-size:11px;margin-right:2px}
+.bcard .btags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.btag{font-size:11px;background:rgba(34,23,33,.05);border-radius:6px;padding:3px 8px;color:var(--plum)}
+.btag.ok{background:rgba(46,107,70,.1);color:#2E6B46}
+.btag.warn{background:rgba(196,72,92,.1);color:#C4485C}
+.bcard .brsn{margin-top:8px;padding:8px 10px;background:rgba(244,205,217,.18);border-radius:8px;color:#4A3742;line-height:1.55;white-space:pre-wrap;word-break:break-word}
+.pill.bst{background:rgba(34,23,33,.06);color:var(--plum)}
+.pill.bst.selected{background:rgba(176,141,87,.14);color:#8A6A38}
+.pill.bst.invited{background:rgba(46,107,70,.12);color:#2E6B46}
+.pill.bst.declined{background:rgba(196,72,92,.1);color:#C4485C}
 .foot{margin-top:26px;text-align:center;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#B9AAB1}
 </style>
 </head>
@@ -109,6 +133,16 @@ select.st.beta_selected{color:#8A6A38;border-color:rgba(176,141,87,.4)}
       <div class="tile"><p class="k">Admitted</p><p class="v" id="stAdm">0</p><p class="s" id="stAdmS">8.1 입장권 (컷 500)</p></div>
       <div class="tile"><p class="k">Beta</p><p class="v" id="stBeta">0</p><p class="s">베타 30인 지원</p></div>
       <div class="tile"><p class="k">Referred</p><p class="v" id="stRef">0</p><p class="s">추천 유입</p></div>
+    </div>
+
+    <div class="panel" style="margin-top:10px">
+      <h2>베타 신청 · Live</h2>
+      <div class="bbar">
+        <span class="bcount" id="bCount"><b id="bTotal">0</b>명 신청</span>
+        <span class="bnote"><span id="bSyncAt">—</span> · 30초 자동 갱신 · 읽기 전용 (선별은 OS Beta 탭)</span>
+      </div>
+      <div class="bcards" id="bCards"></div>
+      <p class="empty" id="bEmpty" style="display:none">아직 신청이 없어요</p>
     </div>
 
     <div class="grid2">
@@ -180,6 +214,9 @@ select.st.beta_selected{color:#8A6A38;border-color:rgba(176,141,87,.4)}
       render();
       if(timer) clearInterval(timer);
       timer = setInterval(load, 15000);
+      loadBeta();
+      if(bTimer) clearInterval(bTimer);
+      bTimer = setInterval(loadBeta, 30000);
     }catch(e){
       PASS = null;
       try{ sessionStorage.removeItem('mv-admin-pass'); }catch(err){}
@@ -197,7 +234,54 @@ select.st.beta_selected{color:#8A6A38;border-color:rgba(176,141,87,.4)}
     if(!PASS) return;
     try{ DATA = await rpc('admin_dashboard', {p_pass:PASS}); render(); }catch(e){}
   };
-  $('refresh').addEventListener('click', load);
+  $('refresh').addEventListener('click', () => { load(); loadBeta(); });
+
+  /* ---------- beta signups (read-only live) ---------- */
+  let BETA = null, bTimer = null, bPrevTotal = null;
+  const BSTATUS = {pending:'대기', selected:'선정', beta_selected:'선정', invited:'초대 발송', declined:'제외', beta_declined:'제외', rejected:'제외'};
+  const bstCls = s => /selected/.test(s) ? 'selected' : /invited/.test(s) ? 'invited' : /declined|rejected/.test(s) ? 'declined' : '';
+
+  const loadBeta = async () => {
+    if(!PASS) return;
+    try{
+      const d = await rpc('admin_beta_signups_list', {p_pass:PASS});
+      const isNew = bPrevTotal !== null && d.total > bPrevTotal;
+      bPrevTotal = d.total;
+      BETA = d;
+      renderBeta(isNew);
+    }catch(e){}
+  };
+
+  function renderBeta(isNew){
+    const d = BETA; if(!d) return;
+    $('bSyncAt').textContent = '업데이트 ' + new Date().toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+    $('bTotal').textContent = Number(d.total).toLocaleString();
+    if(isNew){
+      const c = $('bCount');
+      c.classList.remove('flash'); void c.offsetWidth; c.classList.add('flash');
+    }
+    const rows = d.rows || [];
+    $('bEmpty').style.display = rows.length ? 'none' : 'block';
+    $('bCards').innerHTML = rows.map(r => {
+      const st = r.status || 'pending';
+      const tags = [
+        r.device ? '<span class="btag">'+esc(r.device)+'</span>' : '',
+        r.can_test === true ? '<span class="btag ok">3일 테스트 OK</span>' : (r.can_test === false ? '<span class="btag warn">3일 어려움</span>' : ''),
+        r.skin_type ? '<span class="btag">'+esc(r.skin_type)+'</span>' : '',
+        r.concerns ? '<span class="btag">고민: '+esc(r.concerns)+'</span>' : '',
+        r.instagram ? '<span class="btag">IG '+esc(r.instagram)+'</span>' : ''
+      ].filter(Boolean).join('');
+      return '<div class="bcard">' +
+        '<div class="bh"><b>'+esc(r.name||'—')+'</b>' +
+          '<span class="pill bst '+bstCls(st)+'">'+esc(BSTATUS[st]||st)+'</span>' +
+          '<span class="tm">'+fmtT(r.created_at)+'</span></div>' +
+        '<div class="bm"><span class="lbl">Apple ID</span>'+esc(r.apple_email||'—') +
+          (r.contact_email ? ' · <span class="lbl">초대 메일</span>'+esc(r.contact_email) : '') + '</div>' +
+        (tags ? '<div class="btags">'+tags+'</div>' : '') +
+        (r.reason ? '<div class="brsn">'+esc(r.reason)+'</div>' : '') +
+      '</div>';
+    }).join('');
+  }
 
   /* ---------- render ---------- */
   const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
