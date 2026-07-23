@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <title>MEVE (미브) 베타 피드백</title>
-  <meta name="description" content="MEVE (미브) 베타 테스트 경험을 30초 만에 남겨주세요." />
+  <meta name="description" content="MEVE (미브) 베타 테스트 경험을 짧고 구체적으로 남겨주세요." />
   <meta name="robots" content="noindex,nofollow" />
   <link rel="icon" type="image/png" href="/assets/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -123,13 +123,13 @@
 
     <section class="hero">
       <div class="eyebrow">your skin, in progress</div>
-      <h1>30초면<br />충분해요.</h1>
+      <h1>짧게,<br />구체적으로.</h1>
       <p class="hero-copy">
-        완벽한 문장 대신 방금 느낀 점을 한 줄로 남겨주세요.
-        테스트할 때마다 여러 번 제출해도 좋아요.
+        길게 쓸 필요는 없어요. 어느 화면에서 무엇을 했고,
+        기대와 실제가 어떻게 달랐는지 알려주세요.
       </p>
       <div class="receipt" aria-label="테스트 안내">
-        <div><small>time</small><b>약 30초</b></div>
+        <div><small>time</small><b>약 1분</b></div>
         <div><small>repeat</small><b>여러 번 가능</b></div>
         <div><small>privacy</small><b>선정자 전용</b></div>
       </div>
@@ -184,8 +184,9 @@
           </div>
         </div>
         <div class="field">
-          <label for="note">한 줄로 알려주세요.<span class="req">*</span></label>
-          <textarea id="note" maxlength="1000" placeholder="어느 화면에서 무엇이 좋았거나 불편했는지 적어주세요."></textarea>
+          <label for="note">구체적으로 알려주세요.<span class="req">*</span></label>
+          <div class="hint" id="noteHint">피드백 종류를 고르면 작성 안내가 바뀌어요.</div>
+          <textarea id="note" minlength="10" maxlength="1000" placeholder="먼저 위에서 피드백 종류를 골라주세요."></textarea>
         </div>
         <label class="consent">
           <input id="contactOk" type="checkbox" checked />
@@ -221,6 +222,24 @@
     const value = (id) => document.getElementById(id).value.trim();
     let rating = 0;
     let feedbackType = '';
+    const feedbackPrompts = {
+      bug: {
+        hint: '어느 화면에서 무엇을 했고, 실제로 어떤 문제가 생겼는지 적어주세요.',
+        placeholder: '예: 피부 스캔 정면 촬영 후 분석을 눌렀는데 로딩만 계속됐어요.',
+      },
+      confusing: {
+        hint: '어느 화면의 어떤 문구나 버튼이 왜 헷갈렸는지 적어주세요.',
+        placeholder: '예: 화장대의 관찰 중 상태가 무엇을 뜻하는지 이해하기 어려웠어요.',
+      },
+      praise: {
+        hint: '어느 기능이 왜 좋았고, 앞으로도 쓰고 싶은 이유를 적어주세요.',
+        placeholder: '예: 제품별 반응 기록이 한 화면에 보여서 변화 원인을 찾기 쉬웠어요.',
+      },
+      idea: {
+        hint: '무엇을 어떻게 바꾸면 더 좋아질지 적어주세요.',
+        placeholder: '예: 피부 기록을 주간 그래프로 비교할 수 있으면 변화를 더 쉽게 볼 것 같아요.',
+      },
+    };
 
     try {
       document.getElementById('email').value = localStorage.getItem('meve-beta-email') || '';
@@ -245,6 +264,9 @@
         document.querySelectorAll('#feedbackType .chip').forEach((other) => other.classList.remove('on'));
         chip.classList.add('on');
         feedbackType = chip.dataset.value;
+        const prompt = feedbackPrompts[feedbackType];
+        document.getElementById('noteHint').textContent = prompt.hint;
+        document.getElementById('note').placeholder = prompt.placeholder;
       });
     });
 
@@ -266,7 +288,9 @@
       if (!features.length) return fail('오늘 테스트한 기능을 하나 이상 골라 주세요.');
       if (!feedbackType) return fail('피드백 종류를 하나 골라 주세요.');
       if (!rating) return fail('이번 경험의 점수를 골라 주세요.');
-      if (!note) return fail('느낀 점을 한 줄로 알려주세요.');
+      if (note.replace(/\s/g, '').length < 10) {
+        return fail('조금만 더 구체적으로 적어 주세요. 어느 화면에서 무엇을 했고, 어떻게 느꼈는지 알려주세요.');
+      }
 
       submit.disabled = true;
       submit.textContent = '안전하게 보내는 중…';
