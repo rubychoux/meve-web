@@ -435,6 +435,20 @@ h1 em{font-style:normal;color:var(--powder)}
 .beta:has(input:checked){color:var(--cream-soft)}
 .beta:has(input:checked) b{color:var(--powder)}
 .beta b{font-weight:600;color:var(--cream-soft);transition:color .25s}
+.beta-closed{
+  display:inline-flex;align-items:center;gap:.5rem;
+  margin-top:.55rem;
+  padding:.5rem .95rem;border-radius:100px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.11);
+  font-size:.8rem;font-weight:400;color:rgba(245,238,236,.62);
+}
+.beta-closed .tag{
+  font-size:.6rem;letter-spacing:.14em;font-weight:600;
+  padding:.18rem .5rem;border-radius:100px;
+  background:rgba(239,184,200,.14);color:var(--powder);
+}
+.beta-closed b{font-weight:600;color:rgba(245,238,236,.86)}
 .wl-note{
   margin-top:1.5rem;
   font-size:.88rem;font-weight:400;line-height:1.9;color:var(--cream-mute);
@@ -822,10 +836,10 @@ h1 em{font-style:normal;color:var(--powder)}
         <input type="email" id="wlEmail" name="email" inputmode="email" autocomplete="email" placeholder="이메일 주소" required>
         <button type="submit" id="wlBtn"><span>내 티켓 번호 받기</span><span class="ar">→</span></button>
       </div>
-      <label class="beta">
-        <input type="checkbox" id="wlBeta">
-        <span><b>베타 테스터 30인</b> 선발에도 지원할래요</span>
-      </label>
+      <p class="beta-closed">
+        <span class="tag">마감</span>
+        <span><b>베타 테스터 30인</b> 모집은 마감됐어요</span>
+      </p>
       <p class="wl-error" id="wlError"></p>
     </form>
 
@@ -1210,13 +1224,13 @@ h1 em{font-style:normal;color:var(--powder)}
     btn.disabled = true; btn.textContent = '번호 확인 중…';
     try{
       let pos, code = null;
-      let r = await joinV2(email, $('wlBeta').checked);
+      let r = await joinV2(email, false);
       if(r.ok){
         const data = await r.json();
         pos = data.position ?? data; code = data.ref_code ?? null;
         if(data.entry_position) store.set('mv-wl-entry', data.entry_position);
       }else{
-        r = await joinV1(email, $('wlBeta').checked);
+        r = await joinV1(email, false);
         if(!r.ok) throw new Error('bad status');
         pos = await r.json();
       }
