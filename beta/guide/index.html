@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>MEVE 클로즈드 베타 가이드</title>
+  <meta name="description" content="선정된 MEVE 베타 테스터를 위한 설치 및 테스트 안내." />
+  <meta name="robots" content="noindex,nofollow" />
+  <link rel="icon" href="/assets/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <style>
+    :root{--ink:#281f25;--muted:#897781;--rose:#d05878;--paper:#fffdfb;--line:rgba(40,31,37,.10)}
+    *{box-sizing:border-box}
+    body{
+      margin:0;color:var(--ink);font-family:Pretendard,-apple-system,sans-serif;-webkit-font-smoothing:antialiased;
+      background:radial-gradient(850px 440px at 86% -8%,rgba(238,172,194,.57),transparent 62%),
+      radial-gradient(650px 500px at -10% 86%,rgba(198,211,231,.38),transparent 60%),
+      linear-gradient(160deg,#faf7f4,#f4e3e9);min-height:100vh
+    }
+    .wrap{width:min(100%,680px);margin:auto;padding:38px 20px 82px}
+    .top{display:flex;justify-content:space-between;align-items:center}.logo{width:112px}
+    .pill{padding:8px 12px;border:1px solid rgba(208,88,120,.28);border-radius:999px;color:#a83f63;font-size:10px;font-weight:700;letter-spacing:.12em;background:rgba(255,255,255,.5)}
+    header{padding:52px 4px 34px}
+    .eyebrow{font:italic 14px "Playfair Display",serif;color:#a83f63}
+    h1{font:500 clamp(35px,8vw,50px)/1.12 "Playfair Display",Pretendard,serif;letter-spacing:-.04em;margin:12px 0 0}
+    header p{margin:18px 0 0;color:var(--muted);font-size:14px;line-height:1.8}
+    .notice{margin-top:24px;border:1px dashed rgba(208,88,120,.38);border-radius:18px;padding:15px 17px;background:rgba(255,255,255,.48);font-size:12px;line-height:1.7;color:#725d68}
+    .card{background:rgba(255,253,251,.78);border:1px solid rgba(255,255,255,.86);border-radius:28px;padding:27px 24px;box-shadow:0 26px 70px rgba(119,55,78,.12);backdrop-filter:blur(22px)}
+    .step{display:grid;grid-template-columns:42px 1fr;gap:14px;padding:24px 0;border-bottom:1px solid var(--line)}
+    .step:first-child{padding-top:4px}.step:last-child{border:0;padding-bottom:4px}
+    .num{width:38px;height:38px;border-radius:13px;display:grid;place-items:center;background:#f5e7ec;color:#a83f63;font:italic 17px "Playfair Display",serif}
+    h2{font-size:16px;margin:1px 0 7px}.copy{font-size:12.5px;color:var(--muted);line-height:1.75;margin:0}
+    ul{padding-left:18px;margin:10px 0 0;color:var(--muted);font-size:12.5px;line-height:1.8}
+    .action{display:inline-flex;margin-top:14px;padding:11px 16px;border-radius:999px;background:var(--ink);color:#fff;text-decoration:none;font-size:12px;font-weight:700}
+    .action.soft{background:#f3e4ea;color:#a83f63}
+    .test-list{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:13px}
+    .test-list span{padding:10px 11px;border:1px solid var(--line);background:#fff;border-radius:12px;color:#6f5d66;font-size:11.5px}
+    footer{text-align:center;color:var(--muted);font-size:10.5px;line-height:1.8;margin-top:25px}
+    @media(max-width:520px){.wrap{padding:27px 16px 64px}.card{padding:23px 18px}.test-list{grid-template-columns:1fr}.step{grid-template-columns:38px 1fr;gap:11px}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="top">
+      <img class="logo" src="/assets/wordmark2.png" alt="MEVE" />
+      <span class="pill">CLOSED BETA · iOS</span>
+    </div>
+    <header>
+      <div class="eyebrow">welcome to the skin lab</div>
+      <h1>가장 먼저 미브의<br />피부 여정을 시작해요.</h1>
+      <p>완성품을 평가하는 시간이 아니라, 실제 피부 생활에서 미브가 어디까지 도움이 되는지 함께 찾는 테스트예요.</p>
+      <div class="notice">
+        출시 전 버전이라 갑자기 멈추거나 결과가 어색할 수 있어요. 개인 피부 정보와 사진이 포함된 화면은 외부 SNS에 공유하지 말아 주세요.
+      </div>
+    </header>
+
+    <section class="card">
+      <article class="step">
+        <div class="num">1</div>
+        <div>
+          <h2>TestFlight 초대를 수락해요</h2>
+          <p class="copy">Apple에서 온 TestFlight 메일을 열고 앱을 설치해 주세요. 초대를 받은 Apple ID로 App Store에 로그인돼 있어야 해요.</p>
+          <a class="action soft" href="https://apps.apple.com/app/testflight/id899247664">TestFlight 설치</a>
+        </div>
+      </article>
+      <article class="step">
+        <div class="num">2</div>
+        <div>
+          <h2>로그인하고 내 티켓을 연결해요</h2>
+          <p class="copy">
+            베타 신청 때 적은 Apple ID로 로그인해 주세요. 대기명단 이메일이 다르면 그 이메일을 입력하고,
+            <b>MEVE 티켓 확인 코드</b> 메일의 6자리 코드를 입력하면 돼요.
+          </p>
+          <ul>
+            <li>Apple 로그인에서 선택지가 보이면 ‘이메일 공유’를 골라 주세요.</li>
+            <li>메일 발신자: MEVE &lt;hello@meve.beauty&gt;</li>
+            <li>메일이 없으면 스팸함을 확인해 주세요.</li>
+            <li>기존 티켓이 없다면 앱에서 새 번호를 받을 수 있어요.</li>
+          </ul>
+        </div>
+      </article>
+      <article class="step">
+        <div class="num">3</div>
+        <div>
+          <h2>내 피부 기준으로 자유롭게 써봐요</h2>
+          <p class="copy">정해진 정답은 없어요. 다만 아래 흐름을 한 번씩 지나가면 핵심 경험을 거의 모두 확인할 수 있어요.</p>
+          <div class="test-list">
+            <span>셀카 3장 피부 스캔</span>
+            <span>쓰는 제품 촬영·전성분 확인</span>
+            <span>내 화장대에 제품 등록</span>
+            <span>피부 반응·오늘 상태 기록</span>
+            <span>추천과 회피 성분 확인</span>
+            <span>코치에게 내 루틴 질문</span>
+          </div>
+        </div>
+      </article>
+      <article class="step">
+        <div class="num">4</div>
+        <div>
+          <h2>막힌 순간을 바로 남겨요</h2>
+          <p class="copy">한 번에 완벽히 정리하지 않아도 돼요. 튕김, 실패, 헷갈린 문장, 계속 쓰고 싶은 순간을 테스트할 때마다 짧게 남겨주세요.</p>
+          <a class="action" href="/beta/feedback/">베타 피드백 남기기</a>
+        </div>
+      </article>
+    </section>
+
+    <footer>
+      설치·입장 문제가 있으면 화면 캡처와 함께
+      <a href="mailto:ruby@meve.beauty" style="color:inherit">ruby@meve.beauty</a>로 알려주세요.<br />
+      © 2026 MEVE · SELECTED BETA ONLY
+    </footer>
+  </main>
+</body>
+</html>

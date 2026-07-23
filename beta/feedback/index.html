@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>MEVE 베타 피드백</title>
+  <meta name="description" content="MEVE 클로즈드 베타 사용 경험을 들려주세요." />
+  <meta name="robots" content="noindex,nofollow" />
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <style>
+    :root{
+      --ink:#281f25; --muted:#897781; --rose:#d05878; --rose-dark:#a83f63;
+      --pink:#e8a0b8; --paper:#fffdfb; --line:rgba(40,31,37,.10);
+      --glass:rgba(255,253,251,.76); --shadow:0 28px 80px rgba(119,55,78,.13);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; min-height:100vh; color:var(--ink);
+      font-family:Pretendard,-apple-system,BlinkMacSystemFont,sans-serif;
+      background:
+        radial-gradient(900px 520px at 90% -10%,rgba(238,172,194,.58),transparent 62%),
+        radial-gradient(760px 520px at -15% 80%,rgba(198,211,231,.45),transparent 60%),
+        linear-gradient(155deg,#faf7f4 5%,#f7e9ee 64%,#f0dde4 100%);
+      -webkit-font-smoothing:antialiased;
+    }
+    body:before{
+      content:"";position:fixed;inset:0;pointer-events:none;opacity:.32;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.06'/%3E%3C/svg%3E");
+    }
+    .shell{width:min(100%,620px);margin:0 auto;padding:42px 20px 80px;position:relative}
+    .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:34px}
+    .logo{width:108px;height:auto;display:block}
+    .private{
+      display:inline-flex;align-items:center;gap:7px;padding:8px 11px;border:1px solid rgba(168,63,99,.22);
+      border-radius:999px;background:rgba(255,255,255,.48);font-size:10px;font-weight:700;
+      letter-spacing:.12em;color:var(--rose-dark);backdrop-filter:blur(12px)
+    }
+    .private i{width:6px;height:6px;border-radius:50%;background:var(--rose);box-shadow:0 0 0 5px rgba(208,88,120,.10)}
+    .hero{padding:4px 4px 28px}
+    .eyebrow{font:italic 14px "Playfair Display",serif;color:var(--rose-dark);letter-spacing:.06em}
+    h1{margin:11px 0 0;font:500 clamp(34px,8vw,48px)/1.16 "Playfair Display",Pretendard,serif;letter-spacing:-.035em}
+    .hero-copy{margin:17px 0 0;max-width:470px;color:var(--muted);font-size:14px;line-height:1.8}
+    .receipt{
+      margin-top:24px;padding:18px;border:1px dashed rgba(168,63,99,.30);border-radius:18px;
+      display:grid;grid-template-columns:repeat(3,1fr);gap:8px;background:rgba(255,253,251,.55)
+    }
+    .receipt div{text-align:center;border-right:1px solid var(--line)}
+    .receipt div:last-child{border-right:0}
+    .receipt small{display:block;color:var(--muted);font-size:9px;letter-spacing:.14em;text-transform:uppercase}
+    .receipt b{display:block;margin-top:6px;font-family:"Playfair Display",serif;font-size:14px;font-weight:500}
+    .card{
+      border:1px solid rgba(255,255,255,.8);border-radius:30px;padding:28px 24px;background:var(--glass);
+      box-shadow:var(--shadow);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)
+    }
+    .section{padding:4px 0 27px;margin-bottom:27px;border-bottom:1px solid var(--line)}
+    .section:last-of-type{border-bottom:0;margin-bottom:8px;padding-bottom:8px}
+    .section-kicker{font:italic 13px "Playfair Display",serif;color:var(--rose-dark);margin-bottom:17px}
+    .field{margin-bottom:19px}
+    .field:last-child{margin-bottom:0}
+    label{display:block;margin-bottom:8px;font-size:13px;font-weight:650;line-height:1.55}
+    .req{color:var(--rose);margin-left:3px}
+    .hint{margin:-3px 0 8px;color:var(--muted);font-size:11px;line-height:1.55}
+    input,textarea{
+      width:100%;border:1px solid rgba(40,31,37,.14);border-radius:14px;padding:13px 14px;
+      background:rgba(255,255,255,.72);color:var(--ink);font:14px/1.5 inherit;
+      transition:border-color .18s,box-shadow .18s,background .18s
+    }
+    textarea{min-height:92px;resize:vertical}
+    input:focus,textarea:focus{outline:0;border-color:var(--rose);background:#fff;box-shadow:0 0 0 4px rgba(208,88,120,.10)}
+    input::placeholder,textarea::placeholder{color:#b9aeb3}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .stars{display:flex;gap:8px}
+    .star{
+      width:48px;height:48px;border-radius:16px;border:1px solid rgba(40,31,37,.12);background:#fff;
+      color:#cbbfc4;font-size:24px;line-height:1;cursor:pointer;transition:transform .15s,background .15s,color .15s,border .15s
+    }
+    .star:hover{transform:translateY(-2px)}
+    .star.on{color:#fff;background:var(--rose);border-color:var(--rose);box-shadow:0 10px 20px rgba(208,88,120,.22)}
+    .chips{display:flex;flex-wrap:wrap;gap:8px}
+    .chip{
+      appearance:none;border:1px solid rgba(40,31,37,.13);border-radius:999px;background:#fff;padding:10px 13px;
+      color:var(--muted);font:600 12.5px inherit;cursor:pointer;transition:.16s
+    }
+    .chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+    .consent{display:flex;align-items:flex-start;gap:10px;cursor:pointer;color:var(--muted);font-size:11.5px;line-height:1.6}
+    .consent input{width:18px;height:18px;margin:1px 0 0;accent-color:var(--rose);flex:0 0 auto}
+    .website{position:absolute!important;left:-10000px!important;width:1px!important;height:1px!important;overflow:hidden!important}
+    .submit{
+      width:100%;border:0;border-radius:999px;padding:17px 20px;background:var(--ink);color:#fff;
+      font:700 15px inherit;cursor:pointer;box-shadow:0 14px 28px rgba(40,31,37,.21);transition:transform .15s,opacity .15s
+    }
+    .submit:active{transform:scale(.985)}
+    .submit:disabled{opacity:.5;cursor:default}
+    .error{min-height:19px;margin-top:12px;text-align:center;color:var(--rose-dark);font-size:12px;line-height:1.55}
+    .done{display:none;text-align:center;padding:24px 5px 8px;animation:rise .55s cubic-bezier(.2,.8,.2,1)}
+    .done.show{display:block}
+    .seal{
+      width:82px;height:82px;margin:0 auto 22px;border-radius:50%;display:grid;place-items:center;color:#fff;font:italic 28px "Playfair Display",serif;
+      background:radial-gradient(circle at 32% 24%,#efbdcd,#c9567b 75%);box-shadow:0 18px 35px rgba(169,64,102,.28)
+    }
+    .done h2{margin:0;font:500 28px "Playfair Display",Pretendard,serif}
+    .done p{color:var(--muted);font-size:13px;line-height:1.75}
+    .again{border:0;background:none;color:var(--rose-dark);font:650 12px inherit;text-decoration:underline;cursor:pointer}
+    footer{text-align:center;margin-top:25px;color:var(--muted);font-size:10.5px;line-height:1.8}
+    @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+    @media(max-width:500px){
+      .shell{padding:26px 16px 62px}.card{border-radius:25px;padding:24px 18px}
+      .grid{grid-template-columns:1fr}.receipt{padding:15px 8px}.star{width:44px;height:44px}
+    }
+    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <div class="top">
+      <img class="logo" src="/assets/wordmark2.png" alt="MEVE" />
+      <span class="private"><i></i>SELECTED BETA</span>
+    </div>
+
+    <section class="hero">
+      <div class="eyebrow">your skin, in progress</div>
+      <h1>써본 순간의 느낌을<br />그대로 들려주세요.</h1>
+      <p class="hero-copy">
+        완벽한 문장보다 실제로 막혔던 순간이 더 중요해요.
+        한 번 제출하고 끝나는 설문이 아니라, 테스트할 때마다 짧게 남기는 베타 노트예요.
+      </p>
+      <div class="receipt" aria-label="테스트 안내">
+        <div><small>time</small><b>약 4분</b></div>
+        <div><small>repeat</small><b>여러 번 가능</b></div>
+        <div><small>privacy</small><b>선정자 전용</b></div>
+      </div>
+    </section>
+
+    <form class="card" id="feedbackForm" novalidate>
+      <section class="section">
+        <div class="section-kicker">01 · identify your ticket</div>
+        <div class="field">
+          <label for="email">베타 신청 이메일 또는 Apple ID 이메일<span class="req">*</span></label>
+          <div class="hint">베타 신청 때 적은 두 이메일 중 하나를 입력해 주세요.</div>
+          <input id="email" type="email" autocomplete="email" inputmode="email" placeholder="you@icloud.com" />
+        </div>
+        <div class="field">
+          <label for="ticket">파운딩 티켓 번호<span class="req">*</span></label>
+          <div class="hint">앱 프로필의 No. 숫자만 적어 주세요.</div>
+          <input id="ticket" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="예: 174" />
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-kicker">02 · this test session</div>
+        <div class="grid">
+          <div class="field">
+            <label for="device">아이폰 기종</label>
+            <input id="device" type="text" placeholder="예: iPhone 15 Pro" />
+          </div>
+          <div class="field">
+            <label for="ios">iOS 버전</label>
+            <input id="ios" type="text" placeholder="예: iOS 19.0" />
+          </div>
+        </div>
+        <div class="field">
+          <label for="version">MEVE 앱 버전</label>
+          <div class="hint">TestFlight의 앱 정보에서 확인할 수 있어요. 몰라도 괜찮아요.</div>
+          <input id="version" type="text" placeholder="예: 1.0.0 (42)" />
+        </div>
+        <div class="field">
+          <label>오늘 테스트한 기능<span class="req">*</span></label>
+          <div class="chips" id="features">
+            <button type="button" class="chip" data-value="signup_ticket">가입·티켓</button>
+            <button type="button" class="chip" data-value="skin_scan">피부 스캔</button>
+            <button type="button" class="chip" data-value="product_scan">제품 스캔</button>
+            <button type="button" class="chip" data-value="vanity">내 화장대</button>
+            <button type="button" class="chip" data-value="care_journal">피부 저널</button>
+            <button type="button" class="chip" data-value="coach">코치</button>
+            <button type="button" class="chip" data-value="community">이브 피드</button>
+            <button type="button" class="chip" data-value="sharing">공유</button>
+          </div>
+        </div>
+        <div class="field">
+          <label>전체 경험은 어땠나요?<span class="req">*</span></label>
+          <div class="stars" id="rating" aria-label="1점부터 5점까지">
+            <button type="button" class="star" data-value="1" aria-label="1점">★</button>
+            <button type="button" class="star" data-value="2" aria-label="2점">★</button>
+            <button type="button" class="star" data-value="3" aria-label="3점">★</button>
+            <button type="button" class="star" data-value="4" aria-label="4점">★</button>
+            <button type="button" class="star" data-value="5" aria-label="5점">★</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-kicker">03 · what really happened</div>
+        <div class="field">
+          <label for="blocker">멈춤·튕김·실패가 있었나요?</label>
+          <div class="hint">어느 화면에서 무엇을 눌렀는지 순서대로 적으면 가장 빨리 고칠 수 있어요.</div>
+          <textarea id="blocker" placeholder="예: 피부 스캔 → 정면 촬영 → 분석 중 화면에서 앱이 종료됐어요."></textarea>
+        </div>
+        <div class="field">
+          <label for="favorite">가장 좋았거나 계속 쓰고 싶은 순간은?</label>
+          <textarea id="favorite" placeholder="작은 부분도 좋아요. 왜 좋았는지도 알려주세요."></textarea>
+        </div>
+        <div class="field">
+          <label for="confusing">뜻을 모르겠거나 헷갈린 부분은?</label>
+          <textarea id="confusing" placeholder="버튼, 문장, 결과 해석, 화면 이동 등 자유롭게 적어주세요."></textarea>
+        </div>
+        <div class="field">
+          <label for="improvement">딱 한 가지 바꿀 수 있다면?</label>
+          <textarea id="improvement" placeholder="가장 먼저 고쳤으면 하는 한 가지를 들려주세요."></textarea>
+        </div>
+        <div class="field">
+          <label>정식 출시 후 유료로 쓸 의향</label>
+          <div class="chips single" id="payIntent">
+            <button type="button" class="chip" data-value="yes">있어요</button>
+            <button type="button" class="chip" data-value="maybe">가격·기능에 따라</button>
+            <button type="button" class="chip" data-value="no">아직 없어요</button>
+          </div>
+        </div>
+        <label class="consent">
+          <input id="contactOk" type="checkbox" checked />
+          <span>답변 확인을 위해 베타 신청 이메일로 추가 질문을 받아도 좋아요.</span>
+        </label>
+        <label class="website" aria-hidden="true">Website<input id="website" type="text" tabindex="-1" autocomplete="off" /></label>
+      </section>
+
+      <button class="submit" id="submit" type="submit">베타 노트 보내기</button>
+      <div class="error" id="error" role="alert"></div>
+    </form>
+
+    <section class="card done" id="done">
+      <div class="seal">M</div>
+      <h2>베타 노트가 도착했어요.</h2>
+      <p>남겨주신 순간부터 바로 확인할게요.<br />미브를 더 정확하게 만드는 데 함께해 주셔서 고마워요.</p>
+      <button class="again" id="again" type="button">다른 테스트 기록도 남기기</button>
+    </section>
+
+    <footer>
+      선정된 베타 테스터의 의견 수집을 위한 페이지예요.<br />
+      문의 <a href="mailto:ruby@meve.beauty" style="color:inherit">ruby@meve.beauty</a> · © 2026 MEVE
+    </footer>
+  </main>
+
+  <script>
+    const SB = 'https://auyqgcppbrhjthvkkwwb.supabase.co';
+    const KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF1eXFnY3BwYnJoanRodmtrd3diIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzOTY4NTAsImV4cCI6MjA4ODk3Mjg1MH0.3VjInUooRD1TahI9tgFX3G6yE5A97yAJ2sZH2YMmXLY';
+    const form = document.getElementById('feedbackForm');
+    const errorEl = document.getElementById('error');
+    const submit = document.getElementById('submit');
+    const emailOk = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+    const value = (id) => document.getElementById(id).value.trim();
+    let rating = 0;
+    let payIntent = '';
+
+    document.querySelectorAll('#rating .star').forEach((button) => {
+      button.addEventListener('click', () => {
+        rating = Number(button.dataset.value);
+        document.querySelectorAll('#rating .star').forEach((star) => {
+          star.classList.toggle('on', Number(star.dataset.value) <= rating);
+        });
+      });
+    });
+
+    document.querySelectorAll('#features .chip').forEach((chip) => {
+      chip.addEventListener('click', () => chip.classList.toggle('on'));
+    });
+
+    document.querySelectorAll('#payIntent .chip').forEach((chip) => {
+      chip.addEventListener('click', () => {
+        document.querySelectorAll('#payIntent .chip').forEach((other) => other.classList.remove('on'));
+        chip.classList.add('on');
+        payIntent = chip.dataset.value;
+      });
+    });
+
+    function fail(message) {
+      errorEl.textContent = message;
+      errorEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      errorEl.textContent = '';
+      const email = value('email').toLowerCase();
+      const ticket = Number(value('ticket').replace(/\D/g, ''));
+      const features = [...document.querySelectorAll('#features .chip.on')].map((chip) => chip.dataset.value);
+
+      if (!emailOk(email)) return fail('베타 신청 이메일을 정확히 입력해 주세요.');
+      if (!Number.isInteger(ticket) || ticket < 1) return fail('파운딩 티켓 번호를 숫자로 입력해 주세요.');
+      if (!features.length) return fail('오늘 테스트한 기능을 하나 이상 골라 주세요.');
+      if (!rating) return fail('전체 경험 점수를 골라 주세요.');
+
+      submit.disabled = true;
+      submit.textContent = '안전하게 보내는 중…';
+
+      try {
+        const response = await fetch(SB + '/rest/v1/rpc/submit_beta_feedback', {
+          method: 'POST',
+          headers: {
+            apikey: KEY,
+            Authorization: 'Bearer ' + KEY,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            p_email: email,
+            p_ticket_no: ticket,
+            p_app_version: value('version') || null,
+            p_device: value('device') || null,
+            p_ios_version: value('ios') || null,
+            p_overall_rating: rating,
+            p_tested_features: features,
+            p_blocker: value('blocker') || null,
+            p_favorite: value('favorite') || null,
+            p_confusing: value('confusing') || null,
+            p_improvement: value('improvement') || null,
+            p_pay_intent: payIntent || null,
+            p_contact_ok: document.getElementById('contactOk').checked,
+            p_user_agent: navigator.userAgent.slice(0, 300),
+            p_website: value('website') || null,
+          }),
+        });
+        if (!response.ok) throw new Error('network');
+        const result = await response.json();
+        if (!result.ok) {
+          const messages = {
+            not_selected: '선정된 베타 신청 정보를 찾지 못했어요. 신청 때 쓴 다른 이메일을 확인해 주세요.',
+            ticket_mismatch: '이메일과 티켓 번호가 일치하지 않아요. 앱 프로필의 번호를 다시 확인해 주세요.',
+            rate_limited: '방금 피드백이 접수됐어요. 2분 뒤 새 기록을 남겨 주세요.',
+            too_long: '답변이 너무 길어요. 핵심만 조금 줄여서 보내 주세요.',
+          };
+          throw new Error(messages[result.reason] || '입력 내용을 다시 확인해 주세요.');
+        }
+        form.style.display = 'none';
+        document.getElementById('done').classList.add('show');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } catch (error) {
+        submit.disabled = false;
+        submit.textContent = '베타 노트 보내기';
+        fail(error.message === 'network' ? '연결이 잠시 불안정해요. 조금 뒤 다시 보내 주세요.' : error.message);
+      }
+    });
+
+    document.getElementById('again').addEventListener('click', () => {
+      window.location.reload();
+    });
+  </script>
+</body>
+</html>
