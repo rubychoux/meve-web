@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>MEVE 베타 피드백</title>
-  <meta name="description" content="MEVE 클로즈드 베타 사용 경험을 들려주세요." />
+  <title>MEVE (미브) 베타 피드백</title>
+  <meta name="description" content="MEVE (미브) 베타 테스트 경험을 30초 만에 남겨주세요." />
   <meta name="robots" content="noindex,nofollow" />
   <link rel="icon" type="image/png" href="/assets/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -117,19 +117,19 @@
 <body>
   <main class="shell">
     <div class="top">
-      <img class="logo" src="/assets/wordmark2.png" alt="MEVE" />
+      <img class="logo" src="/assets/wordmark2.png" alt="MEVE (미브)" />
       <span class="private"><i></i>SELECTED BETA</span>
     </div>
 
     <section class="hero">
       <div class="eyebrow">your skin, in progress</div>
-      <h1>써본 순간의 느낌을<br />그대로 들려주세요.</h1>
+      <h1>30초면<br />충분해요.</h1>
       <p class="hero-copy">
-        완벽한 문장보다 실제로 막혔던 순간이 더 중요해요.
-        한 번 제출하고 끝나는 설문이 아니라, 테스트할 때마다 짧게 남기는 베타 노트예요.
+        완벽한 문장 대신 방금 느낀 점을 한 줄로 남겨주세요.
+        테스트할 때마다 여러 번 제출해도 좋아요.
       </p>
       <div class="receipt" aria-label="테스트 안내">
-        <div><small>time</small><b>약 4분</b></div>
+        <div><small>time</small><b>약 30초</b></div>
         <div><small>repeat</small><b>여러 번 가능</b></div>
         <div><small>privacy</small><b>선정자 전용</b></div>
       </div>
@@ -137,38 +137,22 @@
 
     <form class="card" id="feedbackForm" novalidate>
       <section class="section">
-        <div class="section-kicker">01 · identify your ticket</div>
+        <div class="section-kicker">01 · tester</div>
         <div class="field">
-          <label for="email">베타 신청 이메일 또는 Apple ID 이메일<span class="req">*</span></label>
-          <div class="hint">베타 신청 때 적은 두 이메일 중 하나를 입력해 주세요.</div>
+          <label for="email">이메일<span class="req">*</span></label>
           <input id="email" type="email" autocomplete="email" inputmode="email" placeholder="you@icloud.com" />
         </div>
         <div class="field">
-          <label for="ticket">파운딩 티켓 번호<span class="req">*</span></label>
-          <div class="hint">앱 프로필의 No. 숫자만 적어 주세요.</div>
+          <label for="ticket">티켓 번호<span class="req">*</span></label>
           <input id="ticket" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="예: 174" />
         </div>
+        <div class="hint">한 번 입력하면 다음 제출부터 자동으로 채워져요.</div>
       </section>
 
       <section class="section">
-        <div class="section-kicker">02 · this test session</div>
-        <div class="grid">
-          <div class="field">
-            <label for="device">아이폰 기종</label>
-            <input id="device" type="text" placeholder="예: iPhone 15 Pro" />
-          </div>
-          <div class="field">
-            <label for="ios">iOS 버전</label>
-            <input id="ios" type="text" placeholder="예: iOS 19.0" />
-          </div>
-        </div>
+        <div class="section-kicker">02 · quick note</div>
         <div class="field">
-          <label for="version">MEVE 앱 버전</label>
-          <div class="hint">TestFlight의 앱 정보에서 확인할 수 있어요. 몰라도 괜찮아요.</div>
-          <input id="version" type="text" placeholder="예: 1.0.0 (42)" />
-        </div>
-        <div class="field">
-          <label>오늘 테스트한 기능<span class="req">*</span></label>
+          <label>어느 기능이었나요?<span class="req">*</span></label>
           <div class="chips" id="features">
             <button type="button" class="chip" data-value="signup_ticket">가입·티켓</button>
             <button type="button" class="chip" data-value="skin_scan">피부 스캔</button>
@@ -181,7 +165,16 @@
           </div>
         </div>
         <div class="field">
-          <label>전체 경험은 어땠나요?<span class="req">*</span></label>
+          <label>어떤 피드백인가요?<span class="req">*</span></label>
+          <div class="chips single" id="feedbackType">
+            <button type="button" class="chip" data-value="bug">오류·멈춤</button>
+            <button type="button" class="chip" data-value="confusing">헷갈림</button>
+            <button type="button" class="chip" data-value="praise">좋았어요</button>
+            <button type="button" class="chip" data-value="idea">개선 제안</button>
+          </div>
+        </div>
+        <div class="field">
+          <label>이번 경험은 어땠나요?<span class="req">*</span></label>
           <div class="stars" id="rating" aria-label="1점부터 5점까지">
             <button type="button" class="star" data-value="1" aria-label="1점">★</button>
             <button type="button" class="star" data-value="2" aria-label="2점">★</button>
@@ -190,56 +183,31 @@
             <button type="button" class="star" data-value="5" aria-label="5점">★</button>
           </div>
         </div>
-      </section>
-
-      <section class="section">
-        <div class="section-kicker">03 · what really happened</div>
         <div class="field">
-          <label for="blocker">멈춤·튕김·실패가 있었나요?</label>
-          <div class="hint">어느 화면에서 무엇을 눌렀는지 순서대로 적으면 가장 빨리 고칠 수 있어요.</div>
-          <textarea id="blocker" placeholder="예: 피부 스캔 → 정면 촬영 → 분석 중 화면에서 앱이 종료됐어요."></textarea>
-        </div>
-        <div class="field">
-          <label for="favorite">가장 좋았거나 계속 쓰고 싶은 순간은?</label>
-          <textarea id="favorite" placeholder="작은 부분도 좋아요. 왜 좋았는지도 알려주세요."></textarea>
-        </div>
-        <div class="field">
-          <label for="confusing">뜻을 모르겠거나 헷갈린 부분은?</label>
-          <textarea id="confusing" placeholder="버튼, 문장, 결과 해석, 화면 이동 등 자유롭게 적어주세요."></textarea>
-        </div>
-        <div class="field">
-          <label for="improvement">딱 한 가지 바꿀 수 있다면?</label>
-          <textarea id="improvement" placeholder="가장 먼저 고쳤으면 하는 한 가지를 들려주세요."></textarea>
-        </div>
-        <div class="field">
-          <label>정식 출시 후 유료로 쓸 의향</label>
-          <div class="chips single" id="payIntent">
-            <button type="button" class="chip" data-value="yes">있어요</button>
-            <button type="button" class="chip" data-value="maybe">가격·기능에 따라</button>
-            <button type="button" class="chip" data-value="no">아직 없어요</button>
-          </div>
+          <label for="note">한 줄로 알려주세요.<span class="req">*</span></label>
+          <textarea id="note" maxlength="1000" placeholder="어느 화면에서 무엇이 좋았거나 불편했는지 적어주세요."></textarea>
         </div>
         <label class="consent">
           <input id="contactOk" type="checkbox" checked />
-          <span>답변 확인을 위해 베타 신청 이메일로 추가 질문을 받아도 좋아요.</span>
+          <span>필요한 경우 이메일로 추가 질문을 받아도 좋아요.</span>
         </label>
         <label class="website" aria-hidden="true">Website<input id="website" type="text" tabindex="-1" autocomplete="off" /></label>
       </section>
 
-      <button class="submit" id="submit" type="submit">베타 노트 보내기</button>
+      <button class="submit" id="submit" type="submit">피드백 보내기</button>
       <div class="error" id="error" role="alert"></div>
     </form>
 
     <section class="card done" id="done">
       <div class="seal">M</div>
-      <h2>베타 노트가 도착했어요.</h2>
-      <p>남겨주신 순간부터 바로 확인할게요.<br />미브를 더 정확하게 만드는 데 함께해 주셔서 고마워요.</p>
-      <button class="again" id="again" type="button">다른 테스트 기록도 남기기</button>
+      <h2>피드백이 도착했어요.</h2>
+      <p>MEVE (미브)를 더 나아지게 만드는 데<br />함께해 주셔서 감사합니다!</p>
+      <button class="again" id="again" type="button">다른 피드백 남기기</button>
     </section>
 
     <footer>
       선정된 베타 테스터의 의견 수집을 위한 페이지예요.<br />
-      문의 <a href="mailto:ruby@meve.beauty" style="color:inherit">ruby@meve.beauty</a> · © 2026 MEVE
+      문의 <a href="mailto:ruby@meve.beauty" style="color:inherit">ruby@meve.beauty</a> · © 2026 MEVE (미브)
     </footer>
   </main>
 
@@ -252,7 +220,12 @@
     const emailOk = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
     const value = (id) => document.getElementById(id).value.trim();
     let rating = 0;
-    let payIntent = '';
+    let feedbackType = '';
+
+    try {
+      document.getElementById('email').value = localStorage.getItem('meve-beta-email') || '';
+      document.getElementById('ticket').value = localStorage.getItem('meve-beta-ticket') || '';
+    } catch (_) {}
 
     document.querySelectorAll('#rating .star').forEach((button) => {
       button.addEventListener('click', () => {
@@ -267,11 +240,11 @@
       chip.addEventListener('click', () => chip.classList.toggle('on'));
     });
 
-    document.querySelectorAll('#payIntent .chip').forEach((chip) => {
+    document.querySelectorAll('#feedbackType .chip').forEach((chip) => {
       chip.addEventListener('click', () => {
-        document.querySelectorAll('#payIntent .chip').forEach((other) => other.classList.remove('on'));
+        document.querySelectorAll('#feedbackType .chip').forEach((other) => other.classList.remove('on'));
         chip.classList.add('on');
-        payIntent = chip.dataset.value;
+        feedbackType = chip.dataset.value;
       });
     });
 
@@ -286,11 +259,14 @@
       const email = value('email').toLowerCase();
       const ticket = Number(value('ticket').replace(/\D/g, ''));
       const features = [...document.querySelectorAll('#features .chip.on')].map((chip) => chip.dataset.value);
+      const note = value('note');
 
       if (!emailOk(email)) return fail('베타 신청 이메일을 정확히 입력해 주세요.');
       if (!Number.isInteger(ticket) || ticket < 1) return fail('파운딩 티켓 번호를 숫자로 입력해 주세요.');
       if (!features.length) return fail('오늘 테스트한 기능을 하나 이상 골라 주세요.');
-      if (!rating) return fail('전체 경험 점수를 골라 주세요.');
+      if (!feedbackType) return fail('피드백 종류를 하나 골라 주세요.');
+      if (!rating) return fail('이번 경험의 점수를 골라 주세요.');
+      if (!note) return fail('느낀 점을 한 줄로 알려주세요.');
 
       submit.disabled = true;
       submit.textContent = '안전하게 보내는 중…';
@@ -306,16 +282,16 @@
           body: JSON.stringify({
             p_email: email,
             p_ticket_no: ticket,
-            p_app_version: value('version') || null,
-            p_device: value('device') || null,
-            p_ios_version: value('ios') || null,
+            p_app_version: null,
+            p_device: null,
+            p_ios_version: null,
             p_overall_rating: rating,
             p_tested_features: features,
-            p_blocker: value('blocker') || null,
-            p_favorite: value('favorite') || null,
-            p_confusing: value('confusing') || null,
-            p_improvement: value('improvement') || null,
-            p_pay_intent: payIntent || null,
+            p_blocker: feedbackType === 'bug' ? note : null,
+            p_favorite: feedbackType === 'praise' ? note : null,
+            p_confusing: feedbackType === 'confusing' ? note : null,
+            p_improvement: feedbackType === 'idea' ? note : null,
+            p_pay_intent: null,
             p_contact_ok: document.getElementById('contactOk').checked,
             p_user_agent: navigator.userAgent.slice(0, 300),
             p_website: value('website') || null,
@@ -332,12 +308,16 @@
           };
           throw new Error(messages[result.reason] || '입력 내용을 다시 확인해 주세요.');
         }
+        try {
+          localStorage.setItem('meve-beta-email', email);
+          localStorage.setItem('meve-beta-ticket', String(ticket));
+        } catch (_) {}
         form.style.display = 'none';
         document.getElementById('done').classList.add('show');
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } catch (error) {
         submit.disabled = false;
-        submit.textContent = '베타 노트 보내기';
+        submit.textContent = '피드백 보내기';
         fail(error.message === 'network' ? '연결이 잠시 불안정해요. 조금 뒤 다시 보내 주세요.' : error.message);
       }
     });
