@@ -1,7 +1,12 @@
-/* MEVE — first-party, cookie-free page analytics.
-   Records: anonymous session id, path, external referrer, UTM params.
-   No cookies, no personal data, nothing rendered. */
+/* MEVE — consent-gated first-party, cookie-free page analytics.
+   The site must set meve_analytics_consent=granted only after an explicit
+   optional choice. Without that choice this file performs no collection. */
 (function () {
+  try {
+    if (localStorage.getItem('meve_analytics_consent') !== 'granted') return;
+  } catch (e) {
+    return;
+  }
   var SB = 'https://auyqgcppbrhjthvkkwwb.supabase.co';
   var KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF1eXFnY3BwYnJoanRodmtrd3diIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzOTY4NTAsImV4cCI6MjA4ODk3Mjg1MH0.3VjInUooRD1TahI9tgFX3G6yE5A97yAJ2sZH2YMmXLY';
 
