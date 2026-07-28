@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>MEVE · 데이터로 설계하는 나의 아름다움</title>
-<meta name="description" content="MEVE는 당신의 피부와 얼굴을 데이터로 이해해 감이나 유행이 아닌, 당신에게 맞는 아름다움을 제안합니다. 8월 1일 앱 출시.">
+<meta name="description" content="MEVE는 당신의 피부와 얼굴을 데이터로 이해해 감이나 유행이 아닌, 당신에게 맞는 아름다움을 제안합니다. 8월 1일 오후 6시 앱 출시.">
 <meta property="og:title" content="MEVE · Beauty-Tech House">
-<meta property="og:description" content="아름다움은 정말, 감의 영역일까요? 8월 1일, 입장 줄 순서대로 문이 열려요.">
+<meta property="og:description" content="아름다움은 정말, 감의 영역일까요? 8월 1일 오후 6시, 입장 줄 순서대로 문이 열려요.">
 <meta property="og:url" content="https://meve.beauty">
 <meta property="og:image" content="https://meve.beauty/assets/og.png">
 <meta property="og:image:width" content="1200">
@@ -823,7 +823,7 @@ h1 em{font-style:normal;color:var(--powder)}
     <div class="hero-veil" aria-hidden="true"></div>
     <div class="hero-brand fade d1">
       <div class="mark-m" role="img" aria-label="MEVE"></div>
-      <p class="hero-date"><span>App Launch</span><i aria-hidden="true"></i><b>8.1</b></p>
+      <p class="hero-date"><span>App Launch</span><i aria-hidden="true"></i><b>8.1 · 오후 6시</b></p>
     </div>
     <div class="hero-mid fade d2">
       <h1>내 피부엔 뭐가 <em>맞는지</em>,<br>내 얼굴엔 뭐가 <em>어울리는지</em></h1>
@@ -833,7 +833,7 @@ h1 em{font-style:normal;color:var(--powder)}
     <form class="wl" id="waitlist" novalidate>
       <p class="wl-count" id="wlCount"></p>
       <p class="wl-teaser"><span id="wlTeaser">지금 <b>No.100</b> 안에 들면, 프리미엄 3개월 무료</span></p>
-      <p class="wl-note"><b>8.1</b> 오픈 · 입장 줄 앞 <b>500명</b>부터 입장</p>
+      <p class="wl-note"><b>8.1 오후 6시</b> 오픈 · 입장 줄 앞 <b>500명</b>부터 입장</p>
       <div class="wl-row">
         <input type="email" id="wlEmail" name="email" inputmode="email" autocomplete="email" placeholder="이메일 주소" required>
         <button type="submit" id="wlBtn"><span>내 티켓 번호 받기</span><span class="ar">→</span></button>
@@ -862,7 +862,7 @@ h1 em{font-style:normal;color:var(--powder)}
       <p class="boost">친구가 한 명 올 때마다 입장 줄에서 <b>10칸 앞으로</b> 이동해요.<br>번호는 그대로, 입장만 빨라져요.</p>
       <div class="tiers">
         <p class="t"><b>1명</b> = 입장 10칸 앞으로</p>
-        <p class="t"><b>3명</b> = 8.1 첫 입장 확정</p>
+        <p class="t"><b>3명</b> = 8.1 오후 6시 첫 입장 확정</p>
         <p class="t"><b>10명</b> = 프리미엄 3개월 추가</p>
       </div>
       <div class="done-btns">
@@ -959,7 +959,7 @@ h1 em{font-style:normal;color:var(--powder)}
               <p class="big">+10<small>per friend</small></p>
               <div>
                 <p class="tt">친구 한 명, 입장 줄 열 칸 앞으로</p>
-                <p class="ds">번호는 그대로, 입장 줄만 앞으로 당겨져요. 3명이면 <b>8.1 첫 입장</b> 확정이에요.</p>
+                <p class="ds">번호는 그대로, 입장 줄만 앞으로 당겨져요. 3명이면 <b>8.1 오후 6시 첫 입장</b> 확정이에요.</p>
               </div>
             </div>
           </div>
@@ -1026,7 +1026,7 @@ h1 em{font-style:normal;color:var(--powder)}
   if(SHOW_FOUNDERS) $('founders').classList.add('on');
 
   /* ---- launch countdown: waxing moon ---- */
-  const LAUNCH = new Date('2026-08-01T09:00:00+09:00').getTime();
+  const LAUNCH = new Date('2026-08-01T18:00:00+09:00').getTime();
   const OPENED = new Date('2026-07-18T00:00:00+09:00').getTime();
   const p2 = n => String(n).padStart(2, '0');
   const shade = document.getElementById('moonShade');
@@ -1130,8 +1130,8 @@ h1 em{font-style:normal;color:var(--powder)}
     tb.classList.remove('yes', 'no');
     tb.classList.add('on', en <= 500 ? 'yes' : 'no');
     tb.textContent = en <= 500
-      ? '\u2726 8.1 \uCCAB \uC785\uC7A5 500\uBA85 \uC548\uC774\uC5D0\uC694 \u00B7 \uC790\uB9AC\uAC00 \uD655\uC815\uB410\uC5B4\uC694'
-      : '8.1 \uCCAB \uC785\uC7A5\uC740 \uC904 \uC55E 500\uBA85 \u00B7 \uCE5C\uAD6C \uCD08\uB300\uB85C \uC904\uC744 \uB2F9\uACA8\uC694';
+      ? '\u2726 8.1 \uC624\uD6C4 6\uC2DC \uCCAB \uC785\uC7A5 500\uBA85 \uC548\uC774\uC5D0\uC694 \u00B7 \uC790\uB9AC\uAC00 \uD655\uC815\uB410\uC5B4\uC694'
+      : '8.1 \uC624\uD6C4 6\uC2DC \uCCAB \uC785\uC7A5\uC740 \uC904 \uC55E 500\uBA85 \u00B7 \uCE5C\uAD6C \uCD08\uB300\uB85C \uC904\uC744 \uB2F9\uACA8\uC694';
   };
   /* returning visitor: refresh from the server (invites may have moved them up) */
   const refreshStatus = () => {
@@ -1192,12 +1192,12 @@ h1 em{font-style:normal;color:var(--powder)}
         $('wlTeaser').innerHTML = '<b>First 100</b> · 첫 입장 <b>500</b> 마감 · 지금은 <b>2차 웨이브</b>예요';
         $('perk100tt').innerHTML = '첫 입장 500, 마감됐어요<span class="tag">Closed</span>';
         $('perkNum').textContent = '500'; $('perkUnit').textContent = 'closed';
-        $('perk100ds').innerHTML = '8.1 첫 입장 <b>500자리</b>가 다 찼어요. 지금 신청하면 <b>2차 웨이브</b>로, 첫 입장 뒤 순차 입장돼요. 친구 초대로 줄을 당기면 더 빨리 들어와요.';
+        $('perk100ds').innerHTML = '8.1 오후 6시 첫 입장 <b>500자리</b>가 다 찼어요. 지금 신청하면 <b>2차 웨이브</b>로, 첫 입장 뒤 순차 입장돼요. 친구 초대로 줄을 당기면 더 빨리 들어와요.';
       } else if(typeof n === 'number' && n >= 100){
-        $('wlTeaser').innerHTML = '<b>First 100</b> 마감 · 8.1 첫 입장 <b>500</b>자리는 아직 열려 있어요';
+        $('wlTeaser').innerHTML = '<b>First 100</b> 마감 · 8.1 오후 6시 첫 입장 <b>500</b>자리는 아직 열려 있어요';
         $('perk100tt').innerHTML = 'First 100, 마감됐어요<span class="tag">Closed</span>';
         $('perkNum').textContent = '500'; $('perkUnit').textContent = 'limited';
-        $('perk100ds').innerHTML = '프리미엄 3개월 무료와 <b>평생 고정</b> 얼리버드가는 첫 100명에게 돌아갔어요. 다음 문은 <b>8.1 첫 입장 500</b>이에요.';
+        $('perk100ds').innerHTML = '프리미엄 3개월 무료와 <b>평생 고정</b> 얼리버드가는 첫 100명에게 돌아갔어요. 다음 문은 <b>8.1 오후 6시 첫 입장 500</b>이에요.';
       }
   }
   function refreshCount(){
@@ -1288,7 +1288,7 @@ h1 em{font-style:normal;color:var(--powder)}
       x.fillStyle = '#C7A76C';
       x.font = '600 26px "Pretendard Variable", sans-serif';
       x.textAlign = 'center'; x.letterSpacing = '8px';
-      x.fillText('APP LAUNCH · 8.1', W/2, 300 + h + 46);
+      x.fillText('APP LAUNCH · 8.1 · 6PM KST', W/2, 300 + h + 46);
       x.letterSpacing = '0px';
     }catch(e){}
     /* the ticket */
@@ -1329,10 +1329,10 @@ h1 em{font-style:normal;color:var(--powder)}
     x.font = '700 34px "Pretendard Variable", sans-serif';
     if(isFinite(n) && n <= 500){
       x.fillStyle = '#8C6B2F';
-      x.fillText('\u2726 8.1 \uCCAB \uC785\uC7A5 500\uBA85 \uC548 \u2014 \uC790\uB9AC \uD655\uC815', 0, 188);
+      x.fillText('\u2726 8.1 18:00 \uCCAB 500\uBA85 \u2014 \uC790\uB9AC \uD655\uC815', 0, 188);
     }else{
       x.fillStyle = '#C25B7C';
-      x.fillText('8.1 \uCCAB \uC785\uC7A5\uC740 \uC904 \uC55E 500\uBA85 \u2014 \uCD08\uB300\uB85C \uC904\uC744 \uB2F9\uACA8\uC694', 0, 188);
+      x.fillText('8.1 18:00 \uCCAB 500\uBA85 \u2014 \uCD08\uB300\uB85C \uC904\uC744 \uB2F9\uACA8\uC694', 0, 188);
     }
     /* tear line + punches */
     const ty = th/2 - 128;
@@ -1381,7 +1381,7 @@ h1 em{font-style:normal;color:var(--powder)}
   /* ---- share ---- */
   $('shareBtn').addEventListener('click', async () => {
     const url = myLink();
-    const data = {title:'MEVE', text:'아름다움은 정말, 감의 영역일까요? 8.1 MEVE', url};
+    const data = {title:'MEVE', text:'아름다움은 정말, 감의 영역일까요? 8.1 오후 6시 MEVE', url};
     if(navigator.share){
       try{ await navigator.share(data); return; }catch(e){}
     }
