@@ -3,14 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>MEVE · 데이터로 설계하는 나의 아름다움</title>
-<meta name="description" content="MEVE는 당신의 피부와 얼굴을 데이터로 이해해 감이나 유행이 아닌, 당신에게 맞는 아름다움을 제안합니다. 8월 1일 오후 6시 앱 출시.">
-<meta property="og:title" content="MEVE · Beauty-Tech House">
-<meta property="og:description" content="아름다움은 정말, 감의 영역일까요? 8월 1일 오후 6시, 입장 줄 순서대로 문이 열려요.">
+<title>MEVE · 내 피부에 맞는 것, 내 얼굴에 어울리는 것</title>
+<meta name="description" content="오늘의 피부, 좋아하는 분위기, 내가 가진 제품. 나를 알아가고 원하는 룩을 준비하는 MEVE가 출시를 준비하고 있어요.">
+<meta property="og:title" content="MEVE · 내 피부에 맞는 것, 내 얼굴에 어울리는 것">
+<meta property="og:description" content="피부 기록에서 원하는 룩까지. MEVE의 출시 소식을 받아보세요.">
 <meta property="og:url" content="https://meve.beauty">
-<meta property="og:image" content="https://meve.beauty/assets/og.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
+<meta property="og:image" content="https://meve.beauty/assets/logo-lockup-dark.png">
+<meta property="og:image:width" content="2459">
+<meta property="og:image:height" content="1260">
+<meta property="og:image:alt" content="MEVE 로고">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#191019">
 <link rel="icon" type="image/png" href="/assets/favicon.png">
@@ -20,7 +21,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
 /* ============================================================
-   MEVE · pre-launch waitlist · NUIT — night luxe
+   MEVE · relaunch preparation · NUIT — night luxe
    deep plum / cream type / powder accent / didone numerals
    fluid type scale via CSS custom props (clamp)
    ============================================================ */
@@ -128,12 +129,16 @@ img{display:block;max-width:100%;height:auto}
   margin-top:1.05rem;
   font-size:clamp(.95rem,3.5vw,1.02rem);font-weight:450;color:var(--cream-soft);
 }
+.hero-link{display:inline-flex;align-items:center;gap:.6rem;min-height:44px;margin-top:.65rem;font-size:.78rem;color:var(--powder);border-bottom:1px solid rgba(239,184,200,.32)}
+.hero-link span{font-family:var(--serif);font-size:1.1rem}
+:focus-visible{outline:2px solid var(--powder);outline-offset:5px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .hero-form{position:relative}
 .hero-form .wl{margin-top:0}
 .hero-form .wl-note{
   margin-top:0;margin-bottom:1.2rem;
-  font-family:var(--sans);font-size:.62rem;font-weight:500;
-  letter-spacing:.18em;text-indent:.18em;text-transform:uppercase;
+  font-family:var(--sans);font-size:.75rem;font-weight:500;
+  letter-spacing:0;
   color:rgba(246,239,233,.55);
 }
 .hero-form .wl-note b{font-weight:600;color:rgba(246,239,233,.78)}
@@ -616,6 +621,12 @@ h1 em{font-style:normal;color:var(--powder)}
 .prom .st{font-family:var(--serif);font-style:italic;font-size:1rem;color:var(--gold)}
 .prom .tt{font-weight:700;font-size:.96rem;color:var(--cream)}
 .prom .ds{font-weight:400;font-size:.9rem;line-height:1.8;color:var(--cream-soft)}
+.journey .prom{grid-template-columns:1.6rem 1fr;padding-bottom:1.2rem;border-bottom:1px solid var(--hairline-soft)}
+.journey .prom:last-child{border-bottom:0;padding-bottom:0}
+.journey .tt{display:block;margin-bottom:.35rem}
+.journey .tt small{font:italic .94rem var(--serif);color:var(--powder);margin-right:.7rem}
+.journey .ds{display:block}
+.journey-note{margin-top:1.4rem;color:var(--cream-mute);font-size:.78rem;line-height:1.8}
 .stamp{
   margin-top:clamp(2.6rem,6vh,3.4rem);
   text-align:center;
@@ -625,7 +636,7 @@ h1 em{font-style:normal;color:var(--powder)}
 }
 
 
-/* ---------- moon countdown ---------- */
+/* ---------- decorative moon, not a launch countdown ---------- */
 .moon-wrap{display:flex;justify-content:center}
 .moon{width:118px;height:118px;filter:drop-shadow(0 0 26px rgba(242,233,225,.16))}
 .moon-line{
@@ -644,6 +655,7 @@ h1 em{font-style:normal;color:var(--powder)}
   font-family:var(--serif);font-weight:500;font-size:1rem;letter-spacing:.1em;color:var(--gold);
   font-variant-numeric:tabular-nums;
 }
+.relaunch-status{margin-top:.6rem;text-align:center;font-size:.8rem;color:var(--cream-mute)}
 
 /* ---------- d-day finale ---------- */
 .dday{margin-top:clamp(2.6rem,6vh,3.4rem)}
@@ -720,7 +732,16 @@ h1 em{font-style:normal;color:var(--powder)}
 .sig-row .v::before{content:"";flex:1;border-bottom:1px dotted rgba(33,28,35,.3);transform:translateY(-3px)}
 .sig-row .v b{
   font-family:'Bodoni Moda',var(--kr);font-weight:600;font-size:.98rem;letter-spacing:.02em;color:var(--ink);
-  font-variant-numeric:tabular-nums;white-space:nowrap;
+  font-variant-numeric:tabular-nums;text-align:right;
+}
+@media(max-width:360px){
+  .hero-date{flex-wrap:wrap;justify-content:center}
+  .sig-panel{padding:1.2rem 1rem}
+  .sig-row .k i{display:none}
+  .sig-row .v b{font-size:.88rem}
+  .wl-row{border-radius:22px;flex-direction:column;align-items:stretch;padding:.6rem}
+  .wl input[type=email]{padding-inline:.6rem;flex:auto;width:100%}
+  .numero{font-size:.6rem;letter-spacing:.28em}
 }
 .gauge{display:none}
 .sig-verdict{
@@ -823,47 +844,47 @@ h1 em{font-style:normal;color:var(--powder)}
     <div class="hero-veil" aria-hidden="true"></div>
     <div class="hero-brand fade d1">
       <div class="mark-m" role="img" aria-label="MEVE"></div>
-      <p class="hero-date"><span>App Launch</span><i aria-hidden="true"></i><b>8.1 · 오후 6시</b></p>
+      <p class="hero-date"><span>Coming Soon</span><i aria-hidden="true"></i><b>출시 준비 중</b></p>
     </div>
     <div class="hero-mid fade d2">
       <h1>내 피부엔 뭐가 <em>맞는지</em>,<br>내 얼굴엔 뭐가 <em>어울리는지</em></h1>
-      <p class="hero-sub">이제 감이 아니라, 데이터가 답해요.</p>
+      <p class="hero-sub">내 기록과 취향으로, 나에게 맞는 선택을 찾아요.</p>
+      <a class="hero-link" href="#journey">미브 알아보기 <span aria-hidden="true">↓</span></a>
     </div>
     <div class="hero-form fade d3">
     <form class="wl" id="waitlist" novalidate>
       <p class="wl-count" id="wlCount"></p>
-      <p class="wl-teaser"><span id="wlTeaser">지금 <b>No.100</b> 안에 들면, 프리미엄 3개월 무료</span></p>
-      <p class="wl-note"><b>8.1 오후 6시</b> 오픈 · 입장 줄 앞 <b>500명</b>부터 입장</p>
+      <p class="wl-teaser"><span id="wlTeaser">미브가 시작되면, <b>가장 먼저 소식으로.</b></span></p>
+      <p class="wl-note">출시 일정과 이용 안내는 준비가 끝나면 알려드려요.</p>
+      <label class="sr-only" for="wlEmail">출시 소식을 받을 이메일 주소</label>
       <div class="wl-row">
-        <input type="email" id="wlEmail" name="email" inputmode="email" autocomplete="email" placeholder="이메일 주소" required>
-        <button type="submit" id="wlBtn"><span>내 티켓 번호 받기</span><span class="ar">→</span></button>
+        <input type="email" id="wlEmail" name="email" inputmode="email" autocomplete="email" placeholder="이메일 주소" aria-describedby="wlError" required>
+        <button type="submit" id="wlBtn"><span>출시 소식 받기</span><span class="ar" aria-hidden="true">→</span></button>
       </div>
       <p class="beta-closed">
-        <span class="tag">마감</span>
-        <span><b>베타 테스터 30인</b> 모집은 마감됐어요</span>
+        <span class="tag">안내</span>
+        <span>이미 신청했다면 <b>같은 이메일</b>로 확인해요</span>
       </p>
-      <p class="wl-error" id="wlError"></p>
+      <p class="wl-error" id="wlError" role="alert"></p>
     </form>
 
     <section class="done" id="done" aria-live="polite">
-      <article class="ptk" aria-label="나의 Beauty DNA 티켓">
-        <div class="ptk-head"><span>MEVE</span><i>Beauty DNA Ticket</i><span>Admit One</span></div>
+      <article class="ptk" aria-label="나의 MEVE 신청 티켓">
+        <div class="ptk-head"><span>MEVE</span><i>Your MEVE Ticket</i><span>Coming Soon</span></div>
         <p class="t-no" id="doneNo">No.—</p>
         <p class="t-batch" id="tBatch"></p>
         <div class="ptk-tear" aria-hidden="true"></div>
         <div class="ptk-stub">
           <i class="bars" aria-hidden="true"></i>
-          <span>MV-0801</span>
-          <b>8.1</b>
+          <span>MEVE · YOUR NUMBER</span>
+          <b>Coming soon</b>
         </div>
       </article>
-      <p class="t-keep">런칭하면 이 번호가 당신의 앱 프로필에 그대로 새겨져요.<br>이 번호의 주인은 <b>세상에 당신 한 명</b>이에요.</p>
+      <p class="t-keep">출시 소식 신청을 확인했어요.<br>기존 신청자는 <b>신청 번호와 초대 기록</b>을 이어가요.</p>
       <hr class="t-rule">
-      <p class="boost">친구가 한 명 올 때마다 입장 줄에서 <b>10칸 앞으로</b> 이동해요.<br>번호는 그대로, 입장만 빨라져요.</p>
+      <p class="boost">이전에 받은 <b>프리미엄·얼리버드·초대 혜택</b>은 유지돼요.<br>새 일정과 이용 방법은 별도로 안내할게요.</p>
       <div class="tiers">
-        <p class="t"><b>1명</b> = 입장 10칸 앞으로</p>
-        <p class="t"><b>3명</b> = 8.1 오후 6시 첫 입장 확정</p>
-        <p class="t"><b>10명</b> = 프리미엄 3개월 추가</p>
+        <p class="t">친구에게도 미브를 소개해 주세요.</p>
       </div>
       <div class="done-btns">
         <button type="button" id="shareBtn">내 초대 링크 공유하기</button>
@@ -876,51 +897,51 @@ h1 em{font-style:normal;color:var(--powder)}
 
   <!-- narrative -->
   <section class="narr">
-    <p class="numero rv">N°01 · Une Question</p>
+    <p class="numero rv">N°01 · A Little More You</p>
     <p class="lead">
-      우리는 피부에 대해 많은 걸 알아요.<br>
-      유행 성분, 화제의 제품, 요즘 뜬다는 시술까지.
-      정작 모르는 건 하나예요.
+      해보고 싶은 메이크업은 저장해뒀는데,<br>
+      오늘 내 피부에, 내가 가진 제품으로<br>
+      어디서부터 시작하면 좋을까요?
     </p>
 
-    <p class="lead-punch"><em>내 피부.</em></p>
+    <p class="lead-punch"><em>내 피부에서, 나의 취향까지.</em></p>
 
     <p class="lead">
-      생리주기는 앱으로 챙기고, MBTI는 퍼센트까지 알면서
-      피부는 아직도 별점 4.8과 남의 후기로 골라요.<br>
-      나의 답은, 어디에도 없으니까요.
+      좋아하는 분위기와 편안했던 피부 느낌,<br>
+      잘 썼던 제품과 아쉬웠던 순간을 함께 모아요.<br>
+      다음 선택을 위한, 나만의 뷰티 노트가 되도록요.
     </p>
 
     <div class="pivot rv">
-      <p class="pivot-en">Is beauty a matter of instinct?</p>
-      <p class="pivot-kr">아름다움은 정말,<br>'감'의 영역일까요?</p>
+      <p class="pivot-en">From your skin, to your look.</p>
+      <p class="pivot-kr">원하는 그 분위기를,<br>나의 버전으로.</p>
     </div>
 
-    <div class="sig-panel rv" aria-label="미브가 읽는 신호 예시">
-      <div class="sig-head"><span>La Carte</span><i>미브가 읽는 것들 · sample</i></div>
-      <div class="sig-row"><span class="k">수면 <i>Sleep</i></span><span class="v"><b data-final="05h 32m">· · ·</b></span></div>
-      <div class="sig-row"><span class="k">오늘 자외선 <i>UV</i></span><span class="v"><b data-final="지수 7 · 높음">· · ·</b></span></div>
-      <div class="sig-row"><span class="k">생리주기 <i>Cycle</i></span><span class="v"><b data-final="D–3 · 황체기">· · ·</b></span></div>
-      <div class="sig-row"><span class="k">성분 궁합 <i>INCI</i></span><span class="v"><b data-final="레티놀 × AHA 충돌">· · ·</b></span></div>
-      <div class="sig-row"><span class="k">트러블 패턴 <i>Pattern</i></span><span class="v"><b data-final="턱 · 3회 반복">· · ·</b></span></div>
-      <p class="sig-verdict"><span>MEVE</span>오늘 밤은 각질 케어를 쉬고, 장벽 회복이에요</p>
+    <div class="sig-panel rv" aria-label="직접 적는 뷰티 노트 예시">
+      <div class="sig-head"><span>My Beauty Note</span><i>직접 기록한 예시</i></div>
+      <div class="sig-row"><span class="k">피부 느낌 <i>Skin</i></span><span class="v"><b>볼이 조금 건조해요</b></span></div>
+      <div class="sig-row"><span class="k">좋아하는 룩 <i>Look</i></span><span class="v"><b>맑은 핑크</b></span></div>
+      <div class="sig-row"><span class="k">원하는 표현 <i>Finish</i></span><span class="v"><b>가볍고 촉촉하게</b></span></div>
+      <div class="sig-row"><span class="k">준비 시간 <i>Time</i></span><span class="v"><b>10분</b></span></div>
+      <div class="sig-row"><span class="k">써본 뒤 <i>Journal</i></span><span class="v"><b>오후에 코 옆 들뜸</b></span></div>
+      <p class="sig-verdict"><span>MEVE</span>오늘 남긴 경험이 다음 준비의 힌트가 돼요.</p>
     </div>
 
     <p class="signals">
-      당신도 몰랐던 신호들이 <b>교차 분석</b>되는 순간,<br>
-      내 피부에 정말 맞는 스킨케어가 보이기 시작해요.<br>
-      그리고 진단은 시작일 뿐이에요.
+      <b>피부 기록과 룩 준비가 한 흐름으로.</b><br>
+      좋아하는 룩을 고르고, 기초부터 입술까지 준비해요.<br>
+      실제로 쓴 제품과 하루 뒤 느낌도 남겨요.
     </p>
 
     <p class="decl">
-      <span class="mv">MEVE</span>는 진단에서 멈추지 않습니다.
-      당신이 되고 싶은 모습까지의 거리를 계산하고,
-      거기까지 가는 길을 <em>설계</em>합니다.
+      <span class="mv">MEVE</span>에서 원하는 모습을 찾고,
+      내 피부와 취향을 참고해 준비하고,
+      써본 경험으로 <em>나의 방법</em>을 만들어가요.
     </p>
 
     <div class="cred">
-      <p class="items"><b>전문가 자문</b> · 피부과학 문헌 · INCI 성분 데이터</p>
-      <p class="note">미브의 답은 감이 아니라, 검증된 근거 위에서 만들어져요.</p>
+      <p class="items"><b>내가 알려준 정보</b> · 내가 고른 룩 · 내가 써본 경험</p>
+      <p class="note">기록만으로 피부 변화의 원인을 단정하지 않아요. AI 안내는 미용 목적의 참고 정보이며 의료 진단이나 객관적 피부 측정이 아니에요.</p>
     </div>
 
     <!-- founders · flip SHOW_FOUNDERS to true on announcement day -->
@@ -930,73 +951,73 @@ h1 em{font-style:normal;color:var(--powder)}
     </div>
   </section>
 
+  <section class="promise journey rv" id="journey" aria-label="MEVE의 네 화면">
+    <p class="numero">N°02 · Your Daily Chapters</p>
+    <div class="prom-rows">
+      <div class="prom"><span class="st">i.</span><p><span class="tt"><small>Today</small>오늘의 나에서 시작해요</span><span class="ds">오늘 피부 느낌을 남기고, 일정에 맞춰 준비할 룩을 골라요. 사용한 뒤의 느낌도 이어서 기록해요.</span></p></div>
+      <div class="prom"><span class="st">ii.</span><p><span class="tt"><small>Skin</small>피부와 제품의 기록을 모아요</span><span class="ds">루틴과 피부 기록을 돌아보고, 쓰는 제품과 반응을 살펴봐요. 기록한 날짜와 출처도 함께 확인해요.</span></p></div>
+      <div class="prom"><span class="st">iii.</span><p><span class="tt"><small>Look</small>좋아하는 룩을, 나의 버전으로</span><span class="ds">영감을 저장하고, 내 피부 느낌과 가진 제품을 참고해 여섯 단계로 준비해요. 직접 해본 룩과 방법도 나눠요.</span></p></div>
+      <div class="prom"><span class="st">iv.</span><p><span class="tt"><small>Me</small>나를 알아가는 뷰티 프로필</span><span class="ds">피부와 메이크업 취향을 직접 알려주세요. 모르는 항목은 비워둬도 괜찮아요. 파우치와 저장한 룩도 여기서 다시 만나요.</span></p></div>
+    </div>
+    <p class="journey-note">이 흐름으로 출시를 준비하고 있어요. 이용 가능한 기능과 시작 방법은 준비가 끝나면 안내할게요.</p>
+  </section>
 
   <section class="rv">
     <!-- the ticket -->
     <div class="ticket-wrap">
-      <p class="numero" style="margin-bottom:1.3rem">N°02 · The Ticket</p>
-      <article class="ticket" id="ticket" aria-label="웨이트리스트 혜택">
+      <p class="numero" style="margin-bottom:1.3rem">N°03 · A Note For You</p>
+      <article class="ticket" id="ticket" aria-label="기존 신청 기록과 혜택 안내">
         <i class="glint" aria-hidden="true"></i>
         <div class="ticket-in">
-          <div class="ticket-head"><span>MEVE Waitlist</span><span class="adm">Admit One</span></div>
-          <p class="ticket-title">What your number gets you</p>
+          <div class="ticket-head"><span>MEVE Waitlist</span><span class="adm">Coming Soon</span></div>
+          <p class="ticket-title">Your story stays with us</p>
           <div class="perks">
             <div class="perk">
-              <p class="big"><span id="perkNum">100</span><small id="perkUnit">limited</small></p>
+              <p class="big">01<small>benefits</small></p>
               <div>
-                <p class="tt" id="perk100tt">No.100 안에 들면, 프리미엄 3개월 무료<span class="tag">First 100</span></p>
-                <p class="ds" id="perk100ds">얼리버드 구독가도 <b>평생 고정</b>돼요. 지금 100자리가 채워지고 있어요.</p>
+                <p class="tt">이미 받은 혜택은 그대로예요</p>
+                <p class="ds">기존 캠페인에서 부여된 <b>프리미엄 이용권·얼리버드 구독·초대 혜택</b>은 유지돼요. 적용 방법은 출시 안내에서 확인해요.</p>
               </div>
             </div>
             <div class="perk">
-              <p class="big">No.<small>forever</small></p>
+              <p class="big">No.<small>your ticket</small></p>
               <div>
-                <p class="tt">번호는 영구 소장</p>
-                <p class="ds">티켓 번호가 앱 프로필에 <b>파운딩 넘버</b>로 새겨져요. 미브가 커질수록, 앞 번호는 다시 나오지 않아요.</p>
+                <p class="tt">신청 기록을 이어가요</p>
+                <p class="ds">이미 신청했다면 <b>같은 이메일</b>을 입력해 주세요. 기존 티켓 번호와 초대 기록을 확인할 수 있어요.</p>
               </div>
             </div>
             <div class="perk">
-              <p class="big">+10<small>per friend</small></p>
+              <p class="big">03<small>next news</small></p>
               <div>
-                <p class="tt">친구 한 명, 입장 줄 열 칸 앞으로</p>
-                <p class="ds">번호는 그대로, 입장 줄만 앞으로 당겨져요. 3명이면 <b>8.1 오후 6시 첫 입장</b> 확정이에요.</p>
+                <p class="tt">다음 소식은 이메일로</p>
+                <p class="ds">출시 일정과 이용 가능한 기능을 안내해요. <b>신규 혜택과 구독 조건</b>도 확정된 내용으로 알려드릴게요.</p>
               </div>
             </div>
           </div>
         </div>
-        <div class="stub"><span>No. MV-0801</span><b>8.1</b></div>
+        <div class="stub"><span>MEVE · COMING SOON</span><b>출시 준비 중</b></div>
       </article>
     </div>
   </section>
 
 
-  <!-- the promise -->
-  <section class="promise rv" aria-label="미브의 약속">
-    <p class="numero">N°03 · The Promise</p>
-    <div class="prom-rows">
-      <div class="prom"><span class="st">i.</span><p><span class="tt">이유</span> &nbsp;<span class="ds">왜 안 맞았는지, 이유부터 알게 돼요</span></p></div>
-      <div class="prom"><span class="st">ii.</span><p><span class="tt">계산</span> &nbsp;<span class="ds">'감'이라 불리던 것들이 데이터로 계산돼요</span></p></div>
-      <div class="prom"><span class="st">iii.</span><p><span class="tt">시술</span> &nbsp;<span class="ds">시술 정보까지, 광고가 아니라 내 피부 데이터가 기준이 돼요</span></p></div>
-      <div class="prom"><span class="st">iv.</span><p><span class="tt">사람</span> &nbsp;<span class="ds">광고 없는 진짜 이야기들과 연결돼요</span></p></div>
-    </div>
-  </section>
-
-  <section class="dday rv" aria-label="런칭까지 남은 시간">
-    <p class="numero">N°04 · D-Day</p>
+  <section class="dday rv" aria-label="출시 준비 안내">
+    <p class="numero">N°04 · See You Soon</p>
     <div class="dday-in" id="cd">
       <div class="moon-wrap">
-        <svg class="moon" viewBox="0 0 120 120" role="img" aria-label="런칭까지 차오르는 달">
+        <svg class="moon" viewBox="0 0 120 120" aria-hidden="true">
           <circle cx="60" cy="60" r="57" fill="none" stroke="rgba(199,167,108,.35)" stroke-width="1"/>
           <clipPath id="moonClip"><circle cx="60" cy="60" r="48"/></clipPath>
           <g clip-path="url(#moonClip)">
             <circle cx="60" cy="60" r="48" fill="#F2E9E1"/>
-            <circle id="moonShade" cx="60" cy="60" r="50" fill="#241A26"/>
+            <circle id="moonShade" cx="12" cy="60" r="50" fill="#241A26"/>
           </g>
         </svg>
       </div>
-      <p class="moon-line">달이 차오르면, 첫 500명의 문이 열려요</p>
-      <p class="moon-count"><b id="cdD">D–14</b><span id="cdT">00:00:00</span></p>
-      <button type="button" class="up" id="upBtn">내 티켓 번호 받기 <span class="ar">↑</span></button>
+      <p class="moon-line">좋아하는 나를 만날 준비를 해요.</p>
+      <p class="moon-count"><b>A little closer.</b></p>
+      <p class="relaunch-status">출시 준비 중 · 일정은 추후 안내해요</p>
+      <button type="button" class="up" id="upBtn">출시 소식 받기 <span class="ar" aria-hidden="true">↑</span></button>
     </div>
   </section>
 
@@ -1006,7 +1027,7 @@ h1 em{font-style:normal;color:var(--powder)}
     <img class="orn" src="/assets/logo-mark.png" alt="" aria-hidden="true" width="893" height="893" loading="lazy" decoding="async">
     <footer class="foot">
       <p>© 2026 Meve<br>
-      <a href="mailto:contact@meve.beauty">contact@meve.beauty</a> · <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a></p>
+      <a href="mailto:contact@meve.beauty">contact@meve.beauty</a> · <a href="/support/">Help</a> · <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a></p>
     </footer>
   </div>
 </main>
@@ -1014,7 +1035,7 @@ h1 em{font-style:normal;color:var(--powder)}
 <script>
 (function(){
   /* ---- config ---- */
-  const SHOW_FOUNDERS = false;           // flip to true on announcement day (7/23)
+  const SHOW_FOUNDERS = false;
   const SITE = 'https://meve.beauty';
   const SB = 'https://auyqgcppbrhjthvkkwwb.supabase.co';
   const KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF1eXFnY3BwYnJoanRodmtrd3diIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzOTY4NTAsImV4cCI6MjA4ODk3Mjg1MH0.3VjInUooRD1TahI9tgFX3G6yE5A97yAJ2sZH2YMmXLY';
@@ -1025,29 +1046,9 @@ h1 em{font-style:normal;color:var(--powder)}
 
   if(SHOW_FOUNDERS) $('founders').classList.add('on');
 
-  /* ---- launch countdown: waxing moon ---- */
-  const LAUNCH = new Date('2026-08-01T18:00:00+09:00').getTime();
-  const OPENED = new Date('2026-07-18T00:00:00+09:00').getTime();
-  const p2 = n => String(n).padStart(2, '0');
+  /* Decorative moon only: no date is promised until relaunch is confirmed. */
   const shade = document.getElementById('moonShade');
-  var moonCharging = false;
-  const tick = () => {
-    const now = Date.now();
-    const left = LAUNCH - now;
-    const prog = Math.min(1, Math.max(0, (now - OPENED) / (LAUNCH - OPENED)));
-    if(shade && !moonCharging) shade.setAttribute('cx', String(60 - prog * 135));
-    if(left <= 0){
-      $('cdD').textContent = 'D-Day';
-      $('cdT').textContent = 'Now Open';
-      $('cd').classList.add('live');
-      clearInterval(timer);
-      return;
-    }
-    $('cdD').textContent = 'D–' + Math.floor(left / 86400000);
-    $('cdT').textContent = p2(Math.floor(left%86400000/3600000)) + ':' + p2(Math.floor(left%3600000/60000)) + ':' + p2(Math.floor(left%60000/1000));
-  };
-  tick();
-  const timer = setInterval(tick, 1000);
+  let moonCharging = false;
 
   /* ---- scroll reveal (house primitive) ---- */
   const io = new IntersectionObserver(es => {
@@ -1062,14 +1063,12 @@ h1 em{font-style:normal;color:var(--powder)}
   }, {threshold:.12});
   document.querySelectorAll('.rv').forEach(el => io.observe(el));
 
-  /* ---- signal panel: measuring sequence ---- */
+  /* ---- personal note: gently reveal the illustrative entries ---- */
   function revealSignals(panel){
     const rows = panel.querySelectorAll('.sig-row');
     rows.forEach((row, i) => {
       setTimeout(() => {
         row.classList.add('on');
-        const b = row.querySelector('b[data-final]');
-        if(b) setTimeout(() => { b.textContent = b.dataset.final; }, 260);
       }, 300 + i * 190);
     });
     setTimeout(() => panel.classList.add('read'), 300 + rows.length * 190 + 350);
@@ -1079,7 +1078,7 @@ h1 em{font-style:normal;color:var(--powder)}
   function chargeMoon(){
     if(moonCharging || !shade || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     moonCharging = true;
-    const target = Math.min(1, Math.max(0, (Date.now() - OPENED) / (LAUNCH - OPENED)));
+    const target = 48 / 135;
     const t0 = performance.now(), dur = 1500;
     const step = t => {
       const p = Math.min(1, (t - t0) / dur);
@@ -1128,10 +1127,8 @@ h1 em{font-style:normal;color:var(--powder)}
     const tb = $('tBatch');
     if(!tb || !isFinite(en)) return;
     tb.classList.remove('yes', 'no');
-    tb.classList.add('on', en <= 500 ? 'yes' : 'no');
-    tb.textContent = en <= 500
-      ? '\u2726 8.1 \uC624\uD6C4 6\uC2DC \uCCAB \uC785\uC7A5 500\uBA85 \uC548\uC774\uC5D0\uC694 \u00B7 \uC790\uB9AC\uAC00 \uD655\uC815\uB410\uC5B4\uC694'
-      : '8.1 \uC624\uD6C4 6\uC2DC \uCCAB \uC785\uC7A5\uC740 \uC904 \uC55E 500\uBA85 \u00B7 \uCE5C\uAD6C \uCD08\uB300\uB85C \uC904\uC744 \uB2F9\uACA8\uC694';
+    tb.classList.add('on', 'yes');
+    tb.textContent = '초대가 반영된 대기 순번 No.' + en + ' · 일정은 별도 안내해요';
   };
   /* returning visitor: refresh from the server (invites may have moved them up) */
   const refreshStatus = () => {
@@ -1183,23 +1180,13 @@ h1 em{font-style:normal;color:var(--powder)}
   /* ---- live count (auto-appears past threshold) ---- */
   function paintCount(n){
       if(typeof n === 'number' && n >= 30){
-        var _el = $('wlCount'), _txt = '지금 ' + n.toLocaleString() + '명이 함께 기다리는 중';
+        var _el = $('wlCount'), _txt = '지금까지 ' + n.toLocaleString() + '명이 소식을 신청했어요';
         if(_el.textContent !== _txt){ _el.textContent = _txt; _el.classList.remove('bump'); void _el.offsetWidth; _el.classList.add('bump'); }
         _el.classList.add('on');
       }
-      /* First 100 sold out: swap the incentive ladder to the 500-door */
-      if(typeof n === 'number' && n >= 500){
-        $('wlTeaser').innerHTML = '<b>First 100</b> · 첫 입장 <b>500</b> 마감 · 지금은 <b>2차 웨이브</b>예요';
-        $('perk100tt').innerHTML = '첫 입장 500, 마감됐어요<span class="tag">Closed</span>';
-        $('perkNum').textContent = '500'; $('perkUnit').textContent = 'closed';
-        $('perk100ds').innerHTML = '8.1 오후 6시 첫 입장 <b>500자리</b>가 다 찼어요. 지금 신청하면 <b>2차 웨이브</b>로, 첫 입장 뒤 순차 입장돼요. 친구 초대로 줄을 당기면 더 빨리 들어와요.';
-      } else if(typeof n === 'number' && n >= 100){
-        $('wlTeaser').innerHTML = '<b>First 100</b> 마감 · 8.1 오후 6시 첫 입장 <b>500</b>자리는 아직 열려 있어요';
-        $('perk100tt').innerHTML = 'First 100, 마감됐어요<span class="tag">Closed</span>';
-        $('perkNum').textContent = '500'; $('perkUnit').textContent = 'limited';
-        $('perk100ds').innerHTML = '프리미엄 3개월 무료와 <b>평생 고정</b> 얼리버드가는 첫 100명에게 돌아갔어요. 다음 문은 <b>8.1 오후 6시 첫 입장 500</b>이에요.';
-      }
+      // Signup totals are informational; they do not offer new launch benefits.
   }
+
   function refreshCount(){
     fetch(SB + '/rest/v1/rpc/waitlist_count', {method:'POST', headers:H, body:'{}'}).then(r => r.json()).then(paintCount).catch(() => {});
   }
@@ -1218,14 +1205,17 @@ h1 em{font-style:normal;color:var(--powder)}
       body: JSON.stringify({p_email: email, p_beta: beta})
     });
 
-  const btnHome = '<span>내 티켓 번호 받기</span><span class="ar">→</span>';
+  const btnHome = '<span>출시 소식 받기</span><span class="ar" aria-hidden="true">→</span>';
 
   form.addEventListener('submit', async e => {
     e.preventDefault();
     err.classList.remove('on');
+    $('wlEmail').removeAttribute('aria-invalid');
     const email = $('wlEmail').value.trim();
     if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){
       err.textContent = '이메일 주소를 다시 확인해 주세요.';
+      $('wlEmail').setAttribute('aria-invalid', 'true');
+      $('wlEmail').focus();
       err.classList.add('on');
       return;
     }
@@ -1288,7 +1278,7 @@ h1 em{font-style:normal;color:var(--powder)}
       x.fillStyle = '#C7A76C';
       x.font = '600 26px "Pretendard Variable", sans-serif';
       x.textAlign = 'center'; x.letterSpacing = '8px';
-      x.fillText('APP LAUNCH · 8.1 · 6PM KST', W/2, 300 + h + 46);
+      x.fillText('MEVE · COMING SOON', W/2, 300 + h + 46);
       x.letterSpacing = '0px';
     }catch(e){}
     /* the ticket */
@@ -1306,10 +1296,10 @@ h1 em{font-style:normal;color:var(--powder)}
     x.fillText('MEVE', -tw/2 + mg, hb);
     x.textAlign = 'center'; x.fillStyle = '#A79CA3';
     x.font = '500 22px "Pretendard Variable", sans-serif'; x.letterSpacing = '5px';
-    x.fillText('BEAUTY DNA TICKET', 0, hb - 1);
+    x.fillText('YOUR MEVE TICKET', 0, hb - 1);
     x.textAlign = 'right'; x.fillStyle = '#C25B7C';
     x.font = '600 26px "Bodoni Moda", serif'; x.letterSpacing = '6px';
-    x.fillText('ADMIT ONE', tw/2 - mg, hb);
+    x.fillText('COMING SOON', tw/2 - mg, hb);
     x.letterSpacing = '0px';
     x.strokeStyle = 'rgba(33,28,35,.16)'; x.lineWidth = 2;
     x.beginPath(); x.moveTo(-tw/2 + mg - 8, hb + 40); x.lineTo(tw/2 - mg + 8, hb + 40); x.stroke();
@@ -1324,16 +1314,11 @@ h1 em{font-style:normal;color:var(--powder)}
     x.font = '600 ' + fs + 'px "Bodoni Moda", serif';
     x.fillStyle = '#211C23';
     x.fillText(label, 0, 50);
-    /* batch line \u2014 entry queue position (boosted), not the founding number */
+    /* Keep the saved entry number; relaunch admission timing is not confirmed. */
     const n = parseInt(store.get('mv-wl-entry') || pos, 10);
-    x.font = '700 34px "Pretendard Variable", sans-serif';
-    if(isFinite(n) && n <= 500){
-      x.fillStyle = '#8C6B2F';
-      x.fillText('\u2726 8.1 18:00 \uCCAB 500\uBA85 \u2014 \uC790\uB9AC \uD655\uC815', 0, 188);
-    }else{
-      x.fillStyle = '#C25B7C';
-      x.fillText('8.1 18:00 \uCCAB 500\uBA85 \u2014 \uCD08\uB300\uB85C \uC904\uC744 \uB2F9\uACA8\uC694', 0, 188);
-    }
+    x.font = '700 30px "Pretendard Variable", sans-serif';
+    x.fillStyle = '#8C6B2F';
+    x.fillText(isFinite(n) ? '대기 순번 No.' + n + ' · 일정 추후 안내' : '출시 소식 신청을 확인했어요', 0, 188);
     /* tear line + punches */
     const ty = th/2 - 128;
     x.strokeStyle = 'rgba(33,28,35,.3)'; x.lineWidth = 4; x.setLineDash([18, 14]);
@@ -1349,9 +1334,9 @@ h1 em{font-style:normal;color:var(--powder)}
     bars.forEach((w, i) => { if(i % 2 === 0) x.fillRect(bx, ty + 30, w, 64); bx += w + 3; });
     x.textAlign = 'right';
     x.fillStyle = '#211C23'; x.font = '600 40px "Bodoni Moda", serif';
-    x.fillText('8.1', tw/2 - 64, ty + 72);
+    x.fillText('MEVE', tw/2 - 64, ty + 72);
     x.fillStyle = '#8F848B'; x.font = '500 24px "Pretendard Variable", sans-serif'; x.letterSpacing = '4px';
-    x.fillText('MV-0801', tw/2 - 150, ty + 70);
+    x.fillText('YOUR NUMBER', tw/2 - 220, ty + 70);
     x.letterSpacing = '0px';
     x.restore();
     /* site line */
@@ -1381,7 +1366,7 @@ h1 em{font-style:normal;color:var(--powder)}
   /* ---- share ---- */
   $('shareBtn').addEventListener('click', async () => {
     const url = myLink();
-    const data = {title:'MEVE', text:'아름다움은 정말, 감의 영역일까요? 8.1 오후 6시 MEVE', url};
+    const data = {title:'MEVE', text:'좋아하는 나를, 나의 방법으로. MEVE의 출시 소식을 함께 기다려요.', url};
     if(navigator.share){
       try{ await navigator.share(data); return; }catch(e){}
     }
