@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>MEVE · 내 피부에 맞는 것, 내 얼굴에 어울리는 것</title>
-<meta name="description" content="오늘의 피부, 좋아하는 분위기, 내가 가진 제품. 나를 알아가고 원하는 룩을 준비하는 MEVE가 출시를 준비하고 있어요.">
+<meta name="description" content="피부 기록과 화장품 반응, 원하는 룩을 한곳에. iPhone에서 MEVE를 시작해요. 초기에는 기존 자격에 따라 순차 입장해요.">
 <meta property="og:title" content="MEVE · 내 피부에 맞는 것, 내 얼굴에 어울리는 것">
-<meta property="og:description" content="피부 기록에서 원하는 룩까지. MEVE의 출시 소식을 받아보세요.">
+<meta property="og:description" content="내 기록과 취향으로, 나에게 맞는 선택을 찾아요. 지금 App Store에서 MEVE를 다운로드하세요. 기본 기능 무료 · AI 이용 횟수 제한 · 순차 입장.">
 <meta property="og:url" content="https://meve.beauty">
 <meta property="og:image" content="https://meve.beauty/assets/logo-lockup-dark.png">
 <meta property="og:image:width" content="2459">
@@ -21,7 +21,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
 /* ============================================================
-   MEVE · relaunch preparation · NUIT — night luxe
+   MEVE · iPhone launch · NUIT — night luxe
    deep plum / cream type / powder accent / didone numerals
    fluid type scale via CSS custom props (clamp)
    ============================================================ */
@@ -81,6 +81,27 @@ img{display:block;max-width:100%;height:auto}
   padding:calc(clamp(1.9rem,4.5vh,3rem) + env(safe-area-inset-top)) clamp(1.4rem,5.5vw,2rem) 0;
 }
 
+
+/* Launch: download first, existing tickets remain one tap away. */
+.hero-actions{position:relative;text-align:center}
+.download-button{display:inline-flex;align-items:center;justify-content:center;gap:.8rem;width:100%;max-width:420px;min-height:58px;padding:.85rem 1.1rem;border:1px solid transparent;border-radius:999px;background:var(--powder);color:var(--ink);font-family:var(--kr);font-size:1rem;font-weight:700;line-height:1.4;transition:background .2s,transform .2s}
+.download-button:hover{background:#F3C6D3;transform:translateY(-1px)}
+.download-button:active{transform:translateY(0)}
+.download-button svg{width:21px;height:25px;flex:none}
+.download-button .download-arrow{font-size:1.25rem;margin-left:.3rem}
+.download-meta{margin-top:.8rem;color:var(--cream-soft);font-size:.74rem}
+.launch-access{max-width:390px;margin:.65rem auto 0;font-size:.75rem;line-height:1.7;color:var(--cream-soft)}
+.launch-links{display:flex;justify-content:center;flex-wrap:wrap;gap:.2rem 1.5rem;margin-top:.7rem}
+.launch-links a{display:inline-flex;align-items:center;min-height:44px;color:var(--powder);font-size:.78rem;text-decoration:underline;text-underline-offset:5px}
+.entry-section{scroll-margin-top:2rem;margin-top:3rem}
+.entry-section h2{font-size:1.4rem;font-weight:600;letter-spacing:-.025em;margin-top:1rem}
+.entry-section .entry-intro{margin:.6rem 0 1.5rem;color:var(--cream-soft);font-size:.88rem}
+.entry-section .hero-form{padding:1.4rem 0;border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline)}
+.entry-section .wl-note{font-size:.8rem;line-height:1.8}
+.entry-section .ticket-wrap{margin-top:2.5rem}
+.download-button.final-download{margin-top:1.5rem}
+@media(max-width:360px){.download-button{font-size:.9rem}.download-meta{font-size:.67rem}}
+@media(prefers-reduced-motion:reduce){.download-button{transition:none}.download-button:hover{transform:none}}
 
 /* ---------- hero: one-screen, comp-B ---------- */
 .hero{
@@ -839,59 +860,26 @@ h1 em{font-style:normal;color:var(--powder)}
 <main class="page">
 
   <!-- hero · one screen ----------------------------------- -->
-  <header class="hero">
+  <header class="hero" aria-label="MEVE iPhone 앱 다운로드">
     <div class="hero-clouds" aria-hidden="true"></div>
     <div class="hero-veil" aria-hidden="true"></div>
     <div class="hero-brand fade d1">
       <div class="mark-m" role="img" aria-label="MEVE"></div>
-      <p class="hero-date"><span>Coming Soon</span><i aria-hidden="true"></i><b>출시 준비 중</b></p>
+      <p class="hero-date"><span>Now on iPhone</span><i aria-hidden="true"></i><b>미브, 지금 시작해요</b></p>
     </div>
     <div class="hero-mid fade d2">
       <h1>내 피부엔 뭐가 <em>맞는지</em>,<br>내 얼굴엔 뭐가 <em>어울리는지</em></h1>
       <p class="hero-sub">내 기록과 취향으로, 나에게 맞는 선택을 찾아요.</p>
       <a class="hero-link" href="#journey">미브 알아보기 <span aria-hidden="true">↓</span></a>
     </div>
-    <div class="hero-form fade d3">
-    <form class="wl" id="waitlist" novalidate>
-      <p class="wl-count" id="wlCount"></p>
-      <p class="wl-teaser"><span id="wlTeaser">미브가 시작되면, <b>가장 먼저 소식으로.</b></span></p>
-      <p class="wl-note">출시 일정과 이용 안내는 준비가 끝나면 알려드려요.</p>
-      <label class="sr-only" for="wlEmail">출시 소식을 받을 이메일 주소</label>
-      <div class="wl-row">
-        <input type="email" id="wlEmail" name="email" inputmode="email" autocomplete="email" placeholder="이메일 주소" aria-describedby="wlError" required>
-        <button type="submit" id="wlBtn"><span>출시 소식 받기</span><span class="ar" aria-hidden="true">→</span></button>
-      </div>
-      <p class="beta-closed">
-        <span class="tag">안내</span>
-        <span>이미 신청했다면 <b>같은 이메일</b>로 확인해요</span>
-      </p>
-      <p class="wl-error" id="wlError" role="alert"></p>
-    </form>
-
-    <section class="done" id="done" aria-live="polite">
-      <article class="ptk" aria-label="나의 MEVE 신청 티켓">
-        <div class="ptk-head"><span>MEVE</span><i>Your MEVE Ticket</i><span>Coming Soon</span></div>
-        <p class="t-no" id="doneNo">No.—</p>
-        <p class="t-batch" id="tBatch"></p>
-        <div class="ptk-tear" aria-hidden="true"></div>
-        <div class="ptk-stub">
-          <i class="bars" aria-hidden="true"></i>
-          <span>MEVE · YOUR NUMBER</span>
-          <b>Coming soon</b>
-        </div>
-      </article>
-      <p class="t-keep">출시 소식 신청을 확인했어요.<br>기존 신청자는 <b>신청 번호와 초대 기록</b>을 이어가요.</p>
-      <hr class="t-rule">
-      <p class="boost">이전에 받은 <b>프리미엄·얼리버드·초대 혜택</b>은 유지돼요.<br>새 일정과 이용 방법은 별도로 안내할게요.</p>
-      <div class="tiers">
-        <p class="t">친구에게도 미브를 소개해 주세요.</p>
-      </div>
-      <div class="done-btns">
-        <button type="button" id="shareBtn">내 초대 링크 공유하기</button>
-        <button type="button" id="saveBtn">티켓 이미지 저장</button>
-        <a id="igBtn" href="https://instagram.com/maison.meve" target="_blank" rel="noopener">인스타그램</a>
-      </div>
-    </section>
+    <div class="hero-actions fade d3">
+      <a class="download-button" href="https://apps.apple.com/kr/app/meve/id6769936891" aria-label="App Store에서 MEVE 다운로드">
+        <svg viewBox="0 0 24 28" fill="none" aria-hidden="true"><rect x="4" y="1.5" width="16" height="25" rx="4" stroke="currentColor" stroke-width="1.5"/><path d="M9 5h6M10 23h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span>App Store에서 다운로드</span><span class="download-arrow" aria-hidden="true">↗</span>
+      </a>
+      <p class="download-meta">iPhone · 기본 기능 무료 · AI 이용 횟수 제한</p>
+      <p class="launch-access">초기에는 기존 티켓·베타·추천·인증된 이벤트 자격에 따라 순차 입장해요. 로그인 후 입장 상태를 확인해 주세요.</p>
+      <div class="launch-links"><a href="#ticket-lookup">기존 티켓·초대 확인</a><a href="/support/">처음이라면, 이용 안내</a></div>
     </div>
   </header>
 
@@ -959,24 +947,67 @@ h1 em{font-style:normal;color:var(--powder)}
       <div class="prom"><span class="st">iii.</span><p><span class="tt"><small>Look</small>좋아하는 룩을, 나의 버전으로</span><span class="ds">영감을 저장하고, 내 피부 느낌과 가진 제품을 참고해 여섯 단계로 준비해요. 직접 해본 룩과 방법도 나눠요.</span></p></div>
       <div class="prom"><span class="st">iv.</span><p><span class="tt"><small>Me</small>나를 알아가는 뷰티 프로필</span><span class="ds">피부와 메이크업 취향을 직접 알려주세요. 모르는 항목은 비워둬도 괜찮아요. 파우치와 저장한 룩도 여기서 다시 만나요.</span></p></div>
     </div>
-    <p class="journey-note">이 흐름으로 출시를 준비하고 있어요. 이용 가능한 기능과 시작 방법은 준비가 끝나면 안내할게요.</p>
+    <p class="journey-note">처음에는 오늘 피부 기록과 써본 제품 하나부터 남겨보세요. 기본 기능은 무료이며 AI 기능에는 이용 횟수 제한이 있어요.</p>
   </section>
 
-  <section class="rv">
-    <!-- the ticket -->
+  <section class="entry-section rv" id="ticket-lookup" aria-labelledby="entry-title">
+    <p class="numero">N°03 · Your Entry</p>
+    <h2 id="entry-title">나의 티켓과 초대 기록</h2>
+    <p class="entry-intro">기존 신청 번호와 초대 기록을 이어가요.<br>실제 입장 가능 여부는 앱에서 로그인한 뒤 확인해 주세요.</p>
+    <div class="hero-form">
+    <form class="wl" id="waitlist" novalidate>
+      <p class="wl-count" id="wlCount"></p>
+      <p class="wl-teaser"><span id="wlTeaser">기존 티켓은 <b>같은 이메일로.</b></span></p>
+      <p class="wl-note" id="entry-note">이미 신청했다면 같은 이메일을 입력해 주세요. 처음 신청하면 대기 등록되며, 등록만으로 즉시 입장할 수 있는 것은 아니에요.</p>
+      <label class="sr-only" for="wlEmail">티켓 확인 또는 대기 등록에 사용할 이메일 주소</label>
+      <div class="wl-row">
+        <input type="email" id="wlEmail" name="email" inputmode="email" autocomplete="email" placeholder="이메일 주소" aria-describedby="entry-note wlError" required>
+        <button type="submit" id="wlBtn"><span>티켓 확인·신청</span><span class="ar" aria-hidden="true">→</span></button>
+      </div>
+      <p class="beta-closed">
+        <span class="tag">안내</span>
+        <span>이미 신청했다면 <b>같은 이메일</b>로 확인해요</span>
+      </p>
+      <p class="wl-error" id="wlError" role="alert"></p>
+    </form>
+
+    <section class="done" id="done" aria-live="polite">
+      <article class="ptk" aria-label="나의 MEVE 신청 티켓">
+        <div class="ptk-head"><span>MEVE</span><i>Your MEVE Ticket</i><span>Your Entry</span></div>
+        <p class="t-no" id="doneNo">No.—</p>
+        <p class="t-batch" id="tBatch"></p>
+        <div class="ptk-tear" aria-hidden="true"></div>
+        <div class="ptk-stub">
+          <i class="bars" aria-hidden="true"></i>
+          <span>MEVE · YOUR NUMBER</span>
+          <b>입장은 앱에서 확인</b>
+        </div>
+      </article>
+      <p class="t-keep">나의 신청 기록을 확인했어요.<br>앱에서도 <b>신청한 이메일</b>로 로그인해 주세요.</p>
+      <hr class="t-rule">
+      <p class="boost">이전에 받은 <b>프리미엄·얼리버드·초대 혜택</b>은<br>앱의 멤버십 화면에서 적용 여부와 기간을 확인해 주세요.</p>
+      <div class="tiers">
+        <p class="t">친구에게도 미브를 소개해 주세요.</p>
+      </div>
+      <div class="done-btns">
+        <button type="button" id="shareBtn">내 초대 링크 공유하기</button>
+        <button type="button" id="saveBtn">티켓 이미지 저장</button>
+        <a id="igBtn" href="https://instagram.com/maison.meve" target="_blank" rel="noopener">인스타그램</a>
+      </div>
+    </section>
+    </div>
     <div class="ticket-wrap">
-      <p class="numero" style="margin-bottom:1.3rem">N°03 · A Note For You</p>
       <article class="ticket" id="ticket" aria-label="기존 신청 기록과 혜택 안내">
         <i class="glint" aria-hidden="true"></i>
         <div class="ticket-in">
-          <div class="ticket-head"><span>MEVE Waitlist</span><span class="adm">Coming Soon</span></div>
+          <div class="ticket-head"><span>MEVE · Your Entry</span><span class="adm">Now on iPhone</span></div>
           <p class="ticket-title">Your story stays with us</p>
           <div class="perks">
             <div class="perk">
               <p class="big">01<small>benefits</small></p>
               <div>
                 <p class="tt">이미 받은 혜택은 그대로예요</p>
-                <p class="ds">기존 캠페인에서 부여된 <b>프리미엄 이용권·얼리버드 구독·초대 혜택</b>은 유지돼요. 적용 방법은 출시 안내에서 확인해요.</p>
+                <p class="ds">기존에 받은 <b>프리미엄 이용권·얼리버드·초대 혜택</b>의 적용 여부와 기간은 앱의 멤버십 화면에서 확인해 주세요.</p>
               </div>
             </div>
             <div class="perk">
@@ -987,22 +1018,22 @@ h1 em{font-style:normal;color:var(--powder)}
               </div>
             </div>
             <div class="perk">
-              <p class="big">03<small>next news</small></p>
+              <p class="big">03<small>your access</small></p>
               <div>
-                <p class="tt">다음 소식은 이메일로</p>
-                <p class="ds">출시 일정과 이용 가능한 기능을 안내해요. <b>신규 혜택과 구독 조건</b>도 확정된 내용으로 알려드릴게요.</p>
+                <p class="tt">입장 상태는 앱에서</p>
+                <p class="ds">초기에는 기존 자격에 따라 순차 입장해요. <b>같은 이메일로 로그인</b>한 뒤 현재 입장 상태를 확인해 주세요.</p>
               </div>
             </div>
           </div>
         </div>
-        <div class="stub"><span>MEVE · COMING SOON</span><b>출시 준비 중</b></div>
+        <div class="stub"><span>MEVE · NOW ON IPHONE</span><b>입장은 앱에서 확인</b></div>
       </article>
     </div>
   </section>
 
 
-  <section class="dday rv" aria-label="출시 준비 안내">
-    <p class="numero">N°04 · See You Soon</p>
+  <section class="dday rv" aria-label="MEVE 다운로드 안내">
+    <p class="numero">N°04 · A Little More You</p>
     <div class="dday-in" id="cd">
       <div class="moon-wrap">
         <svg class="moon" viewBox="0 0 120 120" aria-hidden="true">
@@ -1014,14 +1045,18 @@ h1 em{font-style:normal;color:var(--powder)}
           </g>
         </svg>
       </div>
-      <p class="moon-line">좋아하는 나를 만날 준비를 해요.</p>
-      <p class="moon-count"><b>A little closer.</b></p>
-      <p class="relaunch-status">출시 준비 중 · 일정은 추후 안내해요</p>
-      <button type="button" class="up" id="upBtn">출시 소식 받기 <span class="ar" aria-hidden="true">↑</span></button>
+      <p class="moon-line">오늘의 나부터, 미브에 남겨요.</p>
+      <p class="moon-count"><b>Your story starts here.</b></p>
+      <p class="relaunch-status">iPhone에서 시작해요 · 초기에는 순차 입장</p>
+      <a class="download-button final-download" href="https://apps.apple.com/kr/app/meve/id6769936891" aria-label="App Store에서 MEVE 다운로드">
+        <svg viewBox="0 0 24 28" fill="none" aria-hidden="true"><rect x="4" y="1.5" width="16" height="25" rx="4" stroke="currentColor" stroke-width="1.5"/><path d="M9 5h6M10 23h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span>App Store에서 다운로드</span><span class="download-arrow" aria-hidden="true">↗</span>
+      </a>
+      <p class="download-meta">기본 기능 무료 · AI 이용 횟수 제한</p>
     </div>
   </section>
 
-  <p class="legal rv">신청하시면 확인 메일과 출시 소식을 보내드려요 · <a href="/privacy/">개인정보처리방침</a> · <a href="/terms/">이용약관</a></p>
+  <p class="legal rv">신청 정보의 처리 방법은 아래 문서에서 확인할 수 있어요 · <a href="/privacy/">개인정보처리방침</a> · <a href="/terms/">이용약관</a></p>
 
   <div class="nuit rv">
     <img class="orn" src="/assets/logo-mark.png" alt="" aria-hidden="true" width="893" height="893" loading="lazy" decoding="async">
@@ -1046,7 +1081,7 @@ h1 em{font-style:normal;color:var(--powder)}
 
   if(SHOW_FOUNDERS) $('founders').classList.add('on');
 
-  /* Decorative moon only: no date is promised until relaunch is confirmed. */
+  /* Decorative moon; not an admission countdown. */
   const shade = document.getElementById('moonShade');
   let moonCharging = false;
 
@@ -1107,13 +1142,6 @@ h1 em{font-style:normal;color:var(--powder)}
     });
   }
 
-  /* ---- bottom CTA: back to the form ---- */
-  $('upBtn').addEventListener('click', () => {
-    const target = form.style.display === 'none' ? done : form;
-    target.scrollIntoView({behavior:'smooth', block:'center'});
-    if(form.style.display !== 'none') setTimeout(() => $('wlEmail').focus({preventScroll:true}), 650);
-  });
-
   /* ---- referral source capture (?r=CODE, or set by /heesun redirect) ---- */
   const qs = new URLSearchParams(location.search);
   if(qs.get('r')) store.set('mv-ref-src', qs.get('r'));
@@ -1128,7 +1156,7 @@ h1 em{font-style:normal;color:var(--powder)}
     if(!tb || !isFinite(en)) return;
     tb.classList.remove('yes', 'no');
     tb.classList.add('on', 'yes');
-    tb.textContent = '초대가 반영된 대기 순번 No.' + en + ' · 일정은 별도 안내해요';
+    tb.textContent = '초대가 반영된 대기 순번 No.' + en + ' · 입장은 앱에서 확인해요';
   };
   /* returning visitor: refresh from the server (invites may have moved them up) */
   const refreshStatus = () => {
@@ -1180,7 +1208,7 @@ h1 em{font-style:normal;color:var(--powder)}
   /* ---- live count (auto-appears past threshold) ---- */
   function paintCount(n){
       if(typeof n === 'number' && n >= 30){
-        var _el = $('wlCount'), _txt = '지금까지 ' + n.toLocaleString() + '명이 소식을 신청했어요';
+        var _el = $('wlCount'), _txt = '지금까지 ' + n.toLocaleString() + '명이 대기 등록했어요';
         if(_el.textContent !== _txt){ _el.textContent = _txt; _el.classList.remove('bump'); void _el.offsetWidth; _el.classList.add('bump'); }
         _el.classList.add('on');
       }
@@ -1205,7 +1233,7 @@ h1 em{font-style:normal;color:var(--powder)}
       body: JSON.stringify({p_email: email, p_beta: beta})
     });
 
-  const btnHome = '<span>출시 소식 받기</span><span class="ar" aria-hidden="true">→</span>';
+  const btnHome = '<span>티켓 확인·신청</span><span class="ar" aria-hidden="true">→</span>';
 
   form.addEventListener('submit', async e => {
     e.preventDefault();
@@ -1278,7 +1306,7 @@ h1 em{font-style:normal;color:var(--powder)}
       x.fillStyle = '#C7A76C';
       x.font = '600 26px "Pretendard Variable", sans-serif';
       x.textAlign = 'center'; x.letterSpacing = '8px';
-      x.fillText('MEVE · COMING SOON', W/2, 300 + h + 46);
+      x.fillText('MEVE · NOW ON IPHONE', W/2, 300 + h + 46);
       x.letterSpacing = '0px';
     }catch(e){}
     /* the ticket */
@@ -1299,7 +1327,7 @@ h1 em{font-style:normal;color:var(--powder)}
     x.fillText('YOUR MEVE TICKET', 0, hb - 1);
     x.textAlign = 'right'; x.fillStyle = '#C25B7C';
     x.font = '600 26px "Bodoni Moda", serif'; x.letterSpacing = '6px';
-    x.fillText('COMING SOON', tw/2 - mg, hb);
+    x.fillText('NOW ON IPHONE', tw/2 - mg, hb);
     x.letterSpacing = '0px';
     x.strokeStyle = 'rgba(33,28,35,.16)'; x.lineWidth = 2;
     x.beginPath(); x.moveTo(-tw/2 + mg - 8, hb + 40); x.lineTo(tw/2 - mg + 8, hb + 40); x.stroke();
@@ -1314,11 +1342,11 @@ h1 em{font-style:normal;color:var(--powder)}
     x.font = '600 ' + fs + 'px "Bodoni Moda", serif';
     x.fillStyle = '#211C23';
     x.fillText(label, 0, 50);
-    /* Keep the saved entry number; relaunch admission timing is not confirmed. */
+    /* The saved number is not a guarantee of immediate admission. */
     const n = parseInt(store.get('mv-wl-entry') || pos, 10);
     x.font = '700 30px "Pretendard Variable", sans-serif';
     x.fillStyle = '#8C6B2F';
-    x.fillText(isFinite(n) ? '대기 순번 No.' + n + ' · 일정 추후 안내' : '출시 소식 신청을 확인했어요', 0, 188);
+    x.fillText(isFinite(n) ? '대기 순번 No.' + n + ' · 입장은 앱에서 확인' : '나의 신청 기록을 확인했어요', 0, 188);
     /* tear line + punches */
     const ty = th/2 - 128;
     x.strokeStyle = 'rgba(33,28,35,.3)'; x.lineWidth = 4; x.setLineDash([18, 14]);
@@ -1366,7 +1394,7 @@ h1 em{font-style:normal;color:var(--powder)}
   /* ---- share ---- */
   $('shareBtn').addEventListener('click', async () => {
     const url = myLink();
-    const data = {title:'MEVE', text:'좋아하는 나를, 나의 방법으로. MEVE의 출시 소식을 함께 기다려요.', url};
+    const data = {title:'MEVE', text:'좋아하는 나를, 나의 방법으로. MEVE가 iPhone에서 시작됐어요. 초기에는 기존 자격에 따라 순차 입장해요.', url};
     if(navigator.share){
       try{ await navigator.share(data); return; }catch(e){}
     }
