@@ -134,6 +134,7 @@ select.st.beta_selected{color:#8A6A38;border-color:rgba(176,141,87,.4)}
     <section id="appOps" class="ops" aria-labelledby="opsTitle">
       <div class="ops-head"><div><p class="brand">APP · LIVE</p><h1 id="opsTitle">앱에 들어온 사람들</h1></div><span class="pill adm" id="opsAlert">연결 확인 중</span></div>
       <p class="ops-status" id="opsStatus" role="status" aria-live="polite">앱 가입 정보를 불러오고 있어요.</p>
+      <div class="panel" id="opsPolicy" style="margin-bottom:10px;font-size:12px;color:var(--plum)" hidden></div>
       <div class="tiles app-tiles">
         <div class="tile"><p class="k">가입 완료</p><p class="v" id="opsSignups">—</p><p class="s" id="opsToday">이메일·소셜 인증 완료</p></div>
         <div class="tile"><p class="k">입장 가능</p><p class="v" id="opsAdmitted">—</p><p class="s">티켓·이벤트 자격 확인</p></div>
@@ -322,7 +323,7 @@ select.st.beta_selected{color:#8A6A38;border-color:rgba(176,141,87,.4)}
     $('stBeta').textContent  = d.stats.beta.toLocaleString();
     $('stRef').textContent   = d.stats.referred.toLocaleString();
     $('stAdm').textContent   = APP ? APP.stats.eligible_tickets.toLocaleString() : '—';
-    $('stAdmS').textContent  = '현재 입장 가능 티켓 · 이벤트·추천·베타 포함';
+    $('stAdmS').textContent  = '지금 입장 가능한 티켓 · 기존 이용자 포함';
 
     // chart
     const days = d.daily || [];
@@ -410,6 +411,9 @@ select.st.beta_selected{color:#8A6A38;border-color:rgba(176,141,87,.4)}
   function renderAppOps(){
     if(!APP) return;
     const s=APP.stats;
+    const policy=APP.launch_policy;
+    $('opsPolicy').hidden=!policy;
+    if(policy) $('opsPolicy').textContent='우선 오픈 '+date(policy.opens_at)+' KST · 기존 티켓 1~100번 + 인증 이벤트 '+number(policy.invited_count)+'명 · 기존 입장 계정 '+number(policy.preserved_accounts)+'명 유지 · 나머지 대상은 별도 안내';
     $('opsSignups').textContent=number(s.signups);
     $('opsToday').textContent='오늘 +'+number(s.today_signups)+'명 · 미인증 '+number(s.unverified)+'명';
     $('opsAdmitted').textContent=number(s.admitted);
