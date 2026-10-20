@@ -110,6 +110,9 @@ select.st.beta_selected{color:#8A6A38;border-color:rgba(176,141,87,.4)}
 .ops{margin-bottom:32px}.ops-head{display:flex;justify-content:space-between;align-items:center;gap:12px}.ops-head h1{font-size:24px;letter-spacing:-.04em;margin-top:5px}.ops-status{font-size:12px;color:var(--plum);margin:10px 0 14px;min-height:20px}.ops-status.error{color:#A53D52}.app-tiles{grid-template-columns:repeat(5,minmax(0,1fr))}.app-tiles .tile{padding:15px}.app-tiles .k{letter-spacing:.03em;font-size:11px}.app-tiles .v{font-size:32px;letter-spacing:-.04em;color:var(--ink)}.download-tile{background:transparent;border-style:dashed}.download-tile .v{font-size:20px;padding:8px 0}.download-tile a{color:var(--rose-deep)}.ops-flow{margin-top:10px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.flow-stage{border-left:3px solid #DCA0B4;padding-left:12px}.flow-stage:nth-child(2){border-color:#B4A2BE}.flow-stage:nth-child(3){border-color:#8AA794}.flow-stage b{display:block;font-size:20px;font-variant-numeric:tabular-nums}.flow-stage span,.flow-stage small{display:block;font-size:12px;color:var(--plum)}.flow-stage small{font-size:11px;color:var(--muted)}.mobile-table-note{display:none}.ops-caption{font-size:11px;color:var(--muted);margin:8px 0 12px}.ops-table-scroll{overflow-x:auto}.ops-table{min-width:730px}.ops-table td{vertical-align:top;padding:12px}.ops-table strong{display:block;font-size:13px}.ops-table small{display:block;font-size:11px;color:#796671;margin-top:3px;overflow-wrap:anywhere}.ops-table .mail{overflow-wrap:anywhere;max-width:270px}.section-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:12px}.section-head h2{font-size:16px}.section-head span{font-size:11px;color:var(--muted)}button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(--rose);outline-offset:3px}.ops button{min-height:40px}tbody td{overflow-wrap:anywhere}.tablewrap:not(.ops .tablewrap){overflow-x:auto}
 @media(max-width:760px){.mobile-table-note{display:block}.app-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}.download-tile{grid-column:1/-1;display:flex;gap:12px;align-items:center;flex-wrap:wrap}.download-tile .v{font-size:14px;padding:0}.ops-head h1{font-size:22px}.ops-flow{gap:8px;padding:14px 12px}.flow-stage{padding-left:8px}.flow-stage span{font-size:11px}.wrap{padding:24px 16px 60px}header.top{align-items:center}.sync{font-size:10px}.brand{letter-spacing:.15em}.ops .tbar input[type=search]{flex-basis:100%}.section-head{flex-wrap:wrap}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}
+
+.usage-head{display:flex;justify-content:space-between;gap:12px;align-items:center;margin:24px 0 12px}.usage-head h2{font-size:18px}.usage-head select{border:1px solid var(--line);border-radius:8px;padding:10px;background:var(--paper);color:var(--ink)}.usage-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.usage-tiles b{font-size:25px;display:block;margin:5px 0}.usage-tiles small{color:var(--muted)}.usage-person{margin-top:10px;border:1px solid var(--line);border-radius:12px;background:var(--paper);overflow:hidden}.usage-person summary{cursor:pointer;padding:16px;display:flex;gap:12px;justify-content:space-between;align-items:center;flex-wrap:wrap}.usage-person summary strong{font-size:14px}.usage-person summary small{display:block;color:var(--muted);margin-top:4px}.usage-person .metrics{display:flex;gap:18px;flex-wrap:wrap;font-size:12px}.usage-body{border-top:1px solid var(--line);padding:16px}.usage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.usage-grid h3{font-size:12px;margin-bottom:10px}.usage-line{display:flex;gap:12px;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--line);font-size:12px;overflow-wrap:anywhere}.usage-line>b{flex-shrink:0;white-space:nowrap}.usage-line>span{min-width:0}.usage-line small{display:block;color:var(--muted);font-size:11px}.online-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#37815A;margin-right:5px}.usage-detail-meta{font-size:11px;color:var(--muted);margin-bottom:16px;overflow-wrap:anywhere}
+@media(max-width:760px){.usage-grid{grid-template-columns:1fr}.usage-tiles{gap:8px}.usage-tiles .panel{padding:12px}.usage-tiles b{font-size:19px}.usage-person summary{align-items:flex-start}.usage-person .metrics{gap:12px}.usage-head{flex-wrap:wrap}}
 </style>
 </head>
 <body>
@@ -150,6 +153,17 @@ select.st.beta_selected{color:#8A6A38;border-color:rgba(176,141,87,.4)}
         <p class="empty" id="opsEmpty" hidden>아직 가입자가 없어요.</p>
         <p class="ops-caption">가입은 인증 완료 기준이에요. 첫 기록은 피부·생활·제품·스캔의 서버 저장 시점이며, 기기에만 보관한 기록은 포함하지 않아요. 다운로드한 개인의 신원은 Apple이 제공하지 않아요.</p>
       </div>
+
+      <div class="usage-head"><h2>앱 사용 · 기록 · 비용</h2><label>조회 기간 <select id="usageDays" aria-label="사용 내역 조회 기간"><option value="7">최근 7일</option><option value="30" selected>최근 30일</option><option value="90">최근 90일</option></select></label></div>
+      <p class="ops-status" id="usageStatus" role="status">사용 정보를 불러오고 있어요.</p>
+      <div class="usage-tiles">
+        <div class="panel"><span>지금 활동 중</span><b id="usageOnline">—</b><small>최근 2분 내 연결 · 종료 신호 반영</small></div>
+        <div class="panel"><span>측정된 체류 시간</span><b id="usageTime">—</b><small>선택 동의 · 앱 전경 시간 합계</small></div>
+        <div class="panel"><span>API 추정 비용</span><b id="usageCost">—</b><small id="usageCalls">AI 호출 기록 기준</small></div>
+      </div>
+      <p class="ops-caption">아래 계정을 선택하면 저장 기록 현황, 사용 기능, AI 호출 비용을 볼 수 있어요. 위 검색·운영 계정 필터가 적용돼요. 합계는 검색 전 전체 계정 기준이에요.</p>
+      <div id="usageUsers"></div>
+      <p class="ops-caption">체류 시간은 새 앱 버전부터 수집하며 이전 시간은 미수집이에요. 기능 이벤트는 선택 동의한 사용자만 포함해요. 기록 수는 기간 내 서버 저장·수정 기준이며 기기 전용 데이터는 제외해요. 비용은 제공된 사용량·단가·당시 환율로 계산한 추정액이며 청구서 총액과 다를 수 있어요. 사용량 누락 건은 0원으로 처리하지 않아요.</p>
     </section>
     <div class="section-head"><h2>출시 대기 · 초대 관리</h2><span>앱 계정과 별도 집계</span></div>
     <div class="tiles">
@@ -218,7 +232,7 @@ select.st.beta_selected{color:#8A6A38;border-color:rgba(176,141,87,.4)}
   const H = {'apikey':KEY,'Authorization':'Bearer '+KEY,'Content-Type':'application/json'};
   const $ = id => document.getElementById(id);
   const STATUSES = {waiting:'대기', invited:'초대장 발송', beta_selected:'베타 선정', beta_declined:'베타 제외'};
-  let PASS = null, DATA = null, timer = null, APP = null, appTimer = null, appLoading = false;
+  let PASS = null, DATA = null, timer = null, APP = null, USAGE = null, usageFailed = false, usageRevision = 0, appTimer = null, appLoading = false;
 
   const rpc = (fn, body) =>
     fetch(SB + '/rest/v1/rpc/' + fn, {method:'POST', headers:H, body:JSON.stringify(body)})
@@ -240,8 +254,9 @@ select.st.beta_selected{color:#8A6A38;border-color:rgba(176,141,87,.4)}
       if(timer) clearInterval(timer);
       timer = setInterval(load, 15000);
       loadAppOps();
+      loadUsage();
       if(appTimer) clearInterval(appTimer);
-      appTimer = setInterval(() => { if(!document.hidden) loadAppOps(); }, 30000);
+      appTimer = setInterval(() => { if(!document.hidden) { loadAppOps(); loadUsage(); } }, 30000);
       loadBeta();
       if(bTimer) clearInterval(bTimer);
       bTimer = setInterval(loadBeta, 30000);
@@ -262,7 +277,7 @@ select.st.beta_selected{color:#8A6A38;border-color:rgba(176,141,87,.4)}
     if(!PASS) return;
     try{ DATA = await rpc('admin_dashboard', {p_pass:PASS}); render(); }catch(e){}
   };
-  $('refresh').addEventListener('click', () => { load(); loadBeta(); loadAppOps(); });
+  $('refresh').addEventListener('click', () => { load(); loadBeta(); loadAppOps(); loadUsage(); });
 
   /* ---------- beta signups (read-only live) ---------- */
   let BETA = null, bTimer = null, bPrevTotal = null;
@@ -385,6 +400,80 @@ select.st.beta_selected{color:#8A6A38;border-color:rgba(176,141,87,.4)}
   $('q').addEventListener('input', renderRows);
   $('betaOnly').addEventListener('change', renderRows);
 
+
+  const usageDuration = seconds => seconds == null ? '미수집' : seconds < 60 ? number(seconds)+'초' : seconds < 3600 ? number(Math.floor(seconds/60))+'분' : number(Math.floor(seconds/3600))+'시간 '+number(Math.floor(seconds%3600/60))+'분';
+  const usageMoney = value => value == null ? '미확인' : '$'+Number(value).toFixed(4);
+  const usageSum = (items,key) => items.reduce((n,item)=>n+Number(item[key]||0),0);
+  const usageKnownCost = items => items.some(item=>item.cost_usd!=null) ? usageSum(items,'cost_usd') : null;
+  const recordLabels={skin_checkin:'피부 체크인',daily_log:'생활 기록',product_tracking:'제품 사용 기록',skin_scan:'피부 스캔',routine:'저장 루틴'};
+  const aiFeatureLabels={coach_chat:'뷰티 코치 대화',community_meve_note:'커뮤니티 뷰티 노트',dday_plan:'D-day 준비 계획',face_scan:'얼굴·피부 스캔',home_daily_tip:'오늘의 피부 팁',ingredient_personal_insight:'맞춤 성분 분석',makeup_today_look:'오늘의 메이크업',product_photo_identification:'제품 사진 인식',product_tracking_insight:'제품 사용 분석',product_web_ingredients:'제품 전성분 검색',routine_builder:'루틴 만들기',today_one_thing:'오늘의 피부 행동',trouble_analysis:'트러블 분석',unclassified:'미분류 호출',look_plan:'룩 준비 계획'};
+  const eventLabels={app_open:'앱 열기',scan_analysis_started:'스캔 분석 시작',scan_completed:'스캔 완료',daily_skin_checkin_saved:'피부 체크인 저장',product_added:'제품 추가',product_tracking_started:'제품 추적 시작',look_plan_generated:'룩 준비 생성',look_plan_saved:'룩 저장',look_wear_feedback_saved:'룩 사용 후기',skin_report_viewed:'피부 리포트 열기',onboarding_completed:'시작 설정 완료',today_skin_action_completed:'오늘 피부 행동 완료',weekly_skin_report_viewed:'주간 피부 리포트 열기'};
+  async function loadUsage(){
+    if(!PASS) return;
+    const revision=++usageRevision;
+    const includeInternal=$('opsInternal').checked, days=Number($('usageDays').value);
+    $('usageStatus').textContent=USAGE?'사용 정보를 갱신하고 있어요.':'사용 정보를 불러오고 있어요.';
+    try{
+      const response=await fetch(SB+'/functions/v1/app-ops-dashboard',{method:'POST',headers:H,body:JSON.stringify({pass:PASS,view:'usage',days,includeInternal}),signal:AbortSignal.timeout(15000)});
+      if(!response.ok) throw new Error(response.status===401?'다시 로그인해 주세요.':response.status===429?'잠시 후 다시 시도해 주세요.':'사용 정보 연결을 확인해 주세요.');
+      const data=await response.json();
+      if(revision!==usageRevision) return;
+      USAGE=data;
+      usageFailed=false;
+      $('usageStatus').className='ops-status';
+      $('usageStatus').textContent='최근 '+number(data.days)+'일 · 업데이트 '+date(data.generated_at)+' KST · 30초 자동 갱신';
+      renderUsage();
+    }catch(error){
+      if(revision!==usageRevision) return;
+      usageFailed=true;
+      $('usageStatus').className='ops-status error';
+      $('usageStatus').textContent=(USAGE?'마지막 결과를 표시해요. ':'사용 정보를 불러오지 못했어요. ')+error.message;
+      // A stale online badge must never look like a current observation.
+      $('usageOnline').textContent='확인 불가';
+      document.querySelectorAll('.usage-live').forEach(el=>el.textContent='활동 확인 불가');
+    }
+  }
+  function renderUsage(){
+    if(!USAGE){$('usageUsers').innerHTML='';['usageOnline','usageTime','usageCost'].forEach(id=>$(id).textContent='—');return;}
+    const users=USAGE.users, ai=users.flatMap(r=>r.ai), seconds=users.filter(r=>r.foreground_seconds!=null);
+    const fresh=!usageFailed && Date.now()-new Date(USAGE.generated_at).getTime()<120000;
+    $('usageOnline').textContent=fresh?number(users.filter(r=>r.online).length)+'명':'확인 불가';
+    $('usageTime').textContent=seconds.length?usageDuration(usageSum(seconds,'foreground_seconds')):'미수집';
+    $('usageCost').textContent=ai.length?usageMoney(usageKnownCost(ai)):'호출 기록 없음';
+    $('usageCalls').textContent=number(usageSum(ai,'calls'))+'회 · 사용량 미확인 '+number(usageSum(ai,'unknown_usage'))+'건';
+    const q=$('opsQuery').value.trim().toLowerCase();
+    const accounts=new Map((APP?.users||[]).map(r=>[r.id,r]));
+    const visible=users.filter(r=>{const a=accounts.get(r.id)||{};return !q||[r.id,a.email,a.display_name,...(a.ticket_numbers||[])].some(v=>String(v||'').toLowerCase().includes(q));});
+    const savedRecords=new Map([...$('usageUsers').querySelectorAll('details')].filter(el=>el.querySelector('.usage-record-content')?.dataset.loaded==='true').map(el=>[el.dataset.user,el.querySelector('.usage-record-content').innerHTML]));
+    const opened=new Set([...$('usageUsers').querySelectorAll('details[open]')].map(el=>el.dataset.user));
+    const line=(label,count,extra='')=>'<div class="usage-line"><span>'+esc(label)+(extra?'<small>'+esc(extra)+'</small>':'')+'</span><b>'+esc(count)+'</b></div>';
+    $('usageUsers').innerHTML=visible.map(r=>{
+      const a=accounts.get(r.id)||{}, cost=usageKnownCost(r.ai), missing=usageSum(r.ai,'unknown_usage');
+      const online=fresh&&r.online;
+      return '<details class="usage-person" data-user="'+esc(r.id)+'"'+(opened.has(r.id)?' open':'')+'><summary><div><strong>'+esc(a.display_name||a.email||r.id)+'</strong><small>'+esc(a.email||r.id)+'</small></div><div class="metrics"><span class="usage-live">'+(online?'<i class="online-dot"></i>활동 중':fresh?'최근 '+esc(date(r.last_activity_at)):'활동 확인 불가')+'</span><span>체류 '+usageDuration(r.foreground_seconds)+'</span><span>API '+(r.ai.length?usageMoney(cost):'기록 없음')+(missing?' + 미확인 '+number(missing)+'건':'')+'</span></div></summary><div class="usage-body"><p class="usage-detail-meta">'+esc(r.platform||'플랫폼 미확인')+' · 앱 '+esc(r.app_version||'버전 미확인')+' · 선택 분석 '+(r.analytics_consent?'동의':'미동의 / 현재 동의 미확인')+' · 측정 방문 '+number(r.sessions)+'회'+(r.measured_since?' · 측정 시작 '+esc(date(r.measured_since)):'')+'</p><div class="usage-grid"><section><h3>저장된 기록 현황</h3>'+(r.records.map(e=>line(recordLabels[e.kind]||e.kind,number(e.count)+'건','최근 '+date(e.last_at))).join('')||'<p class="ops-caption">기간 내 서버 기록이 없어요.</p>')+'</section><section><h3>사용한 기능 · 이벤트</h3>'+(r.features.map(e=>line(eventLabels[e.event]||e.event,number(e.count)+'회','최근 '+date(e.last_at))).join('')||'<p class="ops-caption">수집된 이벤트가 없어요. 미동의·이전 버전·기기 전용 활동은 표시되지 않아요.</p>')+'</section><section><h3>기능별 AI 비용</h3>'+(r.ai.map(e=>line(aiFeatureLabels[e.feature]||e.feature,usageMoney(e.cost_usd),number(e.calls)+'회 · 실패 '+number(e.failed)+'회 · 사용량 미확인 '+number(e.unknown_usage)+'건 · 입력 '+number(e.input_tokens)+' / 출력 '+number(e.output_tokens)+' 토큰 · 평균 '+number(e.latency_ms)+'ms · 원화 추정 '+(e.cost_krw==null?'미확인':number(Number(e.cost_krw).toFixed(2))+'원'))).join('')||'<p class="ops-caption">기간 내 AI 호출 원장 기록이 없어요.</p>')+'</section></div><button class="csv usage-records" data-user="'+esc(r.id)+'">저장 기록 내용 보기</button><div class="usage-record-content" role="status"></div></div></details>';
+    }).join('')||'<p class="empty">검색 조건에 맞는 앱 계정이 없어요.</p>';
+    $('usageUsers').querySelectorAll('details').forEach(el=>{const html=savedRecords.get(el.dataset.user);if(html){const body=el.querySelector('.usage-record-content');body.innerHTML=html;body.dataset.loaded='true';}});
+  }
+  $('usageUsers').addEventListener('click',async event=>{
+    const button=event.target.closest('.usage-records');if(!button) return;
+    const target=button.nextElementSibling, userId=button.dataset.user;
+    const revision=usageRevision;
+    button.disabled=true;target.textContent='기록 내용을 불러오고 있어요.';
+    try{
+      const response=await fetch(SB+'/functions/v1/app-ops-dashboard',{method:'POST',headers:H,body:JSON.stringify({pass:PASS,view:'records',userId,days:Number($('usageDays').value),includeInternal:$('opsInternal').checked}),signal:AbortSignal.timeout(15000)});
+      if(!response.ok) throw new Error('기록을 불러오지 못했어요. 권한과 연결을 확인해 주세요.');
+      const data=await response.json();
+      if(!target.isConnected||revision!==usageRevision) return;
+      const value=x=>x==null?'미기록':String(x);
+      const entry=(title,text)=>'<div class="usage-line"><span>'+esc(title)+'</span><span>'+esc(text)+'</span></div>';
+      const groups=[['피부 체크인',data.skin.map(r=>entry(r.date,'수분 '+value(r.hydration_score)+' · 트러블 '+value(r.trouble_score)+' · 윤기 '+value(r.glow_score)))],['생활 기록',data.lifestyle.map(r=>entry(r.date,'수면 '+value(r.sleep_hours)+'시간 · 물 '+value(r.water_intake)+'컵 · 스트레스 '+value(r.stress_level)))],['제품 사용 기록',data.products.map(r=>entry(r.product_name,'상태 '+({active:'사용 중',using:'사용 중',testing:'테스트 중',stopped:'사용 중단',completed:'사용 완료'}[r.status]||value(r.status))+' · 시작 '+value(r.started_at)))]];
+      target.dataset.loaded='true';
+      target.innerHTML='<p class="ops-caption">조회 '+esc(date(new Date().toISOString()))+' KST · 각 종류별 최근 20건까지 표시해요. 값은 사용자가 저장한 원본 척도예요. 물 섭취는 컵 단위예요.</p><div class="usage-grid">'+groups.map(([title,rows])=>'<section><h3>'+esc(title)+'</h3>'+(rows.join('')||'<p class="ops-caption">기간 내 기록이 없어요.</p>')+'</section>').join('')+'</div>';
+    }catch(error){if(target.isConnected) target.textContent=error.message;}
+    finally{button.disabled=false;}
+  });
+  $('usageDays').addEventListener('change',()=>{USAGE=null;renderUsage();loadUsage();});
+
   /* App accounts: separate from waitlist signups. No personal skin values. */
   const number = value => Number(value || 0).toLocaleString('ko-KR');
   const date = value => value ? fmtT(value) : '아직 없어요';
@@ -401,6 +490,7 @@ select.st.beta_selected{color:#8A6A38;border-color:rgba(176,141,87,.4)}
       $('opsStatus').className = 'ops-status';
       $('opsStatus').textContent = '업데이트 '+date(APP.generated_at)+' KST · 30초 자동 갱신 · '+(includeInternal?'운영 계정 포함':'운영 계정 제외');
       renderAppOps();
+      renderUsage();
       render();
     }catch(error){
       $('opsStatus').className = 'ops-status error';
@@ -433,9 +523,9 @@ select.st.beta_selected{color:#8A6A38;border-color:rgba(176,141,87,.4)}
     $('opsRows').innerHTML=rows.map(r=>'<tr><td><strong>'+esc(r.display_name||'이름 미등록')+'</strong><div class="mail">'+esc(r.email||'이메일 비공개')+'</div><small>'+esc(r.provider)+(r.is_internal?' · 운영 계정':'')+'</small></td><td>'+esc(r.signed_up_at?date(r.signed_up_at):'인증 대기')+'<small>티켓 '+esc(r.ticket_numbers?.length?r.ticket_numbers.map(v=>'#'+v).join(', '):'미연결')+'</small></td><td><span class="pill '+(r.admitted?'adm':'ref')+'">'+(r.admitted?'입장 가능':'입장 대기')+'</span><small>'+esc(plans[r.plan]||r.plan)+(r.benefit_expires_at?' · '+esc(date(r.benefit_expires_at))+'까지':'')+'</small></td><td>'+esc(r.first_record_at?'첫 기록 '+date(r.first_record_at):'첫 기록 전')+'<small>최근 활동 '+esc(date([r.last_seen_at,r.last_sign_in_at].filter(Boolean).sort().at(-1)))+'</small></td><td>'+esc(labels[r.notification_state]||(r.is_internal?'알림 제외':'시작 전 가입 / 미인증'))+'</td></tr>').join('');
   }
   $('opsQuery').value=new URLSearchParams(location.search).get('user')||'';
-  $('opsQuery').addEventListener('input',renderAppOps);
-  $('opsInternal').addEventListener('change',loadAppOps);
-  $('opsRefresh').addEventListener('click',loadAppOps);
+  $('opsQuery').addEventListener('input',()=>{renderAppOps();renderUsage();});
+  $('opsInternal').addEventListener('change',()=>{USAGE=null;renderUsage();loadAppOps();loadUsage();});
+  $('opsRefresh').addEventListener('click',()=>{loadAppOps();loadUsage();});
 
   /* ---------- instagram verification ---------- */
   const igBtns = show => {
